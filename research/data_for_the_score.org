@@ -1,0 +1,12 @@
+#+title: Data for the result score 
+#+SUBTITLE: This is a sub document of the morocc-elections.org is about doing research on the data that's required by the formulas to calculate an overal score
+#+AUTHOR: His majesty's makarov
+#+TODO: FILL(f) VERIFY(v) DONE(d) | OPEN(o) WIP(w) BLOCKED(b)
+
+
+In this document , we will list the data required for calculating the indexes , to give a somewhat objective POV to the decision takers ( -- us voter ) for the upcoming elections .
+
+* PJD :
+#+BEGIN_SRC org
+
+#+END_SRC

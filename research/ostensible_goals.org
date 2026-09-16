@@ -1,0 +1,12 @@
+#+title: Ostensible Reasons
+#+SUBTITLE: This is a sub document of the morocc-elections.org is about doing research on the possible goals of each party , personal glory , increase in wealth , rumors and others 
+#+AUTHOR: His majesty's makarov
+#+TODO: FILL(f) VERIFY(v) DONE(d) | OPEN(o) WIP(w) BLOCKED(b)
+
+
+In this document , we will list all rumours , data about each head of political party . Those data will be classed the same as claims , with different relevancy .
+
+* PJD :
+#+BEGIN_SRC org
+
+#+END_SRC

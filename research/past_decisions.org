@@ -1,0 +1,18 @@
+#+title: Other Major Decisions That Were Not Included Promises
+#+SUBTITLE: This is a sub document of the morocc-elections.org that is about doing research about the major decision that were taken by each political party for the past decade and weren't part of the original promises . 
+#+AUTHOR: His majesty's makarov
+#+TODO: FILL(f) VERIFY(v) DONE(d) | OPEN(o) WIP(w) BLOCKED(b)
+
+
+In this document , we will populate the decisions like the class accepted before in the parent document , each decision will be in an adequate row with all the required fields
+
+
+
+
+
+We will focus more on the main players , then i must surely add the others 
+
+* PJD :
+#+BEGIN_SRC org
+
+#+END_SRC

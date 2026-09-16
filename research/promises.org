@@ -1,0 +1,14 @@
+#+title: Promises
+#+SUBTITLE: This is a sub document of the morocc-elections.org is about doing research on past promises and their status per party
+#+AUTHOR: His majesty's makarov
+#+TODO: FILL(f) VERIFY(v) DONE(d) | OPEN(o) WIP(w) BLOCKED(b)
+
+
+In this document , we will set claims like the class accepted before in the parent document , each claim will be in an adequate row with all the required fields
+
+We will focus more on the main players , then i must surely add the others 
+
+* PJD :
+#+BEGIN_SRC org
+
+#+END_SRC

@@ -1,0 +1,14 @@
+#+title: Claims
+#+SUBTITLE: This is a sub document of the morocc-elections.org is about doing research on claims about the current election
+#+AUTHOR: His majesty's makarov
+#+TODO: FILL(f) VERIFY(v) DONE(d) | OPEN(o) WIP(w) BLOCKED(b)
+
+
+In this document , we will set claims like the class accepted before in the parent document , each claim will be in an adequate row with all the required fields
+
+The difference of the claims from promises document is that claims is about current promises not past ones .
+
+* PJD :
+#+BEGIN_SRC org
+
+#+END_SRC

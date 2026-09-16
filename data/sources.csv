@@ -1,11 +1,2 @@
-source_id,title,author_org,date,url,type,primary_secondary,reliability,bias_lean,bias_label,country,election_year,party_actor,status,notes
-S001,RNI 2021 legislative manifesto,RNI,2021-08,,Manifesto,Primary,4,1,Pro-business,Morocco,2021,RNI,To read,Extract quantified targets
-S002,PAM 2021 legislative manifesto,PAM,2021-08,,Manifesto,Primary,4,0,Centrist,Morocco,2021,PAM,To read,
-S003,Istiqlal 2021 legislative manifesto,Istiqlal,2021-08,,Manifesto,Primary,4,-1,Conservative-nationalist,Morocco,2021,Istiqlal,To read,
-S004,PJD 2021 legislative manifesto,PJD,2021-08,,Manifesto,Primary,4,-2,Islamist-conservative,Morocco,2021,PJD,To read,
-S005,HCP official statistics,Haut Commissariat au Plan,2021,,Dataset,Primary,5,0,Official,Morocco,2021,,To read,Baselines for jobs growth poverty
-S006,2021 legislative results,Ministère de l'Intérieur,2021-09,,Official results,Primary,5,0,Official,Morocco,2021,,Read,Votes and seats
-S007,Chambre des Représentants composition,Chambre des Représentants,2021-10,,Official,Primary,5,0,Official,Morocco,2021,,Read,Seat count per group
-S008,2016 legislative results,Ministère de l'Intérieur,2016-10,,Official results,Primary,5,0,Official,Morocco,2016,,Read,
-S009,2011 legislative results,Ministère de l'Intérieur,2011-11,,Official results,Primary,5,0,Official,Morocco,2011,,Read,
-S010,Press fact-checks on promises,Various press,2021-2024,,News,Secondary,3,0,Mixed,Morocco,2021,,To read,Counter-evidence
+source_id,,title,author_org,date,url,type,primary_secondary,reliability,bias_lean,bias_label,country,election_year,,party_actor,,status,,notes
+S001,MAPEXPRESS,,Not explicitly stated, 14/09/2026, ,https://www.mapexpress.ma/actualite/activites-partisanes-et-syndicales/legislatives-2026-principaux-engagements-du-programme-electoral-du-pjd/,Post ,Secondary ( not by the party itself ), FILL, FILL,FILL, Morocco, 2026, Not relevant, FILL, 

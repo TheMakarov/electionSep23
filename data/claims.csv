@@ -1,11 +1,4 @@
 claim_id,party_id,election_year,claim,domain,baseline,target,deadline,unit,class,verification_score,source_ids,confidence
-C001,P001,2021,"Create 1,000,000 jobs",Employment,FILL,1000000,2026,jobs,Q,4,S001,MEDIUM
-C002,P001,2021,Generalize social protection (AMO) to all citizens,Social,Partial,100,2025,percent_population,Q,4,S001,MEDIUM
-C003,P001,2021,Raise GDP growth rate,Economy,FILL,6,2026,percent,Q,3,S001,LOW
-C004,P002,2021,Digitalize public administration,Administration,FILL,FILL,2026,none,V,3,S002,LOW
-C005,P002,2021,Reform the justice system,Justice,FILL,FILL,2026,none,V,3,S002,LOW
-C006,P003,2021,Achieve food sovereignty (cereal self-sufficiency),Agriculture,FILL,FILL,2026,none,Q,3,S003,LOW
-C007,P004,2021,Protect purchasing power,Economy,FILL,FILL,2026,none,V,2,S004,LOW
-C008,P005,2021,Increase wages and pensions,Social,FILL,FILL,2026,none,V,3,FILL,LOW
-C009,P006,2021,Support rural areas,Rural,FILL,FILL,2026,none,V,2,FILL,LOW
-C010,P007,2021,Introduce progressive taxation,Economy,FILL,FILL,2026,none,Q,3,FILL,LOW
+C001,P004,2026,"Élaborer une stratégie nationale intégrée visant à renforcer l’identité nationale et les valeurs marocaines authentiques et fédératrices."s,National Prestige + Seeking Authencity,FILL,FILL,FILL,FILL,FILL,FILL,S001,FILL
+C002,P004,2026,"Adopter un programme national de prévention et de protection des enfants et des mineurs contre l’exploitation, la violence, l’addiction numérique et des contenus préjudiciables et la consommation de drogues.",Child Safety + Addiction countermeasures,FILL,FILL,FILL,FILL,FILL,FILL,S001,FILL
+C003,P004,2026,"Adopter un programme national de prévention et de protection des enfants et des mineurs contre l’exploitation, la violence, l’addiction numérique et des contenus préjudiciables et la consommation de drogues.",Child Safety + Addiction countermeasures,FILL,FILL,FILL,FILL,FILL,FILL,S001,FILL
