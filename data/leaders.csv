@@ -1,0 +1,9 @@
+leader,party_id,role,tenure,achievements,ownership,reported_wealth,ostensible_motive,conflicts,skin_in_game,source_ids,confidence
+Aziz Akhannouch,P001,Head of Government,2021-,Launched social-protection generalization,"Akwa Group (Afriquia fuels, Maghreb Oxygène), media stakes",Forbes-listed billionaire (VERIFY),Economic modernization and investment climate,Energy-market interests overlap with ministerial portfolios,0.35,FILL,MEDIUM
+Abdellatif Ouahbi,P002,Secretary General / Minister of Justice,2021-,FILL,FILL,FILL,Judicial and administrative reform,FILL,0.60,FILL,LOW
+Nizar Baraka,P003,Secretary General,2017-,FILL,FILL,FILL,Economic sovereignty and Istiqlal legacy,FILL,0.70,FILL,LOW
+Saad Eddine El Othmani,P004,Head of Government,2017-2021,FILL,FILL,FILL,Gradualist Islamist governance and coalition stability,Internal PJD dissent,0.55,FILL,LOW
+Abdelilah Benkirane,P004,Head of Government / Secretary General,2011-2017,FILL,FILL,FILL,Anti-corruption populism,Polarising style,0.50,FILL,LOW
+Driss Lachguar,P005,First Secretary,2012-,FILL,FILL,FILL,Social-democratic renewal,FILL,0.60,FILL,LOW
+Mohamed Ouzzine,P006,Secretary General,2017-,FILL,FILL,FILL,Rural and Amazigh representation,FILL,0.65,FILL,LOW
+Nabil Benabdallah,P007,Secretary General,2010-,FILL,FILL,FILL,Progressive-left platform,FILL,0.60,FILL,LOW

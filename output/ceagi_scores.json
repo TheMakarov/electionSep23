@@ -1,0 +1,164 @@
+{
+  "weights": {
+    "D": 0.25,
+    "C": 0.2,
+    "E": 0.1,
+    "G": 0.2,
+    "L": 0.15,
+    "M": 0.1
+  },
+  "parties": [
+    {
+      "party_id": "P001",
+      "name": "RNI",
+      "score": 0.659,
+      "ci": {
+        "median": 0.658,
+        "lo": 0.611,
+        "hi": 0.703
+      },
+      "subindices": {
+        "D": 0.5,
+        "C": 0.733,
+        "E": 0.912,
+        "G": 0.85,
+        "L": 0.5,
+        "M": 0.7
+      },
+      "advantage_ratio": 0.954
+    },
+    {
+      "party_id": "P003",
+      "name": "Istiqlal",
+      "score": 0.619,
+      "ci": {
+        "median": 0.616,
+        "lo": 0.572,
+        "hi": 0.661
+      },
+      "subindices": {
+        "D": 0.5,
+        "C": 0.6,
+        "E": 0.87,
+        "G": 0.7,
+        "L": 0.6,
+        "M": 0.65
+      },
+      "advantage_ratio": 1.068
+    },
+    {
+      "party_id": "P002",
+      "name": "PAM",
+      "score": 0.616,
+      "ci": {
+        "median": 0.614,
+        "lo": 0.569,
+        "hi": 0.658
+      },
+      "subindices": {
+        "D": 0.5,
+        "C": 0.6,
+        "E": 0.825,
+        "G": 0.75,
+        "L": 0.55,
+        "M": 0.65
+      },
+      "advantage_ratio": 1.091
+    },
+    {
+      "party_id": "P006",
+      "name": "MP",
+      "score": 0.544,
+      "ci": {
+        "median": 0.542,
+        "lo": 0.495,
+        "hi": 0.587
+      },
+      "subindices": {
+        "D": 0.5,
+        "C": 0.4,
+        "E": 0.945,
+        "G": 0.55,
+        "L": 0.6,
+        "M": 0.6
+      },
+      "advantage_ratio": 1.029
+    },
+    {
+      "party_id": "P008",
+      "name": "UC",
+      "score": 0.534,
+      "ci": {
+        "median": 0.532,
+        "lo": 0.487,
+        "hi": 0.577
+      },
+      "subindices": {
+        "D": 0.5,
+        "C": 0.5,
+        "E": 0.945,
+        "G": 0.45,
+        "L": 0.55,
+        "M": 0.55
+      },
+      "advantage_ratio": 1.029
+    },
+    {
+      "party_id": "P004",
+      "name": "PJD",
+      "score": 0.249,
+      "ci": {
+        "median": 0.27,
+        "lo": 0.228,
+        "hi": 0.404
+      },
+      "subindices": {
+        "D": 0.5,
+        "C": 0.4,
+        "E": 0.0,
+        "G": 0.4,
+        "L": 0.55,
+        "M": 0.5
+      },
+      "advantage_ratio": 0.478
+    },
+    {
+      "party_id": "P005",
+      "name": "USFP",
+      "score": 0.12,
+      "ci": {
+        "median": 0.127,
+        "lo": 0.113,
+        "hi": 0.375
+      },
+      "subindices": {
+        "D": 0.0,
+        "C": 0.6,
+        "E": 0.822,
+        "G": 0.45,
+        "L": 0.65,
+        "M": 0.6
+      },
+      "advantage_ratio": 1.093
+    },
+    {
+      "party_id": "P007",
+      "name": "PPS",
+      "score": 0.116,
+      "ci": {
+        "median": 0.122,
+        "lo": 0.109,
+        "hi": 0.362
+      },
+      "subindices": {
+        "D": 0.0,
+        "C": 0.6,
+        "E": 0.748,
+        "G": 0.4,
+        "L": 0.65,
+        "M": 0.6
+      },
+      "advantage_ratio": 1.131
+    }
+  ]
+}

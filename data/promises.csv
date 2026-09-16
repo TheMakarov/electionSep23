@@ -1,0 +1,14 @@
+promise_id,party_id,term_start,term_end,promise,domain,status,outcome_metric,source_ids,confidence
+PR001,P004,2011,2016,Subsidy reform (fuel indexation),Economy,fulfilled,Subsidies indexed 2014-2015,S010,HIGH
+PR002,P004,2011,2016,Anti-corruption crackdown,Governance,partial,Limited convictions,S010,MEDIUM
+PR003,P004,2016,2021,Expand social protection,Social,partial,AMO groundwork launched,S010,MEDIUM
+PR004,P004,2016,2021,Social housing (logement social),Housing,partial,Units delivered below target,S010,MEDIUM
+PR005,P004,2016,2021,Create jobs,Employment,failed,Unemployment remained high,S010,MEDIUM
+PR006,P001,2021,2026,Generalize AMO to all citizens,Social,in_progress,Launched Dec 2021,S010,MEDIUM
+PR007,P001,2021,2026,"Create 1,000,000 jobs",Employment,pending,Not yet measurable,S010,MEDIUM
+PR008,P002,2021,2026,Administrative reform,Administration,in_progress,Digitalization underway,S010,LOW
+PR009,P003,2021,2026,Food sovereignty,Agriculture,in_progress,Programs launched,S010,LOW
+PR010,P005,2016,2021,Minimum wage increase,Social,failed,Rejected in social dialogue,S010,LOW
+PR011,P006,2016,2021,Rural development,Rural,partial,Some infrastructure delivered,S010,LOW
+PR012,P007,2016,2021,Progressive tax reform,Economy,failed,No reform passed,S010,LOW
+PR013,P008,2016,2021,Liberal economic reform,Economy,partial,Partial liberalization,S010,LOW

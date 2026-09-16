@@ -1,0 +1,87 @@
+Great topic. The key is don’t organize only links. Organize in three layers:
+
+    Sources — where information comes from
+
+    Facts/claims — what you extract from sources
+
+    Synthesis — your analysis, questions, and arguments
+
+Best tools: Airtable/Notion for linked databases, Google Sheets for simple free version, Zotero for citations, Obsidian/Notion for notes.
+1. Sources table
+
+Use one row per source. Give every source an ID like S001.
+Field	Example	Why
+Source ID	S001	Link everything to this
+Title	2024 Party Manifesto	
+Author/Org	Labour Party	
+Date	2024-06-13	
+URL	https://...	
+Archived URL	https://web.archive.org/...	Prevents link rot
+Type	Manifesto / news / dataset / poll / law / interview / peer-reviewed	
+Primary or secondary	Primary	
+Reliability	1–5	
+Bias/lean	Center-left	Keep separate from reliability
+Country/Region	UK	
+Election year	2024	
+Party/Actor	Labour	
+Key facts/claims	NHS funding, tax policy	
+Direct quotes	“We will…”	
+Citation	Author, Title, Date, URL	
+Tags	economy, health, campaign-finance	
+Status	To read / read / verified	
+Notes	Why it matters	
+2. Facts / Claims bank
+
+This is the most important part. One row per fact or claim, not per source.
+Field	Example
+Fact ID	F001
+Claim/Fact	Party X promised to cut VAT on energy
+Date	2024-06-13
+Actor/Party	Party X
+Election	2024 General Election
+Source ID(s)	S001, S014
+Evidence/quote	“We will cut VAT…”
+Verification status	Single-source / corroborated / disputed / false
+Confidence	High/Medium/Low
+Counter-evidence	S021 says costing disputed
+Context	Happened during campaign launch
+Related facts	F002, F017
+
+Rule: a fact is only “corroborated” if 2+ independent reliable sources support it.
+3. Parties / Actors table
+Field	Example
+Party ID	P001
+Name	Labour Party
+Country	UK
+Ideology	Social democratic
+Founded	1900
+Leaders	Keir Starmer
+Coalition/allies	None
+Manifesto URL	...
+Key policies	NHS, green energy, workers’ rights
+Funding	Donations, unions
+Electoral results	2024: 411 seats
+Internal factions	...
+Sources	S001, S009
+4. Elections table
+Field	Example
+Election ID	E001
+Country	UK
+Date	2024-07-04
+Type	General
+Electoral system	First-past-the-post
+Candidates/Parties	Labour, Conservative, Lib Dem, Reform
+Turnout	59.8%
+Results	Labour majority
+Polling	S010, S011
+Key issues	Economy, NHS, immigration
+Legal disputes	...
+Sources	S001–S020
+5. Timeline table
+Date	Event	Actor	Source ID	Significance
+2024-05-22	Election called	PM	S003	Start of campaign
+2024-06-13	Manifesto launched	Labour	S001	Policy commitments
+6. Themes / Issues table
+Theme	Description	Party positions	Key facts	Sources
+Economy	Tax, spending, growth	Labour: ...	F001, F004	S001, S014
+Immigration	Border policy	Conservative: ...	F009	S005

@@ -1,0 +1,9 @@
+party_id,election_year,g_score,l_score,m_score,basis
+P001,2021,0.85,0.50,0.70,Assigned: governing party with broad portfolio; conflict flags lower L
+P002,2021,0.75,0.55,0.65,Assigned: coalition partner
+P003,2021,0.70,0.60,0.65,Assigned: coalition partner
+P004,2021,0.40,0.55,0.50,Assigned: opposition after collapse
+P005,2021,0.45,0.65,0.60,Assigned: opposition
+P006,2021,0.55,0.60,0.60,Assigned: coalition support
+P007,2021,0.40,0.65,0.60,Assigned: opposition
+P008,2021,0.45,0.55,0.55,Assigned: minor coalition/opposition

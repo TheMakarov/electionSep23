@@ -1,0 +1,9 @@
+date,event,actor,election_year,significance,source_ids
+2011-07-01,2011 Constitution adopted,National,,Redefined royal vs government powers,FILL
+2011-11-25,Legislative election (PJD wins),National,2011,First PJD-led government under new constitution,S009
+2012-01-03,Benkirane government formed,PJD,2011,Coalition with Istiqlal MP PPS,FILL
+2016-10-07,Legislative election (PJD first again),National,2016,PJD wins 125 seats,S008
+2017-03-15,El Othmani government formed,PJD,2016,After Benkirane failed to form government,FILL
+2021-09-08,Legislative election (RNI wins),National,2021,RNI 102 seats; PJD collapses to 13,S006
+2021-10-07,Akhannouch government formed,RNI,2021,Coalition RNI-PAM-Istiqlal,FILL
+2021-12-01,AMO generalization launched,RNI,2021,Flagship social-protection promise,FILL
