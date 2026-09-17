@@ -1,2 +1,4 @@
-source_id,,title,author_org,date,url,type,primary_secondary,reliability,bias_lean,bias_label,country,election_year,,party_actor,,status,,notes
-S001,MAPEXPRESS,,Not explicitly stated, 14/09/2026, ,https://www.mapexpress.ma/actualite/activites-partisanes-et-syndicales/legislatives-2026-principaux-engagements-du-programme-electoral-du-pjd/,Post ,Secondary ( not by the party itself ), FILL, FILL,FILL, Morocco, 2026, Not relevant, FILL, 
+source_id,title,author_org,date,url,type,primary_secondary,reliability,bias_lean,bias_label,country,election_year,party_actor,status,notes
+S001,MACEXPRESS PJD,Not explicitly stated, 14/09/2026,https://www.mapexpress.ma/actualite/activites-partisanes-et-syndicales/legislatives-2026-principaux-engagements-du-programme-electoral-du-pjd/,Post ,secondary, FILL, FILL,FILL, Morocco,2026, FILL,FILL,
+S002,MACEXPRESS PPS,Not explicitly stated, 13/09/2026,https://www.mapexpress.ma/actualite/activites-partisanes-et-syndicales/legislatives-2026-principaux-engagements-du-programme-electoral-du-pps/,Post ,secondary, FILL, FILL, FILL,Morocco,2026,FILL,FILL,
+S003,MACEXPRESS PPS,Not explicitly stated,11/09/26,https://2m.ma/fr/news/Promesses-%C3%A9lectorales-voici-les-principaux-engagements-du-programme-20260911,Post ,secondary, FILL, FILL, FILL,Morocco,2026,FILL,FILL,"Their official post is much much mundane to read , probably Ai"
