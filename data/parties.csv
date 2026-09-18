@@ -1,10 +1,10 @@
-party_id,name,name_ar,ideology,founded,leader_2021,leader_current,color,official slogon
+party_id,name,name_ar,ideology,founded,leader_2021,leader_current,color,official_slogan
 P001,RNI,التجمع الوطني للأحرار,Liberal pro-business,1978,Aziz Akhannouch,Aziz Akhannouch,#f4a100,
-P002,PAM,حزب الأصالة والمعاصرة,Centrist modernist,2008,Abdellatif Ouahbi,Abdellatif Ouahbi,#1f77b4
-P003,Istiqlal,حزب الاستقلال,Conservative nationalist,1944,Nizar Baraka,Nizar Baraka,#d62728
-P004,PJD,حزب العدالة والتنمية,Islamist conservative,1992,Saad Eddine El Othmani,Abdelilah Benkirane,#2ca02c,Pour la dignité du citoyen : consacrer le droit à une éducation de qualité, à une couverture sanitaire effective, à un emploi décent et à une société solidaire
-P005,USFP,الاتحاد الاشتراكي للقوات الشعبية,Social-democratic,1975,Driss Lachguar,Driss Lachguar,#e377c2,Équité, emploi, dignité : pour un développement équitable et une vie digne
-P006,MP,الحركة الشعبية,Rural Amazigh,1957,Mohamed Ouzzine,Mohamed Ouzzine,#8c564b
+P002,PAM,حزب الأصالة والمعاصرة,Centrist modernist,2008,Abdellatif Ouahbi,Abdellatif Ouahbi,#1f77b4,
+P003,Istiqlal,حزب الاستقلال,Conservative nationalist,1944,Nizar Baraka,Nizar Baraka,#d62728,Watani Mousta9bali
+P004,PJD,حزب العدالة والتنمية,Islamist conservative,1992,Saad Eddine El Othmani,Abdelilah Benkirane,#2ca02c,"Pour la dignité du citoyen : consacrer le droit à une éducation de qualité, à une couverture sanitaire effective, à un emploi décent et à une société solidaire"
+P005,USFP,الاتحاد الاشتراكي للقوات الشعبية,Social-democratic,1975,Driss Lachguar,Driss Lachguar,#e377c2,"Équité, emploi, dignité : pour un développement équitable et une vie digne"
+P006,MP,الحركة الشعبية,Rural Amazigh,1957,Mohamed Ouzzine,Mohamed Ouzzine,#8c564b,
 P007,PPS,حزب التقدم والاشتراكية,Left,1974,Nabil Benabdallah,Nabil Benabdallah,#9467bd,AUCUN
-P008,UC,الاتحاد الدستوري,Centre-right liberal,1983,Mohamed Sajid,FILL,#17becf
-P009,Others,أحزاب أخرى,Other,,, ,#9a9a9a
+P008,UC,الاتحاد الدستوري,Centre-right liberal,1983,Mohamed Sajid,FILL,#17becf,
+P009,Others,أحزاب أخرى,Other,,, ,#9a9a9a,

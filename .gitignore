@@ -1,0 +1,24 @@
+# LibreOffice/OpenOffice lock files -- created whenever a CSV in data/ is open
+# in Calc. They are not data and must never be committed.
+.~lock.*#
+.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Matplotlib cache when MPLCONFIGDIR is pointed here
+.matplotlib/
+
+# Validator / CI output
+output/validation.json
+
+# Editor and OS noise
+*.swp
+*~
+.DS_Store

@@ -1,0 +1,4 @@
+# Pipeline dependencies for scripts/build.py and scripts/validate.py.
+# Validate only needs the standard library; build needs both of these.
+numpy>=1.24
+matplotlib>=3.7

@@ -1,0 +1,43 @@
+{
+  "campaign_year": 2026,
+  "baseline_year": 2021,
+  "election_date": "2026-09-23",
+  "house_seats": 395,
+  "trajectory_years": [2011, 2016, 2021],
+  "monte_carlo": {
+    "n_samples": 8000,
+    "seed": 42,
+    "sigma": 0.05
+  },
+  "composite_weights": {
+    "D": 0.25,
+    "C": 0.20,
+    "E": 0.10,
+    "G": 0.20,
+    "L": 0.15,
+    "M": 0.10
+  },
+  "claim_weights": {
+    "Q": 1.0,
+    "V": 0.4,
+    "S": 0.1,
+    "N": 0.2
+  },
+  "default_claim_weight": 0.4,
+  "min_promises_for_D": 3,
+  "promise_status_numeric": {
+    "fulfilled": 1.0,
+    "partial": 0.66,
+    "in_progress": 0.55,
+    "pending": 0.33,
+    "failed": 0.0,
+    "abandoned": 0.0,
+    "unverifiable": 0.25
+  },
+  "publication_gate": {
+    "max_fill_fraction": 0.10,
+    "min_scorable_claim_share": 0.5,
+    "min_corroborated_claim_share": 0.5,
+    "require_all_subindices": true
+  }
+}

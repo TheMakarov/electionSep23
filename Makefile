@@ -1,7 +1,35 @@
-.PHONY: all clean
+# Use the local venv when it exists, otherwise the system interpreter.
+PY := $(shell [ -x .venv/bin/python ] && echo .venv/bin/python || echo python3)
 
-all:
-	python3 scripts/build.py
+.PHONY: all check strict build install clean serve venv
 
+all: check build
+
+## Validate the data registry. Exits non-zero on a broken invariant.
+check:
+	$(PY) scripts/validate.py
+
+## Same, but warnings fail too. Use before publishing anything.
+strict:
+	$(PY) scripts/validate.py --strict
+
+## Render the report. Refuses to run while validation reports errors.
+build:
+	$(PY) scripts/build.py
+
+## One-time environment setup inside the workspace.
+venv:
+	python3 -m venv --system-site-packages .venv
+	.venv/bin/python -m pip install -r requirements.txt
+
+install:
+	$(PY) -m pip install -r requirements.txt
+
+## Preview the report locally at http://localhost:8000/report.html
+serve: build
+	$(PY) -m http.server 8000 --directory output
+
+## Remove generated artefacts (data/ is never touched).
 clean:
-	rm -rf output/*
+	rm -rf output/report.html output/ceagi_scores.csv output/ceagi_scores.json \
+	       output/audit_trail.md output/charts

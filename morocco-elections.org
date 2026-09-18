@@ -12,6 +12,14 @@ self-contained report lives in [[./output/report.html][output/report.html]] (gen
 [[./output/audit_trail.md][output/audit_trail.md]]. See [[./README.md][README.md]].
 #+END_QUOTE
 
+#+BEGIN_QUOTE
+NOTE (2026-09-18): the *live* registry is =data/*.csv=, not the tables in this
+file. The source register below still lists a placeholder set =S001-S010=; the
+real register is =data/sources.csv= and currently holds =S001-S005= (the 2026
+programme coverage). Validate with =make check= before citing anything here.
+The election is *Wednesday 23 September 2026*.
+#+END_QUOTE
+
 * Purpose & reading guide
 :PROPERTIES:
 :ID:       000-intro
