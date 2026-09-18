@@ -1,0 +1,22 @@
+theme_id,theme,group,n_parties,n_claims,shared,parties,claim_ids
+social,Social protection & pensions,Social,7,9,yes,RNI(1); PAM(1); Istiqlal(1); USFP(1); MP(1); PPS(3); UC(1),RNI:C043; PAM:C047; Istiqlal:C037; USFP:C027; MP:C054; PPS:C003|C005|C006; UC:C058
+wages,Wages & purchasing power,Economy,6,9,yes,RNI(1); PAM(2); Istiqlal(2); USFP(1); PPS(2); UC(1),RNI:C041; PAM:C044|C047; Istiqlal:C038|C039; USFP:C024; PPS:C006|C007; UC:C058
+employment,Jobs & employment,Economy,5,14,yes,RNI(2); PAM(1); USFP(6); MP(3); PPS(2),RNI:C042|C043; PAM:C045; USFP:C022|C023|C027|C029|C034|C036; MP:C049|C052|C056; PPS:C005|C015
+rural,Rural development & territorial equity,Territory,5,7,yes,Istiqlal(1); USFP(2); MP(1); PPS(1); UC(2),Istiqlal:C096; USFP:C025|C029; MP:C053; PPS:C004; UC:C058|C059
+family,"Children, family & youth",Social,5,6,yes,Istiqlal(1); PJD(1); USFP(1); MP(1); PPS(2),Istiqlal:C037; PJD:C002; USFP:C036; MP:C049; PPS:C006|C019
+education,School education,Social,4,7,yes,RNI(1); USFP(2); MP(3); PPS(1),RNI:C043; USFP:C024|C028; MP:C050|C051|C052; PPS:C004
+governance,Governance & anti-corruption,Governance,4,5,yes,Istiqlal(1); USFP(1); PPS(2); UC(1),Istiqlal:C040; USFP:C031; PPS:C016|C021; UC:C059
+health,Health & medical coverage,Social,4,5,yes,RNI(1); PJD(1); USFP(1); PPS(2),RNI:C043; PJD:C002; USFP:C024; PPS:C003|C005
+tax,Taxation & fiscal justice,Economy,4,5,yes,PAM(1); USFP(1); MP(1); PPS(2),PAM:C048; USFP:C023; MP:C055; PPS:C010|C011
+digital,Digital administration,Governance,3,4,yes,USFP(2); MP(1); PPS(1),USFP:C028|C030; MP:C054; PPS:C015
+sme,"SMEs, entrepreneurship & investment",Economy,3,4,yes,USFP(2); MP(1); PPS(1),USFP:C026|C036; MP:C055; PPS:C010
+prices,"Cost of living, food & markets",Economy,3,3,yes,PAM(1); MP(1); PPS(1),PAM:C046; MP:C057; PPS:C013
+housing,"Housing, transport & local services",Social,3,3,yes,USFP(1); PPS(1); UC(1),USFP:C024; PPS:C014; UC:C060
+identity,"Identity, Amazigh & languages",Identity,3,3,yes,PJD(1); USFP(1); PPS(1),PJD:C001; USFP:C033; PPS:C017
+culture,"Culture, sport & leisure",Identity,2,4,yes,USFP(1); PPS(3),USFP:C032; PPS:C007|C008|C019
+water,Water & food security,Environment,2,4,yes,USFP(2); PPS(2),USFP:C029|C035; PPS:C012|C013
+women,Women's rights & equality,Social,2,3,yes,USFP(2); PPS(1),USFP:C023|C034; PPS:C018
+research,Higher education & research,Social,2,2,yes,USFP(1); MP(1),USFP:C028; MP:C051
+industry,Industry & productive sovereignty,Economy,2,2,yes,USFP(1); PPS(1),USFP:C022; PPS:C009
+energy,Energy & renewables,Environment,1,2,no,USFP(2),USFP:C022|C035
+diaspora,Moroccan diaspora (MRE),Identity,1,1,no,PPS(1),PPS:C020

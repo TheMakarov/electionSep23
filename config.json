@@ -25,6 +25,9 @@
   },
   "default_claim_weight": 0.4,
   "min_promises_for_D": 3,
+  "convergence": {
+    "spotlight_theme": "family"
+  },
   "promise_status_numeric": {
     "fulfilled": 1.0,
     "partial": 0.66,

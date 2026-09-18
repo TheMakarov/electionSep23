@@ -302,7 +302,66 @@ and mostly single-source) — by design, not by accident.
 
 ---
 
-## 12. Data-hygiene conventions
+## 12. Claim convergence & duplication (themes layer)
+
+Parties do not have to use the same words to make the same promise. The
+convergence layer answers a different question from CEAGI: **which parties are
+promising the same things?** It is a descriptive lens, not a score, and it is
+deliberately kept out of the composite.
+
+### Controlled vocabulary and mapping
+
+| File | Role |
+|---|---|
+| `data/themes.csv` | the controlled vocabulary: `theme_id`, `label`, `group`, `definition` |
+| `data/claim_themes.csv` | the mapping, one row per `(claim_id, theme_id)` pair, with the literal `evidence` anchor and a `confidence` |
+
+The mapping is an **editorial judgement recorded as data**, not a keyword
+heuristic hidden in the builder. Every row must quote a phrase that actually
+appears in the claim text (or its `domain` label); `scripts/build.py` asserts
+this when the file is generated, and the validator treats a claim with no theme
+as a `CLAIM_WITHOUT_THEME` warning so an omission cannot silently understate
+duplication. Change the mapping and the convergence picture changes; nothing
+about it is inferred at build time.
+
+### Definitions
+
+- **Shared theme** — a theme claimed by two or more parties in the campaign
+  year. **Exclusive / alone** — claimed by exactly one.
+- **Duplication index** — `shared themes ÷ themes in play`. A property of the
+  campaign, not of a party.
+- **Convergence (per party)** — `shared themes ÷ own themes`. High means a
+  crowded, undifferentiated platform; low means a distinctive one. Because it
+  is a ratio it does not reward a party merely for having more claims.
+- **Jaccard overlap (per pair)** — `|A ∩ B| ÷ |A ∪ B|` over each party's theme
+  sets, reported beside the raw shared count so a large programme does not look
+  more convergent than it is.
+- **Carried-over theme** — a theme the same party also ran on in the previous
+  campaign. A promise repeated is not a promise added.
+
+### Presentation
+
+The report's section 7 shows the theme × party matrix as a bubble grid (area ∝
+number of claims on that theme; gold banding marks shared themes), a
+duplication ledger with the claim IDs on each side, a per-party convergence
+table, and a party × party echo matrix. The lede spotlight theme is an explicit
+setting, `convergence.spotlight_theme` in `config.json` (it falls back to the
+most crowded theme when unset). The same matrices are exported as
+`output/charts/claim_convergence_matrix.svg` and
+`output/charts/party_echo_matrix.svg`; the underlying data is written to
+`output/claim_overlap.csv` and `output/claim_overlap.json`.
+
+### Limits
+
+Themes are coarse: two claims can share a theme and still differ sharply in
+ambition, target or mechanism. Convergence therefore measures **agenda overlap,
+not agreement**, and says nothing about whether either party would deliver. A
+claim that bundles several targets touches several themes, so theme-tagged
+claims exceed claim rows.
+
+---
+
+## 13. Data-hygiene conventions
 
 Enforced by `scripts/validate.py`.
 
@@ -325,7 +384,7 @@ The `P009` "Others" bucket is excluded from the party census.
 
 ---
 
-## 13. External standards this project is aligned with
+## 14. External standards this project is aligned with
 
 The policies above are this project's own, but they follow widely accepted
 fact-checking and sourcing practice:
@@ -345,13 +404,15 @@ fact-checking and sourcing practice:
 
 ---
 
-## 14. Where each rule lives
+## 15. Where each rule lives
 
 | Rule | Source of truth |
 |---|---|
 | Years, weights, gate thresholds, Monte-Carlo, promise-status map | `config.json` |
 | Schema, IDs, enums, numeric ranges, FILL/UNSOURCED, merged-claim detection | `scripts/validate.py` |
-| CEAGI formulas, corroboration computation, no-imputation logic | `scripts/build.py` |
+| CEAGI formulas, corroboration computation, no-imputation logic, convergence metrics | `scripts/build.py` |
+| Theme vocabulary and claim-to-theme mapping | `data/themes.csv`, `data/claim_themes.csv` |
+| Presentation: flag palette, pentagram star, zellige watermark | `scripts/moroccan_theme.py` |
 | Claim taxonomy, rubric, six-point protocol, electoral algebra, distortion metrics | `morocco-elections.org` |
 | Three-layer model, corroboration rule, source/claims schema templates | `things.txt` |
 | Human-readable summary of all of the above | this file + `README.md` |

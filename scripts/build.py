@@ -34,6 +34,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -78,6 +79,10 @@ DEFAULTS = {
     "claim_weights": {"Q": 1.0, "V": 0.4, "S": 0.1, "N": 0.2},
     "default_claim_weight": 0.4,
     "min_promises_for_D": 3,
+    # The convergence section leads with one shared theme. An explicit choice
+    # (config.json) beats a hard-coded favourite; fall back to the most shared
+    # theme when the configured id is absent or not actually shared.
+    "convergence": {"spotlight_theme": None},
     "promise_status_numeric": {
         "fulfilled": 1.0, "partial": 0.66, "in_progress": 0.55,
         "pending": 0.33, "failed": 0.0, "abandoned": 0.0, "unverifiable": 0.25,
@@ -155,6 +160,15 @@ def esc(value):
             .replace(">", "&gt;"))
 
 
+def esc_attr(value):
+    """Like esc, but safe inside a double-quoted HTML attribute.
+
+    Claim texts contain quoted phrases (e.g. ``"rentree scolaire"``); an
+    unescaped quote would terminate the attribute early.
+    """
+    return esc(value).replace('"', "&quot;").replace("'", "&#39;")
+
+
 is_missing = validator.is_fill
 
 
@@ -204,6 +218,8 @@ leaders = load_table("leaders.csv")
 sources = load_table("sources.csv")
 timeline = load_table("timeline.csv")
 indicators = load_table("indicators.csv")
+themes = load_table("themes.csv")
+claim_themes = load_table("claim_themes.csv")
 
 pids = [p["party_id"] for p in parties if p["party_id"] != "P009"]
 pname = {p["party_id"]: p["name"] for p in parties}
@@ -217,6 +233,98 @@ campaign_claims = [c for c in claims
                    if str(c.get("election_year")) == str(CAMPAIGN_YEAR)]
 historical_claims = [c for c in claims
                      if str(c.get("election_year")) != str(CAMPAIGN_YEAR)]
+
+
+# ---------------------------------------------------------------------------
+# Claim convergence - who is promising the same thing.
+#
+# A party's programme is a bag of claims. Two parties "duplicate" each other
+# when their claims land on the same policy theme. The claim -> theme mapping
+# is an explicit editorial layer stored in data/claim_themes.csv, never a
+# keyword guess hidden in this script: every mapping row carries a literal
+# anchor copied from the claim text, so the finding can be audited back to the
+# words the party actually used.
+# ---------------------------------------------------------------------------
+theme_meta = {t["theme_id"]: t for t in themes}
+claim_by_id = {c["claim_id"]: c for c in claims}
+ct_claim: dict = {}
+for _r in claim_themes:
+    ct_claim.setdefault(_r["claim_id"], []).append(_r["theme_id"])
+
+
+def convergence(claim_set):
+    """{theme_id: {party_id: [claim_id, ...]}} for a set of claim rows."""
+    cells: dict = {}
+    for c in claim_set:
+        pid = c.get("party_id")
+        for tid in ct_claim.get(c["claim_id"], []):
+            cells.setdefault(tid, {}).setdefault(pid, []).append(c["claim_id"])
+    return cells
+
+
+campaign_cells = convergence(campaign_claims)
+history_cells = convergence(historical_claims)
+
+# Themes ordered by how many parties crowd onto them - the most duplicated
+# theme sits at the top of the matrix, which is the whole point of the chart.
+campaign_theme_order = sorted(
+    campaign_cells,
+    key=lambda t: (-len(campaign_cells[t]),
+                   -sum(len(v) for v in campaign_cells[t].values()),
+                   theme_meta[t]["label"]))
+conv_parties = [p for p in pids if any(p in campaign_cells[t] for t in campaign_cells)]
+if not conv_parties:
+    conv_parties = list(pids)
+
+shared_themes = [t for t in campaign_theme_order if len(campaign_cells[t]) >= 2]
+exclusive_themes = [t for t in campaign_theme_order if len(campaign_cells[t]) == 1]
+unused_themes = [t for t in theme_meta if t not in campaign_cells]
+
+party_themes = {p: {t for t in campaign_cells if p in campaign_cells[t]}
+                for p in conv_parties}
+party_shared = {p: {t for t in party_themes[p] if len(campaign_cells[t]) >= 2}
+                for p in conv_parties}
+party_exclusive = {p: party_themes[p] - party_shared[p] for p in conv_parties}
+# Themes a party also ran on in the previous campaign: recycled promises.
+party_carried = {}
+for p in conv_parties:
+    previous = {t for t in history_cells if p in history_cells[t]}
+    party_carried[p] = sorted(previous & party_themes[p])
+
+conv_claims_total = sum(len(v) for t in campaign_cells for v in campaign_cells[t].values())
+conv_shared_cells = sum(len(campaign_cells[t][p]) for t in shared_themes
+                        for p in campaign_cells[t])
+conv_duplication = (len(shared_themes) / len(campaign_theme_order)
+                    if campaign_theme_order else 0.0)
+conv_top_theme = campaign_theme_order[0] if campaign_theme_order else None
+conv_top_parties = (sorted(campaign_cells[conv_top_theme],
+                           key=lambda p: -len(campaign_cells[conv_top_theme][p]))
+                    if conv_top_theme else [])
+conv_most_derivative = max(
+    (p for p in conv_parties if party_themes[p]),
+    key=lambda p: (len(party_shared[p]) / len(party_themes[p]), len(party_shared[p])),
+    default=None)
+conv_most_distinctive = max(
+    conv_parties,
+    key=lambda p: (len(party_exclusive[p]), len(party_themes[p])),
+    default=None)
+# Best single "same theme, two parties" example to lead the section with. The
+# preference is explicit config, not a hidden favourite; if it is unset, absent
+# or not actually shared, fall back to the most crowded theme.
+_spot_pref = (CFG.get("convergence") or {}).get("spotlight_theme")
+conv_spotlight = (
+    _spot_pref if _spot_pref in campaign_cells and len(campaign_cells[_spot_pref]) >= 2
+    else (shared_themes[0] if shared_themes else None))
+
+
+def theme_claims(tid, pid):
+    return campaign_cells[tid][pid]
+
+
+def short_claim(cid, limit=110):
+    text = re.sub(r"\s+", " ", claim_by_id[cid].get("claim", "")).strip()
+    return text if len(text) <= limit else text[: limit - 1].rstrip() + "\u2026"
+
 
 
 # ---------------------------------------------------------------------------
@@ -442,12 +550,17 @@ publishable = all(ok for _label, ok, _detail in gates)
 plt.rcParams.update({
     "font.family": "DejaVu Sans",
     "font.size": 11,
-    "axes.edgecolor": "#555555",
+    "axes.edgecolor": "#8a7f6c",
     "axes.linewidth": 0.8,
     "axes.grid": True,
-    "grid.color": "#dddddd",
+    "grid.color": "#e6dfd0",
     "grid.linewidth": 0.6,
     "figure.dpi": 150,
+    # Warm paper tone keeps the exported SVG charts in the same family as the
+    # Moroccan-palette report instead of floating on stark white.
+    "figure.facecolor": "#fffdf8",
+    "axes.facecolor": "#fffdf8",
+    "savefig.facecolor": "#fffdf8",
 })
 
 
@@ -634,7 +747,7 @@ def chart_bias_reliability():
     fig, ax = plt.subplots(figsize=(9, 6))
     xs = [p[0] for p in points]
     ys = [p[1] for p in points]
-    ax.scatter(xs, ys, s=90, c="#b32424", alpha=0.85, zorder=3)
+    ax.scatter(xs, ys, s=90, c="#c1272d", alpha=0.85, zorder=3)
     for x, y, sid in points:
         ax.annotate(sid, (x, y), textcoords="offset points", xytext=(6, 6),
                     fontsize=9, color="#333333")
@@ -690,6 +803,106 @@ def chart_ceagi():
     return save(fig, "ceagi_ranking")
 
 
+# ---------------------------------------------------------------------------
+# Convergence charts. They join the chart wall like any other export; the
+# convergence section carries the interactive version of the same matrix.
+# ---------------------------------------------------------------------------
+def chart_claim_convergence():
+    """Bubble matrix: one row per theme, one column per party, area ~ claims.
+
+    Shared rows (two or more parties) are banded. This is the chart that shows,
+    at a glance, that e.g. child-and-family commitments are not a PJD-only
+    position. A plain heatmap would say the same thing less legibly; a bubble
+    matrix keeps "how many claims" and "which party" in one cell.
+    """
+    if not campaign_theme_order or not conv_parties:
+        return None
+    rows, cols = campaign_theme_order, conv_parties
+    fig, ax = plt.subplots(figsize=(10.5, 0.44 * len(rows) + 2.0))
+    for i, tid in enumerate(rows):
+        n_parties = len(campaign_cells[tid])
+        if n_parties >= 2:
+            ax.axhspan(i - 0.5, i + 0.5, color="#fbf1d8", zorder=0)
+        for j, pid in enumerate(cols):
+            cids = campaign_cells[tid].get(pid)
+            if not cids:
+                continue
+            n = len(cids)
+            ax.scatter(j, i, s=110 + 105 * (n - 1), color=pcolor[pid],
+                       edgecolors="#3a3a3a", linewidths=0.7, zorder=3)
+            ax.text(j, i, str(n), ha="center", va="center", fontsize=7.5,
+                    fontweight="bold", color="#111111", zorder=4)
+    ax.set_xlim(-0.6, len(cols) - 0.4)
+    ax.set_ylim(len(rows) - 0.5, -0.5)
+    ax.set_xticks(range(len(cols)))
+    ax.set_xticklabels([pname[p] for p in cols], fontsize=9)
+    ax.set_yticks(range(len(rows)))
+    ax.set_yticklabels([theme_meta[t]["label"] for t in rows], fontsize=8.5)
+    ax.set_xticks(np.arange(-0.5, len(cols), 1), minor=True)
+    ax.set_yticks(np.arange(-0.5, len(rows), 1), minor=True)
+    ax.grid(which="minor", color="#e7e1d7", linewidth=0.7)
+    ax.grid(which="major", visible=False)
+    ax.tick_params(which="minor", length=0)
+    ax.tick_params(which="major", length=0)
+    handles = [plt.Line2D([], [], marker="o", linestyle="",
+                          markersize=math.sqrt(110 + 105 * (n - 1)) / 2.4,
+                          markerfacecolor="#b9b2a6", markeredgecolor="#3a3a3a",
+                          label=f"{n} claim{'s' if n > 1 else ''}")
+               for n in (1, 2, 3)]
+    handles.append(plt.Rectangle((0, 0), 1, 1, facecolor="#fbf1d8",
+                                 edgecolor="none", label="claimed by 2+ parties"))
+    ax.legend(handles=handles, loc="lower right", frameon=False, fontsize=8,
+              ncol=4, bbox_to_anchor=(1.0, 1.005))
+    ax.set_title(f"{CAMPAIGN_YEAR} claim convergence: a filled bubble means the "
+                 f"party has that theme, its size is how many claims",
+                 fontsize=10.5, pad=26)
+    return save(fig, "claim_convergence_matrix")
+
+
+def chart_party_echo():
+    """Party x party matrix: how many themes any two parties both claim.
+
+    The number is the count of shared themes; the percentage is the Jaccard
+    overlap (shared / union), which does not reward a party merely for being
+    large.
+    """
+    cols = conv_parties
+    if len(cols) < 2:
+        return None
+    n = len(cols)
+    mat = np.full((n, n), np.nan)
+    for i, a in enumerate(cols):
+        for j, b in enumerate(cols):
+            if i != j:
+                mat[i, j] = len(party_themes[a] & party_themes[b])
+    cmap = plt.cm.YlOrRd.copy()
+    cmap.set_bad("#f4f1ec")
+    fig, ax = plt.subplots(figsize=(1.05 * n + 2.2, 0.85 * n + 1.6))
+    im = ax.imshow(np.ma.masked_invalid(mat), cmap=cmap, aspect="auto",
+                   vmin=0, vmax=max(1.0, float(np.nanmax(mat))))
+    ax.set_xticks(range(n))
+    ax.set_xticklabels([pname[p] for p in cols], fontsize=9)
+    ax.set_yticks(range(n))
+    ax.set_yticklabels([pname[p] for p in cols], fontsize=9)
+    for i, a in enumerate(cols):
+        for j, b in enumerate(cols):
+            if i == j:
+                ax.text(j, i, "self", ha="center", va="center", fontsize=7.5,
+                        color="#9a938a")
+                continue
+            shared = len(party_themes[a] & party_themes[b])
+            union = len(party_themes[a] | party_themes[b])
+            jac = (shared / union) if union else 0.0
+            dark = shared >= 0.6 * max(1.0, float(np.nanmax(mat)))
+            ax.text(j, i, f"{shared}\n{jac:.0%}", ha="center", va="center",
+                    fontsize=8, color="white" if dark else "#222222")
+    ax.set_title("Echo matrix: shared themes between each pair of parties "
+                 "(count / Jaccard overlap)", fontsize=10.5, pad=10)
+    fig.colorbar(im, ax=ax, fraction=0.035, label="shared themes")
+    ax.grid(False)
+    return save(fig, "party_echo_matrix")
+
+
 CHART_SPECS = [
     ("Votes to seats", chart_vote_seat),
     ("Advantage ratio", chart_advantage),
@@ -699,7 +912,10 @@ CHART_SPECS = [
     ("CEAGI ranking", chart_ceagi),
     ("Promise ledger", chart_heatmap),
     ("Source map: reliability vs. lean", chart_bias_reliability),
+    ("Claim convergence matrix", chart_claim_convergence),
+    ("Party echo matrix", chart_party_echo),
 ]
+
 
 # Drop SVGs from a previous run so a chart that is now skipped cannot linger in
 # output/charts and be mistaken for a current one.
@@ -964,47 +1180,260 @@ banner_text = ("PUBLISHABLE - the data passes every gate below."
                "NOT PUBLISHABLE - this report must not be printed as-is. "
                "The gates below say exactly what is missing.")
 
+
+# ---------------------------------------------------------------------------
+# Section - claim convergence. Rendered as HTML rather than a flat image so a
+# reader can hover a bubble and read the exact claim behind it.
+# ---------------------------------------------------------------------------
+def stat_card(value, label, note=""):
+    note_html = f'<div class="statn">{note}</div>' if note else ""
+    return (f'<div class="stat"><div class="statv">{value}</div>'
+            f'<div class="statl">{label}</div>{note_html}</div>')
+
+
+conv_head = "".join(f'<th scope="col">{esc(pname[p])}</th>' for p in conv_parties)
+conv_rows_html = []
+for _tid in campaign_theme_order:
+    _pm = campaign_cells[_tid]
+    _cells = []
+    for _p in conv_parties:
+        _cids = _pm.get(_p)
+        if not _cids:
+            _cells.append('<td class="ccell cempty"></td>')
+            continue
+        _tip = "&#10;".join(esc_attr(f"{cid}: {short_claim(cid, 160)}") for cid in _cids)
+        _size = 15 + min(len(_cids) - 1, 5) * 8
+        _cells.append(
+            f'<td class="ccell" title="{esc_attr(pname[_p])} &#10;{_tip}">'
+            f'<span class="bub" style="width:{_size}px;height:{_size}px;'
+            f'background:{pcolor[_p]}">{len(_cids)}</span></td>')
+    _n = len(_pm)
+    _badge = (f'<span class="pill">{_n} parties</span>' if _n >= 2
+              else '<span class="pill lone">alone</span>')
+    _rowcls = ' class="shared-row"' if _n >= 2 else ''
+    conv_rows_html.append(
+        f'<tr{_rowcls}><th class="th-left">{esc(theme_meta[_tid]["label"])}'
+        f'<span class="tgrp">{esc(theme_meta[_tid]["group"])}</span>{_badge}</th>'
+        + "".join(_cells) + "</tr>")
+conv_matrix = (
+    '<table class="conv"><thead><tr><th class="th-left">Theme &middot; group</th>'
+    + conv_head + "</tr></thead><tbody>" + "".join(conv_rows_html)
+    + "</tbody></table>")
+
+ledger_rows = []
+for _tid in campaign_theme_order:
+    _pm = campaign_cells[_tid]
+    if len(_pm) < 2:
+        continue
+    _ids = "<br>".join(
+        f'<b>{esc(pname[_p])}</b> '
+        + " ".join(f'<span class="cid">{esc(c)}</span>' for c in _pm[_p])
+        for _p in conv_parties if _p in _pm)
+    ledger_rows.append([
+        esc(theme_meta[_tid]["label"]), esc(theme_meta[_tid]["group"]),
+        f'<span class="pill">{len(_pm)}</span>',
+        esc(", ".join(pname[_p] for _p in conv_parties if _p in _pm)), _ids])
+conv_ledger = table(["Theme", "Group", "Parties", "Who", "Claim IDs (hover a bubble above)"],
+                    ledger_rows, "smalltbl")
+
+party_stat_rows = []
+for _p in sorted(conv_parties, key=lambda p: (-len(party_shared[p]), pname[p])):
+    _share = (len(party_shared[_p]) / len(party_themes[_p])) if party_themes[_p] else 0.0
+    _excl = ", ".join(esc(theme_meta[t]["label"]) for t in sorted(party_exclusive[_p]))
+    _carr = ", ".join(esc(theme_meta[t]["label"]) for t in party_carried[_p])
+    party_stat_rows.append([
+        f'<span class="swatch" style="background:{pcolor[_p]}"></span>{esc(pname[_p])}',
+        str(len(party_themes[_p])), str(len(party_shared[_p])), f"{_share:.0%}",
+        _excl or '<span class="na">none</span>',
+        str(len(party_carried[_p])),
+        _carr or '<span class="na">none</span>'])
+conv_party_table = table(
+    ["Party", "Themes", "Shared", "Convergence", "Themes nobody else claims",
+     f"Carried from {BASELINE_YEAR}", "Which ones"],
+    party_stat_rows, "smalltbl")
+
+conv_stats = (
+    stat_card(f"{len(shared_themes)}<span class='den'>/{len(campaign_theme_order)}</span>",
+              "themes claimed by 2+ parties",
+              f"{conv_duplication:.0%} of the themes in play are contested ground")
+    + stat_card(f"{len(exclusive_themes)}", "single-party themes",
+                "a position only one party is running on")
+    + stat_card(f"{conv_claims_total}", "theme-tagged claims",
+                f"{conv_shared_cells} of them sit on a shared theme")
+    + stat_card(esc(pname.get(conv_most_derivative, "n/a")),
+                "most converged party",
+                f"{len(party_shared[conv_most_derivative])}/"
+                f"{len(party_themes[conv_most_derivative])} of its themes "
+                f"are shared" if conv_most_derivative else "")
+    + stat_card(esc(pname.get(conv_most_distinctive, "n/a")),
+                "most distinctive party",
+                f"{len(party_exclusive[conv_most_distinctive])} theme(s) no "
+                f"other party claims" if conv_most_distinctive else "")
+)
+
+if conv_spotlight:
+    _sp = conv_spotlight
+    _sp_parties = [p for p in conv_parties if p in campaign_cells[_sp]]
+    _sp_list = "; ".join(
+        f'<b>{esc(pname[p])}</b> '
+        + ", ".join(f'<span class="cid">{esc(c)}</span>' for c in campaign_cells[_sp][p])
+        for p in _sp_parties)
+    conv_spotlight_html = (
+        f'<div class="spotlight"><div class="spotk">Same promise, different '
+        f'party &middot; spotlight</div>'
+        f'<p><b>{esc(theme_meta[_sp]["label"])}</b> is claimed by '
+        f'<b>{len(_sp_parties)} parties</b>: {_sp_list}. The mapping is not a '
+        f'guess: each claim is tied to this theme in '
+        f'<code>data/claim_themes.csv</code>, with the exact phrase that '
+        f'justifies it.</p></div>')
+else:
+    conv_spotlight_html = ""
+
+conv_top_line = ""
+if conv_top_theme:
+    conv_top_line = (
+        f"The single most crowded theme is <b>{esc(theme_meta[conv_top_theme]['label'])}</b>: "
+        f"{len(conv_top_parties)} of {len(conv_parties)} parties "
+        f"({esc(', '.join(pname[p] for p in conv_top_parties))}) each carry at "
+        f"least one claim on it.")
+
+convergence_html = f"""
+<section id="convergence">
+  <h2>7. Claim convergence - who is promising the same thing</h2>
+  <p>{conv_claims_total} claims from {len(conv_parties)} parties are tagged onto
+  {len(campaign_theme_order)} policy themes. Where two or more parties land on
+  the same theme, their programmes overlap - the promise is duplicated even when
+  the wording is not. {conv_top_line}</p>
+  <p class="small">Method: every claim is mapped to one or more themes in
+  <code>data/claim_themes.csv</code>, an explicit editorial layer whose rows
+  quote the phrase in the claim that justifies the tag. The controlled
+  vocabulary is <code>data/themes.csv</code>. Nothing is inferred by keyword at
+  build time; change the CSV and the picture changes. A theme is
+  <b>shared</b> when two or more parties claim it, <b>alone</b> when only one
+  does.</p>
+  <div class="stats">{conv_stats}</div>
+
+  {conv_spotlight_html}
+  <div class="scroll convwrap">{conv_matrix}</div>
+  <p class="small">Each bubble is one party on one theme; the number in it is
+  how many of that party's claims touch the theme. Gold-banded rows are the
+  shared themes. Hover a bubble for the claim text behind it. The same matrix is
+  exported as <code>output/charts/claim_convergence_matrix.svg</code>, and the
+  pairwise view as <code>output/charts/party_echo_matrix.svg</code>.</p>
+
+  <h3>Duplication ledger - the shared themes in full</h3>
+  <p class="small">Every theme claimed by two or more parties, with the claim
+  IDs on each side. This is the list to read before saying a promise is
+  "owned" by one party.</p>
+  <div class="scroll">{conv_ledger}</div>
+
+  <h3>Convergence and distinctiveness by party</h3>
+  <p class="small"><b>Convergence</b> is the share of a party's themes that at
+  least one other party also claims: high means a crowded, undifferentiated
+  platform; low means a distinctive one. <b>Carried from {BASELINE_YEAR}</b>
+  counts themes the same party already ran on in the previous campaign - a
+  promise repeated is not a promise added.</p>
+  <div class="scroll">{conv_party_table}</div>
+</section>
+"""
+
+
+from moroccan_theme import STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG  # noqa: E402
+
 CSS = """
-:root { --red:#b32424; --ink:#1a1a1a; --muted:#666; --line:#e3e0dc;
-        --bg:#fbfaf8; --green:#2e7d32; }
+:root {
+  --red:#c1272d;          /* Moroccan flag red */
+  --red-deep:#8e1b20;
+  --green:#006233;        /* Moroccan flag green */
+  --green-bright:#0a7d43;
+  --gold:#c8a24a;
+  --sand:#f6efe0;
+  --ink:#1c1a17;
+  --muted:#6d6459;
+  --line:#e4dbc9;
+  --bg:#fbf8f1;
+}
 * { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 body { margin:0; font-family:Georgia,'Times New Roman',serif; color:var(--ink);
        background:var(--bg); line-height:1.55; }
-.wrap { max-width:1180px; margin:0 auto; padding:0 22px 60px; }
-header { border-bottom:4px solid var(--red); padding:34px 0 20px; margin-bottom:26px; }
+body::before { content:""; display:block; height:5px;
+  background:linear-gradient(90deg,var(--green) 0 34%,var(--gold) 34% 66%,var(--red) 66% 100%); }
+a { color:var(--green); }
+a:hover { color:var(--red); }
+
+/* -- masthead: Moroccan flag red, zellige tile, pentagram star -- */
+.masthead { position:relative; overflow:hidden; color:#fff;
+  background:radial-gradient(125% 145% at 86% 6%,#d8434a 0%,var(--red) 46%,var(--red-deep) 100%);
+  border-bottom:5px solid var(--green);
+  box-shadow:0 3px 0 var(--gold); }
+.masthead-bg { position:absolute; inset:0; pointer-events:none;
+  background-image:url("__ZELLIGE__"); background-size:68px 68px;
+  opacity:.95; }
+.masthead-inner { position:relative; max-width:1180px; margin:0 auto;
+  padding:34px 22px 30px; display:flex; gap:28px; align-items:center; }
+.flagmark { flex:0 0 auto; width:116px; height:116px;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.38)); }
+.flagmark svg { width:100%; height:100%; display:block; }
+.masthead-copy { min-width:0; }
 .kicker { font-family:Helvetica,Arial,sans-serif; text-transform:uppercase;
-          letter-spacing:.14em; color:var(--red); font-size:.8rem; font-weight:700; }
-h1 { font-size:2.4rem; margin:.25rem 0 .35rem; line-height:1.1; }
+  letter-spacing:.2em; color:var(--gold); font-size:.74rem; font-weight:700; }
+.kicker .ar { font-family:'Amiri','Traditional Arabic','Noto Naskh Arabic',serif;
+  letter-spacing:0; font-size:1.08rem; text-transform:none; vertical-align:-2px;
+  direction:rtl; unicode-bidi:isolate; }
+.masthead h1 { font-size:2.7rem; margin:.3rem 0 .45rem; line-height:1.06;
+  color:#fffdf7; text-shadow:0 2px 0 rgba(0,0,0,.2); }
+.masthead .deck { font-size:1.1rem; color:#fbe6e6; max-width:760px; margin:.15rem 0 1.05rem; }
+.chips { display:flex; flex-wrap:wrap; gap:8px; }
+.chip { font-family:Helvetica,Arial,sans-serif; font-size:.71rem; font-weight:700;
+  letter-spacing:.05em; text-transform:uppercase; color:#fff;
+  background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.3);
+  border-radius:999px; padding:4px 11px; }
+.chip-link { text-decoration:none; background:var(--green); border-color:var(--gold); }
+.chip-link:hover { background:var(--gold); color:#3a2c07; }
+
+.wrap { max-width:1180px; margin:0 auto; padding:0 22px 60px; }
+.colophon { font-family:Helvetica,Arial,sans-serif; font-size:.78rem;
+  color:var(--muted); background:#fff; border-left:4px solid var(--gold);
+  padding:9px 14px; margin:20px 0 0; }
+.colophon code { color:var(--green); }
+
 h2 { font-family:Helvetica,Arial,sans-serif; font-size:1.25rem;
-     border-bottom:2px solid var(--line); padding-bottom:6px; margin:44px 0 16px; }
-h3 { font-family:Helvetica,Arial,sans-serif; font-size:1rem; margin:26px 0 10px; }
+     color:var(--green); border-bottom:2px solid var(--green);
+     padding-bottom:7px; margin:44px 0 16px;
+     display:flex; align-items:center; gap:.55em; }
+h2::before { content:""; flex:0 0 auto; width:1.05em; height:1.05em;
+     background:url("__STAR__") center/contain no-repeat; }
+h3 { font-family:Helvetica,Arial,sans-serif; font-size:1rem; color:var(--red);
+     margin:26px 0 10px; }
 .deck { font-size:1.12rem; color:#333; max-width:780px; }
 .meta { font-family:Helvetica,Arial,sans-serif; font-size:.8rem; color:var(--muted);
         margin-top:10px; }
+
 .banner { padding:14px 18px; margin:22px 0; font-family:Helvetica,Arial,sans-serif;
-          font-size:.88rem; border-left:6px solid var(--red); }
-.bad-banner { background:#fdf3f3; }
-.ok-banner { background:#f2f8f2; border-left-color:var(--green); }
+          font-size:.88rem; border-left:6px solid var(--red); background:#fff; }
+.bad-banner { background:#fdf2f1; }
+.ok-banner { background:#f0f7f2; border-left-color:var(--green); }
 .banner b { color:var(--red); }
 .ok-banner b { color:var(--green); }
 ul.findings { font-size:1.02rem; padding-left:20px; }
 ul.findings li { margin-bottom:8px; }
 table { border-collapse:collapse; width:100%; margin:14px 0;
         font-family:Helvetica,Arial,sans-serif; font-size:.8rem; background:#fff; }
-th { background:#f1eee8; text-align:left; padding:8px 9px;
-     border-bottom:2px solid var(--ink); font-size:.72rem; text-transform:uppercase;
+th { background:var(--sand); text-align:left; padding:8px 9px; color:#4a4132;
+     border-bottom:2px solid var(--green); font-size:.72rem; text-transform:uppercase;
      letter-spacing:.04em; position:sticky; top:0; }
 td { padding:7px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
-tr:hover td { background:#faf6f0; }
+tr:hover td { background:#fdf9f0; }
 .badge { color:#fff; padding:2px 8px; border-radius:3px; font-size:.72rem;
          font-weight:600; white-space:nowrap; }
-.miss { color:#b32424; background:#fdf3f3; border:1px solid #f0c9c9;
+.miss { color:var(--red); background:#fdf2f1; border:1px solid #f0cdcb;
         padding:1px 6px; border-radius:3px; font-size:.72rem; font-weight:600; }
-.na { color:#8a8a8a; font-style:italic; }
+.na { color:#8a8378; font-style:italic; }
 .ok { color:var(--green); font-weight:700; }
 .bad { color:var(--red); font-weight:700; }
 .sev-error { color:var(--red); font-weight:700; }
-.sev-warn { color:#a86a00; font-weight:700; }
+.sev-warn { color:#a8741a; font-weight:700; }
 .sev-info { color:#1a6a8a; }
 .claimtext { display:block; max-width:520px; }
 figure.chart { margin:28px 0; text-align:center; }
@@ -1017,14 +1446,59 @@ figcaption { font-family:Helvetica,Arial,sans-serif; font-size:.78rem;
 .tldate { font-weight:700; color:var(--red); }
 .tlactor, .tlsrc { color:var(--muted); }
 .formula { font-family:Georgia,serif; font-style:italic; background:#fff;
-           border:1px solid var(--line); padding:10px 14px; margin:10px 0;
-           overflow-x:auto; }
+           border:1px solid var(--line); border-left:4px solid var(--green);
+           padding:10px 14px; margin:10px 0; overflow-x:auto; }
 .small { font-family:Helvetica,Arial,sans-serif; font-size:.78rem; color:var(--muted); }
 .scroll { overflow-x:auto; }
-footer { margin-top:50px; padding-top:16px; border-top:3px solid var(--ink);
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr));
+         gap:10px; margin:18px 0; }
+.stat { background:#fff; border:1px solid var(--line); border-top:3px solid var(--red);
+        padding:10px 12px; }
+.stat:nth-child(even) { border-top-color:var(--green); }
+.statv { font-family:Helvetica,Arial,sans-serif; font-size:1.45rem; font-weight:700;
+         line-height:1.1; }
+.den { font-size:.85rem; color:var(--muted); font-weight:400; }
+.statl { font-family:Helvetica,Arial,sans-serif; font-size:.7rem; text-transform:uppercase;
+         letter-spacing:.05em; color:#444; margin-top:4px; }
+.statn { font-family:Helvetica,Arial,sans-serif; font-size:.72rem; color:var(--muted);
+         margin-top:5px; }
+table.conv { font-size:.78rem; width:100%; }
+table.conv th, table.conv td { text-align:center; padding:4px 5px; vertical-align:middle; }
+table.conv th.th-left { text-align:left; white-space:nowrap; }
+table.conv thead th { font-size:.66rem; }
+table.conv tr.shared-row th, table.conv tr.shared-row td { background:#f7efd9; }
+table.conv tr.shared-row th.th-left { box-shadow:inset 3px 0 0 var(--gold); }
+.tgrp { display:inline-block; margin-left:7px; font-weight:400; color:var(--muted);
+        font-size:.66rem; text-transform:uppercase; letter-spacing:.04em; }
+.bub { display:inline-flex; align-items:center; justify-content:center;
+       border-radius:50%; color:#fff; font-weight:700; font-size:.68rem;
+       box-shadow:inset 0 0 0 1px rgba(0,0,0,.3); }
+.pill { display:inline-block; margin-left:7px; background:var(--sand); color:#5b5140;
+        border-radius:10px; padding:0 7px; font-size:.66rem; font-weight:700;
+        white-space:nowrap; }
+.pill.lone { background:#efeee9; color:#999999; }
+.swatch { display:inline-block; width:10px; height:10px; border-radius:2px;
+          margin-right:6px; }
+.cid { font-family:ui-monospace,Menlo,Consolas,monospace; background:#f4efe3;
+       border:1px solid var(--line); border-radius:3px; padding:0 4px; font-size:.7rem; }
+.spotlight { background:#fffdf6; border:1px solid var(--line);
+             border-left:5px solid var(--red); padding:12px 16px; margin:16px 0; }
+.spotlight p { margin:0; }
+.spotk { font-family:Helvetica,Arial,sans-serif; text-transform:uppercase;
+         letter-spacing:.1em; font-size:.68rem; font-weight:700; color:var(--red);
+         margin-bottom:6px; }
+.smalltbl { font-size:.76rem; }
+footer { margin-top:50px; padding-top:16px; border-top:4px solid var(--green);
+         box-shadow:inset 0 2px 0 var(--gold);
          font-family:Helvetica,Arial,sans-serif; font-size:.78rem; color:var(--muted); }
-@media (max-width:820px) { h1 { font-size:1.8rem; } .tl { grid-template-columns:1fr; } }
+@media (max-width:820px) {
+  .masthead-inner { flex-direction:column; align-items:flex-start; gap:16px; }
+  .flagmark { width:86px; height:86px; }
+  .masthead h1 { font-size:1.85rem; }
+  .tl { grid-template-columns:1fr; }
+}
 """
+CSS = CSS.replace("__STAR__", STAR_URI).replace("__ZELLIGE__", ZELLIGE_URI)
 
 html_doc = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1035,21 +1509,35 @@ html_doc = f"""<!DOCTYPE html>
 <style>{CSS}</style>
 </head>
 <body>
+<header class="masthead">
+  <div class="masthead-bg" aria-hidden="true"></div>
+  <div class="masthead-inner">
+    <div class="flagmark">{STAR_BADGE_SVG}</div>
+    <div class="masthead-copy">
+      <div class="kicker">Royaume du Maroc &middot; <span class="ar" dir="rtl">&#1575;&#1604;&#1605;&#1605;&#1604;&#1603;&#1577; &#1575;&#1604;&#1605;&#1594;&#1585;&#1576;&#1610;&#1577;</span> &middot; {esc(countdown)}</div>
+      <h1>Electoral Claims, Promises &amp; Accountability</h1>
+      <p class="deck">What the parties are promising for {CAMPAIGN_YEAR}, how votes
+      became seats in {BASELINE_YEAR}, and which numbers we can actually stand behind.</p>
+      <div class="chips">
+        <span class="chip">Campaign {CAMPAIGN_YEAR}</span>
+        <span class="chip">Baseline {BASELINE_YEAR}</span>
+        <span class="chip">{claim_rows} claims</span>
+        <span class="chip">{len(shared_themes)} shared themes</span>
+        <a class="chip chip-link" href="seat_simulator.html">Seat simulator &#8594;</a>
+      </div>
+    </div>
+  </div>
+</header>
+
 <div class="wrap">
 
-<header>
-  <div class="kicker">Data project &middot; Morocco &middot; {esc(countdown)}</div>
-  <h1>Electoral Claims, Promises &amp; Accountability</h1>
-  <p class="deck">What the parties are promising for {CAMPAIGN_YEAR}, how votes
-  became seats in {BASELINE_YEAR}, and which numbers we can actually stand behind.</p>
-  <div class="meta">Generated from the <code>data/</code> registry by
+  <div class="colophon">Generated from the <code>data/</code> registry by
   <code>scripts/build.py</code> &middot; model CEAGI &middot;
   {len(sources)} sources, {claim_rows} campaign claims
   ({len(historical_claims)} historical), {len(promises)} promises,
-  {len(pids)} parties &middot; config: campaign {CAMPAIGN_YEAR} / baseline {BASELINE_YEAR}.</div>
-  <div class="meta" style="margin-top:6px">&#9673; <a href="seat_simulator.html">Open the interactive seat-allocation simulator</a>
-  (Hare quota &#8594; hemicycle, with a CEAGI reference).</div>
-</header>
+  {len(pids)} parties &middot; convergence: {len(campaign_theme_order)} themes,
+  {len(shared_themes)} shared by 2+ parties &middot;
+  config: campaign {CAMPAIGN_YEAR} / baseline {BASELINE_YEAR}.</div>
 
 <div class="{banner_class}">
   <b>{esc(banner_text)}</b>
@@ -1125,8 +1613,10 @@ html_doc = f"""<!DOCTYPE html>
   </div>
 </section>
 
+{convergence_html}
+
 <section>
-  <h2>7. Historical campaign claims ({', '.join(sorted({c.get('election_year') for c in historical_claims}))})</h2>
+  <h2>8. Historical campaign claims ({', '.join(sorted({c.get('election_year') for c in historical_claims}))})</h2>
   <p class="small">{len(historical_claims)} claims from the earlier campaign(s), kept
   as a traceable record of what each party promised. They are not scored in the
   current CEAGI run.</p>
@@ -1138,13 +1628,13 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>8. Promise ledger (past terms)</h2>
+  <h2>9. Promise ledger (past terms)</h2>
   {table(["ID", "Party", "Term", "Promise", "Domain", "Status", "Outcome",
           "Sources", "Conf."], promise_rows)}
 </section>
 
 <section>
-  <h2>9. Leaders - achievements, ownership, ostensible motives</h2>
+  <h2>10. Leaders - achievements, ownership, ostensible motives</h2>
   <p class="small">"Skin in the game" = 0-1 judgement of how tightly the leader's
   personal fortune or career is tied to the promised outcomes (1 = fully exposed).
   Ownership and motive cells are claims requiring corroboration.</p>
@@ -1155,7 +1645,7 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>10. Sources registry</h2>
+  <h2>11. Sources registry</h2>
   <div class="scroll">
   {table(["ID", "Title", "Author/Org", "Date", "Type", "Primary?", "Rel.",
           "Lean", "Status"], source_rows)}
@@ -1166,12 +1656,12 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>11. Timeline</h2>
+  <h2>12. Timeline</h2>
   {timeline_html}
 </section>
 
 <section>
-  <h2>12. Validation findings</h2>
+  <h2>13. Validation findings</h2>
   <p class="small">Produced by <code>scripts/validate.py</code>. ERROR breaks an
   invariant, WARN is incomplete but sound, INFO is coverage.</p>
   <div class="scroll">
@@ -1180,7 +1670,7 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>13. Methodology (short)</h2>
+  <h2>14. Methodology (short)</h2>
   <p class="small">Sources to facts/claims to synthesis. A claim is
   "corroborated" only with 2+ independent reliable sources. Delivery
   D = (fulfilled + 0.5&middot;partial) / (fulfilled + partial + failed +
@@ -1258,6 +1748,84 @@ with open(OUT / "ceagi_scores.csv", "w", newline="", encoding="utf-8") as fh:
         w.writerow(["", pid, pname[pid], "", "", "", f"{coverage[pid]}/6",
                     partial[pid]] + [sub[pid][d]["value"] for d in DIMS])
 
+
+# ---------------------------------------------------------------------------
+# Claim-convergence outputs. The report section is a view; these are the data.
+# ---------------------------------------------------------------------------
+conv_pairwise = []
+for _i, _a in enumerate(conv_parties):
+    for _b in conv_parties[_i + 1:]:
+        _shared = sorted(party_themes[_a] & party_themes[_b],
+                         key=lambda t: campaign_theme_order.index(t))
+        _union = party_themes[_a] | party_themes[_b]
+        conv_pairwise.append({
+            "party_a": _a, "party_b": _b,
+            "shared_themes": len(_shared),
+            "jaccard": round(len(_shared) / len(_union), 3) if _union else 0.0,
+            "themes": _shared,
+        })
+conv_pairwise.sort(key=lambda r: -r["shared_themes"])
+
+write_json(OUT / "claim_overlap.json", {
+    "generated": dt.datetime.now().isoformat(timespec="seconds"),
+    "campaign_year": CAMPAIGN_YEAR,
+    "method": ("claim -> theme mapping in data/claim_themes.csv (one row per "
+               "claim/theme pair, each with a literal anchor from the claim); "
+               "a theme is 'shared' when two or more parties claim it"),
+    "totals": {
+        "themes_in_play": len(campaign_theme_order),
+        "themes_total": len(theme_meta),
+        "shared_themes": len(shared_themes),
+        "exclusive_themes": len(exclusive_themes),
+        "unused_themes": len(unused_themes),
+        "duplication_index": round(conv_duplication, 3),
+        "theme_tagged_claims": conv_claims_total,
+        "theme_tagged_claims_on_shared_themes": conv_shared_cells,
+        "parties": len(conv_parties),
+    },
+    "themes": [
+        {
+            "theme_id": _tid, "label": theme_meta[_tid]["label"],
+            "group": theme_meta[_tid]["group"],
+            "shared": len(campaign_cells[_tid]) >= 2,
+            "n_parties": len(campaign_cells[_tid]),
+            "n_claims": sum(len(v) for v in campaign_cells[_tid].values()),
+            "parties": {_p: campaign_cells[_tid][_p] for _p in conv_parties
+                        if _p in campaign_cells[_tid]},
+        }
+        for _tid in campaign_theme_order
+    ],
+    "parties": [
+        {
+            "party_id": _p, "name": pname[_p],
+            "themes": sorted(party_themes[_p],
+                             key=lambda t: campaign_theme_order.index(t)),
+            "shared_themes": sorted(party_shared[_p],
+                                    key=lambda t: campaign_theme_order.index(t)),
+            "exclusive_themes": sorted(party_exclusive[_p]),
+            "carried_over_from_baseline": party_carried[_p],
+            "convergence": round(len(party_shared[_p]) / len(party_themes[_p]), 3)
+                           if party_themes[_p] else None,
+        }
+        for _p in sorted(conv_parties, key=lambda p: (-len(party_shared[p]), pname[p]))
+    ],
+    "pairwise": conv_pairwise,
+})
+
+with open(OUT / "claim_overlap.csv", "w", newline="", encoding="utf-8") as fh:
+    w = csv.writer(fh)
+    w.writerow(["theme_id", "theme", "group", "n_parties", "n_claims",
+                "shared", "parties", "claim_ids"])
+    for _tid in campaign_theme_order:
+        _pm = campaign_cells[_tid]
+        w.writerow([
+            _tid, theme_meta[_tid]["label"], theme_meta[_tid]["group"],
+            len(_pm), sum(len(v) for v in _pm.values()),
+            "yes" if len(_pm) >= 2 else "no",
+            "; ".join(f"{pname[p]}({len(_pm[p])})" for p in conv_parties if p in _pm),
+            "; ".join(f"{pname[p]}:{'|'.join(_pm[p])}" for p in conv_parties if p in _pm),
+        ])
+
 (OUT / "report.html").write_text(html_doc, encoding="utf-8")
 
 # ---------------------------------------------------------------------------
@@ -1329,6 +1897,29 @@ for c in historical_claims:
         f"({status}) - sources: {c.get('source_ids') or 'none'} "
         f"- confidence: {c.get('confidence') or 'FILL'}")
 
+lines += ["", "## 4c. Claim-theme mapping and convergence", "",
+          f"Method: `data/claim_themes.csv` maps each claim to one or more themes "
+          f"from the controlled vocabulary in `data/themes.csv`; every mapping "
+          f"row quotes a literal anchor from the claim text. "
+          f"`{len(shared_themes)}` of `{len(campaign_theme_order)}` themes in play "
+          f"for {CAMPAIGN_YEAR} are claimed by two or more parties "
+          f"(duplication index {conv_duplication:.0%}).", "",
+          "| Theme | Group | Parties | Claim IDs |",
+          "|---|---|---|---|"]
+for _tid in campaign_theme_order:
+    _pm = campaign_cells[_tid]
+    _who = ", ".join(f"{pname[p]} ({len(_pm[p])})" for p in conv_parties if p in _pm)
+    _ids = "; ".join(f"{pname[p]}: {', '.join(_pm[p])}"
+                     for p in conv_parties if p in _pm)
+    lines.append(f"| {theme_meta[_tid]['label']} | {theme_meta[_tid]['group']} | "
+                 f"{_who} | {_ids} |")
+
+lines += ["", "### Carried-over themes (same party, previous campaign)", "",
+          "| Party | Themes run in both campaigns |", "|---|---|"]
+for _p in conv_parties:
+    _carried = ", ".join(theme_meta[t]["label"] for t in party_carried[_p])
+    lines.append(f"| {pname[_p]} | {_carried or 'none'} |")
+
 lines += ["", "## 5. Promises", ""]
 for r in promises:
     lines.append(
@@ -1382,6 +1973,10 @@ if skipped:
     for c in skipped:
         print(f"     - skipped: {c['name']} ({c['note']})")
 print(f"[ok] Scores    -> ceagi_scores.csv / ceagi_scores.json")
+print(f"[ok] Overlap   -> claim_overlap.csv / claim_overlap.json")
+print(f"[conv] themes={len(campaign_theme_order)} shared={len(shared_themes)} "
+      f"({conv_duplication:.0%}) exclusive={len(exclusive_themes)} "
+      f"theme_tagged_claims={conv_claims_total}")
 print(f"[ok] Audit     -> audit_trail.md")
 print(f"[gate] errors={sev_count[validator.ERROR]} "
       f"warnings={sev_count[validator.WARN]} "

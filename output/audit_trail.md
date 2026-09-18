@@ -1,6 +1,6 @@
 # Audit trail - Morocco electoral data project
 
-Generated 2026-09-18T21:57:52 by `scripts/build.py`.
+Generated 2026-09-18T23:44:55 by `scripts/build.py`.
 Campaign year **2026**, baseline year **2021**, publication gate: **FAIL**.
 
 Every number below is traced to a source ID and a confidence level.
@@ -208,6 +208,47 @@ A value of `n/a` means the evidence does not exist yet - it is not a zero.
 - `C094` [2021] [UC] class=V, verification=1 (scored) - sources: S026, S059 - confidence: MEDIUM
 - `C095` [2021] [UC] class=V, verification=1 (scored) - sources: S027, S060 - confidence: LOW
 
+## 4c. Claim-theme mapping and convergence
+
+Method: `data/claim_themes.csv` maps each claim to one or more themes from the controlled vocabulary in `data/themes.csv`; every mapping row quotes a literal anchor from the claim text. `19` of `21` themes in play for 2026 are claimed by two or more parties (duplication index 90%).
+
+| Theme | Group | Parties | Claim IDs |
+|---|---|---|---|
+| Social protection & pensions | Social | RNI (1), PAM (1), Istiqlal (1), USFP (1), MP (1), PPS (3), UC (1) | RNI: C043; PAM: C047; Istiqlal: C037; USFP: C027; MP: C054; PPS: C003, C005, C006; UC: C058 |
+| Wages & purchasing power | Economy | RNI (1), PAM (2), Istiqlal (2), USFP (1), PPS (2), UC (1) | RNI: C041; PAM: C044, C047; Istiqlal: C038, C039; USFP: C024; PPS: C006, C007; UC: C058 |
+| Jobs & employment | Economy | RNI (2), PAM (1), USFP (6), MP (3), PPS (2) | RNI: C042, C043; PAM: C045; USFP: C022, C023, C027, C029, C034, C036; MP: C049, C052, C056; PPS: C005, C015 |
+| Rural development & territorial equity | Territory | Istiqlal (1), USFP (2), MP (1), PPS (1), UC (2) | Istiqlal: C096; USFP: C025, C029; MP: C053; PPS: C004; UC: C058, C059 |
+| Children, family & youth | Social | Istiqlal (1), PJD (1), USFP (1), MP (1), PPS (2) | Istiqlal: C037; PJD: C002; USFP: C036; MP: C049; PPS: C006, C019 |
+| School education | Social | RNI (1), USFP (2), MP (3), PPS (1) | RNI: C043; USFP: C024, C028; MP: C050, C051, C052; PPS: C004 |
+| Governance & anti-corruption | Governance | Istiqlal (1), USFP (1), PPS (2), UC (1) | Istiqlal: C040; USFP: C031; PPS: C016, C021; UC: C059 |
+| Health & medical coverage | Social | RNI (1), PJD (1), USFP (1), PPS (2) | RNI: C043; PJD: C002; USFP: C024; PPS: C003, C005 |
+| Taxation & fiscal justice | Economy | PAM (1), USFP (1), MP (1), PPS (2) | PAM: C048; USFP: C023; MP: C055; PPS: C010, C011 |
+| Digital administration | Governance | USFP (2), MP (1), PPS (1) | USFP: C028, C030; MP: C054; PPS: C015 |
+| SMEs, entrepreneurship & investment | Economy | USFP (2), MP (1), PPS (1) | USFP: C026, C036; MP: C055; PPS: C010 |
+| Cost of living, food & markets | Economy | PAM (1), MP (1), PPS (1) | PAM: C046; MP: C057; PPS: C013 |
+| Housing, transport & local services | Social | USFP (1), PPS (1), UC (1) | USFP: C024; PPS: C014; UC: C060 |
+| Identity, Amazigh & languages | Identity | PJD (1), USFP (1), PPS (1) | PJD: C001; USFP: C033; PPS: C017 |
+| Culture, sport & leisure | Identity | USFP (1), PPS (3) | USFP: C032; PPS: C007, C008, C019 |
+| Water & food security | Environment | USFP (2), PPS (2) | USFP: C029, C035; PPS: C012, C013 |
+| Women's rights & equality | Social | USFP (2), PPS (1) | USFP: C023, C034; PPS: C018 |
+| Higher education & research | Social | USFP (1), MP (1) | USFP: C028; MP: C051 |
+| Industry & productive sovereignty | Economy | USFP (1), PPS (1) | USFP: C022; PPS: C009 |
+| Energy & renewables | Environment | USFP (2) | USFP: C022, C035 |
+| Moroccan diaspora (MRE) | Identity | PPS (1) | PPS: C020 |
+
+### Carried-over themes (same party, previous campaign)
+
+| Party | Themes run in both campaigns |
+|---|---|
+| RNI | School education, Jobs & employment, Health & medical coverage, Social protection & pensions, Wages & purchasing power |
+| PAM | Jobs & employment, Taxation & fiscal justice |
+| Istiqlal | Children, family & youth, Social protection & pensions, Wages & purchasing power |
+| PJD | none |
+| USFP | Governance & anti-corruption, SMEs, entrepreneurship & investment, Social protection & pensions, Taxation & fiscal justice, Wages & purchasing power |
+| MP | School education, Rural development & territorial equity, SMEs, entrepreneurship & investment |
+| PPS | School education, Jobs & employment, Health & medical coverage, Social protection & pensions, Women's rights & equality |
+| UC | Social protection & pensions |
+
 ## 5. Promises
 
 - `PR001` [PJD, 2011-2016] Subsidy reform (fuel indexation) - **fulfilled** - Subsidies indexed 2014-2015 (sources: UNSOURCED, HIGH)
@@ -302,7 +343,7 @@ A value of `n/a` means the evidence does not exist yet - it is not a zero.
 
 ## 8. Validation findings
 
-errors=0, warnings=92, info=2
+errors=0, warnings=91, info=2
 
 ### WARN SINGLE_SOURCE (29)
 
@@ -383,10 +424,6 @@ errors=0, warnings=92, info=2
 - timeline.csv:6: source_ids=FILL -- no source assigned yet
 - timeline.csv:8: source_ids=FILL -- no source assigned yet
 - ... and 1 more
-
-### WARN OPEN_IN_CALC (1)
-
-- claims.csv: a LibreOffice lock file exists -- close the CSV in Calc before editing it from a script, or the edit is lost on save
 
 ### WARN NON_SNAKE_CASE (1)
 

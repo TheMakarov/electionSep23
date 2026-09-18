@@ -18,8 +18,10 @@ charts are inline SVG, no internet needed).
 
 Section 1 of that report is a **publication gate**. While it says
 `NOT PUBLISHABLE`, the report is a workbench, not a source. It is currently
-`NOT PUBLISHABLE`: the campaign claims exist, but they are unscored and
-single-sourced.
+`NOT PUBLISHABLE` on one gate only: the registry is 10.4% `FILL` cells, just
+above the 10% ceiling (`class`/`verification_score` are now scored for all 61
+campaign claims and 69% are corroborated; the remaining holes are mostly
+`baseline` / `deadline` / `unit`).
 
 ## Quick start
 
@@ -41,13 +43,14 @@ broken output.
 
 | File | What it is |
 |---|---|
-| `output/report.html` | The full report: publication gate, supportable vs. blocked findings, an auto-generated to-do list, readiness and sub-index tables, charts, the campaign claims table, promise ledger, leaders, sources, timeline, validation findings, methodology |
+| `output/report.html` | The full report: publication gate, supportable vs. blocked findings, an auto-generated to-do list, readiness and sub-index tables, charts, the campaign claims table, **claim convergence** (bubble matrix, duplication ledger, party echo matrix), promise ledger, leaders, sources, timeline, validation findings, methodology |
 | `output/seat_simulator.html` | **Interactive** seat-allocation simulator: enter votes, see the Hare-quota → hemicycle (coloured seats) + interpretation, plus the CEAGI reference |
 | `output/ceagi_scores.csv` | Sub-indices + coverage per party, machine-readable |
 | `output/ceagi_scores.json` | Same, plus per-sub-index provenance (`n`, `year`, `detail`) and the gate results |
+| `output/claim_overlap.csv` / `.json` | Which parties promise the same things: themes in play, shared themes, per-party convergence, carried-over themes, pairwise Jaccard overlap |
 | `output/audit_trail.md` | Every number traced to a source ID, a sample size, a year, and a reason when absent |
 | `output/charts/*.svg` | Individual vector charts (stale ones are deleted on each build) |
-| `config.json` | Years, weights, and gate thresholds — the only place to change the model |
+| `config.json` | Years, weights, gate thresholds, convergence spotlight — the only place to change the model |
 | `morocco-elections.org` | The research skeleton (org-mode) with methodology & algebra |
 
 ## Data integrity gate — `scripts/validate.py`
@@ -61,8 +64,9 @@ anything. It reads `data/` and reports:
   enum. Any ERROR fails `make check` and blocks `make build`.
 - **WARN** — incomplete but structurally sound. `FILL` placeholders (with a
   per-column census), rows marked `UNSOURCED`, claims resting on a single
-  source, claims that bundle several numeric targets into one row, non-ISO
-  dates, a CSV left open in LibreOffice.
+  source, claims that bundle several numeric targets into one row, a claim with
+  no theme mapping (`CLAIM_WITHOUT_THEME`, which would silently understate
+  duplication), non-ISO dates, a CSV left open in LibreOffice.
 - **INFO** — coverage. e.g. "claims exist for 2026 but there is no 2026
   election row, so E cannot be computed".
 
@@ -93,6 +97,23 @@ and the `P009` "Others" bucket is excluded from the party census.
 
 A claim is *corroborated* only with 2+ independent reliable sources.
 Reliability and political lean are stored in **separate** columns.
+
+### The convergence layer (who is copying whom)
+
+Parties rarely use the same words, but they often make the same promise. Every
+campaign claim is mapped to one or more policy themes in
+**`data/claim_themes.csv`**, drawn from the controlled vocabulary in
+**`data/themes.csv`**. Each mapping row quotes the phrase in the claim that
+justifies the tag, so the duplication finding is auditable rather than a
+keyword guess. Section 7 of the report renders the result as a bubble matrix
+(area ∝ claims, gold banding = shared theme), a duplication ledger with claim
+IDs, and a party × party echo matrix; the machine-readable form is
+`output/claim_overlap.csv` / `.json`.
+
+Two numbers come out of it: the campaign's **duplication index** (shared themes
+÷ themes in play) and each party's **convergence** (shared themes ÷ own themes),
+plus **carried-over themes** — the same party running again on a theme it
+already campaigned on in 2021.
 
 ## Two years, not one
 
@@ -137,16 +158,19 @@ incomparable, and ranking them would compare unlike things.
 
 - **Seat counts** (2011/2016/2021) are from official election records → **HIGH** confidence.
 - **Vote shares** are **ESTIMATES** (marked `LOW`) — replace with official Interior-Ministry figures.
-- **The 2026 campaign claims** (`C001`–`C040`) are real extracted commitments, but
-  every scorable field (`class`, `verification_score`, `baseline`, `target`,
-  `deadline`, `unit`, `confidence`) is still `FILL`.
-- **All five sources are secondary press reports**, with `reliability` unfilled and
-  no archived URL. Every claim rests on exactly one of them, so **no claim is
+- **The 2026 campaign claims** (61 rows) are extracted commitments. `class` and
+  `verification_score` are now filled for all of them, but `baseline` (96/96),
+  `deadline` (87/96), `target` (39/96) and `unit` (40/96) are still largely
+  `FILL`, so most claims cannot yet be checked against an outcome.
+- **The 60 sources are almost all secondary press reports** (59 secondary, 1
+  primary); 5 have no `reliability` score and 6 no `bias_lean`. 19 of the 61
+  campaign claims still rest on a single source, so they are **not
   corroborated** under the project's own rule.
-- **14 claims bundle three or more numeric targets into one row** (e.g. C003 mixes
+- **15 claims bundle three or more numeric targets into one row** (e.g. C003 mixes
   AMO coverage, doctors, and nurses). The methodology requires one claim per row.
-- **Four parties have no 2026 claims at all**: RNI (the governing party), PAM, MP,
-  and UC — so no incumbent-vs-challenger comparison is possible yet.
+- **Convergence mapping is editorial.** `data/claim_themes.csv` is a human
+  classification with an evidence anchor per row, not a measured fact; read
+  METHODOLOGY.md section 12 before quoting a "duplication" figure.
 
 Run `make check` for the current, authoritative version of this list.
 
@@ -154,8 +178,12 @@ Run `make check` for the current, authoritative version of this list.
 
 ```
 data/                  auditable CSVs (edit these, never the charts)
+data/themes.csv        controlled vocabulary for the convergence layer
+data/claim_themes.csv  claim -> theme mapping, each row with its evidence anchor
 scripts/validate.py    the integrity gate: schema, references, enums, census
-scripts/build.py       compute -> charts -> HTML -> audit trail
+scripts/build.py       compute -> charts -> HTML -> audit trail -> overlap export
+scripts/build_simulator.py  the interactive seat simulator
+scripts/moroccan_theme.py   shared flag palette, pentagram star, zellige tile
 config.json            years, weights, gate thresholds
 METHODOLOGY.md         the full reference: every metric, formula & policy
 output/                generated artefacts (safe to delete; `make clean`)
@@ -163,17 +191,24 @@ things.txt             the original methodology note
 morocco-elections.org  research skeleton (org-mode)
 ```
 
+Both HTML deliverables carry one Moroccan identity, defined once in
+`scripts/moroccan_theme.py`: the flag palette (`#c1272d` red, `#006233` green,
+brass `#c8a24a`), the flag's interlaced pentagram as the masthead badge and the
+section markers, and an eight-point zellige tile as the masthead watermark.
+Change it there and the report and the simulator both follow.
+
 ## Next steps for a publishable version
 
-1. Close `data/claims.csv` in LibreOffice (the `.~lock.claims.csv#` file is why
-   the validator warns), then fill `class` and `verification_score` — that alone
-   unblocks **C** for every party.
-2. Split the 14 merged claims into atomic rows (`C003a`, `C003b`, …) and fill
+1. Fill the remaining `FILL` cells (mostly `baseline`, `deadline`, `target`,
+   `unit`) to push the registry below the 10% fill ceiling — that is the last
+   gate keeping the report `NOT PUBLISHABLE`.
+2. Split the 15 merged claims into atomic rows (`C003a`, `C003b`, …) and fill
    `baseline` / `target` / `deadline` / `unit` so the killer table renders.
-3. Add a second independent source per claim (an official manifesto PDF is
-   both primary and corroborating) and give every source a reliability score
-   and an archived URL.
-4. Add the missing parties' 2026 programmes — RNI, PAM, MP, UC.
+3. Add a second independent source to the 19 single-source campaign claims (an
+   official manifesto PDF is both primary and corroborating) and give the 5
+   sources without a `reliability` score one.
+4. Extend the convergence layer as new programmes land: add a row to
+   `data/themes.csv` rather than inventing a one-off theme, and re-run `make`.
 5. Re-source the `UNSOURCED` promise and timeline rows from Interior-Ministry
    and HCP documents.
 6. Add 2026 rows to `data/indicators.csv` (justify each `G`/`L`/`M` in `basis`)

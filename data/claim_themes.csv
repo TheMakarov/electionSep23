@@ -1,0 +1,160 @@
+claim_id,theme_id,evidence,confidence
+C001,identity,identite nationale,HIGH
+C002,family,enfants et des mineurs,HIGH
+C002,health,drogues,HIGH
+C003,health,amo,HIGH
+C003,social,amo,HIGH
+C004,education,enseignants,HIGH
+C004,rural,zones rurales,HIGH
+C005,employment,chomage,HIGH
+C005,health,couverture medicale,HIGH
+C005,social,retraite,HIGH
+C006,wages,smig,HIGH
+C006,family,enfant,HIGH
+C006,social,bouclier social,HIGH
+C007,culture,culture,HIGH
+C007,wages,menages a revenu modeste,MEDIUM
+C008,culture,sportive,HIGH
+C009,industry,industrie,HIGH
+C010,sme,tpme,HIGH
+C010,tax,recettes fiscales,HIGH
+C011,tax,impot de solidarite,HIGH
+C012,water,dessalement,HIGH
+C013,water,eau agricole,HIGH
+C013,prices,prix des produits alimentaires,HIGH
+C014,housing,logements,HIGH
+C015,digital,numerique,HIGH
+C015,employment,emplois dans les metiers du numerique,HIGH
+C016,governance,bonne gouvernance,HIGH
+C017,identity,amazigh,HIGH
+C018,women,egalite des droits entre epoux,HIGH
+C019,family,jeunes,HIGH
+C019,culture,maisons de jeunesse,HIGH
+C020,diaspora,mre,HIGH
+C021,governance,sanctions administratives,HIGH
+C022,industry,souverainete industrielle,HIGH
+C022,employment,emplois industriels,HIGH
+C022,energy,energies renouvelables,HIGH
+C023,employment,emploi decent,HIGH
+C023,women,participation des femmes,HIGH
+C023,tax,exoneration fiscale,HIGH
+C024,wages,salaire moyen,HIGH
+C024,housing,logement,HIGH
+C024,health,sante,HIGH
+C024,education,education,HIGH
+C025,rural,investissement public vers les regions,HIGH
+C026,sme,tpe,HIGH
+C027,social,protection sociale,HIGH
+C027,employment,insertion,HIGH
+C028,research,recherche scientifique,HIGH
+C028,education,universites,HIGH
+C028,digital,digitalisation a 100% des services universitaires,HIGH
+C029,rural,monde rural,HIGH
+C029,employment,emplois ruraux,HIGH
+C029,water,acces a l'eau,HIGH
+C030,digital,administration numerique,HIGH
+C031,governance,corruption,HIGH
+C032,culture,cinema,HIGH
+C033,identity,amazigh,HIGH
+C034,women,femmes,HIGH
+C034,employment,participation de la femme au marche du travail,HIGH
+C035,water,securite hydrique,HIGH
+C035,energy,energies renouvelables,HIGH
+C036,employment,insertion economique des jeunes,HIGH
+C036,family,jeunes,HIGH
+C036,sme,start-up,HIGH
+C037,family,cohesion nationale,HIGH
+C037,social,retirement,MEDIUM
+C038,wages,pouvoir d'achat,HIGH
+C039,wages,pouvoir d'achat,HIGH
+C040,governance,corruption,HIGH
+C041,wages,smig,HIGH
+C042,employment,million d'emplois,HIGH
+C043,social,protection sociale,HIGH
+C043,health,sante,HIGH
+C043,education,education,HIGH
+C043,employment,emploi,HIGH
+C044,wages,pouvoir d'achat,HIGH
+C045,employment,emplois nets,HIGH
+C046,prices,produits alimentaires,HIGH
+C047,social,protection sociale,HIGH
+C047,wages,1 000 dh par citoyen,HIGH
+C048,tax,impot sur le revenu,HIGH
+C049,employment,chomage,HIGH
+C049,family,diplomes,MEDIUM
+C050,education,concours de l'enseignement,HIGH
+C051,education,enseignement superieur,HIGH
+C051,research,bourses universitaires,HIGH
+C052,employment,formation professionnelle,HIGH
+C052,education,formation professionnelle,HIGH
+C053,rural,agriculteurs,HIGH
+C054,social,protection sociale,HIGH
+C054,digital,ciblage numerique,HIGH
+C055,sme,capital ne depasse pas 500 000,HIGH
+C055,tax,exonerer de tout impot,HIGH
+C056,employment,jour de conge,MEDIUM
+C057,prices,inflation,HIGH
+C058,wages,pouvoir d'achat,HIGH
+C058,social,equite sociale,HIGH
+C058,rural,justice territoriale,HIGH
+C059,rural,regions,HIGH
+C059,governance,competences executives,HIGH
+C060,housing,logement,HIGH
+C061,employment,emplois,HIGH
+C062,rural,familles rurales,HIGH
+C062,wages,classe moyenne,HIGH
+C063,employment,activites temporaires,HIGH
+C064,social,protection sociale,HIGH
+C064,health,sante,HIGH
+C064,education,ecole,HIGH
+C064,employment,emplois pour tous,HIGH
+C065,employment,emploi,HIGH
+C066,education,prescolaire,HIGH
+C067,education,formation,HIGH
+C068,sme,jeunes entreprises,HIGH
+C069,tax,exoneres,HIGH
+C070,energy,independance energetique,HIGH
+C071,social,pauvrete,HIGH
+C072,wages,pouvoir d'achat,HIGH
+C073,employment,chomage,HIGH
+C073,women,activite des femmes,HIGH
+C074,family,par enfant,HIGH
+C074,social,allocations familiales,HIGH
+C075,health,sante,HIGH
+C075,family,jeunes,HIGH
+C076,health,soins,HIGH
+C076,family,enfants,HIGH
+C077,sme,banque publique nationale d'investissement,HIGH
+C078,governance,programme de plus de 400 mesures,MEDIUM
+C079,employment,postes,HIGH
+C079,research,doctorat,HIGH
+C080,research,recherche scientifique,HIGH
+C081,education,bourse etudiante,HIGH
+C082,tax,exoneration fiscale,HIGH
+C082,wages,classe moyenne,HIGH
+C083,social,infrastructures sociales,HIGH
+C083,sme,investissement public,HIGH
+C084,tax,fraude fiscale,HIGH
+C084,governance,criminalisation,HIGH
+C085,governance,droit a une vie digne,MEDIUM
+C086,identity,amazigh,HIGH
+C086,rural,monde rural,HIGH
+C087,rural,agriculteurs,HIGH
+C088,rural,raccordement eau,HIGH
+C088,water,eau/electricite,HIGH
+C089,identity,amazigh,HIGH
+C089,education,colleges,HIGH
+C090,sme,microcredits,HIGH
+C091,employment,croissance,MEDIUM
+C092,social,protection sociale,HIGH
+C093,social,retraites,HIGH
+C093,health,sante,HIGH
+C093,education,ecole publique,HIGH
+C093,women,parite,HIGH
+C094,social,protection sociale,HIGH
+C094,health,sante,HIGH
+C094,education,education,HIGH
+C094,employment,emploi,HIGH
+C095,employment,capital humain,HIGH
+C095,education,capital humain,HIGH
+C096,rural,developpement territorial,HIGH

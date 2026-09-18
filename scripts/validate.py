@@ -143,6 +143,24 @@ SCHEMA = {
         "optional": ["election_year"],
         "number": {"election_year": (1950, 2100)},
     },
+    # The convergence layer: an explicit, auditable editorial classification.
+    # themes.csv is the controlled vocabulary; claim_themes.csv is the mapping,
+    # one row per (claim, theme) pair with a literal anchor from the claim text.
+    "themes.csv": {
+        "key": "theme_id",
+        "header": ["theme_id", "label", "group", "definition"],
+        "id_re": r"^[a-z][a-z0-9_]*$",
+        "ids": [],
+        "optional": ["definition"],
+    },
+    "claim_themes.csv": {
+        "key": ["claim_id", "theme_id"],
+        "header": ["claim_id", "theme_id", "evidence", "confidence"],
+        "ids": [],
+        "fk": {"claim_id": "claims.csv", "theme_id": "themes.csv"},
+        "enum": {"confidence": {"HIGH", "MEDIUM", "LOW", "ILLUSTRATIVE"}},
+        "optional": [],
+    },
 }
 
 # Claims that bundle this many or more numeric targets should be split.
@@ -269,6 +287,13 @@ def validate():
 
     parties = {r.get("party_id") for r in tables.get("parties.csv", [])}
     sources = {r.get("source_id") for r in tables.get("sources.csv", [])}
+    # Declared foreign keys, resolved from the tables that loaded successfully.
+    fk_targets = {
+        "parties.csv": parties,
+        "sources.csv": sources,
+        "claims.csv": {r.get("claim_id") for r in tables.get("claims.csv", [])},
+        "themes.csv": {r.get("theme_id") for r in tables.get("themes.csv", [])},
+    }
 
     # -- pass 2: per-file structural checks -----------------------------------
     for name, spec in SCHEMA.items():
@@ -298,8 +323,10 @@ def validate():
             # foreign keys
             for col, target in spec.get("fk", {}).items():
                 value = str(row.get(col, "")).strip()
-                if value and value not in parties:
-                    err("DANGLING_PARTY", where,
+                if value and value not in fk_targets.get(target, set()):
+                    code = ("DANGLING_PARTY" if target == "parties.csv"
+                            else "DANGLING_REF")
+                    err(code, where,
                         f"{col}={value!r} is not declared in {target}")
 
             # enums
@@ -423,6 +450,29 @@ def validate():
 
     have_sources = {r.get("party_id") for r in claims}
     del have_sources
+
+    # -- theme coverage (the convergence layer) -------------------------------
+    # A claim missing from claim_themes.csv is silently absent from the
+    # convergence matrix, which would understate duplication. Say so.
+    themes = tables.get("themes.csv", [])
+    claim_themes = tables.get("claim_themes.csv", [])
+    theme_ids = {r.get("theme_id") for r in themes}
+    mapped: dict[str, set] = {}
+    for r in claim_themes:
+        cid = str(r.get("claim_id", "")).strip()
+        tid = str(r.get("theme_id", "")).strip()
+        if cid and tid:
+            mapped.setdefault(cid, set()).add(tid)
+    for r in claims:
+        cid = str(r.get("claim_id", "")).strip()
+        if cid and not mapped.get(cid):
+            warn("CLAIM_WITHOUT_THEME", f"claims.csv:{cid}",
+                 f"{cid} is not mapped to any theme in claim_themes.csv, so it "
+                 f"is invisible to the convergence analysis")
+    used = {t for ts in mapped.values() for t in ts}
+    for tid in sorted(theme_ids - used):
+        info("EMPTY_THEME", "claim_themes.csv",
+             f"theme {tid!r} has no claim mapped to it")
 
     # -- pass 4: corroboration (the project's own rule) -----------------------
     for i, row in enumerate(claims, start=2):
