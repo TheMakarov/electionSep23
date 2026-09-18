@@ -13,9 +13,11 @@ check:
 strict:
 	$(PY) scripts/validate.py --strict
 
-## Render the report. Refuses to run while validation reports errors.
+## Render the report + the interactive seat simulator. Refuses to run while
+## validation reports errors.
 build:
 	$(PY) scripts/build.py
+	$(PY) scripts/build_simulator.py
 
 ## One-time environment setup inside the workspace.
 venv:
@@ -32,4 +34,4 @@ serve: build
 ## Remove generated artefacts (data/ is never touched).
 clean:
 	rm -rf output/report.html output/ceagi_scores.csv output/ceagi_scores.json \
-	       output/audit_trail.md output/charts
+	       output/audit_trail.md output/charts output/seat_simulator.html

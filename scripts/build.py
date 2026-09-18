@@ -1047,6 +1047,8 @@ html_doc = f"""<!DOCTYPE html>
   {len(sources)} sources, {claim_rows} campaign claims
   ({len(historical_claims)} historical), {len(promises)} promises,
   {len(pids)} parties &middot; config: campaign {CAMPAIGN_YEAR} / baseline {BASELINE_YEAR}.</div>
+  <div class="meta" style="margin-top:6px">&#9673; <a href="seat_simulator.html">Open the interactive seat-allocation simulator</a>
+  (Hare quota &#8594; hemicycle, with a CEAGI reference).</div>
 </header>
 
 <div class="{banner_class}">

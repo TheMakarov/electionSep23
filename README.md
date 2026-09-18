@@ -42,6 +42,7 @@ broken output.
 | File | What it is |
 |---|---|
 | `output/report.html` | The full report: publication gate, supportable vs. blocked findings, an auto-generated to-do list, readiness and sub-index tables, charts, the campaign claims table, promise ledger, leaders, sources, timeline, validation findings, methodology |
+| `output/seat_simulator.html` | **Interactive** seat-allocation simulator: enter votes, see the Hare-quota → hemicycle (coloured seats) + interpretation, plus the CEAGI reference |
 | `output/ceagi_scores.csv` | Sub-indices + coverage per party, machine-readable |
 | `output/ceagi_scores.json` | Same, plus per-sub-index provenance (`n`, `year`, `detail`) and the gate results |
 | `output/audit_trail.md` | Every number traced to a source ID, a sample size, a year, and a reason when absent |
@@ -109,6 +110,9 @@ which is the finding, not a bug.
 
 ## The CEAGI model (short)
 
+The full reference — every metric, scale, formula and threshold, with the
+external standards they follow — is in **[`METHODOLOGY.md`](METHODOLOGY.md)**.
+
 ```
 S_p = ( D^0.25 · C^0.20 · E^0.10 · G^0.20 · L^0.15 · M^0.10 )
 ```
@@ -153,6 +157,7 @@ data/                  auditable CSVs (edit these, never the charts)
 scripts/validate.py    the integrity gate: schema, references, enums, census
 scripts/build.py       compute -> charts -> HTML -> audit trail
 config.json            years, weights, gate thresholds
+METHODOLOGY.md         the full reference: every metric, formula & policy
 output/                generated artefacts (safe to delete; `make clean`)
 things.txt             the original methodology note
 morocco-elections.org  research skeleton (org-mode)
