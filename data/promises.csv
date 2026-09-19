@@ -1,8 +1,8 @@
 promise_id,party_id,term_start,term_end,promise,domain,status,outcome_metric,source_ids,confidence
 PR101,P001,2021,2026,Créer un million d'emplois,Emploi,failed,Unemployment 13.0% in 2025; the 1M-jobs target was not met,"S015, S047, S087",MEDIUM
 PR102,P001,2021,2026,Permettre à près de 400 000 familles rurales d'accéder à la classe moyenne,Classe moyenne / monde rural,unverifiable,No reliable evidence found,"S015, S048",LOW
-PR103,P001,2021,2026,Créer 250 000 activités temporaires sur deux ans pour absorber les pertes d'emploi (COVID),Emploi,fulfilled,"Awrach programme delivered ~250,000 temporary beneficiaries (2022-2023)","S015, S049, S089",MEDIUM
-PR104,P001,2021,2026,"Cinq priorités : protection sociale, système de santé digne, emplois pour tous, école de l'égalité, administration à l'écoute",Programme global,fulfilled,AMO generalized: 32M beneficiaries (~88%) incl. AMO Tadamon for ~4M vulnerable families,"S015, S050, S088",MEDIUM
+PR103,P001,2021,2026,Créer 250 000 activités temporaires sur deux ans pour absorber les pertes d'emploi (COVID),Emploi,fulfilled,"Awrach programme delivered ~250,000 temporary beneficiaries (2022-2023)","S015, S049, S089, S092",MEDIUM
+PR104,P001,2021,2026,"Cinq priorités : protection sociale, système de santé digne, emplois pour tous, école de l'égalité, administration à l'écoute",Programme global,fulfilled,AMO generalized: 32M beneficiaries (~88%) incl. AMO Tadamon for ~4M vulnerable families,"S015, S050, S078, S079, S080, S088, S091",MEDIUM
 PR105,P002,2021,2026,Créer 820 000 postes d'emploi et atteindre 6% de croissance en 2026,Emploi / croissance,failed,Growth ~2.4-3.4% and unemployment ~13%; both 820k-jobs and 6%-growth targets missed,"S016, S051, S087",MEDIUM
 PR106,P002,2021,2026,Créer 9 000 salles de classe par an pour le préscolaire,Éducation / préscolaire,partial,"Preschool coverage 82.1% but ~3,800 public classrooms/year, below the 9,000/year pace","S016, S051, S081",MEDIUM
 PR107,P002,2021,2026,Bourse de formation mensuelle de 1 500 DH pendant 6 mois,Formation,in_progress,,"S016, S051",MEDIUM

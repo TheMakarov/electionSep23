@@ -56,6 +56,7 @@ import matplotlib  # noqa: E402
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
+import matplotlib.patches as mpatches  # noqa: E402
 
 sys.path.insert(0, str(SCRIPTS))
 import validate as validator  # noqa: E402
@@ -626,6 +627,30 @@ def moroccan_axes(ax, title, pad=12, fontsize=10.5):
                  fontweight="bold", pad=pad)
 
 
+def moroccan_frame(fig, ax, title, pad=14, fontsize=11.5):
+    """Moroccan chart furniture: cream paper, green spines, red title and the
+    flag ribbon (green / brass / red) along the bottom of the figure."""
+    moroccan_axes(ax, title, pad=pad, fontsize=fontsize)
+    for x0, w, c in ((0.00, 0.34, MOROC_GREEN), (0.34, 0.32, MOROC_GOLD),
+                     (0.66, 0.34, MOROC_RED)):
+        fig.add_artist(mpatches.Rectangle(
+            (x0, 0.010), w, 0.011, transform=fig.transFigure,
+            facecolor=c, edgecolor="none", zorder=6))
+
+
+def add_star_watermark(ax, cx=0.5, cy=0.56, r=0.44, alpha=0.055,
+                       color=None, zorder=0):
+    """The Moroccan pentagram, faint, behind the data."""
+    pts = []
+    for k in range(10):
+        ang = np.pi / 2 + k * np.pi / 5
+        rad = r if k % 2 == 0 else r * 0.382
+        pts.append((cx + rad * np.cos(ang), cy + rad * np.sin(ang)))
+    ax.add_patch(mpatches.Polygon(
+        pts, closed=True, transform=ax.transAxes, facecolor=color or MOROC_GREEN,
+        edgecolor="none", alpha=alpha, zorder=zorder))
+
+
 def save(fig, name):
     path = CHARTS / f"{name}.svg"
     fig.savefig(path, bbox_inches="tight", pad_inches=0.15)
@@ -645,290 +670,39 @@ def chart(title, fn):
     return {"name": title, "path": result, "note": None}
 
 
-def year_rows(year):
-    return [r for r in elections
-            if as_int(r.get("election_year")) == year and r["party_id"] != "P009"]
-
-
-def chart_vote_seat():
-    rows = year_rows(BASELINE_YEAR)
-    if not rows:
-        return None
-    rows.sort(key=lambda r: -(as_int(r.get("seats")) or 0))
-    names = [pname[r["party_id"]] for r in rows]
-    vs = [as_float(r.get("vote_share_est")) or 0.0 for r in rows]
-    ss = [(as_int(r.get("seats")) or 0) / HOUSE_SEATS * 100 for r in rows]
-    colors = [pcolor[r["party_id"]] for r in rows]
-    y = list(range(len(names)))[::-1]
-    fig, ax = plt.subplots(figsize=(9, 6))
-    for i in range(len(names)):
-        ax.plot([vs[i], ss[i]], [y[i], y[i]], color=MOROC_RULE, lw=2.2, zorder=1)
-    ax.scatter(vs, y, s=110, c=colors, marker="o", edgecolors="white",
-               linewidths=1.2, zorder=3, label="Vote share (%)")
-    ax.scatter(ss, y, s=130, c=colors, marker="D", edgecolors="white",
-               linewidths=1.2, zorder=3, label="Seat share (%)")
-    ax.set_yticks(y)
-    ax.set_yticklabels(names)
-    ax.set_xlabel("Share of valid votes / seats (%)")
-    moroccan_axes(ax, f"{BASELINE_YEAR}: how votes translated into seats "
-                      f"(gap = distortion)")
-    ax.legend(loc="lower right", frameon=False)
-    ax.set_xlim(0, max(max(vs), max(ss)) * 1.12)
-    return save(fig, "vote_seat_dumbbell")
-
-
-def chart_advantage():
-    if not Aratio:
-        return None
-    items = sorted(((Aratio[p], p) for p in pids if p in Aratio), reverse=True)
-    names = [pname[p] for _, p in items]
-    vals = [v for v, _ in items]
-    colors = [pcolor[p] for _, p in items]
-    fig, ax = plt.subplots(figsize=(9, 5))
-    bars = ax.bar(names, vals, color=colors, alpha=0.9)
-    ax.axhline(1.0, color=MOROC_GREEN, lw=1.4, ls="--")
-    for b, v in zip(bars, vals):
-        ax.text(b.get_x() + b.get_width() / 2, v + 0.02, f"{v:.2f}",
-                ha="center", va="bottom", fontsize=9)
-    ax.set_ylabel("Advantage ratio  (seat share / vote share)")
-    moroccan_axes(ax, f"{BASELINE_YEAR}: over- and under-representation "
-                      f"(1.0 = perfectly proportional)")
-    ax.set_ylim(0, max(vals) * 1.18)
-    return save(fig, "advantage_ratio")
-
-
-def chart_composition():
-    rows = year_rows(BASELINE_YEAR)
-    if not rows:
-        return None
-    rows.sort(key=lambda r: -(as_int(r.get("seats")) or 0))
-    names = [pname[r["party_id"]] for r in rows]
-    votes = [as_float(r.get("vote_share_est")) or 0.0 for r in rows]
-    seats = [as_int(r.get("seats")) or 0 for r in rows]
-    colors = [pcolor[r["party_id"]] for r in rows]
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 4.6), sharex=True)
-    left = 0.0
-    for n, v, c in zip(names, votes, colors):
-        ax1.barh(0, v, left=left, color=c, edgecolor="white", height=0.55)
-        if v >= 4.5:
-            ax1.text(left + v / 2, 0, f"{n}\n{v:.1f}%", ha="center", va="center",
-                     fontsize=7.5, color="white")
-        left += v
-    ax1.set_xlim(0, 100)
-    ax1.set_yticks([])
-    ax1.set_title("Vote share (%, estimates - verify against official results)",
-                  fontsize=10, color=MOROC_GREEN)
-    left = 0.0
-    for n, s, c in zip(names, seats, colors):
-        ax2.barh(0, s, left=left, color=c, edgecolor="white", height=0.55)
-        if s >= 15:
-            ax2.text(left + s / 2, 0, f"{n}\n{s}", ha="center", va="center",
-                     fontsize=7.5, color="white")
-        left += s
-    ax2.set_xlim(0, HOUSE_SEATS)
-    ax2.set_yticks([])
-    ax2.set_title(f"Seats ({HOUSE_SEATS} total)", fontsize=10, color=MOROC_GREEN)
-    ax2.set_xlabel("Seats")
-    fig.suptitle(f"{BASELINE_YEAR}: from votes to seats - same colour, different slice",
-                 y=1.04, color=MOROC_RED, fontweight="bold")
-    moroccan_spines(ax1); moroccan_spines(ax2)
-    fig.tight_layout()
-    return save(fig, "seat_composition")
-
-
-def chart_trajectory():
-    years = [int(y) for y in CFG.get("trajectory_years") or []]
-    if len(years) < 2:
-        return None
-    main = [p for p in pids if any(r["party_id"] == p for r in elections)]
-    fig, ax = plt.subplots(figsize=(9, 6))
-    drawn = False
-    for pid in main:
-        ys = []
-        for yr in years:
-            r = next((r for r in elections
-                      if r["party_id"] == pid and as_int(r.get("election_year")) == yr),
-                     None)
-            ys.append((as_int(r.get("seats")) or 0) / HOUSE_SEATS * 100 if r else None)
-        if any(v is not None for v in ys):
-            drawn = True
-            ax.plot(years, ys, marker="o", lw=2.2, color=pcolor[pid], label=pname[pid])
-    if not drawn:
-        plt.close(fig)
-        return None
-    ax.set_xticks(years)
-    ax.set_ylabel("Seat share (%)")
-    moroccan_axes(ax, f"Seat-share trajectory, {min(years)}-{max(years)}")
-    ax.legend(frameon=False, ncol=2)
-    ax.set_ylim(0, 35)
-    return save(fig, "trajectory")
-
-
-def chart_heatmap():
-    domains = sorted({r.get("domain", "") for r in promises if r.get("domain")})
-    if not domains:
-        return None
-    active = [pid for pid in pids if any(r["party_id"] == pid for r in promises)]
-    if not active:
-        return None
-    numeric = CFG["promise_status_numeric"]
-    mat = np.zeros((len(active), len(domains)))
-    text = [["" for _ in domains] for _ in active]
-    for i, pid in enumerate(active):
-        for j, dom in enumerate(domains):
-            rows = [r for r in promises
-                    if r["party_id"] == pid and r.get("domain") == dom]
-            if rows:
-                mat[i, j] = min(numeric.get(r.get("status", ""), 0.5) for r in rows)
-                text[i][j] = rows[0].get("status", "")[:8].replace("_", " ")
-    fig, ax = plt.subplots(figsize=(10, 4.5))
-    im = ax.imshow(mat, cmap=MOROC_CMAP_OK, vmin=0, vmax=1, aspect="auto")
-    ax.set_xticks(range(len(domains)))
-    ax.set_xticklabels(domains, rotation=35, ha="right")
-    ax.set_yticks(range(len(active)))
-    ax.set_yticklabels([pname[p] for p in active])
-    for i in range(len(active)):
-        for j in range(len(domains)):
-            if text[i][j]:
-                ax.text(j, i, text[i][j], ha="center", va="center",
-                        fontsize=7.5, color="#241f18")
-    moroccan_axes(ax, "Promise ledger: status by party and domain "
-                      "(green = delivered, red = failed)")
-    cbar = fig.colorbar(im, ax=ax, fraction=0.03, label="0 = failed ... 1 = fulfilled")
-    cbar.outline.set_edgecolor(MOROC_GREEN)
-    cbar.ax.tick_params(colors="#4a4132")
-    ax.grid(False)
-    return save(fig, "promise_ledger_heatmap")
-
-
-def chart_bias_reliability():
-    points = []
-    for s in sources:
-        r = as_float(s.get("reliability"))
-        lean = as_float(s.get("bias_lean"))
-        if r is None or lean is None:
-            continue
-        points.append((r, lean, s["source_id"]))
-    if not points:
-        return None
-    fig, ax = plt.subplots(figsize=(9, 6))
-    xs = [p[0] for p in points]
-    ys = [p[1] for p in points]
-    ax.scatter(xs, ys, s=90, c="#c1272d", alpha=0.85, zorder=3)
-    for x, y, sid in points:
-        ax.annotate(sid, (x, y), textcoords="offset points", xytext=(6, 6),
-                    fontsize=9, color="#4a4132")
-    ax.set_xlabel("Reliability (1 = weak ... 5 = official)")
-    ax.set_ylabel("Political lean (-2 left ... +2 right)")
-    moroccan_axes(ax, "Source map: reliability vs. lean (kept separate)")
-    ax.set_xlim(2.5, 5.5)
-    ax.set_ylim(-2.6, 2.6)
-    ax.axhline(0, color=MOROC_RULE, lw=1)
-    ax.axvline(3, color=MOROC_RULE, lw=1)
-    return save(fig, "bias_reliability")
-
-
-def chart_readiness():
-    """Which CEAGI dimensions actually exist for each party. The point of the
-    report right now is this picture, not a ranking."""
-    labels = [f"{DIM_LABEL[d]} ({d})" for d in DIMS]
-    mat = np.array([[1.0 if sub[p][d]["value"] is not None else 0.0 for d in DIMS]
-                    for p in pids])
-    fig, ax = plt.subplots(figsize=(8.5, 5))
-    ax.imshow(mat, cmap=MOROC_FLAG, vmin=0, vmax=1, aspect="auto")
-    ax.set_xticks(range(len(DIMS)))
-    ax.set_xticklabels(labels, rotation=30, ha="right")
-    ax.set_yticks(range(len(pids)))
-    ax.set_yticklabels([pname[p] for p in pids])
-    for i, p in enumerate(pids):
-        for j, d in enumerate(DIMS):
-            ok = sub[p][d]["value"] is not None
-            ax.text(j, i, "ok" if ok else "missing", ha="center", va="center",
-                    fontsize=8, fontweight="bold",
-                    color="#fdfaf3" if ok else MOROC_RED_DEEP)
-    moroccan_axes(ax, f"Evidence readiness per party: {CAMPAIGN_YEAR} campaign, "
-                      f"{BASELINE_YEAR} baseline")
-    ax.grid(False)
-    return save(fig, "subindex_readiness")
-
-
 def chart_ceagi():
     if not ranked:
         return None
     lo = [ci[p]["lo"] for p in ranked]
     hi = [ci[p]["hi"] for p in ranked]
     vals = [score[p] for p in ranked]
-    fig, ax = plt.subplots(figsize=(9, 5.5))
+    fig, ax = plt.subplots(figsize=(9, 5.6))
+    add_star_watermark(ax, cy=0.58, r=0.46, alpha=0.06)
     ax.bar([pname[p] for p in ranked], vals,
            yerr=[[max(0.0, vals[i] - lo[i]) for i in range(len(vals))],
                  [max(0.0, hi[i] - vals[i]) for i in range(len(vals))]],
-           capsize=4, color=[pcolor[p] for p in ranked], alpha=0.9,
-           error_kw=dict(ecolor=MOROC_GREEN, lw=1.1))
+           capsize=5, color=[pcolor[p] for p in ranked], alpha=0.95,
+           edgecolor=MOROC_GOLD, linewidth=1.3, zorder=3,
+           error_kw=dict(ecolor=MOROC_GREEN, lw=1.4, capthick=1.4))
     for i, v in enumerate(vals):
-        ax.text(i, v + 0.01, f"{v:.3f}", ha="center", va="bottom", fontsize=9)
+        ax.text(i, hi[i] + 0.012, f"{v:.3f}", ha="center", va="bottom",
+                fontsize=10.5, fontweight="bold", color="#241f18", zorder=4)
+    if len(vals) >= 2:
+        med = float(np.median(vals))
+        ax.axhline(med, color=MOROC_RED, ls="--", lw=1.3, zorder=2,
+                   label=f"median of the ranked parties   {med:.3f}")
+        ax.legend(loc="upper right", frameon=False, fontsize=8.5)
     ax.set_ylabel("CEAGI score (0-1)")
-    moroccan_axes(ax, "Party accountability score (CEAGI) with 95% credible interval")
-    ax.set_ylim(0, max(hi) * 1.15)
+    moroccan_frame(fig, ax,
+                   "Party accountability score (CEAGI) with 95% credible interval")
+    ax.set_ylim(0, max(hi) * 1.20)
     return save(fig, "ceagi_ranking")
 
 
 # ---------------------------------------------------------------------------
-# Convergence charts. They join the chart wall like any other export; the
-# convergence section carries the interactive version of the same matrix.
+# Convergence charts. Only the pairwise echo matrix joins the chart wall; the
+# theme-by-party matrix itself lives once, interactively, in section 7.
 # ---------------------------------------------------------------------------
-def chart_claim_convergence():
-    """Bubble matrix: one row per theme, one column per party, area ~ claims.
-
-    Shared rows (two or more parties) are banded. This is the chart that shows,
-    at a glance, that e.g. child-and-family commitments are not a PJD-only
-    position. A plain heatmap would say the same thing less legibly; a bubble
-    matrix keeps "how many claims" and "which party" in one cell.
-    """
-    if not campaign_theme_order or not conv_parties:
-        return None
-    rows, cols = campaign_theme_order, conv_parties
-    fig, ax = plt.subplots(figsize=(10.5, 0.44 * len(rows) + 2.0))
-    for i, tid in enumerate(rows):
-        n_parties = len(campaign_cells[tid])
-        if n_parties >= 2:
-            ax.axhspan(i - 0.5, i + 0.5, color=MOROC_BAND, zorder=0)
-        for j, pid in enumerate(cols):
-            cids = campaign_cells[tid].get(pid)
-            if not cids:
-                continue
-            n = len(cids)
-            ax.scatter(j, i, s=110 + 105 * (n - 1), color=pcolor[pid],
-                       edgecolors=MOROC_GOLD, linewidths=0.9, zorder=3)
-            ax.text(j, i, str(n), ha="center", va="center", fontsize=7.5,
-                    fontweight="bold", color="#241f18", zorder=4)
-    ax.set_xlim(-0.6, len(cols) - 0.4)
-    ax.set_ylim(len(rows) - 0.5, -0.5)
-    ax.set_xticks(range(len(cols)))
-    ax.set_xticklabels([pname[p] for p in cols], fontsize=9)
-    ax.set_yticks(range(len(rows)))
-    ax.set_yticklabels([theme_meta[t]["label"] for t in rows], fontsize=8.5)
-    ax.set_xticks(np.arange(-0.5, len(cols), 1), minor=True)
-    ax.set_yticks(np.arange(-0.5, len(rows), 1), minor=True)
-    ax.grid(which="minor", color="#e4dccb", linewidth=0.7)
-    ax.grid(which="major", visible=False)
-    ax.tick_params(which="minor", length=0)
-    ax.tick_params(which="major", length=0)
-    handles = [plt.Line2D([], [], marker="o", linestyle="",
-                          markersize=math.sqrt(110 + 105 * (n - 1)) / 2.4,
-                          markerfacecolor=MOROC_GOLD, markeredgecolor=MOROC_RED_DEEP,
-                          label=f"{n} claim{'s' if n > 1 else ''}")
-               for n in (1, 2, 3)]
-    handles.append(plt.Rectangle((0, 0), 1, 1, facecolor=MOROC_BAND,
-                                 edgecolor=MOROC_GREEN, linewidth=0.8,
-                                 label="claimed by 2+ parties"))
-    ax.legend(handles=handles, loc="lower right", frameon=False, fontsize=8,
-              ncol=4, bbox_to_anchor=(1.0, 1.005))
-    moroccan_axes(ax, f"{CAMPAIGN_YEAR} claim convergence: a filled bubble means "
-                       f"the party has that theme, its size is how many claims",
-                  pad=34)
-    return save(fig, "claim_convergence_matrix")
-
-
 def chart_party_echo():
     """Party x party matrix: how many themes any two parties both claim.
 
@@ -966,8 +740,19 @@ def chart_party_echo():
             dark = shared >= 0.5 * max(1.0, float(np.nanmax(mat)))
             ax.text(j, i, f"{shared}\n{jac:.0%}", ha="center", va="center",
                     fontsize=8, color="white" if dark else "#222222")
-    moroccan_axes(ax, "Echo matrix: shared themes between each pair of parties "
-                      "(count / Jaccard overlap)")
+    for _k in range(n + 1):
+        ax.axhline(_k - 0.5, color=MOROC_GOLD, lw=0.7, alpha=0.55, zorder=2)
+        ax.axvline(_k - 0.5, color=MOROC_GOLD, lw=0.7, alpha=0.55, zorder=2)
+    if n > 1:
+        _mx = float(np.nanmax(mat))
+        for _i in range(n):
+            for _j in range(n):
+                if _i != _j and mat[_i, _j] == _mx:
+                    ax.add_patch(mpatches.Rectangle(
+                        (_j - 0.5, _i - 0.5), 1, 1, fill=False,
+                        edgecolor=MOROC_RED, linewidth=1.9, zorder=4))
+    moroccan_frame(fig, ax, "Echo matrix: shared themes between each pair of "
+                            "parties (count / Jaccard overlap)")
     cbar = fig.colorbar(im, ax=ax, fraction=0.035, label="shared themes")
     cbar.outline.set_edgecolor(MOROC_GREEN)
     cbar.ax.tick_params(colors="#4a4132")
@@ -976,15 +761,7 @@ def chart_party_echo():
 
 
 CHART_SPECS = [
-    ("Votes to seats", chart_vote_seat),
-    ("Advantage ratio", chart_advantage),
-    ("Seat composition", chart_composition),
-    ("Seat-share trajectory", chart_trajectory),
-    ("Evidence readiness", chart_readiness),
     ("CEAGI ranking", chart_ceagi),
-    ("Promise ledger", chart_heatmap),
-    ("Source map: reliability vs. lean", chart_bias_reliability),
-    ("Claim convergence matrix", chart_claim_convergence),
     ("Party echo matrix", chart_party_echo),
 ]
 
@@ -1412,7 +1189,7 @@ GLOSSARY = [
 
 grades_html = f"""
 <section>
-  <h2>3. How every grade in this report is decided</h2>
+  <h2>2. How every grade in this report is decided</h2>
   <p>Nothing here is a black box. Each claim carries a <b>class</b> (what kind of
   commitment it is) and a <b>verification score</b> (how checkable it is), both
   stored in <code>data/claims.csv</code>; each source carries a confidence level
@@ -1479,7 +1256,7 @@ for _lb in legal_basis:
 
 legal_html = f"""
 <section>
-  <h2>6. Legal basis - what the law actually says</h2>
+  <h2>9. Legal basis - what the law actually says</h2>
   <p>The seat arithmetic in the charts and the simulator comes from Morocco's
   organic law, not from convention. The text in force is <b>loi organique
   n&deg; 27.11 on the House of Representatives</b>, consolidated on 29 January
@@ -1579,7 +1356,7 @@ for _tid in campaign_theme_order:
         _size = 15 + min(len(_cids) - 1, 5) * 8
         _cells.append(
             f'<td class="ccell" title="{esc_attr(pname[_p])} &#10;{_tip}">'
-            f'<span class="bub" style="width:{_size}px;height:{_size}px;'
+            f'<span class="tile" style="width:{_size}px;height:{_size}px;'
             f'background:{pcolor[_p]}">{len(_cids)}</span></td>')
     _n = len(_pm)
     _badge = (f'<span class="pill">{_n} parties</span>' if _n >= 2
@@ -1673,7 +1450,7 @@ if conv_top_theme:
 
 convergence_html = f"""
 <section id="convergence">
-  <h2>9. Claim convergence - who is promising the same thing</h2>
+  <h2>7. Claim convergence - who is promising the same thing</h2>
   <p>{conv_claims_total} claims from {len(conv_parties)} parties are tagged onto
   {len(campaign_theme_order)} policy themes. Where two or more parties land on
   the same theme, their programmes overlap - the promise is duplicated even when
@@ -1689,11 +1466,11 @@ convergence_html = f"""
 
   {conv_spotlight_html}
   <div class="scroll convwrap">{conv_matrix}</div>
-  <p class="small">Each bubble is one party on one theme; the number in it is
-  how many of that party's claims touch the theme. Gold-banded rows are the
-  shared themes. Hover a bubble for the claim text behind it. The same matrix is
-  exported as <code>output/charts/claim_convergence_matrix.svg</code>, and the
-  pairwise view as <code>output/charts/party_echo_matrix.svg</code>.</p>
+  <p class="small">Each tile is one party on one theme; the number in it is how
+  many of that party's claims touch the theme, and its colour is the party's.
+  Green-tinted rows are the shared themes &mdash; the contested ground. Hover a
+  tile for the claim text behind it. The pairwise (party&times;party) view of the
+  same overlap is charted as <code>output/charts/party_echo_matrix.svg</code>.</p>
 
   <h3>Duplication ledger - the shared themes in full</h3>
   <p class="small">Every theme claimed by two or more parties, with the claim
@@ -1712,6 +1489,32 @@ convergence_html = f"""
 """
 
 
+
+ceagi_explained_html = """
+<section>
+  <h2>3. What CEAGI measures</h2>
+  <p>Before the numbers: CEAGI is this project's own yardstick, not an external
+  rating agency. Its definition is written down once, in
+  <code>METHODOLOGY.md</code>, and quoted here in full:</p>
+  <figure class="lawquote">
+    <blockquote lang="en">CEAGI = Composite Electoral Accountability &amp;
+    Governance Index. Six sub-indices, each normalised to [0,1], combined by a
+    weighted geometric mean so that a total failure in one dimension cannot be
+    compensated by a strong show in another.</blockquote>
+    <figcaption><span class="lawtag">Definition</span>
+    <b>METHODOLOGY.md</b> &middot; section 8, &ldquo;The CEAGI model&rdquo;</figcaption>
+  </figure>
+  <p>Six things make it up &mdash; <b>D</b> delivery of the 2021 promises,
+  <b>C</b> promise credibility, <b>E</b> electoral efficiency, <b>G</b>
+  governance, <b>L</b> leadership, <b>M</b> mandate coherence &mdash; and because
+  they are <i>multiplied</i> together, a party that fails one cannot buy its way
+  back with the others. Where a dimension has no evidence it is shown as
+  <span class="na">n/a</span> and never guessed: the score measures how evidenced
+  and how well documented a party's record is, <b>not</b> whether its policies
+  are good. The actual scores follow in the next section; the full algebra is in
+  <code>METHODOLOGY.md</code>.</p>
+</section>
+"""
 
 CSS = """
 :root {
@@ -1842,20 +1645,30 @@ figcaption { font-family:Helvetica,Arial,sans-serif; font-size:.78rem;
          letter-spacing:.05em; color:#444; margin-top:4px; }
 .statn { font-family:Helvetica,Arial,sans-serif; font-size:.72rem; color:var(--muted);
          margin-top:5px; }
-table.conv { font-size:.78rem; width:100%; }
-table.conv th, table.conv td { text-align:center; padding:4px 5px; vertical-align:middle; }
-table.conv th.th-left { text-align:left; white-space:nowrap; }
-table.conv thead th { font-size:.66rem; }
-table.conv tr.shared-row th, table.conv tr.shared-row td { background:#f7efd9; }
-table.conv tr.shared-row th.th-left { box-shadow:inset 3px 0 0 var(--gold); }
+table.conv { font-size:.78rem; width:100%; border-collapse:separate; border-spacing:3px;
+             background:var(--sand); border:3px solid var(--sand); border-radius:6px; }
+table.conv th, table.conv td { text-align:center; padding:3px 4px; vertical-align:middle; }
+table.conv thead th { font-family:Helvetica,Arial,sans-serif; font-size:.62rem;
+                      text-transform:uppercase; letter-spacing:.05em; color:#fff;
+                      background:var(--green); border-radius:3px; padding:8px 4px; }
+table.conv thead th.th-left { background:var(--green); }
+table.conv tbody th.th-left { text-align:left; white-space:nowrap; background:#fffdf6;
+                              border:1px solid #e9dfc3; border-left:3px solid var(--green);
+                              border-radius:3px; padding:4px 10px; }
+table.conv tbody td { background:#fffdf6; border:1px solid #e9dfc3; border-radius:3px; }
+table.conv tbody td.cempty { background:#f4edda; border:1px dashed #ddcf9f; }
+table.conv tbody tr.shared-row th.th-left { background:#eef4ea; border-color:#d6e2d4;
+                                            border-left:3px solid var(--red); }
+table.conv tbody tr.shared-row td { background:#eef4ea; border-color:#d6e2d4; }
 .tgrp { display:inline-block; margin-left:7px; font-weight:400; color:var(--muted);
         font-size:.66rem; text-transform:uppercase; letter-spacing:.04em; }
-.bub { display:inline-flex; align-items:center; justify-content:center;
-       border-radius:50%; color:#fff; font-weight:700; font-size:.68rem;
-       box-shadow:inset 0 0 0 1px rgba(0,0,0,.3); }
-.pill { display:inline-block; margin-left:7px; background:var(--sand); color:#5b5140;
-        border-radius:10px; padding:0 7px; font-size:.66rem; font-weight:700;
-        white-space:nowrap; }
+.tile { display:inline-flex; align-items:center; justify-content:center;
+        color:#fff; font-weight:700; font-size:.68rem; border:1px solid var(--gold);
+        border-radius:3px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),
+        0 1px 1px rgba(0,0,0,.22); }
+.pill { display:inline-block; margin-left:7px; background:var(--gold); color:#3a2e12;
+        border-radius:3px; padding:1px 7px; font-size:.62rem; font-weight:700;
+        letter-spacing:.03em; white-space:nowrap; }
 .pill.lone { background:#efeee9; color:#999999; }
 .swatch { display:inline-block; width:10px; height:10px; border-radius:2px;
           margin-right:6px; }
@@ -1975,24 +1788,12 @@ html_doc = f"""<!DOCTYPE html>
   {table(["Gate", "Status", "Measured"], gate_rows)}
 </section>
 
-<section>
-  <h2>2. What the data supports, and what it does not</h2>
-  <h3>Supportable today</h3>
-  <ul class="findings">{findings_html or '<li class="small">Nothing yet.</li>'}</ul>
-  <h3>Not supportable yet</h3>
-  <ul class="findings">{unfindings_html or '<li class="small">No blocked statements.</li>'}</ul>
-</section>
-
 {grades_html}
 
-<section>
-  <h2>4. To do before publishing</h2>
-  <p class="small">Generated automatically, ordered by how many rows each gap blocks.</p>
-  <ol class="findings">{actions_html or '<li class="small">Nothing outstanding.</li>'}</ol>
-</section>
+{ceagi_explained_html}
 
 <section>
-  <h2>5. CEAGI - party accountability score</h2>
+  <h2>4. CEAGI - party accountability score</h2>
   <p>CEAGI = Composite Electoral Accountability &amp; Governance Index. Six
   sub-indices - Delivery <b>D</b> (2021 promises), Promise credibility <b>C</b>
   (2021 promises), Electoral efficiency <b>E</b>, Governance <b>G</b>,
@@ -2026,15 +1827,14 @@ html_doc = f"""<!DOCTYPE html>
   </div>
 </section>
 
-{legal_html}
-
 <section>
-  <h2>7. Charts</h2>
-  {chart_blocks}
+  <h2>5. Promise ledger (2021)</h2>
+  {table(["ID", "Party", "Term", "Promise", "Domain", "Status", "Outcome",
+          "Sources", "Conf."], promise_rows)}
 </section>
 
 <section>
-  <h2>8. {CAMPAIGN_YEAR} campaign claims</h2>
+  <h2>6. {CAMPAIGN_YEAR} campaign claims</h2>
   <p class="small">{len(campaign_claims)} claims from {len({c.get('party_id') for c in campaign_claims})}
   parties. <span class="miss">FILL</span> marks a cell the registry does not have
   yet - it is shown rather than hidden so the hole is visible.</p>
@@ -2048,7 +1848,7 @@ html_doc = f"""<!DOCTYPE html>
 {convergence_html}
 
 <section>
-  <h2>10. Historical campaign claims ({', '.join(sorted({c.get('election_year') for c in historical_claims}))})</h2>
+  <h2>8. Historical campaign claims ({', '.join(sorted({c.get('election_year') for c in historical_claims}))})</h2>
   <p class="small">{len(historical_claims)} claims from the earlier campaign(s), kept
   as a traceable record of what each party promised. They are not scored in the
   current CEAGI run.</p>
@@ -2059,14 +1859,15 @@ html_doc = f"""<!DOCTYPE html>
   </div>
 </section>
 
+{legal_html}
+
 <section>
-  <h2>11. Promise ledger (past terms)</h2>
-  {table(["ID", "Party", "Term", "Promise", "Domain", "Status", "Outcome",
-          "Sources", "Conf."], promise_rows)}
+  <h2>10. Charts</h2>
+  {chart_blocks}
 </section>
 
 <section>
-  <h2>12. Leaders - achievements, ownership, ostensible motives</h2>
+  <h2>11. Leaders - achievements, ownership, ostensible motives</h2>
   <p class="small">"Skin in the game" = 0-1 judgement of how tightly the leader's
   personal fortune or career is tied to the promised outcomes (1 = fully exposed).
   Ownership and motive cells are claims requiring corroboration.</p>
@@ -2077,7 +1878,7 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>13. Sources registry</h2>
+  <h2>12. Sources registry</h2>
   <div class="scroll">
   {table(["ID", "Title", "Author/Org", "Date", "Type", "Primary?", "Rel.",
           "Lean", "Status", "Link"], source_rows)}
@@ -2086,21 +1887,35 @@ html_doc = f"""<!DOCTYPE html>
   (laws, official texts) and {n_secondary} <b>secondary</b> reports. Every claim
   table above links its source IDs to the matching row here, and every row links
   out to the original. Where a claim rests on a single source it is marked as
-  not corroborated - see section 3 for the rule.</p>
+  not corroborated - see section 2 for the rule.</p>
 </section>
 
 <section>
-  <h2>14. Timeline</h2>
+  <h2>13. Timeline</h2>
   <p class="small">The legislative record since 2002: elections, referendums, the
   organic laws that set the rules, and the governments they produced. Source IDs
-  link to the registry in section 13; <span class="miss">FILL</span> means a date
+  link to the registry in section 12; <span class="miss">FILL</span> means a date
   or source is still missing, and <code>UNSOURCED</code> rows are knowingly
   unattributed and must not be published as they stand.</p>
   {timeline_html}
 </section>
 
 <section>
-  <h2>15. Validation findings</h2>
+  <h2>14. What the data supports, and what it does not</h2>
+  <h3>Supportable today</h3>
+  <ul class="findings">{findings_html or '<li class="small">Nothing yet.</li>'}</ul>
+  <h3>Not supportable yet</h3>
+  <ul class="findings">{unfindings_html or '<li class="small">No blocked statements.</li>'}</ul>
+</section>
+
+<section>
+  <h2>15. To do before publishing</h2>
+  <p class="small">Generated automatically, ordered by how many rows each gap blocks.</p>
+  <ol class="findings">{actions_html or '<li class="small">Nothing outstanding.</li>'}</ol>
+</section>
+
+<section>
+  <h2>16. Validation findings</h2>
   <p class="small">Produced by <code>scripts/validate.py</code>. ERROR breaks an
   invariant, WARN is incomplete but sound, INFO is coverage.</p>
   <div class="scroll">
@@ -2109,7 +1924,7 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>16. Methodology (short)</h2>
+  <h2>17. Methodology (short)</h2>
   <p class="small">Sources to facts/claims to synthesis. A claim is
   "corroborated" only with 2+ independent reliable sources. Delivery
   D = (fulfilled + 0.5&middot;partial) / (fulfilled + partial + failed +

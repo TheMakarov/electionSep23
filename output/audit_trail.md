@@ -1,6 +1,6 @@
 # Audit trail - Morocco electoral data project
 
-Generated 2026-09-19T18:26:23 by `scripts/build.py`.
+Generated 2026-09-19T19:21:53 by `scripts/build.py`.
 Campaign year **2026**, baseline year **2021**, publication gate: **FAIL**.
 
 Every number below is traced to a source ID and a confidence level.
@@ -284,8 +284,8 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 
 - `PR101` [RNI, 2021-2026] Créer un million d'emplois - **failed** - Unemployment 13.0% in 2025; the 1M-jobs target was not met (sources: S015, S047, S087, MEDIUM)
 - `PR102` [RNI, 2021-2026] Permettre à près de 400 000 familles rurales d'accéder à la classe moyenne - **unverifiable** - No reliable evidence found (sources: S015, S048, LOW)
-- `PR103` [RNI, 2021-2026] Créer 250 000 activités temporaires sur deux ans pour absorber les pertes d'emploi (COVID) - **fulfilled** - Awrach programme delivered ~250,000 temporary beneficiaries (2022-2023) (sources: S015, S049, S089, MEDIUM)
-- `PR104` [RNI, 2021-2026] Cinq priorités : protection sociale, système de santé digne, emplois pour tous, école de l'égalité, administration à l'écoute - **fulfilled** - AMO generalized: 32M beneficiaries (~88%) incl. AMO Tadamon for ~4M vulnerable families (sources: S015, S050, S088, MEDIUM)
+- `PR103` [RNI, 2021-2026] Créer 250 000 activités temporaires sur deux ans pour absorber les pertes d'emploi (COVID) - **fulfilled** - Awrach programme delivered ~250,000 temporary beneficiaries (2022-2023) (sources: S015, S049, S089, S092, MEDIUM)
+- `PR104` [RNI, 2021-2026] Cinq priorités : protection sociale, système de santé digne, emplois pour tous, école de l'égalité, administration à l'écoute - **fulfilled** - AMO generalized: 32M beneficiaries (~88%) incl. AMO Tadamon for ~4M vulnerable families (sources: S015, S050, S078, S079, S080, S088, S091, MEDIUM)
 - `PR105` [PAM, 2021-2026] Créer 820 000 postes d'emploi et atteindre 6% de croissance en 2026 - **failed** - Growth ~2.4-3.4% and unemployment ~13%; both 820k-jobs and 6%-growth targets missed (sources: S016, S051, S087, MEDIUM)
 - `PR106` [PAM, 2021-2026] Créer 9 000 salles de classe par an pour le préscolaire - **partial** - Preschool coverage 82.1% but ~3,800 public classrooms/year, below the 9,000/year pace (sources: S016, S051, S081, MEDIUM)
 - `PR107` [PAM, 2021-2026] Bourse de formation mensuelle de 1 500 DH pendant 6 mois - **in_progress** - no metric (sources: S016, S051, MEDIUM)
@@ -423,10 +423,12 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 | S084 | Croissance : le Maroc enregistre ~3,4% en 2023 et ~2,4% en 2024 | MAP (print) | 2025 | News | secondary | 4 | Official (state agency) | read |
 | S085 | Protection sociale : un chantier colossal aux fondations fragiles | LesEco.ma | 2025 | News | secondary | 3 | Economic press | read |
 | S086 | Synthèse - Développement de la recherche et de l'innovation | CESE | 2025-10 | Report | secondary | 4 | Independent advisory council | read |
+| S091 | AMO-Tadamon couvre désormais plus de 11,4 millions de bénéficiaires (Akhannouch) | Le Matin | 2025 | News | secondary | 3 | Center | read |
+| S092 | Le programme Awrach démarre à partir de 10 régions (communiqué de presse) | Chef du Gouvernement - Royaume du Maroc | 2022-01-12 | Official communiqué | primary | 5 | Primary - government communiqué | read |
 
 ## 8. Validation findings
 
-errors=0, warnings=70, info=3
+errors=0, warnings=68, info=3
 
 ### WARN SINGLE_SOURCE (29)
 
@@ -448,8 +450,8 @@ errors=0, warnings=70, info=3
 
 - parties.csv: leader_current: 5/12 rows are still FILL
 - parties.csv: leader_2021: 4/12 rows are still FILL
-- sources.csv: party_actor: 5/90 rows are still FILL
-- sources.csv: bias_lean: 1/90 rows are still FILL
+- sources.csv: party_actor: 5/92 rows are still FILL
+- sources.csv: bias_lean: 1/92 rows are still FILL
 - claims.csv: baseline: 96/96 rows are still FILL
 - claims.csv: deadline: 87/96 rows are still FILL
 - claims.csv: unit: 40/96 rows are still FILL
@@ -486,11 +488,6 @@ errors=0, warnings=70, info=3
 - leaders.csv:7: source_ids=FILL -- no source assigned yet
 - leaders.csv:8: source_ids=FILL -- no source assigned yet
 - leaders.csv:9: source_ids=FILL -- no source assigned yet
-
-### WARN OPEN_IN_CALC (2)
-
-- sources.csv: a LibreOffice lock file exists -- close the CSV in Calc before editing it from a script, or the edit is lost on save
-- timeline.csv: a LibreOffice lock file exists -- close the CSV in Calc before editing it from a script, or the edit is lost on save
 
 ### WARN NON_SNAKE_CASE (1)
 

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-19T18:26:23",
+  "generated": "2026-09-19T19:21:53",
   "config": {
     "campaign_year": 2026,
     "baseline_year": 2021,
@@ -28,7 +28,7 @@
     {
       "gate": "FILL cells below 10%",
       "pass": false,
-      "measured": "10.1% of cells (370/3656)"
+      "measured": "10.0% of cells (370/3686)"
     },
     {
       "gate": "At least 50% of claims scored",
@@ -47,9 +47,9 @@
     }
   ],
   "readiness": {
-    "fill_fraction": 0.1012,
+    "fill_fraction": 0.1004,
     "cells_filled": 370,
-    "cells_total": 3656,
+    "cells_total": 3686,
     "claims_total": 61,
     "claims_scored": 61,
     "claims_corroborated": 42,
