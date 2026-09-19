@@ -9,7 +9,6 @@ Self-contained HTML + inline SVG map + JS (no internet). Reads:
                             official seat counts
   - data/morocco_map.json   simplified province / region geometry (SVG paths)
   - data/legal_basis.csv    the law articles quoted on the page
-  - output/ceagi_scores.json CEAGI sub-indices
 
 Electoral formula (Morocco, Chambre des Représentants, 395 seats):
   - proportional representation, largest remainder (plus fort reste)
@@ -36,7 +35,7 @@ DATA = ROOT / "data"
 OUT = ROOT / "output"
 
 sys.path.insert(0, str(ROOT / "scripts"))
-from moroccan_theme import STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG, apply_tokens  # noqa: E402
+from moroccan_theme import STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG, FAVICON_URI, apply_tokens  # noqa: E402
 
 
 def load(name):
@@ -49,10 +48,6 @@ legal_basis = load("legal_basis.csv")
 constituencies = load("constituencies.csv")
 sources = {r["source_id"]: r for r in load("sources.csv")}
 map_data = json.load(open(DATA / "morocco_map.json", encoding="utf-8"))
-try:
-    ceagi = json.load(open(OUT / "ceagi_scores.json", encoding="utf-8"))
-except FileNotFoundError:
-    ceagi = {"parties": []}
 
 # 2021 vote-share prefill (estimates, labelled LOW in the registry), in percent.
 prefill = {r["party_id"]: float(r["vote_share_est"])
@@ -96,15 +91,6 @@ seats2021_js = {r["party_id"]: int(r["seats"]) for r in elections
                 if r["election_year"] == "2021" and r["seats"].isdigit()}
 TURNOUT_2021 = 50.2  # national participation announced for 8 Sept 2021 (%)
 
-ceagi_js = []
-for p in ceagi.get("parties", []):
-    sub = p.get("subindices", {})
-    ceagi_js.append({
-        "id": p["party_id"], "name": p["name"], "score": p.get("score"),
-        "coverage": p.get("coverage", 0),
-        "sub": {k: sub.get(k, {}).get("value") for k in ("D", "C", "E", "G", "L", "M")},
-    })
-
 
 def law_block(lb):
     src = sources.get(lb["source_id"], {})
@@ -136,7 +122,8 @@ TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Morocco 2026 — Constituency Seat Simulator & CEAGI</title>
+<link rel="icon" type="image/svg+xml" href="__FAVICON__">
+<title>Morocco 2026 — Constituency Seat Simulator</title>
 <style>
 :root { --red:__RED__; --red-deep:__RED_DEEP__; --green:__GREEN__; --gold:__GOLD__;
         --sand:__SAND__; --ink:__INK__; --muted:__MUTED__; --line:__LINE__; --bg:__BG__; }
@@ -191,7 +178,24 @@ tr:hover td { background:#fdf9f0; }
 .chip { display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; vertical-align:middle; }
 .interpret p { margin:8px 0; font-size:.92rem; }
 .interpret .big { font-size:1.05rem; }
-#ceagi-bars svg { max-width:100%; height:auto; }
+/* ---- Gallagher disproportionality ---- */
+.gallagher { display:flex; gap:18px; align-items:center; margin:16px 0 4px;
+  background:#fff; border:1px solid var(--line); border-left:5px solid var(--gold);
+  border-radius:6px; padding:14px 18px; }
+.g-value { font-family:Helvetica,Arial,sans-serif; font-size:2.3rem; font-weight:800;
+  line-height:1; flex:0 0 auto; min-width:96px; text-align:center; }
+.g-body { min-width:0; }
+.g-label { font-family:Helvetica,Arial,sans-serif; font-size:.72rem; text-transform:uppercase;
+  letter-spacing:.07em; font-weight:700; color:#4a4132; }
+.g-verdict { display:inline-block; font-family:Helvetica,Arial,sans-serif; font-size:.74rem;
+  font-weight:700; border-radius:3px; padding:1px 8px; margin:5px 0 5px; }
+.g-note { font-size:.8rem; color:var(--muted); margin:0; line-height:1.45; }
+.gv-low  { color:var(--green); }
+.gv-mid  { color:#a8741a; }
+.gv-high { color:var(--red); }
+.g-verdict.gv-low  { background:#eaf2e5; }
+.g-verdict.gv-mid  { background:#f6e9d0; }
+.g-verdict.gv-high { background:#fbe4e3; }
 /* ---- editable parties ---- */
 .party-row { display:grid; grid-template-columns:34px 1fr 96px 120px 34px; gap:8px;
   align-items:center; margin:6px 0; font-family:Helvetica,Arial,sans-serif; font-size:.84rem; }
@@ -263,7 +267,7 @@ footer { margin-top:46px; padding-top:14px; border-top:4px solid var(--green);
     <div class="flagmark">__STARBADGE__</div>
     <div class="masthead-copy">
       <div class="kicker">Interactive &middot; Chambre des Repr&eacute;sentants &middot; 395 si&egrave;ges</div>
-      <h1>Constituency Seat Simulator &amp; CEAGI</h1>
+      <h1>Constituency Seat Simulator</h1>
       <p class="deck">Draw your own electoral map: edit the parties, enter votes
       constituency by constituency, and watch the 395 seats fall. The method and
       the law behind it are stated below.</p>
@@ -342,6 +346,7 @@ footer { margin-top:46px; padding-top:14px; border-top:4px solid var(--green);
   <div id="hemicycle"></div>
   <p class="note" id="split"></p>
   <div id="seatbar"></div>
+  <div class="gallagher" id="gallagher"></div>
 </section>
 
 <section>
@@ -355,20 +360,10 @@ footer { margin-top:46px; padding-top:14px; border-top:4px solid var(--green);
   __LAW__
 </section>
 
-<section>
-  <h2>6. CEAGI reference — accountability vs. seats</h2>
-  <p class="note">CEAGI combines six sub-indices (D delivery, C claim credibility,
-  E electoral efficiency, G governance, L leadership, M mandate coherence).
-  <b>Only parties with all six are ranked</b>; the rest show a provisional, unranked
-  average. A dash is <code>n/a</code> — no evidence yet, never a zero.</p>
-  <div id="ceagi-table"></div>
-  <div id="ceagi-bars"></div>
-</section>
-
 <footer>
-  <p>Generated from <code>data/</code> (parties, constituencies, elections),
-  <code>data/morocco_map.json</code> and <code>output/ceagi_scores.json</code> by
-  <code>scripts/build_simulator.py</code>. The map is simplified from
+  <p>Generated from <code>data/</code> (parties, constituencies, elections) and
+  <code>data/morocco_map.json</code> by <code>scripts/build_simulator.py</code>.
+  The map is simplified from
   <b>geoBoundaries</b> MAR ADM2/ADM1 (OpenStreetMap / Wambacher, ODbL 1.0); seat
   counts are the official 2021 table (<a href="https://www.chambredesrepresentants.ma/fr/actualites/donnees-chiffrees-autour-du-scrutin-legislatif-du-mercredi-8-septembre-2021-conformement">Chambre des repr&eacute;sentants</a>).
   Method: proportional representation, largest remainder, quotient on registered
@@ -382,13 +377,10 @@ footer { margin-top:46px; padding-top:14px; border-top:4px solid var(--green);
 const REGISTRY = __PARTIES__;
 const CONSTS = __CONSTS__;
 const MAP = __MAP__;
-const CEAGI = __CEAGI__;
 const RESULTS = __RESULTS__;        // map_unit -> {party_id: 2021 votes}
 const SEATS2021 = __SEATS2021__;    // party_id -> official 2021 seats
 const TURNOUT_2021 = __TURNOUT__;   // % participation, 8 Sept 2021
 const SPLINTER_2021 = __SPLINTER__;  // thousands of votes for micro-lists, won no seat
-const DIMS = ["D","C","E","G","L","M"];
-const DIM_LABEL = {D:"Delivery", C:"Claims", E:"Electoral", G:"Governance", L:"Leadership", M:"Mandate"};
 
 const LOCAL = CONSTS.filter(c => c.level === "local");
 const REGIONAL = CONSTS.filter(c => c.level === "regional");
@@ -851,11 +843,6 @@ function renderInterpretation(res) {
       `<p class="note">No votes entered yet. Set national shares above, or click a constituency and type its numbers.</p>`;
     return;
   }
-  let gallagher = 0;
-  entries.forEach(e => { const d = e.v/totalVotes - e.s/TOTAL_SEATS; gallagher += d*d; });
-  gallagher = Math.sqrt(0.5 * gallagher) * 100;
-  let nv = 0, ns = 0;
-  entries.forEach(e => { nv += (e.v/totalVotes)**2; ns += (e.s/TOTAL_SEATS)**2; });
   const largest = entries[0];
   let sum = 0; const coal = [];
   for (const e of entries) { if (sum >= MAJORITY) break; sum += e.s; coal.push(e.p.name); }
@@ -865,46 +852,35 @@ function renderInterpretation(res) {
       ? "reaches the 198-seat majority alone." : "short of the 198-seat majority."}</p>
     <p>A minimal winning bloc needs ${MAJORITY} seats. Counting from the largest, a coalition of
     <b>${coal.length}</b> groups (${coal.join(", ")}) crosses it.</p>
-    <p class="note">Gallagher distortion index <b>${gallagher.toFixed(2)}</b> ·
-    effective number of parties <b>${(nv?1/nv:0).toFixed(2)}</b> by votes /
-    <b>${(ns?1/ns:0).toFixed(2)}</b> by seats. Advantage ratio = seat share ÷ vote share
-    (1.00 = proportional).</p>`;
-}
-function renderCEAGI() {
-  const rows = CEAGI.map(c => {
-    const cells = DIMS.map(d => {
-      const v = c.sub[d];
-      return `<td>${(v === null || v === undefined) ? '<span class="under">—</span>' : v.toFixed(2)}</td>`;
-    }).join("");
-    const score = (c.score === null || c.score === undefined)
-      ? `<span class="under">provisional ${c.coverage}/6</span>` : `<b>${c.score.toFixed(3)}</b>`;
-    const p = parties.find(x => x.id === c.id) || REGISTRY.find(x => x.id === c.id) || {};
-    return `<tr><td><span class="chip" style="background:${p.color||'#999'}"></span>${p.name||c.name}</td>` +
-      `<td>${score}</td>${cells}</tr>`;
-  }).join("");
-  document.getElementById("ceagi-table").innerHTML =
-    `<table><thead><tr><th>Party</th><th>CEAGI</th><th>D</th><th>C</th><th>E</th><th>G</th><th>L</th><th>M</th></tr></thead><tbody>${rows}</tbody></table>`;
-  const bw = 620, bh = CEAGI.length * 40 + 30, leftPad = 90;
-  let bars = "";
-  CEAGI.forEach((c, i) => {
-    const y = 24 + i * 40;
-    const p = parties.find(x => x.id === c.id) || REGISTRY.find(x => x.id === c.id) || {};
-    bars += `<text x="${leftPad-6}" y="${y+15}" text-anchor="end" font-family="Helvetica" font-size="12">${p.name||c.name}</text>`;
-    DIMS.forEach((d, j) => {
-      const v = c.sub[d]; if (v === null || v === undefined) return;
-      const x = leftPad + j * ((bw-leftPad)/DIMS.length);
-      const w = (bw-leftPad)/DIMS.length * 0.8, h = v * 28;
-      bars += `<rect x="${x.toFixed(0)}" y="${y + (28-h)}" width="${w.toFixed(0)}" height="${h.toFixed(0)}" fill="#${d==='C'?'c1272d':d==='D'?'006233':'c8a24a'}" opacity="0.85"/>`;
-    });
-  });
-  const legend = DIMS.map(d => `<tspan fill="#${d==='C'?'c1272d':d==='D'?'006233':'8a7a55'}">${DIM_LABEL[d]}(${d})  </tspan>`).join("");
-  document.getElementById("ceagi-bars").innerHTML =
-    `<svg viewBox="0 0 ${bw} ${bh}" width="100%" role="img" aria-label="CEAGI sub-indices">` +
-    `<rect width="${bw}" height="${bh}" fill="#fff"/>` +
-    `<text x="${leftPad}" y="${bh-4}" font-family="Helvetica" font-size="11" fill="#555">${legend} · green=Delivery, red=Claims; blank = n/a</text>` +
-    bars + `</svg>`;
+    <p class="note">Advantage ratio = seat share ÷ vote share (1.00 = proportional;
+    &gt;1.00 the seat system over-rewards the party, &lt;1.00 it under-rewards).
+    The vote-seat gap is measured by the <b>Gallagher index</b> above the hemicycle.</p>`;
 }
 
+function renderGallagher(res) {
+  const totalVotes = Object.values(res.allVotes).reduce((a,b) => a+b, 0) || 1;
+  const entries = parties.map(p => ({ v:res.allVotes[p.id]||0, s:res.total[p.id]||0 }))
+    .filter(e => e.v > 0 || e.s > 0);
+  const el = document.getElementById("gallagher");
+  if (!entries.length) { el.innerHTML = ""; return; }
+  let g = 0, nv = 0, ns = 0;
+  entries.forEach(e => { const d = e.v/totalVotes - e.s/TOTAL_SEATS; g += d*d; });
+  g = Math.sqrt(0.5 * g) * 100;
+  entries.forEach(e => { nv += (e.v/totalVotes)**2; ns += (e.s/TOTAL_SEATS)**2; });
+  const enpv = nv ? 1/nv : 0, enps = ns ? 1/ns : 0;
+  const band = g < 5 ? "gv-low" : (g < 10 ? "gv-mid" : "gv-high");
+  const verdict = g < 5 ? "highly proportional" : (g < 10 ? "moderate distortion" : "strong distortion");
+  el.innerHTML = `
+    <div class="g-value ${band}">${g.toFixed(2)}</div>
+    <div class="g-body">
+      <div class="g-label">Gallagher disproportionality index</div>
+      <div><span class="g-verdict ${band}">${verdict}</span></div>
+      <p class="g-note">The square root of half the sum of squared
+      (vote-share &minus; seat-share) gaps, expressed as a percentage: <b>0</b> = perfectly
+      proportional, <b>5+</b> moderate, <b>10+</b> high. Effective number of parties
+      <b>${enpv.toFixed(2)}</b> by votes &middot; <b>${enps.toFixed(2)}</b> by seats.</p>
+    </div>`;
+}
 /* ------------------------- orchestration ------------------------- */
 let lastRes = null;
 function renderAll() {
@@ -915,6 +891,7 @@ function renderAll() {
   renderLegend(res);
   renderHemicycle(res.total);
   renderSeatBar(res);
+  renderGallagher(res);
   renderTable(res);
   renderInterpretation(res);
   const lg = res.local, rg = res.regional;
@@ -928,7 +905,6 @@ function init() {
   buildMap();
   renderPartyEditor();
   renderUnitPanel();
-  renderCEAGI();
   renderAll();
   document.getElementById("map-hint").textContent =
     `${UNITS.length} map units · ${TOTAL_LOCAL} local seats`;
@@ -943,7 +919,6 @@ html = (TEMPLATE
         .replace("__PARTIES__", js(party_js))
         .replace("__CONSTS__", js(const_js))
         .replace("__MAP__", js(map_data))
-        .replace("__CEAGI__", js(ceagi_js))
         .replace("__RESULTS__", js(results_js))
         .replace("__SEATS2021__", js(seats2021_js))
         .replace("__TURNOUT__", str(TURNOUT_2021))
@@ -956,6 +931,7 @@ html = (TEMPLATE
         .replace("__STARBADGE__", STAR_BADGE_SVG)
         .replace("__STAR__", STAR_URI)
         .replace("__ZELLIGE__", ZELLIGE_URI)
+        .replace("__FAVICON__", FAVICON_URI)
         .replace("__LAW__", LAW_HTML))
 
 html = apply_tokens(html)
@@ -964,5 +940,4 @@ OUT.mkdir(parents=True, exist_ok=True)
 (OUT / "seat_simulator.html").write_text(html, encoding="utf-8")
 print(f"[ok] Simulator -> {OUT / 'seat_simulator.html'}")
 print(f"[ok] {len(party_js)} parties, {len(const_js)} constituencies, "
-      f"{N_UNITS} map units, {LOCAL_SEATS}+{REGIONAL_SEATS} seats, "
-      f"{len(ceagi_js)} CEAGI rows")
+      f"{N_UNITS} map units, {LOCAL_SEATS}+{REGIONAL_SEATS} seats")

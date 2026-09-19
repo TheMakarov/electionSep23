@@ -1,6 +1,6 @@
 # Audit trail - Morocco electoral data project
 
-Generated 2026-09-19T19:21:53 by `scripts/build.py`.
+Generated 2026-09-19T19:32:16 by `scripts/build.py`.
 Campaign year **2026**, baseline year **2021**, publication gate: **FAIL**.
 
 Every number below is traced to a source ID and a confidence level.

@@ -62,7 +62,7 @@ sys.path.insert(0, str(SCRIPTS))
 import validate as validator  # noqa: E402
 
 from moroccan_theme import (  # noqa: E402
-    STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG, apply_tokens,
+    STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG, FAVICON_URI, apply_tokens,
     RED, RED_DEEP, GREEN, GOLD, SAND, CREAM, INK, MUTED, GRID, RULE, BAND,
     CMAP_COLORS, OK, WARN, BAD,
 )
@@ -701,7 +701,7 @@ def chart_ceagi():
 
 # ---------------------------------------------------------------------------
 # Convergence charts. Only the pairwise echo matrix joins the chart wall; the
-# theme-by-party matrix itself lives once, interactively, in section 7.
+# theme-by-party matrix itself lives once, interactively, in section 8.
 # ---------------------------------------------------------------------------
 def chart_party_echo():
     """Party x party matrix: how many themes any two parties both claim.
@@ -927,7 +927,10 @@ for f in findings:
     if f.code in ("NO_ELECTION_ROW", "NO_INDICATOR_ROW"):
         actions.append((claim_rows, esc(f.message)))
 actions.sort(key=lambda a: -a[0])
-actions_html = "".join(f"<li>{txt}</li>" for _weight, txt in actions[:12])
+_ceagi_todo = ("<li><b>CEAGI accountability score:</b> scoring is still work in "
+               "progress - complete the six sub-indices (D, C, E, G, L, M) for "
+               "every party and then publish the ranking.</li>")
+actions_html = _ceagi_todo + "".join(f"<li>{txt}</li>" for _weight, txt in actions[:12])
 
 # Honest findings: state what the evidence supports, then what it does not.
 supported, unsupported = [], []
@@ -1256,7 +1259,7 @@ for _lb in legal_basis:
 
 legal_html = f"""
 <section>
-  <h2>9. Legal basis - what the law actually says</h2>
+  <h2>3. Legal basis - what the law actually says</h2>
   <p>The seat arithmetic in the charts and the simulator comes from Morocco's
   organic law, not from convention. The text in force is <b>loi organique
   n&deg; 27.11 on the House of Representatives</b>, consolidated on 29 January
@@ -1307,8 +1310,8 @@ for _i, _a in enumerate(conv_parties):
 
 key_findings = [
     f"<b>Read this as a workbench, not a verdict.</b> {fill_fraction:.1%} of the "
-    f"registry is still empty and no party has a complete, well-evidenced score "
-    f"(section 1).",
+    f"registry is still empty, and the CEAGI accountability score is still work "
+    f"in progress - no ranking is published yet (see the To-do list).",
     f"The campaign is crowded: <b>{len(shared_themes)} of "
     f"{len(campaign_theme_order)}</b> policy themes are claimed by two or more "
     f"parties"
@@ -1450,7 +1453,7 @@ if conv_top_theme:
 
 convergence_html = f"""
 <section id="convergence">
-  <h2>7. Claim convergence - who is promising the same thing</h2>
+  <h2>8. Claim convergence - who is promising the same thing</h2>
   <p>{conv_claims_total} claims from {len(conv_parties)} parties are tagged onto
   {len(campaign_theme_order)} policy themes. Where two or more parties land on
   the same theme, their programmes overlap - the promise is duplicated even when
@@ -1492,10 +1495,10 @@ convergence_html = f"""
 
 ceagi_explained_html = """
 <section>
-  <h2>3. What CEAGI measures</h2>
-  <p>Before the numbers: CEAGI is this project's own yardstick, not an external
-  rating agency. Its definition is written down once, in
-  <code>METHODOLOGY.md</code>, and quoted here in full:</p>
+  <h2>9. What CEAGI measures</h2>
+  <p>CEAGI is this project's own yardstick, not an external rating agency. Its
+  definition is written down once, in <code>METHODOLOGY.md</code>, and quoted here
+  in full:</p>
   <figure class="lawquote">
     <blockquote lang="en">CEAGI = Composite Electoral Accountability &amp;
     Governance Index. Six sub-indices, each normalised to [0,1], combined by a
@@ -1511,8 +1514,11 @@ ceagi_explained_html = """
   back with the others. Where a dimension has no evidence it is shown as
   <span class="na">n/a</span> and never guessed: the score measures how evidenced
   and how well documented a party's record is, <b>not</b> whether its policies
-  are good. The actual scores follow in the next section; the full algebra is in
-  <code>METHODOLOGY.md</code>.</p>
+  are good.</p>
+  <p class="spotlight"><b>Work in progress.</b> No CEAGI scores or ranking are
+  shown in this report yet: scoring is deliberately withheld until every party
+  has a complete, well-evidenced six-dimension record. Finishing it is on the
+  To-do list below. The full algebra is in <code>METHODOLOGY.md</code>.</p>
 </section>
 """
 
@@ -1728,6 +1734,7 @@ html_doc = f"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="{FAVICON_URI}">
 <title>Morocco {CAMPAIGN_YEAR} - Electoral Claims, Promises &amp; Accountability</title>
 <style>{CSS}</style>
 </head>
@@ -1790,51 +1797,10 @@ html_doc = f"""<!DOCTYPE html>
 
 {grades_html}
 
-{ceagi_explained_html}
+{legal_html}
 
 <section>
-  <h2>4. CEAGI - party accountability score</h2>
-  <p>CEAGI = Composite Electoral Accountability &amp; Governance Index. Six
-  sub-indices - Delivery <b>D</b> (2021 promises), Promise credibility <b>C</b>
-  (2021 promises), Electoral efficiency <b>E</b>, Governance <b>G</b>,
-  Leadership <b>L</b>, Mandate coherence <b>M</b> - combined with a weighted
-  geometric mean, so a party
-  cannot compensate a total failure in one dimension with a strong showing in
-  another. A dimension with no evidence is <span class="na">n/a</span>; it is
-  never imputed. A full score is published only when all six exist.</p>
-  <div class="formula">S<sub>p</sub> = ( D<sup>0.25</sup> &middot; C<sup>0.20</sup>
-  &middot; E<sup>0.10</sup> &middot; G<sup>0.20</sup> &middot; L<sup>0.15</sup>
-  &middot; M<sup>0.10</sup> )</div>
-  <h3>Sub-index coverage and provisional values</h3>
-  <p class="small">The "provisional" column averages only the dimensions that
-  exist. It is <b>not comparable between parties</b> with different coverage and
-  is shown for diagnosis only - it is never ranked.</p>
-  <div class="scroll">
-  {table(["Party", "Coverage", "Provisional (not ranked)", "CEAGI (complete only)"]
-         + [f"{d} - {DIM_LABEL[d]}" for d in DIMS], sub_rows)}
-  </div>
-  <h3>CEAGI ranking - complete scores only</h3>
-  {table(["Rank", "Party", "Score", "95% CI"] + DIMS, ceagi_rows)
-   if ceagi_rows else '<p class="small">No party has all six dimensions yet, so no ranking is published. This is deliberate: ranking on partial coverage would compare unlike things.</p>'}
-  <h3>Where each number comes from</h3>
-  <p class="small">Every sub-index with its sample size, the year it describes and
-  the rule that produced it. <code>n</code> is how many claims, promises or
-  election rows fed the value. Rows that say "Assigned" are the project's own
-  documented judgements in <code>data/indicators.csv</code>, not measurements.</p>
-  <div class="scroll">
-  {table(["Party", "Dimension", "Value", "n", "Year", "How it was derived"],
-         prov_rows, "smalltbl")}
-  </div>
-</section>
-
-<section>
-  <h2>5. Promise ledger (2021)</h2>
-  {table(["ID", "Party", "Term", "Promise", "Domain", "Status", "Outcome",
-          "Sources", "Conf."], promise_rows)}
-</section>
-
-<section>
-  <h2>6. {CAMPAIGN_YEAR} campaign claims</h2>
+  <h2>4. {CAMPAIGN_YEAR} campaign claims</h2>
   <p class="small">{len(campaign_claims)} claims from {len({c.get('party_id') for c in campaign_claims})}
   parties. <span class="miss">FILL</span> marks a cell the registry does not have
   yet - it is shown rather than hidden so the hole is visible.</p>
@@ -1845,29 +1811,8 @@ html_doc = f"""<!DOCTYPE html>
   </div>
 </section>
 
-{convergence_html}
-
 <section>
-  <h2>8. Historical campaign claims ({', '.join(sorted({c.get('election_year') for c in historical_claims}))})</h2>
-  <p class="small">{len(historical_claims)} claims from the earlier campaign(s), kept
-  as a traceable record of what each party promised. They are not scored in the
-  current CEAGI run.</p>
-  <div class="scroll">
-  {table(["Year", "ID", "Party", "Class", "Verif.", "Claim", "Why this grade",
-          "Sources", "Conf.", "Domain", "Baseline", "Target", "Deadline",
-          "Unit"], historical_rows_html, "claims")}
-  </div>
-</section>
-
-{legal_html}
-
-<section>
-  <h2>10. Charts</h2>
-  {chart_blocks}
-</section>
-
-<section>
-  <h2>11. Leaders - achievements, ownership, ostensible motives</h2>
+  <h2>5. Leaders - achievements, ownership, ostensible motives</h2>
   <p class="small">"Skin in the game" = 0-1 judgement of how tightly the leader's
   personal fortune or career is tied to the promised outcomes (1 = fully exposed).
   Ownership and motive cells are claims requiring corroboration.</p>
@@ -1878,7 +1823,34 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>12. Sources registry</h2>
+  <h2>6. Promise ledger (2021)</h2>
+  {table(["ID", "Party", "Term", "Promise", "Domain", "Status", "Outcome",
+          "Sources", "Conf."], promise_rows)}
+</section>
+
+<section>
+  <h2>7. Historical campaign claims ({', '.join(sorted({c.get('election_year') for c in historical_claims}))})</h2>
+  <p class="small">{len(historical_claims)} claims from the earlier campaign(s), kept
+  as a traceable record of what each party promised. They are not scored in the
+  current CEAGI run.</p>
+  <div class="scroll">
+  {table(["Year", "ID", "Party", "Class", "Verif.", "Claim", "Why this grade",
+          "Sources", "Conf.", "Domain", "Baseline", "Target", "Deadline",
+          "Unit"], historical_rows_html, "claims")}
+  </div>
+</section>
+
+{convergence_html}
+
+{ceagi_explained_html}
+
+<section>
+  <h2>10. Charts</h2>
+  {chart_blocks}
+</section>
+
+<section>
+  <h2>11. Sources registry</h2>
   <div class="scroll">
   {table(["ID", "Title", "Author/Org", "Date", "Type", "Primary?", "Rel.",
           "Lean", "Status", "Link"], source_rows)}
@@ -1891,17 +1863,17 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>13. Timeline</h2>
+  <h2>12. Timeline</h2>
   <p class="small">The legislative record since 2002: elections, referendums, the
   organic laws that set the rules, and the governments they produced. Source IDs
-  link to the registry in section 12; <span class="miss">FILL</span> means a date
+  link to the registry in section 11; <span class="miss">FILL</span> means a date
   or source is still missing, and <code>UNSOURCED</code> rows are knowingly
   unattributed and must not be published as they stand.</p>
   {timeline_html}
 </section>
 
 <section>
-  <h2>14. What the data supports, and what it does not</h2>
+  <h2>13. What the data supports, and what it does not</h2>
   <h3>Supportable today</h3>
   <ul class="findings">{findings_html or '<li class="small">Nothing yet.</li>'}</ul>
   <h3>Not supportable yet</h3>
@@ -1909,13 +1881,13 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>15. To do before publishing</h2>
+  <h2>14. To do before publishing</h2>
   <p class="small">Generated automatically, ordered by how many rows each gap blocks.</p>
   <ol class="findings">{actions_html or '<li class="small">Nothing outstanding.</li>'}</ol>
 </section>
 
 <section>
-  <h2>16. Validation findings</h2>
+  <h2>15. Validation findings</h2>
   <p class="small">Produced by <code>scripts/validate.py</code>. ERROR breaks an
   invariant, WARN is incomplete but sound, INFO is coverage.</p>
   <div class="scroll">
@@ -1924,7 +1896,7 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>17. Methodology (short)</h2>
+  <h2>16. Methodology (short)</h2>
   <p class="small">Sources to facts/claims to synthesis. A claim is
   "corroborated" only with 2+ independent reliable sources. Delivery
   D = (fulfilled + 0.5&middot;partial) / (fulfilled + partial + failed +

@@ -70,6 +70,17 @@ ZELLIGE_SVG = (
 STAR_URI = "data:image/svg+xml," + quote(STAR_SVG, safe="")
 ZELLIGE_URI = "data:image/svg+xml," + quote(ZELLIGE_SVG, safe="")
 
+# -- favicon: the flag reduced to a red tile with the green pentagram ----------
+FAVICON_SVG = (
+    "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>"
+    "<rect width='64' height='64' rx='13' fill='%s'/>"
+    "<g transform='translate(32 32) scale(2)'>"
+    "<path d='M0 -10 L5.88 8.09 L-9.51 -3.09 L9.51 -3.09 L-5.88 8.09 Z' "
+    "fill='none' stroke='%s' stroke-width='1.5' stroke-linejoin='miter'/>"
+    "</g></svg>" % (RED, GREEN)
+)
+FAVICON_URI = "data:image/svg+xml," + quote(FAVICON_SVG, safe="")
+
 # -- the flag rendered as a badge: green pentagram on a red disc ---------------
 STAR_BADGE_SVG = (
     '<svg viewBox="0 0 120 120" role="img" aria-label="Star of Morocco">'
