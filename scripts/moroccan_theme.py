@@ -12,11 +12,43 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-# Moroccan flag colours, plus the brass/gold used for accents and rules.
+# Moroccan flag colours, plus the brass/gold and warm neutrals used everywhere.
 RED = "#c1272d"
 RED_DEEP = "#8e1b20"
 GREEN = "#006233"
 GOLD = "#c8a24a"
+SAND = "#efe8d8"        # table headers, chips, diagonal cells
+CREAM = "#fdfaf3"       # chart and map paper
+BG = "#fbf8f1"          # page background
+INK = "#1c1a17"
+MUTED = "#6d6459"
+LINE = "#e4dbc9"
+GRID = "#e4dccb"
+RULE = "#cdbfa6"        # connector lines and quadrant rules
+BAND = "#eaf2e5"        # "shared by 2+ parties" band
+
+# Sequential scale for "how much": pale green (little) -> brass -> flag red (a lot).
+CMAP_COLORS = ["#f2f7ef", "#cfe3cd", GOLD, RED, RED_DEEP]
+
+# Semantic colours for status text and badges.
+OK = GREEN
+WARN = "#a8741a"
+BAD = RED
+
+# ``__TOKEN__`` placeholders substituted into the CSS/JS of both deliverables so
+# the palette has exactly one definition.
+TOKENS = {
+    "__RED__": RED, "__RED_DEEP__": RED_DEEP, "__GREEN__": GREEN, "__GOLD__": GOLD,
+    "__SAND__": SAND, "__CREAM__": CREAM, "__BG__": BG, "__INK__": INK,
+    "__MUTED__": MUTED, "__LINE__": LINE, "__GRID__": GRID, "__RULE__": RULE,
+    "__BAND__": BAND,
+}
+
+
+def apply_tokens(text: str) -> str:
+    for key, value in TOKENS.items():
+        text = text.replace(key, value)
+    return text
 
 # -- the star of Morocco: a green interlaced pentagram, as on the flag --------
 STAR_SVG = (

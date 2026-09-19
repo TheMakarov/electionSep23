@@ -1,6 +1,6 @@
 # Audit trail - Morocco electoral data project
 
-Generated 2026-09-18T23:44:55 by `scripts/build.py`.
+Generated 2026-09-19T17:41:27 by `scripts/build.py`.
 Campaign year **2026**, baseline year **2021**, publication gate: **FAIL**.
 
 Every number below is traced to a source ID and a confidence level.
@@ -340,6 +340,13 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 | S058 | El mundo rural y la lengua amazigh centran el programa electoral del MP | MAP (ES) | 2021-08-26 | News | secondary | 4 | Official (state agency) | read |
 | S059 | Les priorités de l'UC sont la santé, l'enseignement, l'emploi et la protection sociale | Maroc Diplomatique | 2021 | News | secondary | 3 | Center | read |
 | S060 | Elections 2021 : l'UC place le capital humain et la régionalisation avancée au cœur de son programme | MAP Express | 2021 | News | secondary | 4 | Official (state agency) | read |
+| S061 | Loi organique n° 27.11 relative à la Chambre des représentants (texte consolidé au 29 janvier 2026) | Royaume du Maroc - Ministère de la Justice (adala.justice.gov.ma) | 2026-01-29 | Law | primary | 5 | Primary - official consolidated legal text | read |
+| S062 | Loi organique n° 04.21 modifiant et complétant la loi organique n° 27.11 relative à la Chambre des représentants | Chambre des représentants du Maroc | 2021-05-17 | Law | primary | 5 | Primary - official French text | read |
+| S063 | Textes de loi relatifs aux élections (portail officiel) | Chambre des représentants du Maroc | 2026 | Portal | primary | 5 | Primary - official index of electoral laws | read |
+| S064 | Élections 2021 : comment le quotient électoral rebattra les cartes | LesEco.ma | 2021-03-31 | News | secondary | 3 | Business press | read |
+| S065 | Quotient électoral : un gage de démocratie participative et de mobilisation civique | MapNews (MAP) | 2021-03-22 | News | secondary | 3 | State news agency | read |
+| S066 | Données chiffrées autour du scrutin législatif du 8 septembre 2021 (sièges par circonscription) | Chambre des représentants du Maroc | 2021-09-17 | Official data | primary | 5 | Primary - official seat table per constituency | read |
+| S067 | Résultats définitifs des législatives du 8 septembre 2021 : détail des voix par circonscription et par parti | Chambre des représentants / Ministère de l'Intérieur | 2021-09-27 | Official data | primary | 5 | Primary - official per-constituency results | read |
 
 ## 8. Validation findings
 
@@ -364,11 +371,11 @@ errors=0, warnings=91, info=2
 ### WARN FILL_CELLS (17)
 
 - parties.csv: leader_current: 1/8 rows are still FILL
-- sources.csv: bias_lean: 6/60 rows are still FILL
-- sources.csv: reliability: 5/60 rows are still FILL
-- sources.csv: bias_label: 5/60 rows are still FILL
-- sources.csv: party_actor: 5/60 rows are still FILL
-- sources.csv: status: 5/60 rows are still FILL
+- sources.csv: bias_lean: 6/67 rows are still FILL
+- sources.csv: reliability: 5/67 rows are still FILL
+- sources.csv: bias_label: 5/67 rows are still FILL
+- sources.csv: party_actor: 5/67 rows are still FILL
+- sources.csv: status: 5/67 rows are still FILL
 - claims.csv: baseline: 96/96 rows are still FILL
 - claims.csv: deadline: 87/96 rows are still FILL
 - claims.csv: unit: 40/96 rows are still FILL

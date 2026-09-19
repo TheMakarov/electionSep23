@@ -1,0 +1,105 @@
+constituency_id,level,name,prefecture,map_unit,region,seats,source_id
+LC001,local,Tanger-Assilah,Tanger-Assilah,Prefecture of Tangier - Assilah,Tangier-Tetouan-Al Hoceima,5,S066
+LC002,local,M'diq-Fnideq,M'diq-Fnideq,Préfecture de M'diq-Fnideq عمالة المضيق الفنيدق,Tangier-Tetouan-Al Hoceima,2,S066
+LC003,local,Tétouan,Tétouan,Tetouan Province,Tangier-Tetouan-Al Hoceima,5,S066
+LC004,local,Fahs-Anjra,Fahs-Anjra,Fahs-Anjra Province,Tangier-Tetouan-Al Hoceima,2,S066
+LC005,local,Larache,Larache,Larache Province,Tangier-Tetouan-Al Hoceima,4,S066
+LC006,local,Al Hoceïma,Al Hoceïma,Al Hoceima Province,Tangier-Tetouan-Al Hoceima,4,S066
+LC007,local,Chefchaouen,Chefchaouen,Chefchaouen Province,Tangier-Tetouan-Al Hoceima,4,S066
+LC008,local,Ouezzane,Ouezzane,Province d'Ouezzane إقليم وزان,Tangier-Tetouan-Al Hoceima,3,S066
+LC009,local,Oujda-Angad,Oujda-Angad,Préfecture d'Oujda-Angad عمالة وجدة - أنجاد,Oriental,4,S066
+LC010,local,Nador,Nador,Province de Nador إقليم الناظور,Oriental,4,S066
+LC011,local,Driouch,Driouch,Province de Driouch إقليم الدريوش,Oriental,3,S066
+LC012,local,Jerada,Jerada,Province de Jerada إقليم جرادة,Oriental,2,S066
+LC013,local,Berkane,Berkane,Province de Berkane إقليم بركان,Oriental,3,S066
+LC014,local,Taourirt,Taourirt,Province de Taourirt إقليم تاوريرت,Oriental,2,S066
+LC015,local,Guercif,Guercif,Province de Guercif إقليم جرسيف,Oriental,2,S066
+LC016,local,Figuig,Figuig,Province de Figuig إقليم الناظور,Oriental,3,S066
+LC017,local,Fès-Nord,Fès,Préfecture de Fès عمالة فاس,Fez-Meknes,4,S066
+LC018,local,Fès-Sud,Fès,Préfecture de Fès عمالة فاس,Fez-Meknes,4,S066
+LC019,local,Meknès,Meknès,Prefecture de Meknès عمالة مكناس,Fez-Meknes,6,S066
+LC020,local,El Hajeb,El Hajeb,Province d'El Hajeb إقليم الحاجب,Fez-Meknes,2,S066
+LC021,local,Ifrane,Ifrane,Province d'Ifrane ⵜⴰⵙⴳⴰ ⵏ ⵉⴼⵔⴰⵏ إقليم إفران,Fez-Meknes,2,S066
+LC022,local,Moulay Yaâcoub,Moulay Yaâcoub,Province de Moulay Yacoub إقليم مولاي يعقوب,Fez-Meknes,2,S066
+LC023,local,Séfrou,Séfrou,Province de Sefrou إقليم صفرو,Fez-Meknes,3,S066
+LC024,local,Boulemane,Boulemane,Province de Boulemane إقليم بولمان,Fez-Meknes,3,S066
+LC025,local,Taounate-Tissa,Taounate,Province de Taounate إقليم تاونات,Fez-Meknes,3,S066
+LC026,local,Karia-Ghafsay,Taounate,Province de Taounate إقليم تاونات,Fez-Meknes,3,S066
+LC027,local,Taza,Taza,Province de Taza اقليم تازة,Fez-Meknes,5,S066
+LC028,local,Rabat-Océan,Rabat,Prefecture of Rabat,Rabat-Salé-Kenitra,4,S066
+LC029,local,Rabat-Chellah,Rabat,Prefecture of Rabat,Rabat-Salé-Kenitra,3,S066
+LC030,local,Salé-Médina,Salé,Prefecture of Salé,Rabat-Salé-Kenitra,4,S066
+LC031,local,Salé-El Jadida,Salé,Prefecture of Salé,Rabat-Salé-Kenitra,3,S066
+LC032,local,Skhirate-Témara,Skhirate-Témara,Préfecture de Skhirate-Témara عمالة الصخيرات-تمارة,Rabat-Salé-Kenitra,4,S066
+LC033,local,Kénitra,Kénitra,Province de Kenitra إقليم القنيطرة,Rabat-Salé-Kenitra,4,S066
+LC034,local,El Gharb,Kénitra,Province de Kenitra إقليم القنيطرة,Rabat-Salé-Kenitra,3,S066
+LC035,local,Khémisset-Oulmès,Khémisset,Province de Khémisset إقليم الخميسات,Rabat-Salé-Kenitra,3,S066
+LC036,local,Tiflet-Rommani,Khémisset,Province de Khémisset إقليم الخميسات,Rabat-Salé-Kenitra,3,S066
+LC037,local,Sidi Kacem,Sidi Kacem,Province de Sidi Kacem إقليم سيدي قاسم,Rabat-Salé-Kenitra,5,S066
+LC038,local,Sidi Slimane,Sidi Slimane,Province de Sidi Slimane إقليم سيدي سليمان,Rabat-Salé-Kenitra,3,S066
+LC039,local,Béni-Mellal,Béni-Mellal,Province de Beni Mellal إقليم بني ملال,Béni Mellal-Khénifra,6,S066
+LC040,local,Bzou-Ouaouizeght,Azilal,Province d'Azilal إقليم أزيلال,Béni Mellal-Khénifra,3,S066
+LC041,local,Azilal-Demnate,Azilal,Province d'Azilal إقليم أزيلال,Béni Mellal-Khénifra,3,S066
+LC042,local,Fquih Ben Salah,Fquih Ben Salah,Province de Fquih Ben Saleh إقليم الفقيه بن صالح,Béni Mellal-Khénifra,4,S066
+LC043,local,Khénifra,Khénifra,Province de Khénifra إقليم خنيفرة,Béni Mellal-Khénifra,3,S066
+LC044,local,Khouribga,Khouribga,Province de Khouribga إقليم خريبكة,Béni Mellal-Khénifra,6,S066
+LC045,local,Casablanca-Anfa,Casablanca-Anfa,Prefecture of Casablanca,Casablanca-Settat,4,S066
+LC046,local,Al Fida-Mers Sultan,Al Fida-Mers Sultan,Prefecture of Casablanca,Casablanca-Settat,3,S066
+LC047,local,Aïn Sebaâ-Hay Mohammadi,Aïn Sebaâ-Hay Mohammadi,Prefecture of Casablanca,Casablanca-Settat,4,S066
+LC048,local,Hay Hassani,Hay Hassani,Prefecture of Casablanca,Casablanca-Settat,3,S066
+LC049,local,Aïn Chock,Aïn Chock,Prefecture of Casablanca,Casablanca-Settat,3,S066
+LC050,local,Sidi Bernoussi,Sidi Bernoussi,Prefecture of Casablanca,Casablanca-Settat,3,S066
+LC051,local,Ben M'sick,Ben M'sick,Prefecture of Casablanca,Casablanca-Settat,3,S066
+LC052,local,Moulay Rachid,Moulay Rachid,Prefecture of Casablanca,Casablanca-Settat,3,S066
+LC053,local,Mohammédia,Mohammédia,Prefecture of Mohammédia,Casablanca-Settat,3,S066
+LC054,local,El Jadida,El Jadida,El Jadida Province,Casablanca-Settat,6,S066
+LC055,local,Nouaceur,Nouaceur,Nouaceur Province,Casablanca-Settat,3,S066
+LC056,local,Médiouna,Médiouna,Médiouna Province,Casablanca-Settat,2,S066
+LC057,local,Benslimane,Benslimane,Province de Benslimane إقليم بن سليمان,Casablanca-Settat,3,S066
+LC058,local,Berrechid,Berrechid,Berrechid Province,Casablanca-Settat,4,S066
+LC059,local,Settat,Settat,Settat Province,Casablanca-Settat,6,S066
+LC060,local,Sidi Bennour,Sidi Bennour,Province de Sidi Bennour إقليم سيدي بنور,Casablanca-Settat,4,S066
+LC061,local,Medina-Sidi Youssef Ben Ali,Marrakech,Préfecture de Marrakech عمالة مراكش,Marrakech-Safi,3,S066
+LC062,local,Guéliz-Nakhil,Marrakech,Préfecture de Marrakech عمالة مراكش,Marrakech-Safi,3,S066
+LC063,local,Menara,Marrakech,Préfecture de Marrakech عمالة مراكش,Marrakech-Safi,3,S066
+LC064,local,Chichaoua,Chichaoua,Chichaoua Province,Marrakech-Safi,4,S066
+LC065,local,Al Haouz,Al Haouz,Al Haouz Province,Marrakech-Safi,4,S066
+LC066,local,El Kelâa des Sraghna,El Kelâa des Sraghna,Province d'El Kelâat Es-Sraghna إقليم قلعة السراغنة,Marrakech-Safi,4,S066
+LC067,local,Essaouira,Essaouira,Essaouira Province,Marrakech-Safi,4,S066
+LC068,local,Rehamna,Rehamna,Rhamna Province,Marrakech-Safi,3,S066
+LC069,local,Safi,Safi,Province de Safi إقليم أسفي,Marrakech-Safi,6,S066
+LC070,local,Youssoufia,Youssoufia,Province de Youssoufia إقليم اليوسفية,Marrakech-Safi,2,S066
+LC071,local,Errachidia,Errachidia,Province d'Errachidia إقليم الرشيدية,Drâa-Tafilalet,5,S066
+LC072,local,Ouarzazate,Ouarzazate,Ouarzazate Province,Drâa-Tafilalet,3,S066
+LC073,local,Midelt,Midelt,Province de Midelt إقليم ميدلت,Drâa-Tafilalet,3,S066
+LC074,local,Tinghir,Tinghir,Province de Tinghir إقليم تنغير,Drâa-Tafilalet,3,S066
+LC075,local,Zagora,Zagora,Zagora Province,Drâa-Tafilalet,3,S066
+LC076,local,Agadir Ida-Outanan,Agadir Ida-Outanan,Agadir Ida-Outanane Prefecture,Souss-Massa,4,S066
+LC077,local,Inezgane-Aït Melloul,Inezgane-Aït Melloul,Inezgane-Ait Melloul Prefecture,Souss-Massa,3,S066
+LC078,local,Chtouka-Aït Baha,Chtouka-Aït Baha,Chtouka-Ait Baha Province,Souss-Massa,3,S066
+LC079,local,Taroudant-Sud,Taroudant,Taroudant Province,Souss-Massa,4,S066
+LC080,local,Taroudant-Nord,Taroudant,Taroudant Province,Souss-Massa,3,S066
+LC081,local,Tiznit,Tiznit,Tiznit Province,Souss-Massa,2,S066
+LC082,local,Tata,Tata,Tata Province,Souss-Massa,2,S066
+LC083,local,Guelmim,Guelmim,Guelmim Province,Guelmim-Oued Noun,2,S066
+LC084,local,Assa-Zag,Assa-Zag,Assa-Zag Province,Guelmim-Oued Noun,2,S066
+LC085,local,Tan-Tan,Tan-Tan,Province de Tan-Tan إقليم طانطان,Guelmim-Oued Noun,2,S066
+LC086,local,Sidi Ifni,Sidi Ifni,Sidi Ifni Province,Guelmim-Oued Noun,2,S066
+LC087,local,Laâyoune,Laâyoune,Laayoune Province,Laâyoune-Sakia El Hamra,3,S066
+LC088,local,Boujdour,Boujdour,Boujdour Province,Laâyoune-Sakia El Hamra,2,S066
+LC089,local,Tarfaya,Tarfaya,Tarfaya Province,Laâyoune-Sakia El Hamra,2,S066
+LC090,local,Es-Semara,Es-Semara,Province d'Es-Semara إقليم السمارة,Laâyoune-Sakia El Hamra,2,S066
+LC091,local,Oued Eddahab,Oued Eddahab,Oued Ed-Dahab Province,Dakhla-Oued Ed-Dahab,2,S066
+LC092,local,Aousserd,Aousserd,Province d'Aousserd إقليم أوسرد,Dakhla-Oued Ed-Dahab,2,S066
+RC01,regional,Tanger Tétouan Hoceima,Tanger Tétouan Hoceima,Tangier-Tetouan-Al Hoceima,Tangier-Tetouan-Al Hoceima,8,S061
+RC02,regional,L'Oriental,L'Oriental,Oriental,Oriental,7,S061
+RC03,regional,Fès Meknès,Fès Meknès,Fez-Meknes,Fez-Meknes,10,S061
+RC04,regional,Rabat Salé Kénitra,Rabat Salé Kénitra,Rabat-Salé-Kenitra,Rabat-Salé-Kenitra,10,S061
+RC05,regional,Béni-Mellal Khénifra,Béni-Mellal Khénifra,Béni Mellal-Khénifra,Béni Mellal-Khénifra,7,S061
+RC06,regional,Casablanca-Settat,Casablanca-Settat,Casablanca-Settat,Casablanca-Settat,12,S061
+RC07,regional,Marrakech-Safi,Marrakech-Safi,Marrakech-Safi,Marrakech-Safi,10,S061
+RC08,regional,Drâa-Tafilalet,Drâa-Tafilalet,Drâa-Tafilalet,Drâa-Tafilalet,6,S061
+RC09,regional,Souss-Massa,Souss-Massa,Souss-Massa,Souss-Massa,7,S061
+RC10,regional,Guelmim-Oued Noun,Guelmim-Oued Noun,Guelmim-Oued Noun,Guelmim-Oued Noun,5,S061
+RC11,regional,Laâyoune-Sakia El Hamra,Laâyoune-Sakia El Hamra,Laâyoune-Sakia El Hamra,Laâyoune-Sakia El Hamra,5,S061
+RC12,regional,Dakhla-Oued Ed-Dahab,Dakhla-Oued Ed-Dahab,Dakhla-Oued Ed-Dahab,Dakhla-Oued Ed-Dahab,3,S061

@@ -18,10 +18,12 @@ charts are inline SVG, no internet needed).
 
 Section 1 of that report is a **publication gate**. While it says
 `NOT PUBLISHABLE`, the report is a workbench, not a source. It is currently
-`NOT PUBLISHABLE` on one gate only: the registry is 10.4% `FILL` cells, just
-above the 10% ceiling (`class`/`verification_score` are now scored for all 61
-campaign claims and 69% are corroborated; the remaining holes are mostly
-`baseline` / `deadline` / `unit`).
+`NOT PUBLISHABLE` on one gate only: 12.6% of the **evidence** cells are still
+`FILL`, above the 10% ceiling (`class`/`verification_score` are scored for all
+61 campaign claims and 69% are corroborated; the remaining holes are mostly
+`baseline` / `deadline` / `unit`). The fill measure deliberately counts only the
+tables that feed the scores — method tables (themes, legal basis, constituencies)
+are excluded so that adding them cannot quietly pass the gate.
 
 ## Quick start
 
@@ -44,7 +46,7 @@ broken output.
 | File | What it is |
 |---|---|
 | `output/report.html` | The full report: publication gate, supportable vs. blocked findings, an auto-generated to-do list, readiness and sub-index tables, charts, the campaign claims table, **claim convergence** (bubble matrix, duplication ledger, party echo matrix), promise ledger, leaders, sources, timeline, validation findings, methodology |
-| `output/seat_simulator.html` | **Interactive** seat-allocation simulator: enter votes, see the Hare-quota → hemicycle (coloured seats) + interpretation, plus the CEAGI reference |
+| `output/seat_simulator.html` | **Interactive constituency simulator**: edit the party list (add / rename / recolour / remove), click the **static map of Morocco** by province and prefecture to set each constituency's votes **and its registered voters**, and watch the 305 local + 90 regional seats fall into the 395-seat hemicycle. Load the real 2021 result, colour the map by winner, competitiveness or turnout, and read every party's **Δ vs 2021** |
 | `output/ceagi_scores.csv` | Sub-indices + coverage per party, machine-readable |
 | `output/ceagi_scores.json` | Same, plus per-sub-index provenance (`n`, `year`, `detail`) and the gate results |
 | `output/claim_overlap.csv` / `.json` | Which parties promise the same things: themes in play, shared themes, per-party convergence, carried-over themes, pairwise Jaccard overlap |
@@ -171,6 +173,11 @@ incomparable, and ranking them would compare unlike things.
 - **Convergence mapping is editorial.** `data/claim_themes.csv` is a human
   classification with an evidence anchor per row, not a measured fact; read
   METHODOLOGY.md section 12 before quoting a "duplication" figure.
+- **The seat arithmetic is fixed by law.** `data/legal_basis.csv` quotes
+  articles 1 and 84 of loi organique n° 27.11 (consolidated 29 Jan 2026):
+  395 seats (305 local + 90 regional), proportional representation with the
+  largest remainder, a quotient based on **registered voters**, and **no
+  electoral threshold**.
 
 Run `make check` for the current, authoritative version of this list.
 
@@ -180,6 +187,10 @@ Run `make check` for the current, authoritative version of this list.
 data/                  auditable CSVs (edit these, never the charts)
 data/themes.csv        controlled vocabulary for the convergence layer
 data/claim_themes.csv  claim -> theme mapping, each row with its evidence anchor
+data/legal_basis.csv   verbatim law articles quoted in the report (arts. 1 & 84)
+data/constituencies.csv the 92 local + 12 regional constituencies and their seat counts
+data/morocco_map.json  simplified province / region SVG geometry for the simulator map
+data/results_2021.csv  official 2021 votes per province/prefecture and party (from the results PDF)
 scripts/validate.py    the integrity gate: schema, references, enums, census
 scripts/build.py       compute -> charts -> HTML -> audit trail -> overlap export
 scripts/build_simulator.py  the interactive seat simulator

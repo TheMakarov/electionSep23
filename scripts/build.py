@@ -96,9 +96,9 @@ DEFAULTS = {
 }
 
 STATUS_COLOR = {
-    "fulfilled": "#2e7d32", "partial": "#9ccc65", "in_progress": "#fbc02d",
-    "pending": "#ffb74d", "failed": "#c62828", "abandoned": "#616161",
-    "unverifiable": "#9e9e9e",
+    "fulfilled": GREEN, "partial": "#7fae6a", "in_progress": GOLD,
+    "pending": "#dfc98a", "failed": RED, "abandoned": "#8a8378",
+    "unverifiable": "#b3aa9b",
 }
 
 
@@ -220,6 +220,7 @@ timeline = load_table("timeline.csv")
 indicators = load_table("indicators.csv")
 themes = load_table("themes.csv")
 claim_themes = load_table("claim_themes.csv")
+legal_basis = load_table("legal_basis.csv")
 
 pids = [p["party_id"] for p in parties if p["party_id"] != "P009"]
 pname = {p["party_id"]: p["name"] for p in parties}
@@ -509,11 +510,22 @@ ranked = sorted([p for p in pids if score[p] is not None],
 # ---------------------------------------------------------------------------
 # Publication gate
 # ---------------------------------------------------------------------------
+# The fill gate measures the EVIDENCE that feeds the scores. Ancillary tables
+# that document the method (themes, legal basis, constituencies) are complete by
+# construction; counting them would dilute the measure and let the gate pass
+# while the claims still lack baselines. They are excluded on purpose.
+GATE_EXCLUDE = {"themes.csv", "claim_themes.csv", "legal_basis.csv",
+                "constituencies.csv", "results_2021.csv"}
+
 total_cells = fill_cells = 0
+counted_tables = []
 for name, census in fill_census.items():
+    if name in GATE_EXCLUDE:
+        continue
     header = validator.SCHEMA[name]["header"]
     total_cells += row_counts.get(name, 0) * len(header)
     fill_cells += sum(census.values())
+    counted_tables.append(name)
 fill_fraction = (fill_cells / total_cells) if total_cells else 1.0
 
 claim_rows = len(campaign_claims)
@@ -564,6 +576,33 @@ plt.rcParams.update({
 })
 
 
+# The palette comes from scripts/moroccan_theme.py, so the charts, the report
+# chrome and the simulator cannot drift apart.
+MOROC_RED, MOROC_RED_DEEP, MOROC_GREEN = RED, RED_DEEP, GREEN
+MOROC_GOLD, MOROC_SAND, MOROC_CREAM = GOLD, SAND, CREAM
+MOROC_BAND, MOROC_RULE, MOROC_GRID = BAND, RULE, GRID
+MOROC_CMAP = matplotlib.colors.LinearSegmentedColormap.from_list(
+    "morocco", CMAP_COLORS)
+MOROC_CMAP_R = MOROC_CMAP.reversed()   # red at the low end, green at the high
+MOROC_FLAG = matplotlib.colors.ListedColormap([MOROC_SAND, MOROC_GREEN])
+
+
+def moroccan_spines(ax):
+    """Green spines, cream plot area - the shared chart furniture."""
+    ax.set_facecolor(MOROC_CREAM)
+    for side in ("top", "right"):
+        ax.spines[side].set_visible(False)
+    for side in ("left", "bottom"):
+        ax.spines[side].set_color(MOROC_GREEN)
+        ax.spines[side].set_linewidth(1.1)
+
+
+def moroccan_axes(ax, title, pad=12, fontsize=10.5):
+    moroccan_spines(ax)
+    ax.set_title(title, color=MOROC_RED, fontsize=fontsize,
+                 fontweight="bold", pad=pad)
+
+
 def save(fig, name):
     path = CHARTS / f"{name}.svg"
     fig.savefig(path, bbox_inches="tight", pad_inches=0.15)
@@ -600,7 +639,7 @@ def chart_vote_seat():
     y = list(range(len(names)))[::-1]
     fig, ax = plt.subplots(figsize=(9, 6))
     for i in range(len(names)):
-        ax.plot([vs[i], ss[i]], [y[i], y[i]], color="#bbbbbb", lw=2, zorder=1)
+        ax.plot([vs[i], ss[i]], [y[i], y[i]], color=MOROC_RULE, lw=2.2, zorder=1)
     ax.scatter(vs, y, s=110, c=colors, marker="o", edgecolors="white",
                linewidths=1.2, zorder=3, label="Vote share (%)")
     ax.scatter(ss, y, s=130, c=colors, marker="D", edgecolors="white",
@@ -608,7 +647,8 @@ def chart_vote_seat():
     ax.set_yticks(y)
     ax.set_yticklabels(names)
     ax.set_xlabel("Share of valid votes / seats (%)")
-    ax.set_title(f"{BASELINE_YEAR}: how votes translated into seats (gap = distortion)")
+    moroccan_axes(ax, f"{BASELINE_YEAR}: how votes translated into seats "
+                      f"(gap = distortion)")
     ax.legend(loc="lower right", frameon=False)
     ax.set_xlim(0, max(max(vs), max(ss)) * 1.12)
     return save(fig, "vote_seat_dumbbell")
@@ -623,13 +663,13 @@ def chart_advantage():
     colors = [pcolor[p] for _, p in items]
     fig, ax = plt.subplots(figsize=(9, 5))
     bars = ax.bar(names, vals, color=colors, alpha=0.9)
-    ax.axhline(1.0, color="#111111", lw=1.2, ls="--")
+    ax.axhline(1.0, color=MOROC_GREEN, lw=1.4, ls="--")
     for b, v in zip(bars, vals):
         ax.text(b.get_x() + b.get_width() / 2, v + 0.02, f"{v:.2f}",
                 ha="center", va="bottom", fontsize=9)
     ax.set_ylabel("Advantage ratio  (seat share / vote share)")
-    ax.set_title(f"{BASELINE_YEAR}: over- and under-representation "
-                 f"(1.0 = perfectly proportional)")
+    moroccan_axes(ax, f"{BASELINE_YEAR}: over- and under-representation "
+                      f"(1.0 = perfectly proportional)")
     ax.set_ylim(0, max(vals) * 1.18)
     return save(fig, "advantage_ratio")
 
@@ -654,7 +694,7 @@ def chart_composition():
     ax1.set_xlim(0, 100)
     ax1.set_yticks([])
     ax1.set_title("Vote share (%, estimates - verify against official results)",
-                  fontsize=10)
+                  fontsize=10, color=MOROC_GREEN)
     left = 0.0
     for n, s, c in zip(names, seats, colors):
         ax2.barh(0, s, left=left, color=c, edgecolor="white", height=0.55)
@@ -664,10 +704,11 @@ def chart_composition():
         left += s
     ax2.set_xlim(0, HOUSE_SEATS)
     ax2.set_yticks([])
-    ax2.set_title(f"Seats ({HOUSE_SEATS} total)", fontsize=10)
+    ax2.set_title(f"Seats ({HOUSE_SEATS} total)", fontsize=10, color=MOROC_GREEN)
     ax2.set_xlabel("Seats")
     fig.suptitle(f"{BASELINE_YEAR}: from votes to seats - same colour, different slice",
-                 y=1.04)
+                 y=1.04, color=MOROC_RED, fontweight="bold")
+    moroccan_spines(ax1); moroccan_spines(ax2)
     fig.tight_layout()
     return save(fig, "seat_composition")
 
@@ -694,7 +735,7 @@ def chart_trajectory():
         return None
     ax.set_xticks(years)
     ax.set_ylabel("Seat share (%)")
-    ax.set_title(f"Seat-share trajectory, {min(years)}-{max(years)}")
+    moroccan_axes(ax, f"Seat-share trajectory, {min(years)}-{max(years)}")
     ax.legend(frameon=False, ncol=2)
     ax.set_ylim(0, 35)
     return save(fig, "trajectory")
@@ -718,7 +759,7 @@ def chart_heatmap():
                 mat[i, j] = min(numeric.get(r.get("status", ""), 0.5) for r in rows)
                 text[i][j] = rows[0].get("status", "")[:8].replace("_", " ")
     fig, ax = plt.subplots(figsize=(10, 4.5))
-    im = ax.imshow(mat, cmap=plt.cm.RdYlGn, vmin=0, vmax=1, aspect="auto")
+    im = ax.imshow(mat, cmap=MOROC_CMAP_R, vmin=0, vmax=1, aspect="auto")
     ax.set_xticks(range(len(domains)))
     ax.set_xticklabels(domains, rotation=35, ha="right")
     ax.set_yticks(range(len(active)))
@@ -727,10 +768,12 @@ def chart_heatmap():
         for j in range(len(domains)):
             if text[i][j]:
                 ax.text(j, i, text[i][j], ha="center", va="center",
-                        fontsize=7.5, color="#111111")
-    ax.set_title("Promise ledger: status by party and domain "
-                 "(green = delivered, red = failed)")
-    fig.colorbar(im, ax=ax, fraction=0.03, label="0 = failed ... 1 = fulfilled")
+                        fontsize=7.5, color="#241f18")
+    moroccan_axes(ax, "Promise ledger: status by party and domain "
+                      "(green = delivered, red = failed)")
+    cbar = fig.colorbar(im, ax=ax, fraction=0.03, label="0 = failed ... 1 = fulfilled")
+    cbar.outline.set_edgecolor(MOROC_GREEN)
+    cbar.ax.tick_params(colors="#4a4132")
     return save(fig, "promise_ledger_heatmap")
 
 
@@ -750,14 +793,14 @@ def chart_bias_reliability():
     ax.scatter(xs, ys, s=90, c="#c1272d", alpha=0.85, zorder=3)
     for x, y, sid in points:
         ax.annotate(sid, (x, y), textcoords="offset points", xytext=(6, 6),
-                    fontsize=9, color="#333333")
+                    fontsize=9, color="#4a4132")
     ax.set_xlabel("Reliability (1 = weak ... 5 = official)")
     ax.set_ylabel("Political lean (-2 left ... +2 right)")
-    ax.set_title("Source map: reliability vs. lean (kept separate)")
+    moroccan_axes(ax, "Source map: reliability vs. lean (kept separate)")
     ax.set_xlim(2.5, 5.5)
     ax.set_ylim(-2.6, 2.6)
-    ax.axhline(0, color="#bbbbbb", lw=1)
-    ax.axvline(3, color="#bbbbbb", lw=1)
+    ax.axhline(0, color=MOROC_RULE, lw=1)
+    ax.axvline(3, color=MOROC_RULE, lw=1)
     return save(fig, "bias_reliability")
 
 
@@ -768,7 +811,7 @@ def chart_readiness():
     mat = np.array([[1.0 if sub[p][d]["value"] is not None else 0.0 for d in DIMS]
                     for p in pids])
     fig, ax = plt.subplots(figsize=(8.5, 5))
-    ax.imshow(mat, cmap=plt.cm.RdYlGn, vmin=0, vmax=1, aspect="auto")
+    ax.imshow(mat, cmap=MOROC_FLAG, vmin=0, vmax=1, aspect="auto")
     ax.set_xticks(range(len(DIMS)))
     ax.set_xticklabels(labels, rotation=30, ha="right")
     ax.set_yticks(range(len(pids)))
@@ -777,9 +820,10 @@ def chart_readiness():
         for j, d in enumerate(DIMS):
             ok = sub[p][d]["value"] is not None
             ax.text(j, i, "ok" if ok else "missing", ha="center", va="center",
-                    fontsize=8, color="#111111" if ok else "#7a1010")
-    ax.set_title(f"Evidence readiness per party: {CAMPAIGN_YEAR} campaign, "
-                 f"{BASELINE_YEAR} baseline")
+                    fontsize=8, fontweight="bold",
+                    color="#fdfaf3" if ok else MOROC_RED_DEEP)
+    moroccan_axes(ax, f"Evidence readiness per party: {CAMPAIGN_YEAR} campaign, "
+                      f"{BASELINE_YEAR} baseline")
     return save(fig, "subindex_readiness")
 
 
@@ -794,11 +838,11 @@ def chart_ceagi():
            yerr=[[max(0.0, vals[i] - lo[i]) for i in range(len(vals))],
                  [max(0.0, hi[i] - vals[i]) for i in range(len(vals))]],
            capsize=4, color=[pcolor[p] for p in ranked], alpha=0.9,
-           error_kw=dict(ecolor="#333333", lw=1))
+           error_kw=dict(ecolor=MOROC_GREEN, lw=1.1))
     for i, v in enumerate(vals):
         ax.text(i, v + 0.01, f"{v:.3f}", ha="center", va="bottom", fontsize=9)
     ax.set_ylabel("CEAGI score (0-1)")
-    ax.set_title("Party accountability score (CEAGI) with 95% credible interval")
+    moroccan_axes(ax, "Party accountability score (CEAGI) with 95% credible interval")
     ax.set_ylim(0, max(hi) * 1.15)
     return save(fig, "ceagi_ranking")
 
@@ -822,16 +866,16 @@ def chart_claim_convergence():
     for i, tid in enumerate(rows):
         n_parties = len(campaign_cells[tid])
         if n_parties >= 2:
-            ax.axhspan(i - 0.5, i + 0.5, color="#fbf1d8", zorder=0)
+            ax.axhspan(i - 0.5, i + 0.5, color=MOROC_BAND, zorder=0)
         for j, pid in enumerate(cols):
             cids = campaign_cells[tid].get(pid)
             if not cids:
                 continue
             n = len(cids)
             ax.scatter(j, i, s=110 + 105 * (n - 1), color=pcolor[pid],
-                       edgecolors="#3a3a3a", linewidths=0.7, zorder=3)
+                       edgecolors=MOROC_GOLD, linewidths=0.9, zorder=3)
             ax.text(j, i, str(n), ha="center", va="center", fontsize=7.5,
-                    fontweight="bold", color="#111111", zorder=4)
+                    fontweight="bold", color="#241f18", zorder=4)
     ax.set_xlim(-0.6, len(cols) - 0.4)
     ax.set_ylim(len(rows) - 0.5, -0.5)
     ax.set_xticks(range(len(cols)))
@@ -840,22 +884,23 @@ def chart_claim_convergence():
     ax.set_yticklabels([theme_meta[t]["label"] for t in rows], fontsize=8.5)
     ax.set_xticks(np.arange(-0.5, len(cols), 1), minor=True)
     ax.set_yticks(np.arange(-0.5, len(rows), 1), minor=True)
-    ax.grid(which="minor", color="#e7e1d7", linewidth=0.7)
+    ax.grid(which="minor", color="#e4dccb", linewidth=0.7)
     ax.grid(which="major", visible=False)
     ax.tick_params(which="minor", length=0)
     ax.tick_params(which="major", length=0)
     handles = [plt.Line2D([], [], marker="o", linestyle="",
                           markersize=math.sqrt(110 + 105 * (n - 1)) / 2.4,
-                          markerfacecolor="#b9b2a6", markeredgecolor="#3a3a3a",
+                          markerfacecolor=MOROC_GOLD, markeredgecolor=MOROC_RED_DEEP,
                           label=f"{n} claim{'s' if n > 1 else ''}")
                for n in (1, 2, 3)]
-    handles.append(plt.Rectangle((0, 0), 1, 1, facecolor="#fbf1d8",
-                                 edgecolor="none", label="claimed by 2+ parties"))
+    handles.append(plt.Rectangle((0, 0), 1, 1, facecolor=MOROC_BAND,
+                                 edgecolor=MOROC_GREEN, linewidth=0.8,
+                                 label="claimed by 2+ parties"))
     ax.legend(handles=handles, loc="lower right", frameon=False, fontsize=8,
               ncol=4, bbox_to_anchor=(1.0, 1.005))
-    ax.set_title(f"{CAMPAIGN_YEAR} claim convergence: a filled bubble means the "
-                 f"party has that theme, its size is how many claims",
-                 fontsize=10.5, pad=26)
+    moroccan_axes(ax, f"{CAMPAIGN_YEAR} claim convergence: a filled bubble means "
+                       f"the party has that theme, its size is how many claims",
+                  pad=34)
     return save(fig, "claim_convergence_matrix")
 
 
@@ -875,8 +920,8 @@ def chart_party_echo():
         for j, b in enumerate(cols):
             if i != j:
                 mat[i, j] = len(party_themes[a] & party_themes[b])
-    cmap = plt.cm.YlOrRd.copy()
-    cmap.set_bad("#f4f1ec")
+    cmap = MOROC_CMAP.copy()
+    cmap.set_bad(MOROC_SAND)
     fig, ax = plt.subplots(figsize=(1.05 * n + 2.2, 0.85 * n + 1.6))
     im = ax.imshow(np.ma.masked_invalid(mat), cmap=cmap, aspect="auto",
                    vmin=0, vmax=max(1.0, float(np.nanmax(mat))))
@@ -888,17 +933,19 @@ def chart_party_echo():
         for j, b in enumerate(cols):
             if i == j:
                 ax.text(j, i, "self", ha="center", va="center", fontsize=7.5,
-                        color="#9a938a")
+                        color="#8a7f6c")
                 continue
             shared = len(party_themes[a] & party_themes[b])
             union = len(party_themes[a] | party_themes[b])
             jac = (shared / union) if union else 0.0
-            dark = shared >= 0.6 * max(1.0, float(np.nanmax(mat)))
+            dark = shared >= 0.5 * max(1.0, float(np.nanmax(mat)))
             ax.text(j, i, f"{shared}\n{jac:.0%}", ha="center", va="center",
                     fontsize=8, color="white" if dark else "#222222")
-    ax.set_title("Echo matrix: shared themes between each pair of parties "
-                 "(count / Jaccard overlap)", fontsize=10.5, pad=10)
-    fig.colorbar(im, ax=ax, fraction=0.035, label="shared themes")
+    moroccan_axes(ax, "Echo matrix: shared themes between each pair of parties "
+                      "(count / Jaccard overlap)")
+    cbar = fig.colorbar(im, ax=ax, fraction=0.035, label="shared themes")
+    cbar.outline.set_edgecolor(MOROC_GREEN)
+    cbar.ax.tick_params(colors="#4a4132")
     ax.grid(False)
     return save(fig, "party_echo_matrix")
 
@@ -960,6 +1007,66 @@ def table(headers, rows, cls=""):
 def status_badge(status):
     color = STATUS_COLOR.get(status, "#888888")
     return f'<span class="badge" style="background:{color}">{esc(status)}</span>'
+
+
+# ---------------------------------------------------------------------------
+# Grading transparency. The rules behind every class (Q/V/S/N), every
+# verification score (1-5) and every confidence level live here, next to the
+# code that prints them, so the report can explain itself.
+# ---------------------------------------------------------------------------
+CLASS_RULE = {
+    "Q": ("Quantified", "a target with a number and a unit", 1.0),
+    "V": ("Directional", "a commitment in principle, with no number", 0.4),
+    "S": ("Slogan / identity", "a value statement, not a measurable promise", 0.1),
+    "N": ("Negative / attack", "a criticism of a rival, not an offer", 0.2),
+}
+RUBRIC_RULE = {
+    1: ("Unverifiable", "no baseline, no unit, no deadline"),
+    2: ("Weak", "a target, but a missing baseline or deadline, and/or a single source"),
+    3: ("Moderate", "complete, but single-source or contested"),
+    4: ("Strong", "complete, corroborated by 2+ independent sources, feasible"),
+    5: ("Audited", "independently verified by a neutral body"),
+}
+CONFIDENCE_RULE = {
+    "HIGH": "official or verified, with corroborating sources",
+    "MEDIUM": "one solid source",
+    "LOW": "estimate or headline-only capture, still to verify",
+    "ILLUSTRATIVE": "placeholder that demonstrates the pipeline - never cite",
+}
+source_by_id = {s["source_id"]: s for s in sources}
+
+
+def source_links(raw):
+    """Render a source_ids cell as links into the sources registry."""
+    if is_missing(raw):
+        return '<span class="miss">FILL</span>'
+    out = []
+    for tok in validator.split_ids(raw):
+        if tok in source_by_id:
+            out.append(f'<a class="src" href="#source-{esc(tok)}">{esc(tok)}</a>')
+        else:
+            out.append(f'<span class="unresolved">{esc(tok)}</span>')
+    return ", ".join(out) if out else '<span class="miss">FILL</span>'
+
+
+def grade_cell(c):
+    """Plain-language 'why this grade' for one claim, from its own row."""
+    cls = str(c.get("class") or "").strip()
+    vs = as_float(c.get("verification_score"))
+    n = len({t for t in validator.split_ids(c.get("source_ids"))
+             if validator.SOURCE_ID_RE.match(t)})
+    bits = []
+    if cls in CLASS_RULE:
+        bits.append(f"<b>{esc(cls)}</b> {esc(CLASS_RULE[cls][0].lower())}")
+    if vs is not None and int(vs) in RUBRIC_RULE:
+        bits.append(f"<b>{int(vs)}/5</b> {esc(RUBRIC_RULE[int(vs)][0].lower())}")
+    if n >= 2:
+        bits.append(f"{n} sources")
+    elif n == 1:
+        bits.append("single source")
+    else:
+        bits.append("no source")
+    return '<span class="why">' + " &middot; ".join(bits) + "</span>"
 
 
 # ---------------------------------------------------------------------------
@@ -1109,9 +1216,9 @@ for c in campaign_claims:
         esc(c.get("claim_id")), esc(pname.get(c.get("party_id"), c.get("party_id"))),
         cell(c.get("class")), cell(c.get("verification_score")),
         f'<span class="claimtext">{cell(c.get("claim"))}</span>',
+        grade_cell(c), source_links(c.get("source_ids")), cell(c.get("confidence")),
         esc(c.get("domain")), cell(c.get("baseline")), cell(c.get("target")),
-        cell(c.get("deadline")), cell(c.get("unit")), cell(c.get("source_ids")),
-        cell(c.get("confidence")),
+        cell(c.get("deadline")), cell(c.get("unit")),
     ])
 
 historical_rows_html = []
@@ -1121,9 +1228,9 @@ for c in historical_claims:
         esc(pname.get(c.get("party_id"), c.get("party_id"))),
         cell(c.get("class")), cell(c.get("verification_score")),
         f'<span class="claimtext">{cell(c.get("claim"))}</span>',
+        grade_cell(c), source_links(c.get("source_ids")), cell(c.get("confidence")),
         esc(c.get("domain")), cell(c.get("baseline")), cell(c.get("target")),
-        cell(c.get("deadline")), cell(c.get("unit")), cell(c.get("source_ids")),
-        cell(c.get("confidence")),
+        cell(c.get("deadline")), cell(c.get("unit")),
     ])
 
 promise_rows = []
@@ -1133,7 +1240,7 @@ for r in promises:
         f"{esc(r.get('term_start'))}-{esc(r.get('term_end'))}",
         esc(r.get("promise")), esc(r.get("domain")),
         status_badge(r.get("status", "")),
-        cell(r.get("outcome_metric")), cell(r.get("source_ids")),
+        cell(r.get("outcome_metric")), source_links(r.get("source_ids")),
         cell(r.get("confidence")),
     ])
 
@@ -1143,16 +1250,30 @@ for r in leaders:
         esc(r.get("leader")), esc(pname.get(r.get("party_id"), r.get("party_id"))),
         esc(r.get("role")), cell(r.get("achievements")), cell(r.get("ownership")),
         cell(r.get("ostensible_motive")), cell(r.get("conflicts")),
-        cell(r.get("skin_in_game")), cell(r.get("source_ids")),
+        cell(r.get("skin_in_game")), source_links(r.get("source_ids")),
     ])
 
 source_rows = []
 for r in sources:
+    sid = r.get("source_id")
+    url = (r.get("url") or "").strip()
+    title = esc(r.get("title"))
+    if url and not is_missing(url):
+        title = (f'<a href="{esc_attr(url)}" target="_blank" rel="noopener">'
+                 f'{title}</a>')
+        link = (f'<a href="{esc_attr(url)}" target="_blank" rel="noopener">'
+                f'open &#8599;</a>')
+    else:
+        link = '<span class="miss">no URL</span>'
     source_rows.append([
-        esc(r.get("source_id")), esc(r.get("title")), esc(r.get("author_org")),
-        cell(r.get("date")), esc(r.get("type")), esc(r.get("primary_secondary")),
-        cell(r.get("reliability")), cell(r.get("bias_label")), cell(r.get("status")),
+        f'<span id="source-{esc(sid)}"></span>{esc(sid)}', title,
+        esc(r.get("author_org")), cell(r.get("date")), esc(r.get("type")),
+        esc(r.get("primary_secondary")), cell(r.get("reliability")),
+        cell(r.get("bias_label")), cell(r.get("status")), link,
     ])
+
+n_primary = sum(1 for s_ in sources if s_.get("primary_secondary") == "primary")
+n_secondary = sum(1 for s_ in sources if s_.get("primary_secondary") == "secondary")
 
 timeline_rows = sorted(timeline, key=lambda r: r.get("date", ""))
 timeline_html = "".join(
@@ -1179,6 +1300,227 @@ banner_text = ("PUBLISHABLE - the data passes every gate below."
                if publishable else
                "NOT PUBLISHABLE - this report must not be printed as-is. "
                "The gates below say exactly what is missing.")
+
+
+# ---------------------------------------------------------------------------
+# Transparency blocks. Everything a reader needs to check the report without
+# opening another file: the grading rules, the sourcing rule, the legal basis,
+# the per-number provenance and a one-minute summary.
+# ---------------------------------------------------------------------------
+def n_sources(claim_row):
+    return len({t for t in validator.split_ids(claim_row.get("source_ids"))
+                if validator.SOURCE_ID_RE.match(t)})
+
+
+class_counts: dict = {}
+score_counts: dict = {}
+for _c in campaign_claims:
+    _k = str(_c.get("class") or "FILL").strip()
+    class_counts[_k] = class_counts.get(_k, 0) + 1
+    _v = as_float(_c.get("verification_score"))
+    _sk = str(int(_v)) if _v is not None else "FILL"
+    score_counts[_sk] = score_counts.get(_sk, 0) + 1
+
+corr_buckets = {"0": 0, "1": 0, "2": 0, "3+": 0}
+for _c in campaign_claims:
+    _n = n_sources(_c)
+    corr_buckets["3+" if _n >= 3 else str(_n)] += 1
+
+
+def rule_table():
+    rows = []
+    for k in ("Q", "V", "S", "N"):
+        label, meaning, _w = CLASS_RULE[k]
+        rows.append([f"<b>{k}</b>", esc(label), esc(meaning),
+                     f"{CFG['claim_weights'].get(k, CFG['default_claim_weight']):.1f}",
+                     str(class_counts.get(k, 0))])
+    return table(["Class", "Name", "The rule", "Weight",
+                  f"{CAMPAIGN_YEAR} claims"], rows)
+
+
+def rubric_table():
+    rows = []
+    for k in sorted(RUBRIC_RULE):
+        label, meaning = RUBRIC_RULE[k]
+        rows.append([f"<b>{k}/5</b>", esc(label), esc(meaning),
+                     str(score_counts.get(str(k), 0))])
+    return table(["Score", "Name", "What it requires",
+                  f"{CAMPAIGN_YEAR} claims"], rows)
+
+
+GLOSSARY = [
+    ("CEAGI", "Composite Electoral Accountability &amp; Governance Index - this "
+     "project's six-dimension score. It measures how evidenced a party's promises "
+     "are and how well documented its record is, not how good its policies are."),
+    ("Sub-index", "One of the six dimensions D, C, E, G, L, M. Each is normalised "
+     "to 0-1; a dimension with no evidence is shown as n/a."),
+    ("Claim", "A single promise or commitment taken from a party programme - one "
+     "per row in <code>data/claims.csv</code>."),
+    ("Quantified (Q)", "A claim with a number and a unit, e.g. 'raise the minimum "
+     "wage to 5,000 dirhams'."),
+    ("Verification score", "A 1-5 grade of how checkable a claim is: 1 = "
+     "unverifiable, 5 = independently audited."),
+    ("Corroborated", "Carried by at least two independent sources. A claim resting "
+     "on one source is <b>not</b> corroborated under this project's rule."),
+    ("Confidence", "How solid the sourcing is: HIGH, MEDIUM, LOW or ILLUSTRATIVE."),
+    ("FILL", "A cell the registry does not have yet. It is printed, not hidden, so "
+     "the hole stays visible."),
+    ("n/a", "Not computable from the evidence. It is never replaced by a guess or "
+     "by zero."),
+    ("Quotient électoral", "The electoral quota. In Moroccan law it is the number "
+     "of registered voters in a constituency divided by the seats allocated to it."),
+    ("Plus fort reste", "Largest remainder - the rule that assigns the seats left "
+     "over after the quota to the lists with the largest remainders."),
+    ("Circonscription", "A voting district (constituency). 305 seats are filled in "
+     "local constituencies and 90 in the twelve regional ones."),
+    ("AMO", "Assurance Maladie Obligatoire - Morocco's compulsory health insurance."),
+    ("Promise ledger", "The record of what parties promised in past terms and what "
+     "happened (fulfilled, partial, failed, still open)."),
+]
+
+grades_html = f"""
+<section>
+  <h2>3. How every grade in this report is decided</h2>
+  <p>Nothing here is a black box. Each claim carries a <b>class</b> (what kind of
+  commitment it is) and a <b>verification score</b> (how checkable it is), both
+  stored in <code>data/claims.csv</code>; each source carries a confidence level
+  and a reliability score. The tables below are the exact rules, and the last
+  column shows how many of this year's {len(campaign_claims)} campaign claims fall
+  in each bucket.</p>
+  <h3>Class - what kind of commitment is it?</h3>
+  <div class="scroll">{rule_table()}</div>
+  <p class="small">The class sets how much the claim counts in the credibility
+  sub-index <b>C</b>: a quantified target counts fully, a vague commitment about
+  40%, a slogan about 10%.</p>
+  <h3>Verification score - how checkable is it?</h3>
+  <div class="scroll">{rubric_table()}</div>
+  <p class="small">Today no claim scores above 2, because most
+  <code>baseline</code> cells are still <span class="miss">FILL</span>: the rubric
+  ties a higher score to completeness (target + baseline + deadline). That is why
+  the credibility sub-index is low for every party - it is a statement about the
+  evidence, not about the party.</p>
+  <h3>Confidence - how solid is the sourcing?</h3>
+  <div class="scroll">
+  {table(["Level", "Meaning"], [[f"<b>{k}</b>", esc(v)]
+                                for k, v in CONFIDENCE_RULE.items()])}
+  </div>
+  <h3>Corroboration - the project's own rule</h3>
+  <p>A claim is called <b>corroborated</b> only when two or more independent
+  sources carry it. In this campaign, {corr_buckets['0']} claims have no source
+  linked, {corr_buckets['1']} rest on a single source (so they are <b>not</b>
+  corroborated), {corr_buckets['2']} have two, and {corr_buckets['3+']} have three
+  or more.</p>
+  <h3>What a score does <i>not</i> mean</h3>
+  <ul class="findings">
+    <li><b>Not a prediction.</b> A high CEAGI does not mean a party will keep its
+    promises; it means its promises are better evidenced and its record better
+    documented.</li>
+    <li><b>Not a judgement of the policy.</b> We grade whether a claim can be
+    checked, not whether it is wise, affordable or desirable.</li>
+    <li><b>Not comparable across different coverage.</b> Where a sub-index is
+    missing it is shown as <span class="na">n/a</span> and never guessed.</li>
+  </ul>
+  <h3>Glossary</h3>
+  <dl class="glossary">
+  {''.join(f'<dt>{t}</dt><dd>{d}</dd>' for t, d in GLOSSARY)}
+  </dl>
+</section>
+"""
+
+_law_blocks = []
+for _lb in legal_basis:
+    _sid = _lb.get("source_id")
+    _src = source_by_id.get(_sid, {})
+    _url = (_src.get("url") or "").strip()
+    _link = (f'<a href="{esc_attr(_url)}" target="_blank" rel="noopener">'
+             f'official text &#8599;</a>') if (_url and not is_missing(_url)) else ""
+    _law_blocks.append(f"""
+  <figure class="lawquote">
+    <blockquote lang="ar" dir="rtl">{esc(_lb.get("quote_ar"))}</blockquote>
+    <p class="lawen">{esc(_lb.get("quote_en"))}</p>
+    <figcaption><span class="lawtag">{esc(_lb.get("article"))}</span>
+    <b>{esc(_lb.get("instrument"))}</b> &middot;
+    source <a class="src" href="#source-{esc(_sid)}">{esc(_sid)}</a>
+    {("&middot; " + _link) if _link else ""}
+    <br><span class="small">{esc(_lb.get("note"))}</span></figcaption>
+  </figure>""")
+
+legal_html = f"""
+<section>
+  <h2>6. Legal basis - what the law actually says</h2>
+  <p>The seat arithmetic in the charts and the simulator comes from Morocco's
+  organic law, not from convention. The text in force is <b>loi organique
+  n&deg; 27.11 on the House of Representatives</b>, consolidated on 29 January
+  2026 and amended most recently by <b>loi organique n&deg; 53.25</b> (January
+  2026), and before that by n&deg; 04.21 (2021) and n&deg; 20.16 (2016). Two
+  articles carry the arithmetic that decides the 395 seats:</p>
+  {''.join(_law_blocks)}
+  <h3>What this means in practice</h3>
+  <ul class="findings">
+    <li><b>395 seats, two levels.</b> 305 members are elected in local
+    constituencies and 90 in regional constituencies; the law fixes the 90
+    regional seats in a table across the twelve regions.</li>
+    <li><b>Proportional, largest remainder.</b> Seats go to lists in proportion to
+    their support, and the seats left over after the quota go to the lists with
+    the largest remainders.</li>
+    <li><b>The quota is based on registered voters, not votes cast.</b> That is
+    the distinctive Moroccan rule. In practice few lists reach the quota, so most
+    seats are decided at the largest-remainder step.</li>
+    <li><b>No electoral threshold.</b> The 3%/6% threshold that applied from 2002
+    to 2016 was removed by the 2021 reform; the current law sets none.</li>
+    <li><b>The former national list is gone.</b> The 90 seats that used to be
+    elected on a single national list are now elected in the regional
+    constituencies.</li>
+  </ul>
+  <p class="small">The interactive seat simulator on this site applies the
+  largest-remainder method to national vote totals that you enter. It is an
+  illustration at national level: the real count runs constituency by
+  constituency, on the registered-voter quotient. Read it with that in mind.</p>
+</section>
+"""
+
+prov_rows = []
+for _pid in sorted(pids, key=lambda p: (-(coverage[p]), pname[p])):
+    for _d in DIMS:
+        _s = sub[_pid][_d]
+        prov_rows.append([
+            esc(pname[_pid]), f"<b>{_d}</b> {esc(DIM_LABEL[_d])}",
+            num_cell(_s["value"], "{:.2f}"), str(_s["n"]),
+            esc(str(_s["year"])), esc(str(_s["detail"])),
+        ])
+
+_best_pair = (0, None, None)
+for _i, _a in enumerate(conv_parties):
+    for _b in conv_parties[_i + 1:]:
+        _n = len(party_themes[_a] & party_themes[_b])
+        if _n > _best_pair[0]:
+            _best_pair = (_n, _a, _b)
+
+key_findings = [
+    f"<b>Read this as a workbench, not a verdict.</b> {fill_fraction:.1%} of the "
+    f"registry is still empty and no party has a complete, well-evidenced score "
+    f"(section 1).",
+    f"The campaign is crowded: <b>{len(shared_themes)} of "
+    f"{len(campaign_theme_order)}</b> policy themes are claimed by two or more "
+    f"parties"
+    + (f", and <b>{esc(pname[_best_pair[1]])}</b> and "
+       f"<b>{esc(pname[_best_pair[2]])}</b> overlap on {_best_pair[0]} of them."
+       if _best_pair[1] else "."),
+    (f"The most crowded theme is <b>{esc(theme_meta[conv_top_theme]['label'])}</b>, "
+     f"claimed by {len(conv_top_parties)} of {len(conv_parties)} parties.")
+    if conv_top_theme else "",
+    f"All {claim_rows} campaign claims carry a grade, but <b>{corr_buckets['1']}</b> "
+    f"still rest on a single source, so they are not corroborated under the "
+    f"project's own rule.",
+    (f"In {BASELINE_YEAR} <b>{esc(pname[max(Aratio, key=lambda p: Aratio[p])])}</b> "
+     f"was the most over-represented party (advantage ratio "
+     f"{max(Aratio.values()):.2f}) and "
+     f"<b>{esc(pname[min(Aratio, key=lambda p: Aratio[p])])}</b> the most "
+     f"under-represented ({min(Aratio.values()):.2f}): the seat formula did not "
+     f"turn votes into seats evenly.") if Aratio else "",
+]
+key_box = ('<div class="keybox"><div class="keyk">In one minute</div><ul>'
+           + "".join(f"<li>{t}</li>" for t in key_findings if t) + "</ul></div>")
 
 
 # ---------------------------------------------------------------------------
@@ -1299,7 +1641,7 @@ if conv_top_theme:
 
 convergence_html = f"""
 <section id="convergence">
-  <h2>7. Claim convergence - who is promising the same thing</h2>
+  <h2>9. Claim convergence - who is promising the same thing</h2>
   <p>{conv_claims_total} claims from {len(conv_parties)} parties are tagged onto
   {len(campaign_theme_order)} policy themes. Where two or more parties land on
   the same theme, their programmes overlap - the promise is duplicated even when
@@ -1338,7 +1680,11 @@ convergence_html = f"""
 """
 
 
-from moroccan_theme import STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG  # noqa: E402
+from moroccan_theme import (  # noqa: E402
+    STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG, apply_tokens,
+    RED, RED_DEEP, GREEN, GOLD, SAND, CREAM, INK, MUTED, GRID, RULE, BAND,
+    CMAP_COLORS, OK, WARN, BAD,
+)
 
 CSS = """
 :root {
@@ -1488,6 +1834,36 @@ table.conv tr.shared-row th.th-left { box-shadow:inset 3px 0 0 var(--gold); }
          letter-spacing:.1em; font-size:.68rem; font-weight:700; color:var(--red);
          margin-bottom:6px; }
 .smalltbl { font-size:.76rem; }
+.keybox { background:#fffdf6; border:1px solid var(--line); border-left:5px solid var(--green);
+          padding:14px 18px; margin:22px 0; }
+.keyk { font-family:Helvetica,Arial,sans-serif; text-transform:uppercase;
+        letter-spacing:.1em; font-size:.68rem; font-weight:700; color:var(--green);
+        margin-bottom:6px; }
+.keybox ul { margin:0; padding-left:20px; }
+.keybox li { margin-bottom:7px; }
+a.src { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.72rem;
+        text-decoration:none; border-bottom:1px dotted var(--green); }
+a.src:hover { color:var(--red); border-bottom-color:var(--red); }
+.unresolved { color:#a8741a; font-weight:700; }
+.why { color:#5b5346; font-size:.72rem; white-space:nowrap; }
+table.claims { min-width:1440px; }
+.lawquote { margin:26px 0; }
+.lawquote blockquote { margin:0; background:#fff; border:1px solid var(--line);
+  border-top:5px solid var(--gold); padding:20px 24px;
+  font-family:'Amiri','Traditional Arabic','Noto Naskh Arabic',serif;
+  font-size:1.35rem; line-height:2; color:var(--ink); direction:rtl; text-align:right; }
+.lawquote .lawen { font-style:italic; color:#3a352c; background:#fffdf6;
+  border-left:4px solid var(--green); padding:12px 16px; margin:10px 0 8px; }
+.lawquote .lawtag { display:inline-block; background:var(--red); color:#fff;
+  font-family:Helvetica,Arial,sans-serif; font-size:.66rem; font-weight:700;
+  letter-spacing:.06em; text-transform:uppercase; border-radius:3px;
+  padding:2px 7px; margin-right:8px; vertical-align:1px; }
+.lawquote figcaption { font-family:Helvetica,Arial,sans-serif; font-size:.78rem;
+  color:var(--muted); line-height:1.6; }
+.glossary { margin:10px 0 0; padding:0; font-family:Helvetica,Arial,sans-serif;
+  font-size:.82rem; }
+.glossary dt { font-weight:700; color:var(--green); margin-top:9px; }
+.glossary dd { margin:1px 0 0 0; color:#3f3a32; }
 footer { margin-top:50px; padding-top:16px; border-top:4px solid var(--green);
          box-shadow:inset 0 2px 0 var(--gold);
          font-family:Helvetica,Arial,sans-serif; font-size:.78rem; color:var(--muted); }
@@ -1551,10 +1927,17 @@ html_doc = f"""<!DOCTYPE html>
   </div>
 </div>
 
+{key_box}
+
 <section>
   <h2>1. Publication gate</h2>
   <p class="small">Every gate must pass before this report is used editorially.
-  Run <code>python3 scripts/validate.py</code> for the full finding list.</p>
+  Run <code>python3 scripts/validate.py</code> for the full finding list.
+  The fill measure counts the <b>evidence</b> tables
+  ({esc(', '.join(counted_tables))}); the method tables (theme vocabulary,
+  claim-theme mapping, legal-basis quotes, constituencies) are complete by
+  construction and are deliberately excluded, so adding them cannot make the
+  gate pass while claims still lack baselines.</p>
   {table(["Gate", "Status", "Measured"], gate_rows)}
 </section>
 
@@ -1566,14 +1949,16 @@ html_doc = f"""<!DOCTYPE html>
   <ul class="findings">{unfindings_html or '<li class="small">No blocked statements.</li>'}</ul>
 </section>
 
+{grades_html}
+
 <section>
-  <h2>3. To do before publishing</h2>
+  <h2>4. To do before publishing</h2>
   <p class="small">Generated automatically, ordered by how many rows each gap blocks.</p>
   <ol class="findings">{actions_html or '<li class="small">Nothing outstanding.</li>'}</ol>
 </section>
 
 <section>
-  <h2>4. CEAGI - party accountability score</h2>
+  <h2>5. CEAGI - party accountability score</h2>
   <p>CEAGI = Composite Electoral Accountability &amp; Governance Index. Six
   sub-indices - Delivery <b>D</b>, Claim credibility <b>C</b>, Electoral
   efficiency <b>E</b>, Governance <b>G</b>, Leadership <b>L</b>, Mandate
@@ -1595,46 +1980,58 @@ html_doc = f"""<!DOCTYPE html>
   <h3>CEAGI ranking - complete scores only</h3>
   {table(["Rank", "Party", "Score", "95% CI"] + DIMS, ceagi_rows)
    if ceagi_rows else '<p class="small">No party has all six dimensions yet, so no ranking is published. This is deliberate: ranking on partial coverage would compare unlike things.</p>'}
+  <h3>Where each number comes from</h3>
+  <p class="small">Every sub-index with its sample size, the year it describes and
+  the rule that produced it. <code>n</code> is how many claims, promises or
+  election rows fed the value. Rows that say "Assigned" are the project's own
+  documented judgements in <code>data/indicators.csv</code>, not measurements.</p>
+  <div class="scroll">
+  {table(["Party", "Dimension", "Value", "n", "Year", "How it was derived"],
+         prov_rows, "smalltbl")}
+  </div>
 </section>
 
+{legal_html}
+
 <section>
-  <h2>5. Charts</h2>
+  <h2>7. Charts</h2>
   {chart_blocks}
 </section>
 
 <section>
-  <h2>6. {CAMPAIGN_YEAR} campaign claims</h2>
+  <h2>8. {CAMPAIGN_YEAR} campaign claims</h2>
   <p class="small">{len(campaign_claims)} claims from {len({c.get('party_id') for c in campaign_claims})}
   parties. <span class="miss">FILL</span> marks a cell the registry does not have
   yet - it is shown rather than hidden so the hole is visible.</p>
   <div class="scroll">
-  {table(["ID", "Party", "Class", "Verif.", "Claim", "Domain", "Baseline",
-          "Target", "Deadline", "Unit", "Sources", "Conf."], claim_rows_html)}
+  {table(["ID", "Party", "Class", "Verif.", "Claim", "Why this grade",
+          "Sources", "Conf.", "Domain", "Baseline", "Target", "Deadline",
+          "Unit"], claim_rows_html, "claims")}
   </div>
 </section>
 
 {convergence_html}
 
 <section>
-  <h2>8. Historical campaign claims ({', '.join(sorted({c.get('election_year') for c in historical_claims}))})</h2>
+  <h2>10. Historical campaign claims ({', '.join(sorted({c.get('election_year') for c in historical_claims}))})</h2>
   <p class="small">{len(historical_claims)} claims from the earlier campaign(s), kept
   as a traceable record of what each party promised. They are not scored in the
   current CEAGI run.</p>
   <div class="scroll">
-  {table(["Year", "ID", "Party", "Class", "Verif.", "Claim", "Domain",
-          "Baseline", "Target", "Deadline", "Unit", "Sources", "Conf."],
-          historical_rows_html)}
+  {table(["Year", "ID", "Party", "Class", "Verif.", "Claim", "Why this grade",
+          "Sources", "Conf.", "Domain", "Baseline", "Target", "Deadline",
+          "Unit"], historical_rows_html, "claims")}
   </div>
 </section>
 
 <section>
-  <h2>9. Promise ledger (past terms)</h2>
+  <h2>11. Promise ledger (past terms)</h2>
   {table(["ID", "Party", "Term", "Promise", "Domain", "Status", "Outcome",
           "Sources", "Conf."], promise_rows)}
 </section>
 
 <section>
-  <h2>10. Leaders - achievements, ownership, ostensible motives</h2>
+  <h2>12. Leaders - achievements, ownership, ostensible motives</h2>
   <p class="small">"Skin in the game" = 0-1 judgement of how tightly the leader's
   personal fortune or career is tied to the promised outcomes (1 = fully exposed).
   Ownership and motive cells are claims requiring corroboration.</p>
@@ -1645,23 +2042,25 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>11. Sources registry</h2>
+  <h2>13. Sources registry</h2>
   <div class="scroll">
   {table(["ID", "Title", "Author/Org", "Date", "Type", "Primary?", "Rel.",
-          "Lean", "Status"], source_rows)}
+          "Lean", "Status", "Link"], source_rows)}
   </div>
-  <p class="small">Every source in the registry is currently a
-  <b>secondary</b> press report. The methodology requires primary documents
-  (manifestos, laws, official datasets) and an archived URL per source.</p>
+  <p class="small">The registry holds {n_primary} <b>primary</b> documents
+  (laws, official texts) and {n_secondary} <b>secondary</b> reports. Every claim
+  table above links its source IDs to the matching row here, and every row links
+  out to the original. Where a claim rests on a single source it is marked as
+  not corroborated - see section 3 for the rule.</p>
 </section>
 
 <section>
-  <h2>12. Timeline</h2>
+  <h2>14. Timeline</h2>
   {timeline_html}
 </section>
 
 <section>
-  <h2>13. Validation findings</h2>
+  <h2>15. Validation findings</h2>
   <p class="small">Produced by <code>scripts/validate.py</code>. ERROR breaks an
   invariant, WARN is incomplete but sound, INFO is coverage.</p>
   <div class="scroll">
@@ -1670,7 +2069,7 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>14. Methodology (short)</h2>
+  <h2>16. Methodology (short)</h2>
   <p class="small">Sources to facts/claims to synthesis. A claim is
   "corroborated" only with 2+ independent reliable sources. Delivery
   D = (fulfilled + 0.5&middot;partial) / (fulfilled + partial + failed +

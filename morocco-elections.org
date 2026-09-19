@@ -477,7 +477,7 @@ and report the 2.5th, 50th, and 97.5th percentiles as the credible interval.
    sovereignty; one row per theme with each party's position and key facts.
    =DONE= as the convergence layer: =data/themes.csv= (vocabulary) +
    =data/claim_themes.csv= (claim -> theme, with the evidence anchor), rendered
-   as report section 7 (bubble matrix, duplication ledger, echo matrix) and
+   as report section 9 (bubble matrix, duplication ledger, echo matrix) and
    exported to =output/claim_overlap.csv=. See METHODOLOGY.md section 12.
 3. *Polling vs. outcome* — expectations (polls) against actual results; who
    over/under-performed and why.
@@ -519,4 +519,4 @@ and report the 2.5th, 50th, and 97.5th percentiles as the credible interval.
 - [ ] Populate leader ownership/motives with source-backed claims.
 - [ ] Compute CEAGI sub-indices and run the sensitivity analysis.
 - [X] Add the timeline and themes-matrix sections (theme convergence lives in
-      report section 7); media-bias section still open.
+      report section 9); media-bias section still open.

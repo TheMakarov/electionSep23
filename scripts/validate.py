@@ -161,6 +161,35 @@ SCHEMA = {
         "enum": {"confidence": {"HIGH", "MEDIUM", "LOW", "ILLUSTRATIVE"}},
         "optional": [],
     },
+    # Verbatim legal provisions quoted in the report and the simulator. Each is
+    # tied to a primary source so a reader can check the wording against the law.
+    "legal_basis.csv": {
+        "key": "ref_id",
+        "header": ["ref_id", "instrument", "article", "quote_ar", "quote_en",
+                   "source_id", "note"],
+        "id_re": r"^LB\d{2}$",
+        "ids": ["source_id"],
+        "optional": ["note"],
+    },
+    # Official 2021 votes per map unit (province/prefecture) and party, parsed
+    # from the per-constituency results PDF published after 8 Sept 2021.
+    "results_2021.csv": {
+        "key": ["map_unit", "party"],
+        "header": ["map_unit", "region", "party", "votes", "local_seats"],
+        "ids": [],
+        "number": {"votes": (0, 10000000), "local_seats": (0, 30)},
+    },
+    # The 92 local and 12 regional constituencies that fill the 395 seats, with
+    # their official seat counts (House of Representatives, 8 Sept 2021).
+    "constituencies.csv": {
+        "key": "constituency_id",
+        "header": ["constituency_id", "level", "name", "prefecture", "map_unit",
+                   "region", "seats", "source_id"],
+        "id_re": r"^(LC\d{3}|RC\d{2})$",
+        "ids": ["source_id"],
+        "enum": {"level": {"local", "regional"}},
+        "number": {"seats": (1, 100)},
+    },
 }
 
 # Claims that bundle this many or more numeric targets should be split.

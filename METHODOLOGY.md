@@ -341,7 +341,7 @@ about it is inferred at build time.
 
 ### Presentation
 
-The report's section 7 shows the theme × party matrix as a bubble grid (area ∝
+The report's section 9 shows the theme × party matrix as a bubble grid (area ∝
 number of claims on that theme; gold banding marks shared themes), a
 duplication ledger with the claim IDs on each side, a per-party convergence
 table, and a party × party echo matrix. The lede spotlight theme is an explicit
@@ -413,6 +413,73 @@ fact-checking and sourcing practice:
 | CEAGI formulas, corroboration computation, no-imputation logic, convergence metrics | `scripts/build.py` |
 | Theme vocabulary and claim-to-theme mapping | `data/themes.csv`, `data/claim_themes.csv` |
 | Presentation: flag palette, pentagram star, zellige watermark | `scripts/moroccan_theme.py` |
+| Verbatim legal provisions quoted in the report | `data/legal_basis.csv` |
+| Constituency names, seat counts and map units | `data/constituencies.csv` |
+| Simplified province / region geometry for the map | `data/morocco_map.json` |
+| Official 2021 votes per province and party | `data/results_2021.csv` |
 | Claim taxonomy, rubric, six-point protocol, electoral algebra, distortion metrics | `morocco-elections.org` |
 | Three-layer model, corroboration rule, source/claims schema templates | `things.txt` |
 | Human-readable summary of all of the above | this file + `README.md` |
+
+---
+
+## 16. The electoral law this project relies on
+
+The seat arithmetic is not a convention: it is fixed by Morocco's organic law.
+The report quotes the operative articles verbatim in `data/legal_basis.csv` and
+renders them in report section 6.
+
+| Instrument | Reference |
+|---|---|
+| **Loi organique n° 27.11** relative à la Chambre des représentants | Original: dahir n° 1.11.165 of 14 October 2011; consolidated text dated 29 January 2026 |
+| Amended by **loi organique n° 53.25** | Dahir n° 1.25.70 of 16 January 2026, BO n° 7478 of 29 January 2026, p. 785 |
+| Amended by **loi organique n° 04.21** | Dahir n° 1.21.39 of 21 April 2021, BO n° 6987 of 17 May 2021, p. 3405 |
+| Amended by **loi organique n° 20.16** | Dahir n° 1.16.118 of 10 August 2016, BO n° 6490 |
+
+What the law says (quoted in `data/legal_basis.csv`):
+
+- **Article 1** - the House has **395 members**: **305** elected in local
+  constituencies and **90** in regional constituencies (a fixed table across the
+  twelve regions). The election is by **proportional representation on the
+  largest-remainder rule** (*plus fort reste*), without panachage or preferential
+  voting.
+- **Article 84** - seats are allocated by an **electoral quotient** equal to the
+  **registered voters** in the constituency divided by the number of seats
+  allocated to it; the remaining seats go to the **largest remainders**.
+- **Article 85** applies the same method to the regional constituencies.
+- There is **no electoral threshold**: the 3%/6% threshold in force from 2002 to
+  2016 was removed by the 2021 reform.
+
+Consequence for reading this report: because the quotient is computed on
+*registered* voters rather than votes cast, few lists reach it and most seats are
+decided at the largest-remainder step. The seat simulator illustrates the method
+on national vote totals and says so on the page; the real count runs constituency
+by constituency.
+
+The interactive simulator (`scripts/build_simulator.py`) now applies the
+method constituency by constituency rather than at national level: seats are
+allocated inside each of the 75 map units (305 local seats) and inside each of
+the twelve regional constituencies (90 seats), then summed into the 395-seat
+hemicycle. The map geometry is simplified from **geoBoundaries** MAR ADM2/ADM1
+  (OpenStreetMap / Wambacher, ODbL 1.0; `geoBoundaries-MAR-ADM2.geojson` and
+`-ADM1.geojson` from the geoBoundaries gbOpen release); the seat counts are the
+official 2021 table published by the House of Representatives. Where the law splits a prefecture into several local constituencies
+(Casablanca, Fès, Rabat, Salé, Kénitra, Khémisset, Azilal, Taounate), the map
+shows the prefecture once with the seats added together — the page says so.
+
+### The register and the quotient
+
+The simulator now takes the **registered voters** of a constituency as an
+input, because Article 84 divides the register by the seats to obtain the
+quotient. Each map unit carries a register field; the default is derived from
+the votes cast in the scenario divided by a national **turnout** assumption
+(50.2% for 2021), and it can be overridden per constituency. The page shows the
+resulting `Q` and how many lists reach it — usually few, which is exactly why
+so many seats are decided at the largest-remainder step.
+
+`data/results_2021.csv` holds the real 2021 votes per province/prefecture and
+party, parsed from the official per-constituency results
+(`data/resultats_legislatives_2021_details_et_nombre_de_voix.pdf`): 1,372
+candidate rows, 92 local constituencies, 7.41M votes. Four of the 305 local
+seats could not be traced in the source and are flagged; the small parties
+(MDS, FFD, CNI, PSU) are carried in the registry's `Others` bucket.

@@ -22,3 +22,5 @@ output/validation.json
 *.swp
 *~
 .DS_Store
+.preview/
+.geo/
