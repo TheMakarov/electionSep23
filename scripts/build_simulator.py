@@ -37,6 +37,16 @@ OUT = ROOT / "output"
 
 sys.path.insert(0, str(ROOT / "scripts"))
 from moroccan_theme import STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG, FAVICON_URI, apply_tokens  # noqa: E402
+from og_image import render_card  # noqa: E402
+
+# Site base URL for social-share meta tags (og:url / og:image). Falls back to
+# the local `make serve` address; set config.json's site_base_url for deployment.
+_SITE_BASE = "http://localhost:8000"
+try:
+    _cfg = json.load(open(ROOT / "config.json", encoding="utf-8"))
+    _SITE_BASE = (_cfg.get("site_base_url") or _SITE_BASE).rstrip("/")
+except (FileNotFoundError, ValueError):
+    pass
 
 
 def load(name):
@@ -155,6 +165,7 @@ TEMPLATE = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="__FAVICON__">
+__OG_META__
 <title>Morocco 2026 — Constituency Seat Simulator</title>
 <style>
 :root { --red:__RED__; --red-deep:__RED_DEEP__; --green:__GREEN__; --gold:__GOLD__;
@@ -1003,9 +1014,34 @@ init();
 </html>
 """
 
+render_card(str(OUT / "og-simulator.png"),
+            "MOROCCO \u00b7 CHAMBRE DES REPR\u00c9SENTANTS \u00b7 395 SEATS",
+            "Seat Simulator",
+            "Edit parties, enter votes, watch the seats fall")
+SIM_TITLE = "Morocco 2026 \u2014 Constituency Seat Simulator"
+SIM_DESC = ("Interactive seat simulator for Morocco's 395-seat Chamber of "
+            "Representatives: edit parties, enter votes constituency by "
+            "constituency, and watch the seats fall.")
+SIM_OG_META = f"""
+<meta name="description" content="{SIM_DESC}">
+<meta name="theme-color" content="#c1272d">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Morocco Elections 2026">
+<meta property="og:title" content="{SIM_TITLE}">
+<meta property="og:description" content="{SIM_DESC}">
+<meta property="og:url" content="{_SITE_BASE}/seat_simulator.html">
+<meta property="og:image" content="{_SITE_BASE}/og-simulator.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{SIM_TITLE}">
+<meta name="twitter:description" content="{SIM_DESC}">
+<meta name="twitter:image" content="{_SITE_BASE}/og-simulator.png">"""
+
 html = (TEMPLATE
         .replace("__PARTIES__", js(party_js))
         .replace("__LOGOS__", js(logos_js))
+        .replace("__OG_META__", SIM_OG_META)
         .replace("__CONSTS__", js(const_js))
         .replace("__MAP__", js(map_data))
         .replace("__RESULTS__", js(results_js))

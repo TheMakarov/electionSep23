@@ -38,4 +38,5 @@ serve: build
 ## Remove generated artefacts (data/ is never touched).
 clean:
 	rm -rf output/report.html output/ceagi_scores.csv output/ceagi_scores.json \
-	       output/audit_trail.md output/charts output/seat_simulator.html
+	       output/audit_trail.md output/charts output/seat_simulator.html \
+	       output/og-report.png output/og-simulator.png

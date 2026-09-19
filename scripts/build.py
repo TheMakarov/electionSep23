@@ -67,6 +67,7 @@ from moroccan_theme import (  # noqa: E402
     RED, RED_DEEP, GREEN, GOLD, SAND, CREAM, INK, MUTED, GRID, RULE, BAND,
     CMAP_COLORS, OK, WARN, BAD,
 )
+from og_image import render_card  # noqa: E402
 
 DIMS = ["D", "C", "E", "G", "L", "M"]
 DIM_LABEL = {
@@ -1747,12 +1748,39 @@ footer { margin-top:50px; padding-top:16px; border-top:4px solid var(--green);
 """
 CSS = apply_tokens(CSS.replace("__STAR__", STAR_URI).replace("__ZELLIGE__", ZELLIGE_URI))
 
+# Open Graph / social share preview (Discord, WhatsApp, X, Facebook).
+SITE_BASE = (CFG.get("site_base_url") or "").rstrip("/")
+render_card(str(OUT / "og-report.png"),
+            f"MOROCCO \u00b7 LEGISLATIVE ELECTION \u00b7 {CAMPAIGN_YEAR}",
+            "Electoral Claims & Promises",
+            "A sourced, reproducible accountability report")
+REPORT_TITLE = f"Morocco {CAMPAIGN_YEAR} - Electoral Claims, Promises &amp; Accountability"
+REPORT_DESC = ("A reproducible, sourced account of the Moroccan legislative "
+               "election: campaign claims, the 2021 promise ledger, and where "
+               "the parties overlap.")
+OG_META = f"""
+<meta name="description" content="{REPORT_DESC}">
+<meta name="theme-color" content="{RED}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Morocco Elections {CAMPAIGN_YEAR}">
+<meta property="og:title" content="{REPORT_TITLE}">
+<meta property="og:description" content="{REPORT_DESC}">
+<meta property="og:url" content="{SITE_BASE}/report.html">
+<meta property="og:image" content="{SITE_BASE}/og-report.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{REPORT_TITLE}">
+<meta name="twitter:description" content="{REPORT_DESC}">
+<meta name="twitter:image" content="{SITE_BASE}/og-report.png">"""
+
 html_doc = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="{FAVICON_URI}">
+{OG_META}
 <title>Morocco {CAMPAIGN_YEAR} - Electoral Claims, Promises &amp; Accountability</title>
 <style>{CSS}</style>
 </head>
