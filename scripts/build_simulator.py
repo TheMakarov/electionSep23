@@ -24,6 +24,7 @@ the page has no register — the difference is stated on the page.
 """
 from __future__ import annotations
 
+import base64
 import csv
 import json
 import sys
@@ -49,15 +50,46 @@ constituencies = load("constituencies.csv")
 sources = {r["source_id"]: r for r in load("sources.csv")}
 map_data = json.load(open(DATA / "morocco_map.json", encoding="utf-8"))
 
+# Party logos (data/logos/<party_id>.{svg,png,gif,jpg}) inlined as data URIs so
+# the page stays self-contained; a party without a logo falls back to its colour.
+_MIME = {".svg": "image/svg+xml", ".png": "image/png", ".gif": "image/gif",
+         ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}
+logos_js = {}
+for _p in parties:
+    for _ext, _mime in _MIME.items():
+        _fp = DATA / "logos" / (_p["party_id"] + _ext)
+        if _fp.exists():
+            logos_js[_p["party_id"]] = (
+                "data:" + _mime + ";base64,"
+                + base64.b64encode(_fp.read_bytes()).decode("ascii"))
+            break
+
 # 2021 vote-share prefill (estimates, labelled LOW in the registry), in percent.
 prefill = {r["party_id"]: float(r["vote_share_est"])
            for r in elections
            if r["election_year"] == "2021" and r["party_id"] != "P009"
            and r["vote_share_est"] not in ("", "FILL")}
 
+# Normalise the vote-share prefill so the displayed shares always sum to exactly
+# 100.00% (rounding each row to two decimals on its own drifts the total, e.g.
+# to 99.99%). Largest-remainder keeps every value within 0.01pp of the source.
+_shares = [prefill.get(p["party_id"], 0.0) for p in parties]
+if sum(_shares) > 0:
+    _scaled = [s / sum(_shares) * 100 for s in _shares]
+    _hundredths = [int(round(s * 100)) for s in _scaled]
+    _diff = 10000 - sum(_hundredths)
+    _order = sorted(range(len(_scaled)),
+                    key=lambda i: _scaled[i] * 100 - _hundredths[i], reverse=True)
+    for _k in range(abs(_diff)):
+        _i = _order[_k % len(_order)]
+        _hundredths[_i] += 1 if _diff > 0 else -1
+    _norm_shares = [h / 100 for h in _hundredths]
+else:
+    _norm_shares = [0.0] * len(parties)
+
 party_js = [{"id": p["party_id"], "name": p["name"], "ar": p.get("name_ar", ""),
-             "color": p["color"], "share": round(prefill.get(p["party_id"], 0.0), 2)}
-            for p in parties]
+             "color": p["color"], "share": _norm_shares[i]}
+            for i, p in enumerate(parties)]
 
 const_js = [{"id": c["constituency_id"], "level": c["level"], "name": c["name"],
              "prefecture": c["prefecture"], "unit": c["map_unit"],
@@ -167,6 +199,11 @@ button { font-family:Helvetica,Arial,sans-serif; font-size:.8rem; padding:6px 12
 button:hover { background:var(--sand); }
 button.primary { background:var(--green); color:#fff; border-color:var(--gold); }
 button.primary:hover { background:var(--gold); color:#3a2c07; }
+.share-bar { display:flex; align-items:center; gap:10px; margin:8px 0 10px;
+  font-family:Helvetica,Arial,sans-serif; font-size:.8rem; }
+.share-sum { font-weight:700; padding:2px 10px; border-radius:12px; }
+.share-sum.ok { background:#eaf2e5; color:var(--green); }
+.share-sum.bad { background:#fbe4e3; color:var(--red); }
 table { border-collapse:collapse; width:100%; margin:14px 0; font-family:Helvetica,Arial,sans-serif;
   font-size:.8rem; background:#fff; }
 th { background:var(--sand); text-align:left; padding:7px 8px; border-bottom:2px solid var(--green);
@@ -176,6 +213,8 @@ tr:hover td { background:#fdf9f0; }
 .over { color:var(--red); font-weight:700; }
 .under { color:__GREEN__; }
 .chip { display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; vertical-align:middle; }
+.plogo { width:20px; height:20px; object-fit:contain; vertical-align:-5px; margin-right:6px;
+  border-radius:3px; background:#fff; }
 .interpret p { margin:8px 0; font-size:.92rem; }
 .interpret .big { font-size:1.05rem; }
 /* ---- Gallagher disproportionality ---- */
@@ -299,6 +338,8 @@ footer { margin-top:46px; padding-top:14px; border-top:4px solid var(--green);
   party's national vote share. Everything below recomputes as you type.</p>
   <div class="party-head"><span>Colour</span><span>Party</span><span>Share %</span>
     <span>Arabic name</span><span></span></div>
+  <div class="share-bar"><span id="share-sum" class="share-sum"></span>
+    <button onclick="normaliseShares()" title="Rescale shares so they add up to exactly 100%">Normalise to 100%</button></div>
   <div id="party-editor"></div>
   <div class="toolbar">
     <button class="primary" onclick="addParty()">+ Add a party</button>
@@ -368,6 +409,9 @@ footer { margin-top:46px; padding-top:14px; border-top:4px solid var(--green);
   counts are the official 2021 table (<a href="https://www.chambredesrepresentants.ma/fr/actualites/donnees-chiffrees-autour-du-scrutin-legislatif-du-mercredi-8-septembre-2021-conformement">Chambre des repr&eacute;sentants</a>).
   Method: proportional representation, largest remainder, quotient on registered
   voters (loi organique n&deg; 27.11, arts. 1 &amp; 84), <b>no electoral threshold</b>.</p>
+  <p class="small">Party logos are the trademarks of the respective parties, used
+  editorially for identification only; sourced from each party's Wikipedia article
+  (Wikimedia Commons / Wikipedia uploads).</p>
 </footer>
 
 </div>
@@ -375,6 +419,7 @@ footer { margin-top:46px; padding-top:14px; border-top:4px solid var(--green);
 
 <script>
 const REGISTRY = __PARTIES__;
+const LOGOS = __LOGOS__;            // party_id -> data-URI logo (absent = colour chip)
 const CONSTS = __CONSTS__;
 const MAP = __MAP__;
 const RESULTS = __RESULTS__;        // map_unit -> {party_id: 2021 votes}
@@ -412,6 +457,12 @@ function freshParties() {
   return REGISTRY.map(p => ({ id:p.id, name:p.name, ar:p.ar, color:p.color, share:p.share }));
 }
 parties = freshParties();
+
+// A party's logo when we have one, otherwise its colour chip.
+function partyBadge(p) {
+  if (LOGOS[p.id]) return `<img class="plogo" src="${LOGOS[p.id]}" alt="" aria-hidden="true">`;
+  return `<span class="chip" style="background:${p.color}"></span>`;
+}
 
 /* ------------------------- seat allocation ------------------------- */
 function allocate(votes, seats, registered) {
@@ -713,7 +764,7 @@ function renderUnitPanel() {
   const quota = UNIT_SEATS[selected] ? reg / UNIT_SEATS[selected] : 0;
   const reached = parties.filter(p => (votes[p.id] || 0) >= quota).length;
   const rows = parties.map(p => `<tr>
-      <td><span class="chip" style="background:${p.color}"></span>${p.name}</td>
+      <td>${partyBadge(p)}${p.name}</td>
       <td><input type="number" min="0" step="100" value="${Math.round(votes[p.id]||0)}"
            oninput="setSelectedVote('${p.id}',this.value)"></td>
       <td id="us-${p.id}"><b>${seats[p.id]||0}</b></td></tr>`).join("");
@@ -726,6 +777,8 @@ function renderUnitPanel() {
       · lists reaching Q: <b>${reached}</b></p>
     <table class="unit-votes"><thead><tr><th>Party</th><th>Votes</th><th>Seats</th></tr></thead>
     <tbody>${rows}</tbody></table>
+    <p class="note" style="margin:4px 0 2px">Votes cast here: <b>${Math.round(unitVotesCast(selected)).toLocaleString()}</b>
+    &middot; registered voters: <b>${Math.round(reg).toLocaleString()}</b></p>
     <div class="party-row" style="grid-template-columns:1fr 150px;margin:10px 0 4px">
       <span style="font-family:Helvetica,Arial,sans-serif;font-size:.82rem">Registered voters
       ${regOverrides[selected] != null ? '<span class="seatpill" style="background:#f6e0aa">edited</span>' : ''}</span>
@@ -755,13 +808,18 @@ function clearOverrides() { overrides = {}; regOverrides = {}; renderAll(); rend
 /* ------------------------- parties editor ------------------------- */
 function renderPartyEditor() {
   const el = document.getElementById("party-editor");
-  el.innerHTML = parties.map((p, i) => `<div class="party-row">
+  el.innerHTML = parties.map((p, i) => {
+    const logo = LOGOS[p.id] ? `<img class="plogo" src="${LOGOS[p.id]}" alt="" aria-hidden="true">` : "";
+    return `<div class="party-row">
       <input type="color" value="${p.color}" oninput="setParty(${i},'color',this.value)">
-      <input type="text" value="${(p.name||"").replace(/"/g,'&quot;')}" oninput="setParty(${i},'name',this.value)">
+      <div style="display:flex;align-items:center;gap:6px;min-width:0">${logo}
+        <input type="text" value="${(p.name||"").replace(/"/g,'&quot;')}" oninput="setParty(${i},'name',this.value)">
+      </div>
       <input type="number" min="0" step="0.5" value="${p.share}" oninput="setParty(${i},'share',this.value)">
       <span class="note" style="margin:0">${p.ar||""}</span>
       <button class="rm" title="Remove party" onclick="removeParty(${i})">&times;</button>
-    </div>`).join("");
+    </div>`;
+  }).join("");
 }
 function setParty(i, key, value) {
   if (!parties[i]) return;
@@ -785,9 +843,38 @@ function prefill2021() {
   parties.forEach(p => { p.share = REGISTRY.find(r => r.id === p.id) ? (REGISTRY.find(r => r.id === p.id).share || 0) : p.share; });
   renderPartyEditor(); renderAll();
 }
+function sumShares() { return parties.reduce((a, p) => a + (Number(p.share) || 0), 0); }
+function renderShareSum() {
+  const el = document.getElementById("share-sum");
+  if (!el) return;
+  const s = sumShares();
+  const ok = Math.abs(s - 100) < 0.05;
+  el.className = "share-sum " + (ok ? "ok" : "bad");
+  el.textContent = ok ? `Σ = ${s.toFixed(1)}%` : `Σ = ${s.toFixed(1)}% — not 100%`;
+}
+function normaliseShares() {
+  const s = sumShares();
+  if (s <= 0) { equalShares(); return; }
+  // Work in tenths-of-a-percent to avoid float drift, then fix the residual so
+  // the rounded shares add up to exactly 100.0%.
+  const raw = parties.map(p => (Number(p.share) || 0) / s * 1000);
+  const tenths = raw.map(x => Math.floor(x + 1e-9));
+  let diff = 1000 - tenths.reduce((a, b) => a + b, 0);
+  const order = [...Array(parties.length).keys()]
+    .sort((a, b) => (raw[b] - tenths[b]) - (raw[a] - tenths[a]));
+  for (let k = 0; diff !== 0; k++) {
+    const i = order[k % order.length];
+    const d = diff > 0 ? 1 : -1;
+    tenths[i] += d; diff -= d;
+  }
+  parties.forEach((p, i) => p.share = tenths[i] / 10);
+  renderPartyEditor(); renderAll();
+}
 function equalShares() {
-  const s = parties.length ? 100 / parties.length : 0;
-  parties.forEach(p => p.share = Math.round(s * 10) / 10);
+  const n = parties.length || 1;
+  const base = Math.floor(1000 / n);
+  const rem = 1000 - base * n;
+  parties.forEach((p, i) => p.share = (base + (i < rem ? 1 : 0)) / 10);
   renderPartyEditor(); renderAll();
 }
 
@@ -803,7 +890,7 @@ function renderTable(res) {
     const d = (s21 == null) ? null : s - s21;
     const dTxt = (d === null) ? "—" : (d > 0 ? "+" + d : String(d));
     const dCls = (d === null || d === 0) ? "" : (d > 0 ? "over" : "under");
-    return `<tr><td><span class="chip" style="background:${p.color}"></span>${p.name}</td>` +
+    return `<tr><td>${partyBadge(p)}${p.name}</td>` +
       `<td>${(vs*100).toFixed(1)}%</td><td>${res.local[p.id]||0}</td>` +
       `<td>${res.regional[p.id]||0}</td><td><b>${s}</b></td>` +
       `<td>${(ss*100).toFixed(1)}%</td><td class="${cls}">${adv === null ? "—" : adv.toFixed(2)}</td>` +
@@ -886,6 +973,7 @@ let lastRes = null;
 function renderAll() {
   const res = computeAll();
   lastRes = res;
+  renderShareSum();
   renderMap(res);
   renderMapStats(res);
   renderLegend(res);
@@ -917,6 +1005,7 @@ init();
 
 html = (TEMPLATE
         .replace("__PARTIES__", js(party_js))
+        .replace("__LOGOS__", js(logos_js))
         .replace("__CONSTS__", js(const_js))
         .replace("__MAP__", js(map_data))
         .replace("__RESULTS__", js(results_js))

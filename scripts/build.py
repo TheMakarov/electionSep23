@@ -26,6 +26,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
 import datetime as dt
 import json
@@ -233,6 +234,19 @@ pids = [p["party_id"] for p in parties if p["party_id"] != "P009"]
 pname = {p["party_id"]: p["name"] for p in parties}
 pcolor = {p["party_id"]: p["color"] for p in parties}
 pslogan = {p["party_id"]: p.get("official_slogan", "") for p in parties}
+
+# Party logos (data/logos/<party_id>.*) inlined as data URIs; a party without a
+# logo falls back to a colour swatch.
+_MIME = {".svg": "image/svg+xml", ".png": "image/png", ".gif": "image/gif",
+         ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}
+plogo = {}
+for _p in parties:
+    for _ext, _mime in _MIME.items():
+        _fp = DATA / "logos" / (_p["party_id"] + _ext)
+        if _fp.exists():
+            plogo[_p["party_id"]] = ("data:" + _mime + ";base64,"
+                                     + base64.b64encode(_fp.read_bytes()).decode("ascii"))
+            break
 
 # The claims bank now spans two elections: the live 2026 campaign (feeds C) and
 # the 2021 campaign (historical record, not scored). Keep them apart so the
@@ -1395,8 +1409,10 @@ for _p in sorted(conv_parties, key=lambda p: (-len(party_shared[p]), pname[p])):
     _share = (len(party_shared[_p]) / len(party_themes[_p])) if party_themes[_p] else 0.0
     _excl = ", ".join(esc(theme_meta[t]["label"]) for t in sorted(party_exclusive[_p]))
     _carr = ", ".join(esc(theme_meta[t]["label"]) for t in party_carried[_p])
+    _badge = (f'<img class="plogo" src="{plogo[_p]}" alt="" aria-hidden="true">'
+              if _p in plogo else f'<span class="swatch" style="background:{pcolor[_p]}"></span>')
     party_stat_rows.append([
-        f'<span class="swatch" style="background:{pcolor[_p]}"></span>{esc(pname[_p])}',
+        f'{_badge}{esc(pname[_p])}',
         str(len(party_themes[_p])), str(len(party_shared[_p])), f"{_share:.0%}",
         _excl or '<span class="na">none</span>',
         str(len(party_carried[_p])),
@@ -1678,6 +1694,8 @@ table.conv tbody tr.shared-row td { background:#eef4ea; border-color:#d6e2d4; }
 .pill.lone { background:#efeee9; color:#999999; }
 .swatch { display:inline-block; width:10px; height:10px; border-radius:2px;
           margin-right:6px; }
+.plogo { width:20px; height:20px; object-fit:contain; vertical-align:-5px;
+         margin-right:6px; border-radius:3px; background:#fff; }
 .cid { font-family:ui-monospace,Menlo,Consolas,monospace; background:#f4efe3;
        border:1px solid var(--line); border-radius:3px; padding:0 4px; font-size:.7rem; }
 .spotlight { background:#fffdf6; border:1px solid var(--line);
@@ -1916,6 +1934,9 @@ html_doc = f"""<!DOCTYPE html>
   <code>make check &amp;&amp; make build</code>. Settings in
   <code>config.json</code>. Published scores require passing the gate in
   section 1; until then treat every value as provisional.</p>
+  <p class="small">Party logos are the trademarks of the respective parties, used
+  editorially for identification only; sourced from each party's Wikipedia article
+  (Wikimedia Commons / Wikipedia uploads).</p>
 </footer>
 
 </div>
