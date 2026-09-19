@@ -1,6 +1,6 @@
 # Audit trail - Morocco electoral data project
 
-Generated 2026-09-19T17:41:27 by `scripts/build.py`.
+Generated 2026-09-19T18:26:23 by `scripts/build.py`.
 Campaign year **2026**, baseline year **2021**, publication gate: **FAIL**.
 
 Every number below is traced to a source ID and a confidence level.
@@ -12,67 +12,95 @@ A value of `n/a` means the evidence does not exist yet - it is not a zero.
 
 | Party | Dim | Value | n | Year | Detail |
 |---|---|---|---|---|---|
-| RNI | D | n/a | 0 | 2021 | 0 concluded promise(s) tracked, 3 required to score; 2021-2026 |
-| RNI | C | 0.367 | 3 | 2026 | 3/3 campaign claims scored (1-5 rubric) |
-| RNI | E | 0.912 | 1 | 2021 | seat share / vote share = 0.954 at the 2021 election |
+| RNI | D | 0.667 | 3 | 2021 | 2 fulfilled, 0 partial, 1 failed, 0 abandoned across the 2021 term |
+| RNI | C | 0.376 | 4 | 2021 | 4/4 2021 promises scored (1-5 rubric) |
+| RNI | E | 0.86 | 1 | 2021 | seat share / vote share = 0.902 at the 2021 election |
 | RNI | G | 0.85 | 1 | 2021 | Assigned: governing party with broad portfolio; conflict flags lower L |
 | RNI | L | 0.5 | 1 | 2021 | Assigned: governing party with broad portfolio; conflict flags lower L |
 | RNI | M | 0.7 | 1 | 2021 | Assigned: governing party with broad portfolio; conflict flags lower L |
-| PAM | D | n/a | 0 | 2021 | 0 concluded promise(s) tracked, 3 required to score; 2021-2026 |
-| PAM | C | 0.4 | 5 | 2026 | 5/5 campaign claims scored (1-5 rubric) |
-| PAM | E | 0.825 | 1 | 2021 | seat share / vote share = 1.091 at the 2021 election |
+| PAM | D | 0.167 | 3 | 2021 | 0 fulfilled, 1 partial, 2 failed, 0 abandoned across the 2021 term |
+| PAM | C | 0.385 | 6 | 2021 | 6/6 2021 promises scored (1-5 rubric) |
+| PAM | E | 0.791 | 1 | 2021 | seat share / vote share = 1.146 at the 2021 election |
 | PAM | G | 0.75 | 1 | 2021 | Assigned: coalition partner |
 | PAM | L | 0.55 | 1 | 2021 | Assigned: coalition partner |
 | PAM | M | 0.65 | 1 | 2021 | Assigned: coalition partner |
-| Istiqlal | D | n/a | 0 | 2021 | 0 concluded promise(s) tracked, 3 required to score; 2021-2026 |
-| Istiqlal | C | 0.2 | 5 | 2026 | 5/5 campaign claims scored (1-5 rubric) |
-| Istiqlal | E | 0.87 | 1 | 2021 | seat share / vote share = 1.068 at the 2021 election |
+| Istiqlal | D | n/a | 2 | 2021 | 2 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026 |
+| Istiqlal | C | 0.372 | 7 | 2021 | 7/7 2021 promises scored (1-5 rubric) |
+| Istiqlal | E | 0.787 | 1 | 2021 | seat share / vote share = 1.149 at the 2021 election |
 | Istiqlal | G | 0.7 | 1 | 2021 | Assigned: coalition partner |
 | Istiqlal | L | 0.6 | 1 | 2021 | Assigned: coalition partner |
 | Istiqlal | M | 0.65 | 1 | 2021 | Assigned: coalition partner |
-| PJD | D | 0.5 | 5 | 2021 | 1 fulfilled, 3 partial, 1 failed, 0 abandoned across 2011-2016, 2016-2021 |
-| PJD | C | 0.2 | 2 | 2026 | 2/2 campaign claims scored (1-5 rubric) |
-| PJD | E | 0.0 | 1 | 2021 | seat share / vote share = 0.478 at the 2021 election |
+| PJD | D | n/a | 1 | 2021 | 1 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026 |
+| PJD | C | 0.343 | 4 | 2021 | 4/4 2021 promises scored (1-5 rubric) |
+| PJD | E | 0.701 | 1 | 2021 | seat share / vote share = 0.791 at the 2021 election |
 | PJD | G | 0.4 | 1 | 2021 | Assigned: opposition after collapse |
 | PJD | L | 0.55 | 1 | 2021 | Assigned: opposition after collapse |
 | PJD | M | 0.5 | 1 | 2021 | Assigned: opposition after collapse |
-| USFP | D | n/a | 1 | 2021 | 1 concluded promise(s) tracked, 3 required to score; 2016-2021 |
-| USFP | C | 0.4 | 15 | 2026 | 15/15 campaign claims scored (1-5 rubric) |
-| USFP | E | 0.822 | 1 | 2021 | seat share / vote share = 1.093 at the 2021 election |
+| USFP | D | n/a | 1 | 2021 | 1 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026 |
+| USFP | C | 0.343 | 4 | 2021 | 4/4 2021 promises scored (1-5 rubric) |
+| USFP | E | 0.956 | 1 | 2021 | seat share / vote share = 1.031 at the 2021 election |
 | USFP | G | 0.45 | 1 | 2021 | Assigned: opposition |
 | USFP | L | 0.65 | 1 | 2021 | Assigned: opposition |
 | USFP | M | 0.6 | 1 | 2021 | Assigned: opposition |
-| MP | D | n/a | 1 | 2021 | 1 concluded promise(s) tracked, 3 required to score; 2016-2021 |
-| MP | C | 0.283 | 9 | 2026 | 9/9 campaign claims scored (1-5 rubric) |
-| MP | E | 0.945 | 1 | 2021 | seat share / vote share = 1.029 at the 2021 election |
+| MP | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026 |
+| MP | C | 0.2 | 5 | 2021 | 5/5 2021 promises scored (1-5 rubric) |
+| MP | E | 0.996 | 1 | 2021 | seat share / vote share = 1.003 at the 2021 election |
 | MP | G | 0.55 | 1 | 2021 | Assigned: coalition support |
 | MP | L | 0.6 | 1 | 2021 | Assigned: coalition support |
 | MP | M | 0.6 | 1 | 2021 | Assigned: coalition support |
-| PPS | D | n/a | 1 | 2021 | 1 concluded promise(s) tracked, 3 required to score; 2016-2021 |
-| PPS | C | 0.369 | 19 | 2026 | 19/19 campaign claims scored (1-5 rubric) |
-| PPS | E | 0.748 | 1 | 2021 | seat share / vote share = 1.131 at the 2021 election |
+| PPS | D | n/a | 2 | 2021 | 2 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026 |
+| PPS | C | 0.367 | 3 | 2021 | 3/3 2021 promises scored (1-5 rubric) |
+| PPS | E | 0.941 | 1 | 2021 | seat share / vote share = 1.041 at the 2021 election |
 | PPS | G | 0.4 | 1 | 2021 | Assigned: opposition |
 | PPS | L | 0.65 | 1 | 2021 | Assigned: opposition |
 | PPS | M | 0.6 | 1 | 2021 | Assigned: opposition |
-| UC | D | n/a | 1 | 2021 | 1 concluded promise(s) tracked, 3 required to score; 2016-2021 |
-| UC | C | 0.2 | 3 | 2026 | 3/3 campaign claims scored (1-5 rubric) |
-| UC | E | 0.945 | 1 | 2021 | seat share / vote share = 1.029 at the 2021 election |
+| UC | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026 |
+| UC | C | 0.2 | 2 | 2021 | 2/2 2021 promises scored (1-5 rubric) |
+| UC | E | 0.685 | 1 | 2021 | seat share / vote share = 0.780 at the 2021 election |
 | UC | G | 0.45 | 1 | 2021 | Assigned: minor coalition/opposition |
 | UC | L | 0.55 | 1 | 2021 | Assigned: minor coalition/opposition |
 | UC | M | 0.55 | 1 | 2021 | Assigned: minor coalition/opposition |
+| MDS | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| MDS | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| MDS | E | 0.604 | 1 | 2021 | seat share / vote share = 0.723 at the 2021 election |
+| MDS | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| MDS | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| MDS | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| FFD | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| FFD | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| FFD | E | 0.725 | 1 | 2021 | seat share / vote share = 0.808 at the 2021 election |
+| FFD | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| FFD | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| FFD | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| CNI | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| CNI | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| CNI | E | n/a | 0 | 2021 | no local-list vote share on record (regional-list seat only) |
+| CNI | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| CNI | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| CNI | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PSU | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PSU | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PSU | E | 0.0 | 1 | 2021 | seat share / vote share = 0.301 at the 2021 election |
+| PSU | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PSU | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PSU | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
 
 ## 2. Composite scores
 
 | Party | Coverage | Provisional (unranked) | CEAGI | 95% CI |
 |---|---|---|---|---|
-| PJD | 6/6 | 0.109 | 0.109 | 0.19-0.355 |
-| Istiqlal | 5/6 | 0.495 | n/a | n/a |
-| MP | 5/6 | 0.51 | n/a | n/a |
-| PAM | 5/6 | 0.592 | n/a | n/a |
-| PPS | 5/6 | 0.495 | n/a | n/a |
-| RNI | 5/6 | 0.601 | n/a | n/a |
-| UC | 5/6 | 0.428 | n/a | n/a |
-| USFP | 5/6 | 0.529 | n/a | n/a |
+| PAM | 6/6 | 0.427 | 0.427 | 0.337-0.487 |
+| RNI | 6/6 | 0.616 | 0.616 | 0.566-0.661 |
+| Istiqlal | 5/6 | 0.577 | n/a | n/a |
+| MP | 5/6 | 0.468 | n/a | n/a |
+| PJD | 5/6 | 0.454 | n/a | n/a |
+| PPS | 5/6 | 0.51 | n/a | n/a |
+| UC | 5/6 | 0.41 | n/a | n/a |
+| USFP | 5/6 | 0.518 | n/a | n/a |
+| FFD | 1/6 | n/a | n/a | n/a |
+| MDS | 1/6 | n/a | n/a | n/a |
+| PSU | 1/6 | n/a | n/a | n/a |
+| CNI | 0/6 | n/a | n/a | n/a |
 
 ## 3. Election results (seats and vote shares)
 
@@ -96,15 +124,18 @@ A value of `n/a` means the evidence does not exist yet - it is not a zero.
 | 2016 | PPS | 12 | HIGH | 4.7% | LOW |
 | 2016 | UC | 19 | HIGH | 4.7% | LOW |
 | 2016 | Others | 7 | MEDIUM | 8.5% | LOW |
-| 2021 | RNI | 102 | HIGH | 27.5% | LOW |
-| 2021 | PAM | 87 | HIGH | 20.5% | LOW |
-| 2021 | Istiqlal | 81 | HIGH | 19.5% | LOW |
-| 2021 | PJD | 13 | HIGH | 7.0% | LOW |
-| 2021 | USFP | 34 | HIGH | 8.0% | LOW |
-| 2021 | MP | 28 | HIGH | 7.0% | LOW |
-| 2021 | PPS | 22 | HIGH | 5.0% | LOW |
-| 2021 | UC | 18 | HIGH | 4.5% | LOW |
-| 2021 | Others | 10 | MEDIUM | 1.0% | LOW |
+| 2021 | RNI | 102 | HIGH | 28.62% | MEDIUM |
+| 2021 | PAM | 87 | HIGH | 19.22% | MEDIUM |
+| 2021 | Istiqlal | 81 | HIGH | 17.85% | MEDIUM |
+| 2021 | PJD | 13 | HIGH | 4.16% | MEDIUM |
+| 2021 | USFP | 34 | HIGH | 8.35% | MEDIUM |
+| 2021 | MP | 28 | HIGH | 7.07% | MEDIUM |
+| 2021 | PPS | 22 | HIGH | 5.35% | MEDIUM |
+| 2021 | UC | 18 | HIGH | 5.84% | MEDIUM |
+| 2021 | MDS | 5 | HIGH | 1.75% | MEDIUM |
+| 2021 | FFD | 3 | HIGH | 0.94% | MEDIUM |
+| 2021 | CNI | 1 | HIGH | 0.00% | LOW |
+| 2021 | PSU | 1 | HIGH | 0.84% | MEDIUM |
 
 ## 4. Campaign claims (2026)
 
@@ -251,19 +282,41 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 
 ## 5. Promises
 
-- `PR001` [PJD, 2011-2016] Subsidy reform (fuel indexation) - **fulfilled** - Subsidies indexed 2014-2015 (sources: UNSOURCED, HIGH)
-- `PR002` [PJD, 2011-2016] Anti-corruption crackdown - **partial** - Limited convictions (sources: UNSOURCED, MEDIUM)
-- `PR003` [PJD, 2016-2021] Expand social protection - **partial** - AMO groundwork launched (sources: UNSOURCED, MEDIUM)
-- `PR004` [PJD, 2016-2021] Social housing (logement social) - **partial** - Units delivered below target (sources: UNSOURCED, MEDIUM)
-- `PR005` [PJD, 2016-2021] Create jobs - **failed** - Unemployment remained high (sources: UNSOURCED, MEDIUM)
-- `PR006` [RNI, 2021-2026] Generalize AMO to all citizens - **in_progress** - Launched Dec 2021 (sources: UNSOURCED, MEDIUM)
-- `PR007` [RNI, 2021-2026] Create 1,000,000 jobs - **pending** - Not yet measurable (sources: UNSOURCED, MEDIUM)
-- `PR008` [PAM, 2021-2026] Administrative reform - **in_progress** - Digitalization underway (sources: UNSOURCED, LOW)
-- `PR009` [Istiqlal, 2021-2026] Food sovereignty - **in_progress** - Programs launched (sources: UNSOURCED, LOW)
-- `PR010` [USFP, 2016-2021] Minimum wage increase - **failed** - Rejected in social dialogue (sources: UNSOURCED, LOW)
-- `PR011` [MP, 2016-2021] Rural development - **partial** - Some infrastructure delivered (sources: UNSOURCED, LOW)
-- `PR012` [PPS, 2016-2021] Progressive tax reform - **failed** - No reform passed (sources: UNSOURCED, LOW)
-- `PR013` [UC, 2016-2021] Liberal economic reform - **partial** - Partial liberalization (sources: UNSOURCED, LOW)
+- `PR101` [RNI, 2021-2026] Créer un million d'emplois - **failed** - Unemployment 13.0% in 2025; the 1M-jobs target was not met (sources: S015, S047, S087, MEDIUM)
+- `PR102` [RNI, 2021-2026] Permettre à près de 400 000 familles rurales d'accéder à la classe moyenne - **unverifiable** - No reliable evidence found (sources: S015, S048, LOW)
+- `PR103` [RNI, 2021-2026] Créer 250 000 activités temporaires sur deux ans pour absorber les pertes d'emploi (COVID) - **fulfilled** - Awrach programme delivered ~250,000 temporary beneficiaries (2022-2023) (sources: S015, S049, S089, MEDIUM)
+- `PR104` [RNI, 2021-2026] Cinq priorités : protection sociale, système de santé digne, emplois pour tous, école de l'égalité, administration à l'écoute - **fulfilled** - AMO generalized: 32M beneficiaries (~88%) incl. AMO Tadamon for ~4M vulnerable families (sources: S015, S050, S088, MEDIUM)
+- `PR105` [PAM, 2021-2026] Créer 820 000 postes d'emploi et atteindre 6% de croissance en 2026 - **failed** - Growth ~2.4-3.4% and unemployment ~13%; both 820k-jobs and 6%-growth targets missed (sources: S016, S051, S087, MEDIUM)
+- `PR106` [PAM, 2021-2026] Créer 9 000 salles de classe par an pour le préscolaire - **partial** - Preschool coverage 82.1% but ~3,800 public classrooms/year, below the 9,000/year pace (sources: S016, S051, S081, MEDIUM)
+- `PR107` [PAM, 2021-2026] Bourse de formation mensuelle de 1 500 DH pendant 6 mois - **in_progress** - no metric (sources: S016, S051, MEDIUM)
+- `PR108` [PAM, 2021-2026] Prêt gratuit de 150 000 DH pour les jeunes entreprises - **in_progress** - no metric (sources: S016, S051, MEDIUM)
+- `PR109` [PAM, 2021-2026] Relever le seuil des revenus exonérés de la contribution de solidarité de 30 000 à 36 000 DH - **in_progress** - no metric (sources: S016, S051, MEDIUM)
+- `PR110` [PAM, 2021-2026] Relancer la Samir (raffinerie) et renforcer l'indépendance énergétique - **failed** - Samir refinery never restarted; activity extended 3 months at a time by the court (sources: S017, S052, S090, LOW)
+- `PR111` [Istiqlal, 2021-2026] Sortir un million de familles de la pauvreté et de la fragilité (200 000 familles/an à l'horizon 2026) - **unverifiable** - No reliable evidence found (sources: S018, S053, LOW)
+- `PR112` [Istiqlal, 2021-2026] Augmenter le pouvoir d'achat de la classe moyenne de plus de 20% - **unverifiable** - No reliable evidence found (sources: S018, S054, LOW)
+- `PR113` [Istiqlal, 2021-2026] Croissance ~4%, chômage <9%, chômage des jeunes <20%, activité des femmes >30% - **failed** - Unemployment 13.0% (2025), youth 37.2%, female activity ~19%; all targets missed (sources: S019, S054, S087, MEDIUM)
+- `PR114` [Istiqlal, 2021-2026] Allocations familiales de 300 DH par mois et par enfant versées aux mères - **partial** - Direct child support 250 DH/month (300 for schoolchildren), means-tested not universal (sources: S019, S055, S082, MEDIUM)
+- `PR115` [Istiqlal, 2021-2026] Créer 100 espaces de santé pour les jeunes à l'horizon 2026 - **in_progress** - no metric (sources: S019, S056, MEDIUM)
+- `PR116` [Istiqlal, 2021-2026] Prise en charge à 100% des personnes de plus de 70 ans et gratuité des soins pour femmes enceintes, enfants et personnes handicapées - **in_progress** - no metric (sources: S019, MEDIUM)
+- `PR117` [Istiqlal, 2021-2026] Créer une banque publique nationale d'investissement avec des agences régionales - **in_progress** - no metric (sources: S019, MEDIUM)
+- `PR118` [PJD, 2021-2026] Poursuivre les réformes : programme de plus de 400 mesures en 5 axes - **in_progress** - no metric (sources: S020, MEDIUM)
+- `PR119` [PJD, 2021-2026] Créer 800 postes par an pour les titulaires de doctorat - **unverifiable** - No reliable evidence found (sources: S021, LOW)
+- `PR120` [PJD, 2021-2026] Porter la recherche scientifique à 1,2% du PIB - **failed** - Research spending ~0.7-0.8% of GDP, below the 1.2% target (sources: S021, S086, MEDIUM)
+- `PR121` [PJD, 2021-2026] Généraliser la bourse étudiante à tous les ayants droit - **in_progress** - no metric (sources: S021, MEDIUM)
+- `PR122` [USFP, 2021-2026] Relever le seuil d'exonération fiscale de 30 000 à 50 000 DH - **partial** - IR exemption threshold raised 30,000→40,000 DH, short of the promised 50,000 (sources: S023, S057, S083, MEDIUM)
+- `PR123` [USFP, 2021-2026] Plan d'investissement public de 100 à 120 milliards de DH pour les infrastructures sociales - **in_progress** - no metric (sources: S023, S057, MEDIUM)
+- `PR124` [USFP, 2021-2026] Nouvelles tranches d'imposition pour les hauts revenus et criminalisation de la fraude fiscale - **in_progress** - no metric (sources: S023, S057, MEDIUM)
+- `PR125` [USFP, 2021-2026] Changement politique pour le droit à une vie digne, la santé, l'éducation et l'emploi (slogan « Morocco first ») - **in_progress** - no metric (sources: S022, S057, MEDIUM)
+- `PR126` [MP, 2021-2026] Programme de 130 mesures sur 13 chantiers, centré sur le monde rural et l'amazigh - **in_progress** - no metric (sources: S024, S058, MEDIUM)
+- `PR127` [MP, 2021-2026] Appui direct aux petits agriculteurs et agriculture solidaire et familiale - **in_progress** - no metric (sources: S024, S058, MEDIUM)
+- `PR128` [MP, 2021-2026] Réduire les frais de raccordement eau/électricité - **in_progress** - no metric (sources: S024, S058, MEDIUM)
+- `PR129` [MP, 2021-2026] Accélérer l'officialisation de l'amazigh, doter les communes rurales de collèges et toutes les régions d'universités - **in_progress** - no metric (sources: S024, S058, MEDIUM)
+- `PR130` [MP, 2021-2026] Simplifier l'accès des jeunes aux microcrédits - **in_progress** - no metric (sources: S024, MEDIUM)
+- `PR131` [PPS, 2021-2026] Atteindre une croissance d'au moins 6% - **failed** - Growth ~2.4-3.4%, far below the 6% target (sources: S025, S084, MEDIUM)
+- `PR132` [PPS, 2021-2026] Généraliser la protection sociale à l'horizon 2025 - **partial** - AMO and direct support delivered; retirement and job-loss pillars still rolling out (sources: S025, S085, MEDIUM)
+- `PR133` [PPS, 2021-2026] Réformer les retraites, restructurer la santé, investir dans l'école publique, éliminer l'économie de rente et instaurer la parité - **in_progress** - no metric (sources: S025, MEDIUM)
+- `PR134` [UC, 2021-2026] Priorités : santé, éducation, emploi et protection sociale via la réallocation de l'investissement et les PPP - **in_progress** - no metric (sources: S026, S059, MEDIUM)
+- `PR135` [UC, 2021-2026] Miser sur le capital humain et le décollage économique (nouveau modèle de développement) - **in_progress** - no metric (sources: S027, S060, LOW)
 
 ## 6. Leaders
 
@@ -280,11 +333,11 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 
 | ID | Title | Org | Date | Type | Primary | Reliability | Lean | Status |
 |---|---|---|---|---|---|---|---|---|
-| S001 | MACEXPRESS PJD | Not explicitly stated | 14/09/2026 | Post | secondary | FILL | FILL | FILL |
-| S002 | MACEXPRESS PPS | Not explicitly stated | 13/09/2026 | Post | secondary | FILL | FILL | FILL |
-| S003 | MACEXPRESS USFP | Not explicitly stated | 11/09/26 | Post | secondary | FILL | FILL | FILL |
-| S004 | lopinion.ma | Dr Khalil Laraki | 11/09/26 | Post | secondary | FILL | FILL | FILL |
-| S005 | LE Matin.ma | Hiba Chaker | 19/07/26 | Post | secondary | FILL | FILL | FILL |
+| S001 | Législatives 2026 : Principaux engagements du programme électoral du PJD | Not explicitly stated | 14/09/2026 | Post | secondary | 3 | Official (state agency) | read |
+| S002 | Législatives 2026: Principaux engagements du programme électoral du PPS | Not explicitly stated | 13/09/2026 | Post | secondary | 3 | Official (state agency) | read |
+| S003 | Promesses électorales : voici les principaux engagements du programme électoral de l'USFP | Not explicitly stated | 11/09/26 | Post | secondary | 3 | Official (state agency) | read |
+| S004 | Istiqlal 2026-2031 : Les cinq engagements pour un Maroc plus équitable, plus souverain et plus confiant | Dr Khalil Laraki | 11/09/26 | Post | secondary | 1 | Business press | read |
+| S005 | Élections 2026 : L'Istiqlal dévoile ses cinq engagements | Hiba Chaker | 19/07/26 | Post | secondary | 1 | Center (economic press) | read |
 | S006 | SMIG à 5.000 DH : Chaouki rejette les surenchères | Hespress FR (Hicham Oukerzaz) | 2026-09-07 | News | secondary | 3 | Center | read |
 | S007 | Législatives 2026 : ce que proposent les partis politiques pour les cinq prochaines années | LesEco.ma | 2026-09-18 | News | secondary | 3 | Center (economic press) | read |
 | S008 | Élections 2026 : A Tanger, le PAM défend son plan de 350 MMDH centré sur le pouvoir d'achat | Hespress FR (Khadija Khettou) | 2026-09-16 | News | secondary | 3 | Center | read |
@@ -347,10 +400,33 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 | S065 | Quotient électoral : un gage de démocratie participative et de mobilisation civique | MapNews (MAP) | 2021-03-22 | News | secondary | 3 | State news agency | read |
 | S066 | Données chiffrées autour du scrutin législatif du 8 septembre 2021 (sièges par circonscription) | Chambre des représentants du Maroc | 2021-09-17 | Official data | primary | 5 | Primary - official seat table per constituency | read |
 | S067 | Résultats définitifs des législatives du 8 septembre 2021 : détail des voix par circonscription et par parti | Chambre des représentants / Ministère de l'Intérieur | 2021-09-27 | Official data | primary | 5 | Primary - official per-constituency results | read |
+| S068 | Bref historique de la Chambre des représentants | Chambre des représentants du Maroc | 2026 | Portal | primary | 5 | Primary - official parliamentary history | read |
+| S069 | IFES Election Guide - Morocco (election dates, registered voters, turnout) | International Foundation for Electoral Systems | 2026 | Data portal | secondary | 4 | International election database | read |
+| S070 | Élections législatives marocaines 2026 (calendrier officiel) | Portail national du Maroc | 2026 | Official portal | primary | 5 | Primary - government portal | read |
+| S071 | Scrutin du 4 septembre : des néophytes aux commandes | MAP Express | 2015 | News | secondary | 3 | State news agency | read |
+| S072 | Élections communales marocaines de 2009 | Wikipédia (fr) | 2009 | Encyclopaedia | secondary | 3 | Community-edited encyclopaedia | read |
+| S073 | Morocco's king appoints new government to end political deadlock | Xinhua | 2017-04-06 | News | secondary | 3 | State news agency | read |
+| S074 | Maroc : nomination d'un nouveau gouvernement | Xinhua | 2019-10-10 | News | secondary | 3 | State news agency | read |
+| S075 | Dahir n° 1-24-56 portant nomination du gouvernement (28 octobre 2024) | Royaume du Maroc | 2024-10-28 | Law | primary | 5 | Primary - official dahir | read |
+| S076 | Recensement général de la population et de l'habitat 2024 | Haut-Commissariat au Plan | 2024 | Official data | primary | 5 | Primary - national statistics office | read |
+| S077 | Gouvernement Benkiran II | Bulletin Officiel | 1905-07-05 | Official data | primary | 5 | Primary - official dahir | read |
+| S078 | Le chantier de l’Assurance Maladie Obligatoire (AMO) lancé en 2021 | Bladi Net | 06-08-2020 | News | secondary | 2 | Center | read |
+| S079 | Généralisation de 'AMO : la CNSS au ceeur du chantier royal de généralisation de la protection sociale | Telquel | 26-12-2025 | News | secondary | 4 | Left | read |
+| S080 | Moroccan Social Protection for Employees: CNSS, AMO, Pension and Unemployment Rights in Practice | AvocatLib | 13-03-2026 | News | secondary | 2 | Right | read |
+| S087 | Morocco's unemployment rate slips 0.3 points to 13% in 2025 | MAP (Agence Marocaine de Presse) | 2025 | News | secondary | 4 | Official (state agency) | read |
+| S088 | Généralisation de l'AMO : plus de 32 millions de bénéficiaires en 2025 | Portail national du Maroc | 2025 | Official portal | primary | 5 | Primary - government portal | read |
+| S089 | Emploi : 250 000 bénéficiaires du programme Awrach en 2022-2023 | MAP Express | 2023 | News | secondary | 4 | Official (state agency) | read |
+| S090 | Le tribunal de commerce autorise la poursuite de l'activité de la Samir pour trois mois | TelQuel | 2025-04-23 | News | secondary | 3 | Independent press | read |
+| S081 | Préscolaire : l'extension se poursuit (couverture 82,1% en 2023/24) | Madar21 | 2024 | News | secondary | 3 | Center | read |
+| S082 | Soutien social direct : 250 DH par enfant, porté à 300 DH pour les scolarisés | Chouf TV | 2026 | News | secondary | 3 | Center | read |
+| S083 | Baisse de l'impôt sur le revenu : une réforme de 8,6 MMDH pour les salariés | L'Économiste | 2025 | News | secondary | 3 | Economic press | read |
+| S084 | Croissance : le Maroc enregistre ~3,4% en 2023 et ~2,4% en 2024 | MAP (print) | 2025 | News | secondary | 4 | Official (state agency) | read |
+| S085 | Protection sociale : un chantier colossal aux fondations fragiles | LesEco.ma | 2025 | News | secondary | 3 | Economic press | read |
+| S086 | Synthèse - Développement de la recherche et de l'innovation | CESE | 2025-10 | Report | secondary | 4 | Independent advisory council | read |
 
 ## 8. Validation findings
 
-errors=0, warnings=91, info=2
+errors=0, warnings=70, info=3
 
 ### WARN SINGLE_SOURCE (29)
 
@@ -368,37 +444,21 @@ errors=0, warnings=91, info=2
 - claims.csv:22: C021 rests on a single source (S002); the project's rule requires 2+ independent sources to call a claim corroborated
 - ... and 17 more
 
-### WARN FILL_CELLS (17)
+### WARN FILL_CELLS (15)
 
-- parties.csv: leader_current: 1/8 rows are still FILL
-- sources.csv: bias_lean: 6/67 rows are still FILL
-- sources.csv: reliability: 5/67 rows are still FILL
-- sources.csv: bias_label: 5/67 rows are still FILL
-- sources.csv: party_actor: 5/67 rows are still FILL
-- sources.csv: status: 5/67 rows are still FILL
+- parties.csv: leader_current: 5/12 rows are still FILL
+- parties.csv: leader_2021: 4/12 rows are still FILL
+- sources.csv: party_actor: 5/90 rows are still FILL
+- sources.csv: bias_lean: 1/90 rows are still FILL
 - claims.csv: baseline: 96/96 rows are still FILL
 - claims.csv: deadline: 87/96 rows are still FILL
 - claims.csv: unit: 40/96 rows are still FILL
 - claims.csv: confidence: 40/96 rows are still FILL
 - claims.csv: target: 39/96 rows are still FILL
+- promises.csv: outcome_metric: 19/35 rows are still FILL
 - leaders.csv: source_ids: 8/8 rows are still FILL
-- ... and 5 more
-
-### WARN UNSOURCED (16)
-
-- promises.csv:2: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:3: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:4: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:5: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:6: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:7: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:8: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:9: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:10: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:11: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:12: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- promises.csv:13: source_ids declares UNSOURCED -- row is knowingly unattributed and must not be published
-- ... and 4 more
+- leaders.csv: achievements: 7/8 rows are still FILL
+- ... and 3 more
 
 ### WARN MERGED_CLAIM (15)
 
@@ -416,7 +476,7 @@ errors=0, warnings=91, info=2
 - claims.csv:33: 3 numeric targets in one row; methodology requires one claim per row (split into Cxxxa/b/c)
 - ... and 3 more
 
-### WARN PLACEHOLDER_SOURCE (13)
+### WARN PLACEHOLDER_SOURCE (8)
 
 - leaders.csv:2: source_ids=FILL -- no source assigned yet
 - leaders.csv:3: source_ids=FILL -- no source assigned yet
@@ -426,11 +486,11 @@ errors=0, warnings=91, info=2
 - leaders.csv:7: source_ids=FILL -- no source assigned yet
 - leaders.csv:8: source_ids=FILL -- no source assigned yet
 - leaders.csv:9: source_ids=FILL -- no source assigned yet
-- timeline.csv:2: source_ids=FILL -- no source assigned yet
-- timeline.csv:4: source_ids=FILL -- no source assigned yet
-- timeline.csv:6: source_ids=FILL -- no source assigned yet
-- timeline.csv:8: source_ids=FILL -- no source assigned yet
-- ... and 1 more
+
+### WARN OPEN_IN_CALC (2)
+
+- sources.csv: a LibreOffice lock file exists -- close the CSV in Calc before editing it from a script, or the edit is lost on save
+- timeline.csv: a LibreOffice lock file exists -- close the CSV in Calc before editing it from a script, or the edit is lost on save
 
 ### WARN NON_SNAKE_CASE (1)
 
@@ -443,3 +503,7 @@ errors=0, warnings=91, info=2
 ### INFO NO_INDICATOR_ROW (1)
 
 - indicators.csv: claims exist for 2026 but no indicators.csv row -- G/L/M cannot be computed
+
+### INFO PARTIES_WITHOUT_CLAIMS (1)
+
+- claims.csv: no claims recorded for ['P010', 'P011', 'P012', 'P013'] -- these parties cannot be compared on claim credibility

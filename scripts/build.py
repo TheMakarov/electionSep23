@@ -13,7 +13,7 @@ Two rules govern this script:
    substituting 0.5 for a missing dimension is gone: that manufactured a score
    out of nothing, which is the one thing an accountability model must never do.
 2. *The two years are not the same year.* Delivery (D) is a property of a
-   completed term; claim credibility (C) is a property of the current campaign;
+   completed term; promise credibility (C) is the verifiability of the 2021 promises;
    electoral efficiency (E) comes from the last election that actually happened.
    ``campaign_year`` and ``baseline_year`` are therefore separate settings.
 
@@ -60,9 +60,15 @@ import matplotlib.pyplot as plt  # noqa: E402
 sys.path.insert(0, str(SCRIPTS))
 import validate as validator  # noqa: E402
 
+from moroccan_theme import (  # noqa: E402
+    STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG, apply_tokens,
+    RED, RED_DEEP, GREEN, GOLD, SAND, CREAM, INK, MUTED, GRID, RULE, BAND,
+    CMAP_COLORS, OK, WARN, BAD,
+)
+
 DIMS = ["D", "C", "E", "G", "L", "M"]
 DIM_LABEL = {
-    "D": "delivery", "C": "claim credibility", "E": "electoral efficiency",
+    "D": "delivery", "C": "promise credibility (2021)", "E": "electoral efficiency",
     "G": "governance", "L": "leadership", "M": "mandate coherence",
 }
 DONE_STATUS = {"fulfilled", "partial", "failed", "abandoned"}
@@ -352,15 +358,15 @@ def compute_delivery():
     for pid in pids:
         rows = [r for r in promises if r["party_id"] == pid]
         complete = [r for r in rows
-                    if (as_int(r.get("term_end")) or 0) <= CAMPAIGN_YEAR]
+                    if (as_int(r.get("term_start")) or 0) == BASELINE_YEAR]
         done = [r for r in complete if r.get("status") in DONE_STATUS]
         terms = sorted({f"{r.get('term_start')}-{r.get('term_end')}" for r in complete})
-        term_txt = ", ".join(terms) if terms else "no completed term on record"
+        term_txt = ", ".join(terms) if terms else f"no {BASELINE_YEAR} promise on record"
         if len(done) < min_n:
             out[pid] = {
                 "value": None, "n": len(done), "year": BASELINE_YEAR,
-                "detail": (f"{len(done)} concluded promise(s) tracked, "
-                           f"{min_n} required to score; {term_txt}"),
+                "detail": (f"{len(done)} concluded {BASELINE_YEAR} promise(s) "
+                           f"tracked, {min_n} required to score; {term_txt}"),
             }
             continue
         F = sum(1 for r in done if r["status"] == "fulfilled")
@@ -371,7 +377,7 @@ def compute_delivery():
             "value": round((F + 0.5 * P) / len(done), 3), "n": len(done),
             "year": BASELINE_YEAR,
             "detail": (f"{F} fulfilled, {P} partial, {X} failed, {A} abandoned "
-                       f"across {term_txt}"),
+                       f"across the {BASELINE_YEAR} term"),
         }
     return out
 
@@ -383,13 +389,13 @@ def compute_credibility():
     for pid in pids:
         rows = [c for c in claims
                 if c["party_id"] == pid
-                and str(c.get("election_year")) == str(CAMPAIGN_YEAR)]
+                and str(c.get("election_year")) == str(BASELINE_YEAR)]
         scored = [c for c in rows if as_float(c.get("verification_score")) is not None]
         if not scored:
             out[pid] = {
                 "value": None, "n": 0, "year": CAMPAIGN_YEAR,
-                "detail": (f"0/{len(rows)} campaign claims have a verification "
-                           f"score; C cannot be computed"),
+                "detail": (f"0/{len(rows)} {BASELINE_YEAR} promises have a "
+                           f"verification score; C cannot be computed"),
             }
             continue
         num = den = 0.0
@@ -398,8 +404,8 @@ def compute_credibility():
             num += w * float(as_float(c["verification_score"]))
             den += w
         out[pid] = {
-            "value": round(num / (5 * den), 3), "n": len(scored), "year": CAMPAIGN_YEAR,
-            "detail": f"{len(scored)}/{len(rows)} campaign claims scored (1-5 rubric)",
+            "value": round(num / (5 * den), 3), "n": len(scored), "year": BASELINE_YEAR,
+            "detail": f"{len(scored)}/{len(rows)} {BASELINE_YEAR} promises scored (1-5 rubric)",
         }
     return out
 
@@ -418,7 +424,14 @@ def compute_efficiency(year):
         pid = r["party_id"]
         s = (as_int(r.get("seats")) or 0) / total_seats
         v = (as_float(r.get("vote_share_est")) or 0.0) / total_votes
-        ratios[pid] = s / v if v else 0.0
+        if v > 0:
+            ratios[pid] = s / v
+    for r in rows:
+        pid = r["party_id"]
+        v = (as_float(r.get("vote_share_est")) or 0.0) / total_votes
+        if v <= 0:
+            out[pid] = {"value": None, "n": 0, "year": year,
+                        "detail": "no local-list vote share on record (regional-list seat only)"}
     maxdev = max(abs(a - 1) for a in ratios.values()) if ratios else 0.0
     for pid, ratio in ratios.items():
         value = 1.0 if maxdev <= 1e-9 else round(1 - abs(ratio - 1) / maxdev, 3)
@@ -516,6 +529,13 @@ ranked = sorted([p for p in pids if score[p] is not None],
 # while the claims still lack baselines. They are excluded on purpose.
 GATE_EXCLUDE = {"themes.csv", "claim_themes.csv", "legal_basis.csv",
                 "constituencies.csv", "results_2021.csv"}
+EXCLUDE_LABEL = {
+    "themes.csv": "the theme vocabulary",
+    "claim_themes.csv": "the claim-theme mapping",
+    "legal_basis.csv": "the legal-basis quotes",
+    "constituencies.csv": "the constituencies",
+    "results_2021.csv": "the 2021 constituency results",
+}
 
 total_cells = fill_cells = 0
 counted_tables = []
@@ -584,6 +604,9 @@ MOROC_BAND, MOROC_RULE, MOROC_GRID = BAND, RULE, GRID
 MOROC_CMAP = matplotlib.colors.LinearSegmentedColormap.from_list(
     "morocco", CMAP_COLORS)
 MOROC_CMAP_R = MOROC_CMAP.reversed()   # red at the low end, green at the high
+# Status scale: deep red = failed, brass = partial, flag green = fulfilled.
+MOROC_CMAP_OK = matplotlib.colors.LinearSegmentedColormap.from_list(
+    "morocco_status", [RED_DEEP, RED, GOLD, "#4f9a62", GREEN])
 MOROC_FLAG = matplotlib.colors.ListedColormap([MOROC_SAND, MOROC_GREEN])
 
 
@@ -759,7 +782,7 @@ def chart_heatmap():
                 mat[i, j] = min(numeric.get(r.get("status", ""), 0.5) for r in rows)
                 text[i][j] = rows[0].get("status", "")[:8].replace("_", " ")
     fig, ax = plt.subplots(figsize=(10, 4.5))
-    im = ax.imshow(mat, cmap=MOROC_CMAP_R, vmin=0, vmax=1, aspect="auto")
+    im = ax.imshow(mat, cmap=MOROC_CMAP_OK, vmin=0, vmax=1, aspect="auto")
     ax.set_xticks(range(len(domains)))
     ax.set_xticklabels(domains, rotation=35, ha="right")
     ax.set_yticks(range(len(active)))
@@ -774,6 +797,7 @@ def chart_heatmap():
     cbar = fig.colorbar(im, ax=ax, fraction=0.03, label="0 = failed ... 1 = fulfilled")
     cbar.outline.set_edgecolor(MOROC_GREEN)
     cbar.ax.tick_params(colors="#4a4132")
+    ax.grid(False)
     return save(fig, "promise_ledger_heatmap")
 
 
@@ -824,6 +848,7 @@ def chart_readiness():
                     color="#fdfaf3" if ok else MOROC_RED_DEEP)
     moroccan_axes(ax, f"Evidence readiness per party: {CAMPAIGN_YEAR} campaign, "
                       f"{BASELINE_YEAR} baseline")
+    ax.grid(False)
     return save(fig, "subindex_readiness")
 
 
@@ -1154,8 +1179,9 @@ if historical_claims:
         f"the CEAGI model).")
 if not ranked:
     unsupported.append(
-        "No party can be ranked on CEAGI: claim credibility C is missing for every "
-        "party because no campaign claim carries a verification score yet.")
+        "No party can be ranked on CEAGI until every sub-index exists for at least "
+        "one party; C now scores the verifiability of the 2021 promises, not the "
+        "2026 campaign.")
 if any(sub[p]["D"]["value"] is None for p in pids):
     d_missing = [pname[p] for p in pids if sub[p]["D"]["value"] is None]
     shown = ", ".join(d_missing[:6]) + (" ..." if len(d_missing) > 6 else "")
@@ -1276,13 +1302,19 @@ n_primary = sum(1 for s_ in sources if s_.get("primary_secondary") == "primary")
 n_secondary = sum(1 for s_ in sources if s_.get("primary_secondary") == "secondary")
 
 timeline_rows = sorted(timeline, key=lambda r: r.get("date", ""))
-timeline_html = "".join(
-    f'<div class="tl"><span class="tldate">{cell(r.get("date"))}</span>'
-    f'<span class="tlev">{esc(r.get("event"))}</span>'
-    f'<span class="tlactor">{esc(r.get("actor"))}</span>'
-    f'<span class="tlsrc">{cell(r.get("source_ids"))}</span></div>'
-    for r in timeline_rows
-)
+_tl_parts, _tl_year = [], None
+for r in timeline_rows:
+    _y = str(r.get("date", ""))[:4]
+    if _y and _y != _tl_year:
+        _tl_parts.append(f'<div class="tlyear">{esc(_y)}</div>')
+        _tl_year = _y
+    _tl_parts.append(
+        f'<div class="tl"><span class="tldate">{cell(r.get("date"))}</span>'
+        f'<span class="tlev">{esc(r.get("event"))}'
+        f'<span class="tlsig">{cell(r.get("significance"))}</span></span>'
+        f'<span class="tlactor">{esc(r.get("actor"))}</span>'
+        f'<span class="tlsrc">{source_links(r.get("source_ids"))}</span></div>')
+timeline_html = "".join(_tl_parts)
 
 chart_blocks = ""
 for c in drawn:
@@ -1680,24 +1712,19 @@ convergence_html = f"""
 """
 
 
-from moroccan_theme import (  # noqa: E402
-    STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG, apply_tokens,
-    RED, RED_DEEP, GREEN, GOLD, SAND, CREAM, INK, MUTED, GRID, RULE, BAND,
-    CMAP_COLORS, OK, WARN, BAD,
-)
 
 CSS = """
 :root {
-  --red:#c1272d;          /* Moroccan flag red */
-  --red-deep:#8e1b20;
-  --green:#006233;        /* Moroccan flag green */
+  --red:__RED__;            /* Moroccan flag red */
+  --red-deep:__RED_DEEP__;
+  --green:__GREEN__;        /* Moroccan flag green */
   --green-bright:#0a7d43;
-  --gold:#c8a24a;
-  --sand:#f6efe0;
-  --ink:#1c1a17;
-  --muted:#6d6459;
-  --line:#e4dbc9;
-  --bg:#fbf8f1;
+  --gold:__GOLD__;
+  --sand:__SAND__;
+  --ink:__INK__;
+  --muted:__MUTED__;
+  --line:__LINE__;
+  --bg:__BG__;
 }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -1780,17 +1807,24 @@ tr:hover td { background:#fdf9f0; }
 .bad { color:var(--red); font-weight:700; }
 .sev-error { color:var(--red); font-weight:700; }
 .sev-warn { color:#a8741a; font-weight:700; }
-.sev-info { color:#1a6a8a; }
+.sev-info { color:var(--green); }
 .claimtext { display:block; max-width:520px; }
 figure.chart { margin:28px 0; text-align:center; }
 figure.chart svg { max-width:100%; height:auto; }
 figcaption { font-family:Helvetica,Arial,sans-serif; font-size:.78rem;
              color:var(--muted); margin-top:6px; }
-.tl { display:grid; grid-template-columns:110px 1fr 150px 90px; gap:10px;
-      padding:7px 0; border-bottom:1px solid var(--line);
+.tl { display:grid; grid-template-columns:96px 1fr 118px 104px; gap:12px;
+      padding:8px 0; border-bottom:1px solid var(--line); align-items:start;
       font-family:Helvetica,Arial,sans-serif; font-size:.85rem; }
-.tldate { font-weight:700; color:var(--red); }
-.tlactor, .tlsrc { color:var(--muted); }
+.tldate { font-weight:700; color:var(--red); white-space:nowrap; }
+.tlev { font-weight:700; }
+.tlsig { display:block; font-weight:400; color:var(--muted); font-size:.78rem;
+         margin-top:2px; line-height:1.45; }
+.tlactor { color:var(--green); font-weight:700; font-size:.75rem; }
+.tlsrc { color:var(--muted); font-size:.75rem; }
+.tlyear { font-family:Helvetica,Arial,sans-serif; font-weight:700; color:var(--red);
+          letter-spacing:.12em; font-size:.95rem; margin:24px 0 4px;
+          padding-bottom:3px; border-bottom:2px solid var(--gold); }
 .formula { font-family:Georgia,serif; font-style:italic; background:#fff;
            border:1px solid var(--line); border-left:4px solid var(--green);
            padding:10px 14px; margin:10px 0; overflow-x:auto; }
@@ -1874,7 +1908,7 @@ footer { margin-top:50px; padding-top:16px; border-top:4px solid var(--green);
   .tl { grid-template-columns:1fr; }
 }
 """
-CSS = CSS.replace("__STAR__", STAR_URI).replace("__ZELLIGE__", ZELLIGE_URI)
+CSS = apply_tokens(CSS.replace("__STAR__", STAR_URI).replace("__ZELLIGE__", ZELLIGE_URI))
 
 html_doc = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1934,9 +1968,9 @@ html_doc = f"""<!DOCTYPE html>
   <p class="small">Every gate must pass before this report is used editorially.
   Run <code>python3 scripts/validate.py</code> for the full finding list.
   The fill measure counts the <b>evidence</b> tables
-  ({esc(', '.join(counted_tables))}); the method tables (theme vocabulary,
-  claim-theme mapping, legal-basis quotes, constituencies) are complete by
-  construction and are deliberately excluded, so adding them cannot make the
+  ({esc(', '.join(counted_tables))}); the method and reference tables
+  ({esc(', '.join(EXCLUDE_LABEL.get(n, n) for n in GATE_EXCLUDE))}) are complete
+  by construction and are deliberately excluded, so adding them cannot make the
   gate pass while claims still lack baselines.</p>
   {table(["Gate", "Status", "Measured"], gate_rows)}
 </section>
@@ -1960,9 +1994,10 @@ html_doc = f"""<!DOCTYPE html>
 <section>
   <h2>5. CEAGI - party accountability score</h2>
   <p>CEAGI = Composite Electoral Accountability &amp; Governance Index. Six
-  sub-indices - Delivery <b>D</b>, Claim credibility <b>C</b>, Electoral
-  efficiency <b>E</b>, Governance <b>G</b>, Leadership <b>L</b>, Mandate
-  coherence <b>M</b> - combined with a weighted geometric mean, so a party
+  sub-indices - Delivery <b>D</b> (2021 promises), Promise credibility <b>C</b>
+  (2021 promises), Electoral efficiency <b>E</b>, Governance <b>G</b>,
+  Leadership <b>L</b>, Mandate coherence <b>M</b> - combined with a weighted
+  geometric mean, so a party
   cannot compensate a total failure in one dimension with a strong showing in
   another. A dimension with no evidence is <span class="na">n/a</span>; it is
   never imputed. A full score is published only when all six exist.</p>
@@ -2056,6 +2091,11 @@ html_doc = f"""<!DOCTYPE html>
 
 <section>
   <h2>14. Timeline</h2>
+  <p class="small">The legislative record since 2002: elections, referendums, the
+  organic laws that set the rules, and the governments they produced. Source IDs
+  link to the registry in section 13; <span class="miss">FILL</span> means a date
+  or source is still missing, and <code>UNSOURCED</code> rows are knowingly
+  unattributed and must not be published as they stand.</p>
   {timeline_html}
 </section>
 

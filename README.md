@@ -45,7 +45,7 @@ broken output.
 
 | File | What it is |
 |---|---|
-| `output/report.html` | The full report: publication gate, supportable vs. blocked findings, an auto-generated to-do list, readiness and sub-index tables, charts, the campaign claims table, **claim convergence** (bubble matrix, duplication ledger, party echo matrix), promise ledger, leaders, sources, timeline, validation findings, methodology |
+| `output/report.html` | The full report: publication gate, supportable vs. blocked findings, an auto-generated to-do list, readiness and sub-index tables, charts, the campaign claims table, **claim convergence** (bubble matrix, duplication ledger, party echo matrix), the **2021 promise ledger** (35 promises with sourced delivery status), leaders, sources, timeline, validation findings, methodology |
 | `output/seat_simulator.html` | **Interactive constituency simulator**: edit the party list (add / rename / recolour / remove), click the **static map of Morocco** by province and prefecture to set each constituency's votes **and its registered voters**, and watch the 305 local + 90 regional seats fall into the 395-seat hemicycle. Load the real 2021 result, colour the map by winner, competitiveness or turnout, and read every party's **Δ vs 2021** |
 | `output/ceagi_scores.csv` | Sub-indices + coverage per party, machine-readable |
 | `output/ceagi_scores.json` | Same, plus per-sub-index provenance (`n`, `year`, `detail`) and the gate results |
@@ -123,7 +123,7 @@ The model deliberately separates the campaign from the record:
 
 | Setting | Value | Meaning |
 |---|---|---|
-| `campaign_year` | 2026 | The election being contested. Claim credibility **C** comes from here. |
+| `campaign_year` | 2026 | The election being contested; the 2026 campaign claims table is data only. Promise credibility **C** and delivery **D** come from the **2021** record. |
 | `baseline_year` | 2021 | The last completed election. **E**, **G**, **L**, **M** come from here. |
 
 **D** (delivery) is computed over completed terms only and requires at least
@@ -140,8 +140,8 @@ external standards they follow — is in **[`METHODOLOGY.md`](METHODOLOGY.md)**.
 S_p = ( D^0.25 · C^0.20 · E^0.10 · G^0.20 · L^0.15 · M^0.10 )
 ```
 
-- **D** Delivery — `(fulfilled + 0.5·partial) / (fulfilled + partial + failed + abandoned)`, completed terms only, minimum 3 concluded promises
-- **C** Claim credibility — claim taxonomy × 1–5 verification rubric
+- **D** Delivery — `(fulfilled + 0.5·partial) / (fulfilled + partial + failed + abandoned)` over the **2021** promises, minimum 3 concluded promises
+- **C** Promise credibility (2021) — the 2021 promises' class taxonomy × 1–5 verification rubric
 - **E** Electoral efficiency — `1 − |seat-share ÷ vote-share − 1| / max(…)`
 - **G** Governance — coalition/portfolio weight, legislative output
 - **L** Leadership — integrity, conflicts, skin-in-the-game
@@ -179,7 +179,13 @@ incomparable, and ranking them would compare unlike things.
   largest remainder, a quotient based on **registered voters**, and **no
   electoral threshold**.
 
-Run `make check` for the current, authoritative version of this list.
+Run `make check` for the current, authoritative version of this list; run
+`make test` for the cross-consistency tests (seats sum, 100% shares, map ↔ seats).
+
+The 2021 promise ledger marks delivery only where a source backs it (2
+fulfilled, 4 partial, 6 failed, 4 unverifiable); the other 19 promises remain
+`in_progress` until sourced. The four small parties that won seats in 2021
+(MDS, FFD, CNI, PSU) now have their own rows (P010–P013).
 
 ## File map
 
@@ -206,7 +212,10 @@ Both HTML deliverables carry one Moroccan identity, defined once in
 `scripts/moroccan_theme.py`: the flag palette (`#c1272d` red, `#006233` green,
 brass `#c8a24a`), the flag's interlaced pentagram as the masthead badge and the
 section markers, and an eight-point zellige tile as the masthead watermark.
-Change it there and the report and the simulator both follow.
+Change it there and the report and the simulator both follow: the CSS custom
+properties of both HTML deliverables are generated from it, and every chart in
+`output/charts/` is drawn with the same red/green/gold palette and furniture
+(green spines, red titles, cream paper).
 
 ## Next steps for a publishable version
 
@@ -220,8 +229,12 @@ Change it there and the report and the simulator both follow.
    sources without a `reliability` score one.
 4. Extend the convergence layer as new programmes land: add a row to
    `data/themes.csv` rather than inventing a one-off theme, and re-run `make`.
-5. Re-source the `UNSOURCED` promise and timeline rows from Interior-Ministry
-   and HCP documents.
+5. Re-source the remaining `UNSOURCED` promise rows, and the two timeline rows
+   still marked `FILL` / `UNSOURCED` (Benkirane 2012 and 2013), from
+   Interior-Ministry and government documents. The rest of the timeline is now
+   sourced: elections and turnout (IFES, S069), the parliamentary record and the
+   organic laws (S068, S061, S062), the 2026 calendar (S070), local elections
+   (S071, S072), government formations (S073–S075) and the 2024 census (S076).
 6. Add 2026 rows to `data/indicators.csv` (justify each `G`/`L`/`M` in `basis`)
    and run the sensitivity analysis promised in `morocco-elections.org`.
 7. Re-run `make strict` and re-read `output/audit_trail.md`.

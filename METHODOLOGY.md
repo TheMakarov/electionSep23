@@ -203,8 +203,8 @@ strong show in another.
 
 | Code | Name | Formula / source |
 |---|---|---|
-| **D** | Delivery | `(F + 0.5·P) / (F + P + X + A)` over *completed* terms only (F=fulfilled, P=partial, X=failed, A=abandoned). Requires `min_promises_for_D = 3` concluded promises before it is scored at all. |
-| **C** | Claim credibility | `Σ(w·s) / (5·Σw)` — see section 6. |
+| **D** | Delivery | `(F + 0.5·P) / (F + P + X + A)` over the **2021** promises (F=fulfilled, P=partial, X=failed, A=abandoned). Requires `min_promises_for_D = 3` concluded promises. Statuses are set only where a source backs them; `unverifiable`/`in_progress` are excluded, never guessed. |
+| **C** | Promise credibility (2021) | `Σ(w·s) / (5·Σw)` over the 2021 promises (see section 6). |
 | **E** | Electoral efficiency | `1 − |A_p − 1| / max_j |A_j − 1|`, where `A_p = (s_p/S) ÷ (v_p/V)` (seat-share ÷ vote-share). |
 | **G** | Governance | 0–1 indicator from `data/indicators.csv` (coalition/portfolio weight, legislative output). |
 | **L** | Leadership | 0–1 indicator (integrity, conflicts, skin-in-the-game). |

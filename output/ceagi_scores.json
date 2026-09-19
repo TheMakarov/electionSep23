@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-19T17:41:27",
+  "generated": "2026-09-19T18:26:23",
   "config": {
     "campaign_year": 2026,
     "baseline_year": 2021,
@@ -28,7 +28,7 @@
     {
       "gate": "FILL cells below 10%",
       "pass": false,
-      "measured": "12.5% of cells (368/2938)"
+      "measured": "10.1% of cells (370/3656)"
     },
     {
       "gate": "At least 50% of claims scored",
@@ -43,191 +43,50 @@
     {
       "gate": "At least one party fully scored on all six dimensions",
       "pass": true,
-      "measured": "1 of 8 parties"
+      "measured": "2 of 12 parties"
     }
   ],
   "readiness": {
-    "fill_fraction": 0.1253,
-    "cells_filled": 368,
-    "cells_total": 2938,
+    "fill_fraction": 0.1012,
+    "cells_filled": 370,
+    "cells_total": 3656,
     "claims_total": 61,
     "claims_scored": 61,
     "claims_corroborated": 42,
     "claims_historical": 35,
-    "parties_fully_scored": 1,
-    "parties_total": 8
+    "parties_fully_scored": 2,
+    "parties_total": 12
   },
   "parties": [
     {
-      "party_id": "P004",
-      "name": "PJD",
-      "score": 0.109,
-      "ci": {
-        "median": 0.235,
-        "lo": 0.19,
-        "hi": 0.355
-      },
-      "coverage": 6,
-      "provisional_score_unranked": 0.109,
-      "subindices": {
-        "D": {
-          "value": 0.5,
-          "n": 5,
-          "year": 2021,
-          "detail": "1 fulfilled, 3 partial, 1 failed, 0 abandoned across 2011-2016, 2016-2021"
-        },
-        "C": {
-          "value": 0.2,
-          "n": 2,
-          "year": 2026,
-          "detail": "2/2 campaign claims scored (1-5 rubric)"
-        },
-        "E": {
-          "value": 0.0,
-          "n": 1,
-          "year": 2021,
-          "detail": "seat share / vote share = 0.478 at the 2021 election"
-        },
-        "G": {
-          "value": 0.4,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: opposition after collapse"
-        },
-        "L": {
-          "value": 0.55,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: opposition after collapse"
-        },
-        "M": {
-          "value": 0.5,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: opposition after collapse"
-        }
-      },
-      "advantage_ratio": 0.478
-    },
-    {
-      "party_id": "P003",
-      "name": "Istiqlal",
-      "score": null,
-      "ci": null,
-      "coverage": 5,
-      "provisional_score_unranked": 0.495,
-      "subindices": {
-        "D": {
-          "value": null,
-          "n": 0,
-          "year": 2021,
-          "detail": "0 concluded promise(s) tracked, 3 required to score; 2021-2026"
-        },
-        "C": {
-          "value": 0.2,
-          "n": 5,
-          "year": 2026,
-          "detail": "5/5 campaign claims scored (1-5 rubric)"
-        },
-        "E": {
-          "value": 0.87,
-          "n": 1,
-          "year": 2021,
-          "detail": "seat share / vote share = 1.068 at the 2021 election"
-        },
-        "G": {
-          "value": 0.7,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: coalition partner"
-        },
-        "L": {
-          "value": 0.6,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: coalition partner"
-        },
-        "M": {
-          "value": 0.65,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: coalition partner"
-        }
-      },
-      "advantage_ratio": 1.068
-    },
-    {
-      "party_id": "P006",
-      "name": "MP",
-      "score": null,
-      "ci": null,
-      "coverage": 5,
-      "provisional_score_unranked": 0.51,
-      "subindices": {
-        "D": {
-          "value": null,
-          "n": 1,
-          "year": 2021,
-          "detail": "1 concluded promise(s) tracked, 3 required to score; 2016-2021"
-        },
-        "C": {
-          "value": 0.283,
-          "n": 9,
-          "year": 2026,
-          "detail": "9/9 campaign claims scored (1-5 rubric)"
-        },
-        "E": {
-          "value": 0.945,
-          "n": 1,
-          "year": 2021,
-          "detail": "seat share / vote share = 1.029 at the 2021 election"
-        },
-        "G": {
-          "value": 0.55,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: coalition support"
-        },
-        "L": {
-          "value": 0.6,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: coalition support"
-        },
-        "M": {
-          "value": 0.6,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: coalition support"
-        }
-      },
-      "advantage_ratio": 1.029
-    },
-    {
       "party_id": "P002",
       "name": "PAM",
-      "score": null,
-      "ci": null,
-      "coverage": 5,
-      "provisional_score_unranked": 0.592,
+      "score": 0.427,
+      "ci": {
+        "median": 0.424,
+        "lo": 0.337,
+        "hi": 0.487
+      },
+      "coverage": 6,
+      "provisional_score_unranked": 0.427,
       "subindices": {
         "D": {
-          "value": null,
-          "n": 0,
+          "value": 0.167,
+          "n": 3,
           "year": 2021,
-          "detail": "0 concluded promise(s) tracked, 3 required to score; 2021-2026"
+          "detail": "0 fulfilled, 1 partial, 2 failed, 0 abandoned across the 2021 term"
         },
         "C": {
-          "value": 0.4,
-          "n": 5,
-          "year": 2026,
-          "detail": "5/5 campaign claims scored (1-5 rubric)"
+          "value": 0.385,
+          "n": 6,
+          "year": 2021,
+          "detail": "6/6 2021 promises scored (1-5 rubric)"
         },
         "E": {
-          "value": 0.825,
+          "value": 0.791,
           "n": 1,
           "year": 2021,
-          "detail": "seat share / vote share = 1.091 at the 2021 election"
+          "detail": "seat share / vote share = 1.146 at the 2021 election"
         },
         "G": {
           "value": 0.75,
@@ -248,80 +107,37 @@
           "detail": "Assigned: coalition partner"
         }
       },
-      "advantage_ratio": 1.091
-    },
-    {
-      "party_id": "P007",
-      "name": "PPS",
-      "score": null,
-      "ci": null,
-      "coverage": 5,
-      "provisional_score_unranked": 0.495,
-      "subindices": {
-        "D": {
-          "value": null,
-          "n": 1,
-          "year": 2021,
-          "detail": "1 concluded promise(s) tracked, 3 required to score; 2016-2021"
-        },
-        "C": {
-          "value": 0.369,
-          "n": 19,
-          "year": 2026,
-          "detail": "19/19 campaign claims scored (1-5 rubric)"
-        },
-        "E": {
-          "value": 0.748,
-          "n": 1,
-          "year": 2021,
-          "detail": "seat share / vote share = 1.131 at the 2021 election"
-        },
-        "G": {
-          "value": 0.4,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: opposition"
-        },
-        "L": {
-          "value": 0.65,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: opposition"
-        },
-        "M": {
-          "value": 0.6,
-          "n": 1,
-          "year": 2021,
-          "detail": "Assigned: opposition"
-        }
-      },
-      "advantage_ratio": 1.131
+      "advantage_ratio": 1.146
     },
     {
       "party_id": "P001",
       "name": "RNI",
-      "score": null,
-      "ci": null,
-      "coverage": 5,
-      "provisional_score_unranked": 0.601,
+      "score": 0.616,
+      "ci": {
+        "median": 0.614,
+        "lo": 0.566,
+        "hi": 0.661
+      },
+      "coverage": 6,
+      "provisional_score_unranked": 0.616,
       "subindices": {
         "D": {
-          "value": null,
-          "n": 0,
+          "value": 0.667,
+          "n": 3,
           "year": 2021,
-          "detail": "0 concluded promise(s) tracked, 3 required to score; 2021-2026"
+          "detail": "2 fulfilled, 0 partial, 1 failed, 0 abandoned across the 2021 term"
         },
         "C": {
-          "value": 0.367,
-          "n": 3,
-          "year": 2026,
-          "detail": "3/3 campaign claims scored (1-5 rubric)"
+          "value": 0.376,
+          "n": 4,
+          "year": 2021,
+          "detail": "4/4 2021 promises scored (1-5 rubric)"
         },
         "E": {
-          "value": 0.912,
+          "value": 0.86,
           "n": 1,
           "year": 2021,
-          "detail": "seat share / vote share = 0.954 at the 2021 election"
+          "detail": "seat share / vote share = 0.902 at the 2021 election"
         },
         "G": {
           "value": 0.85,
@@ -342,7 +158,195 @@
           "detail": "Assigned: governing party with broad portfolio; conflict flags lower L"
         }
       },
-      "advantage_ratio": 0.954
+      "advantage_ratio": 0.902
+    },
+    {
+      "party_id": "P003",
+      "name": "Istiqlal",
+      "score": null,
+      "ci": null,
+      "coverage": 5,
+      "provisional_score_unranked": 0.577,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 2,
+          "year": 2021,
+          "detail": "2 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026"
+        },
+        "C": {
+          "value": 0.372,
+          "n": 7,
+          "year": 2021,
+          "detail": "7/7 2021 promises scored (1-5 rubric)"
+        },
+        "E": {
+          "value": 0.787,
+          "n": 1,
+          "year": 2021,
+          "detail": "seat share / vote share = 1.149 at the 2021 election"
+        },
+        "G": {
+          "value": 0.7,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: coalition partner"
+        },
+        "L": {
+          "value": 0.6,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: coalition partner"
+        },
+        "M": {
+          "value": 0.65,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: coalition partner"
+        }
+      },
+      "advantage_ratio": 1.149
+    },
+    {
+      "party_id": "P006",
+      "name": "MP",
+      "score": null,
+      "ci": null,
+      "coverage": 5,
+      "provisional_score_unranked": 0.468,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026"
+        },
+        "C": {
+          "value": 0.2,
+          "n": 5,
+          "year": 2021,
+          "detail": "5/5 2021 promises scored (1-5 rubric)"
+        },
+        "E": {
+          "value": 0.996,
+          "n": 1,
+          "year": 2021,
+          "detail": "seat share / vote share = 1.003 at the 2021 election"
+        },
+        "G": {
+          "value": 0.55,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: coalition support"
+        },
+        "L": {
+          "value": 0.6,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: coalition support"
+        },
+        "M": {
+          "value": 0.6,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: coalition support"
+        }
+      },
+      "advantage_ratio": 1.003
+    },
+    {
+      "party_id": "P004",
+      "name": "PJD",
+      "score": null,
+      "ci": null,
+      "coverage": 5,
+      "provisional_score_unranked": 0.454,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 1,
+          "year": 2021,
+          "detail": "1 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026"
+        },
+        "C": {
+          "value": 0.343,
+          "n": 4,
+          "year": 2021,
+          "detail": "4/4 2021 promises scored (1-5 rubric)"
+        },
+        "E": {
+          "value": 0.701,
+          "n": 1,
+          "year": 2021,
+          "detail": "seat share / vote share = 0.791 at the 2021 election"
+        },
+        "G": {
+          "value": 0.4,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: opposition after collapse"
+        },
+        "L": {
+          "value": 0.55,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: opposition after collapse"
+        },
+        "M": {
+          "value": 0.5,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: opposition after collapse"
+        }
+      },
+      "advantage_ratio": 0.791
+    },
+    {
+      "party_id": "P007",
+      "name": "PPS",
+      "score": null,
+      "ci": null,
+      "coverage": 5,
+      "provisional_score_unranked": 0.51,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 2,
+          "year": 2021,
+          "detail": "2 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026"
+        },
+        "C": {
+          "value": 0.367,
+          "n": 3,
+          "year": 2021,
+          "detail": "3/3 2021 promises scored (1-5 rubric)"
+        },
+        "E": {
+          "value": 0.941,
+          "n": 1,
+          "year": 2021,
+          "detail": "seat share / vote share = 1.041 at the 2021 election"
+        },
+        "G": {
+          "value": 0.4,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: opposition"
+        },
+        "L": {
+          "value": 0.65,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: opposition"
+        },
+        "M": {
+          "value": 0.6,
+          "n": 1,
+          "year": 2021,
+          "detail": "Assigned: opposition"
+        }
+      },
+      "advantage_ratio": 1.041
     },
     {
       "party_id": "P008",
@@ -350,25 +354,25 @@
       "score": null,
       "ci": null,
       "coverage": 5,
-      "provisional_score_unranked": 0.428,
+      "provisional_score_unranked": 0.41,
       "subindices": {
         "D": {
           "value": null,
-          "n": 1,
+          "n": 0,
           "year": 2021,
-          "detail": "1 concluded promise(s) tracked, 3 required to score; 2016-2021"
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026"
         },
         "C": {
           "value": 0.2,
-          "n": 3,
-          "year": 2026,
-          "detail": "3/3 campaign claims scored (1-5 rubric)"
+          "n": 2,
+          "year": 2021,
+          "detail": "2/2 2021 promises scored (1-5 rubric)"
         },
         "E": {
-          "value": 0.945,
+          "value": 0.685,
           "n": 1,
           "year": 2021,
-          "detail": "seat share / vote share = 1.029 at the 2021 election"
+          "detail": "seat share / vote share = 0.780 at the 2021 election"
         },
         "G": {
           "value": 0.45,
@@ -389,7 +393,7 @@
           "detail": "Assigned: minor coalition/opposition"
         }
       },
-      "advantage_ratio": 1.029
+      "advantage_ratio": 0.78
     },
     {
       "party_id": "P005",
@@ -397,25 +401,25 @@
       "score": null,
       "ci": null,
       "coverage": 5,
-      "provisional_score_unranked": 0.529,
+      "provisional_score_unranked": 0.518,
       "subindices": {
         "D": {
           "value": null,
           "n": 1,
           "year": 2021,
-          "detail": "1 concluded promise(s) tracked, 3 required to score; 2016-2021"
+          "detail": "1 concluded 2021 promise(s) tracked, 3 required to score; 2021-2026"
         },
         "C": {
-          "value": 0.4,
-          "n": 15,
-          "year": 2026,
-          "detail": "15/15 campaign claims scored (1-5 rubric)"
+          "value": 0.343,
+          "n": 4,
+          "year": 2021,
+          "detail": "4/4 2021 promises scored (1-5 rubric)"
         },
         "E": {
-          "value": 0.822,
+          "value": 0.956,
           "n": 1,
           "year": 2021,
-          "detail": "seat share / vote share = 1.093 at the 2021 election"
+          "detail": "seat share / vote share = 1.031 at the 2021 election"
         },
         "G": {
           "value": 0.45,
@@ -436,7 +440,195 @@
           "detail": "Assigned: opposition"
         }
       },
-      "advantage_ratio": 1.093
+      "advantage_ratio": 1.031
+    },
+    {
+      "party_id": "P011",
+      "name": "FFD",
+      "score": null,
+      "ci": null,
+      "coverage": 1,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": 0.725,
+          "n": 1,
+          "year": 2021,
+          "detail": "seat share / vote share = 0.808 at the 2021 election"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.808
+    },
+    {
+      "party_id": "P010",
+      "name": "MDS",
+      "score": null,
+      "ci": null,
+      "coverage": 1,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": 0.604,
+          "n": 1,
+          "year": 2021,
+          "detail": "seat share / vote share = 0.723 at the 2021 election"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.723
+    },
+    {
+      "party_id": "P013",
+      "name": "PSU",
+      "score": null,
+      "ci": null,
+      "coverage": 1,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": 0.0,
+          "n": 1,
+          "year": 2021,
+          "detail": "seat share / vote share = 0.301 at the 2021 election"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.301
+    },
+    {
+      "party_id": "P012",
+      "name": "CNI",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no local-list vote share on record (regional-list seat only)"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
     }
   ]
 }

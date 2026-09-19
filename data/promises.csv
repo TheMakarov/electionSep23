@@ -1,14 +1,36 @@
 promise_id,party_id,term_start,term_end,promise,domain,status,outcome_metric,source_ids,confidence
-PR001,P004,2011,2016,Subsidy reform (fuel indexation),Economy,fulfilled,Subsidies indexed 2014-2015,UNSOURCED,HIGH
-PR002,P004,2011,2016,Anti-corruption crackdown,Governance,partial,Limited convictions,UNSOURCED,MEDIUM
-PR003,P004,2016,2021,Expand social protection,Social,partial,AMO groundwork launched,UNSOURCED,MEDIUM
-PR004,P004,2016,2021,Social housing (logement social),Housing,partial,Units delivered below target,UNSOURCED,MEDIUM
-PR005,P004,2016,2021,Create jobs,Employment,failed,Unemployment remained high,UNSOURCED,MEDIUM
-PR006,P001,2021,2026,Generalize AMO to all citizens,Social,in_progress,Launched Dec 2021,UNSOURCED,MEDIUM
-PR007,P001,2021,2026,"Create 1,000,000 jobs",Employment,pending,Not yet measurable,UNSOURCED,MEDIUM
-PR008,P002,2021,2026,Administrative reform,Administration,in_progress,Digitalization underway,UNSOURCED,LOW
-PR009,P003,2021,2026,Food sovereignty,Agriculture,in_progress,Programs launched,UNSOURCED,LOW
-PR010,P005,2016,2021,Minimum wage increase,Social,failed,Rejected in social dialogue,UNSOURCED,LOW
-PR011,P006,2016,2021,Rural development,Rural,partial,Some infrastructure delivered,UNSOURCED,LOW
-PR012,P007,2016,2021,Progressive tax reform,Economy,failed,No reform passed,UNSOURCED,LOW
-PR013,P008,2016,2021,Liberal economic reform,Economy,partial,Partial liberalization,UNSOURCED,LOW
+PR101,P001,2021,2026,Créer un million d'emplois,Emploi,failed,Unemployment 13.0% in 2025; the 1M-jobs target was not met,"S015, S047, S087",MEDIUM
+PR102,P001,2021,2026,Permettre à près de 400 000 familles rurales d'accéder à la classe moyenne,Classe moyenne / monde rural,unverifiable,No reliable evidence found,"S015, S048",LOW
+PR103,P001,2021,2026,Créer 250 000 activités temporaires sur deux ans pour absorber les pertes d'emploi (COVID),Emploi,fulfilled,"Awrach programme delivered ~250,000 temporary beneficiaries (2022-2023)","S015, S049, S089",MEDIUM
+PR104,P001,2021,2026,"Cinq priorités : protection sociale, système de santé digne, emplois pour tous, école de l'égalité, administration à l'écoute",Programme global,fulfilled,AMO generalized: 32M beneficiaries (~88%) incl. AMO Tadamon for ~4M vulnerable families,"S015, S050, S088",MEDIUM
+PR105,P002,2021,2026,Créer 820 000 postes d'emploi et atteindre 6% de croissance en 2026,Emploi / croissance,failed,Growth ~2.4-3.4% and unemployment ~13%; both 820k-jobs and 6%-growth targets missed,"S016, S051, S087",MEDIUM
+PR106,P002,2021,2026,Créer 9 000 salles de classe par an pour le préscolaire,Éducation / préscolaire,partial,"Preschool coverage 82.1% but ~3,800 public classrooms/year, below the 9,000/year pace","S016, S051, S081",MEDIUM
+PR107,P002,2021,2026,Bourse de formation mensuelle de 1 500 DH pendant 6 mois,Formation,in_progress,,"S016, S051",MEDIUM
+PR108,P002,2021,2026,Prêt gratuit de 150 000 DH pour les jeunes entreprises,Entrepreneuriat,in_progress,,"S016, S051",MEDIUM
+PR109,P002,2021,2026,Relever le seuil des revenus exonérés de la contribution de solidarité de 30 000 à 36 000 DH,Fiscalité,in_progress,,"S016, S051",MEDIUM
+PR110,P002,2021,2026,Relancer la Samir (raffinerie) et renforcer l'indépendance énergétique,Énergie,failed,Samir refinery never restarted; activity extended 3 months at a time by the court,"S017, S052, S090",LOW
+PR111,P003,2021,2026,Sortir un million de familles de la pauvreté et de la fragilité (200 000 familles/an à l'horizon 2026),Lutte contre la pauvreté,unverifiable,No reliable evidence found,"S018, S053",LOW
+PR112,P003,2021,2026,Augmenter le pouvoir d'achat de la classe moyenne de plus de 20%,Pouvoir d'achat,unverifiable,No reliable evidence found,"S018, S054",LOW
+PR113,P003,2021,2026,"Croissance ~4%, chômage <9%, chômage des jeunes <20%, activité des femmes >30%",Économie / emploi,failed,"Unemployment 13.0% (2025), youth 37.2%, female activity ~19%; all targets missed","S019, S054, S087",MEDIUM
+PR114,P003,2021,2026,Allocations familiales de 300 DH par mois et par enfant versées aux mères,Protection sociale / famille,partial,"Direct child support 250 DH/month (300 for schoolchildren), means-tested not universal","S019, S055, S082",MEDIUM
+PR115,P003,2021,2026,Créer 100 espaces de santé pour les jeunes à l'horizon 2026,Santé / jeunesse,in_progress,,"S019, S056",MEDIUM
+PR116,P003,2021,2026,"Prise en charge à 100% des personnes de plus de 70 ans et gratuité des soins pour femmes enceintes, enfants et personnes handicapées",Santé,in_progress,,S019,MEDIUM
+PR117,P003,2021,2026,Créer une banque publique nationale d'investissement avec des agences régionales,Investissement,in_progress,,S019,MEDIUM
+PR118,P004,2021,2026,Poursuivre les réformes : programme de plus de 400 mesures en 5 axes,Programme global,in_progress,,S020,MEDIUM
+PR119,P004,2021,2026,Créer 800 postes par an pour les titulaires de doctorat,Emploi / recherche,unverifiable,No reliable evidence found,S021,LOW
+PR120,P004,2021,2026,"Porter la recherche scientifique à 1,2% du PIB",Recherche scientifique,failed,"Research spending ~0.7-0.8% of GDP, below the 1.2% target","S021, S086",MEDIUM
+PR121,P004,2021,2026,Généraliser la bourse étudiante à tous les ayants droit,Éducation,in_progress,,S021,MEDIUM
+PR122,P005,2021,2026,Relever le seuil d'exonération fiscale de 30 000 à 50 000 DH,Fiscalité / classe moyenne,partial,"IR exemption threshold raised 30,000→40,000 DH, short of the promised 50,000","S023, S057, S083",MEDIUM
+PR123,P005,2021,2026,Plan d'investissement public de 100 à 120 milliards de DH pour les infrastructures sociales,Investissement public,in_progress,,"S023, S057",MEDIUM
+PR124,P005,2021,2026,Nouvelles tranches d'imposition pour les hauts revenus et criminalisation de la fraude fiscale,Fiscalité,in_progress,,"S023, S057",MEDIUM
+PR125,P005,2021,2026,"Changement politique pour le droit à une vie digne, la santé, l'éducation et l'emploi (slogan « Morocco first »)",Programme global,in_progress,,"S022, S057",MEDIUM
+PR126,P006,2021,2026,"Programme de 130 mesures sur 13 chantiers, centré sur le monde rural et l'amazigh",Programme global,in_progress,,"S024, S058",MEDIUM
+PR127,P006,2021,2026,Appui direct aux petits agriculteurs et agriculture solidaire et familiale,Agriculture,in_progress,,"S024, S058",MEDIUM
+PR128,P006,2021,2026,Réduire les frais de raccordement eau/électricité,Services / monde rural,in_progress,,"S024, S058",MEDIUM
+PR129,P006,2021,2026,"Accélérer l'officialisation de l'amazigh, doter les communes rurales de collèges et toutes les régions d'universités",Éducation / amazigh,in_progress,,"S024, S058",MEDIUM
+PR130,P006,2021,2026,Simplifier l'accès des jeunes aux microcrédits,Jeunesse / financement,in_progress,,S024,MEDIUM
+PR131,P007,2021,2026,Atteindre une croissance d'au moins 6%,Croissance,failed,"Growth ~2.4-3.4%, far below the 6% target","S025, S084",MEDIUM
+PR132,P007,2021,2026,Généraliser la protection sociale à l'horizon 2025,Protection sociale,partial,AMO and direct support delivered; retirement and job-loss pillars still rolling out,"S025, S085",MEDIUM
+PR133,P007,2021,2026,"Réformer les retraites, restructurer la santé, investir dans l'école publique, éliminer l'économie de rente et instaurer la parité",Programme global,in_progress,,S025,MEDIUM
+PR134,P008,2021,2026,"Priorités : santé, éducation, emploi et protection sociale via la réallocation de l'investissement et les PPP",Programme global,in_progress,,"S026, S059",MEDIUM
+PR135,P008,2021,2026,Miser sur le capital humain et le décollage économique (nouveau modèle de développement),Programme global,in_progress,,"S027, S060",LOW

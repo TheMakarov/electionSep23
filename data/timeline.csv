@@ -1,10 +1,26 @@
 date,event,actor,election_year,significance,source_ids
-2011-07-01,2011 Constitution adopted,National,,Redefined royal vs government powers,FILL
-2011-11-25,Legislative election (PJD wins),National,2011,First PJD-led government under new constitution,UNSOURCED
-2012-01-03,Benkirane government formed,PJD,2011,Coalition with Istiqlal MP PPS,FILL
-2016-10-07,Legislative election (PJD first again),National,2016,PJD wins 125 seats,UNSOURCED
-2017-03-15,El Othmani government formed,PJD,2016,After Benkirane failed to form government,FILL
-2021-09-08,Legislative election (RNI wins),National,2021,RNI 102 seats; PJD collapses to 13,UNSOURCED
-2021-10-07,Akhannouch government formed,RNI,2021,Coalition RNI-PAM-Istiqlal,FILL
-2021-12-01,AMO generalization launched,RNI,2021,Flagship social-protection promise,FILL
-2026-09-23,"Élections législatives (Chambre des représentants, 395 sièges)",National,2026,Scrutin unique en 2026 : régionales/communales reportées à 2027 (mandats de 6 ans),S028
+2002-09-27,Legislative election,National,2002,First legislative election under Mohammed VI; turnout 51.6% of 13.9M registered voters,S069
+2007-09-07,Legislative election,National,2007,Istiqlal leads; turnout falls to a record-low 37.0%,S069
+2009-06-12,Communal elections,National,,Last local ballot before the 2011 Constitution,S072
+2011-07-01,Constitutional referendum adopts the 2011 Constitution,National,,73.5% turnout; parliament and the head of government strengthened,S069
+2011-10-14,Dahir promulgating loi organique 27.11 on the House of Representatives,National,2011,Creates the 395-seat framework: 305 local seats + 90 national seats,"S061, S068"
+2011-11-25,Legislative election,National,2011,PJD wins 107 seats and leads the first PJD-headed government; turnout 45.5%,S069
+2012-01-03,Benkirane government formed,PJD,2011,Coalition PJD-Istiqlal-MP-PPS,S075
+2013-10-10,Benkirane government II formed after Istiqlal leaves the coalition,PJD,2013,Five-party coalition; Istiqlal replaced by the RNI,S077
+2015-09-04,Communal and regional elections,National,,First local ballot under the 2011 Constitution; regional councils elected directly,S071
+2016-08-10,Loi organique 20.16 amends 27.11,National,2016,Adjusts the electoral framework before the October 2016 ballot,S061
+2016-10-07,Legislative election,National,2016,PJD first again with 125 seats; 15.7M registered voters,S069
+2017-04-05,El Othmani government formed,PJD,2016,Ends a six-month post-election deadlock (the file previously dated this 2017-03-15),S073
+2019-10-09,El Othmani II formed,PJD,2019,"Reshuffle widens the coalition (USFP, MP)",S074
+2021-04-21,Loi organique 04.21 amends 27.11,National,2021,"Quotient moved to registered voters, electoral threshold abolished, national list replaced by 12 regional constituencies","S061, S062"
+2021-09-08,"Legislative, regional and communal elections held on one day",National,2021,RNI 102 seats; PJD collapses to 13; turnout 50.2%,S066
+2021-10-07,Akhannouch government formed,RNI,2021,Coalition RNI-PAM-Istiqlal,S069
+2021-12-01,AMO generalization launched,RNI,2021,Flagship social-protection promise,"S078, S079, S080"
+2024-09-01,General census (RGPH 2024),National,,Demographic base used to draw constituencies and distribute seats,S076
+2024-10-28,Akhannouch government reshuffled,RNI,2024,Dahir 1-24-56 appoints a new cabinet before the 2026 ballot,S075
+2026-01-16,Loi organique 53.25 amends 27.11,National,2026,"Latest electoral reform, in force for 23 September 2026",S061
+2026-07-10,Final electoral register closed,National,2026,15.8M registered voters on the roll for the 2026 ballot,"S070, S069"
+2026-08-31,Candidate filing opens,National,2026,27 parties expected to contest the 395 seats; filings close 8 September,S070
+2026-09-10,Official campaign opens,National,2026,Runs until midnight on 22 September,S070
+2026-09-23,"Élections législatives (Chambre des représentants, 395 sièges)",National,2026,Single ballot in 2026: regional and communal elections postponed to 2027 (six-year local mandates),"S070, S028"
+2026-09-24,Provisional results due,National,2026,"Interior Ministry announces, then validation by the Constitutional Court",S070

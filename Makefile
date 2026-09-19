@@ -1,9 +1,9 @@
 # Use the local venv when it exists, otherwise the system interpreter.
 PY := $(shell [ -x .venv/bin/python ] && echo .venv/bin/python || echo python3)
 
-.PHONY: all check strict build install clean serve venv
+.PHONY: all check strict build test install clean serve venv
 
-all: check build
+all: check build test
 
 ## Validate the data registry. Exits non-zero on a broken invariant.
 check:
@@ -12,6 +12,10 @@ check:
 ## Same, but warnings fail too. Use before publishing anything.
 strict:
 	$(PY) scripts/validate.py --strict
+
+## Run the data cross-consistency tests (map <-> seats <-> shares).
+test:
+	$(PY) scripts/test_consistency.py
 
 ## Render the report + the interactive seat simulator. Refuses to run while
 ## validation reports errors.

@@ -36,7 +36,7 @@ DATA = ROOT / "data"
 OUT = ROOT / "output"
 
 sys.path.insert(0, str(ROOT / "scripts"))
-from moroccan_theme import STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG  # noqa: E402
+from moroccan_theme import STAR_URI, ZELLIGE_URI, STAR_BADGE_SVG, apply_tokens  # noqa: E402
 
 
 def load(name):
@@ -72,11 +72,19 @@ const_js = [{"id": c["constituency_id"], "level": c["level"], "name": c["name"],
 # 2021 real results, parsed from the official per-constituency PDF
 # (data/results_2021.csv). Party abbreviations used in the source -> party_id.
 ABBR = {"RNI": "P001", "PAM": "P002", "PI": "P003", "PJD": "P004",
-        "USFP": "P005", "MP": "P006", "PPS": "P007", "UC": "P008"}
+        "USFP": "P005", "MP": "P006", "PPS": "P007", "UC": "P008",
+        "MDS": "P010", "FFD": "P011", "CNI": "P012", "PSU": "P013"}
+# Only the 12 parties that won a seat in 2021 are modelled; the micro-lists
+# (AFG, NEO, PEDD, ...) won none and are NOT lumped together, otherwise their
+# summed votes would fake a seat bloc in the largest-remainder step.
 results_js = {}
+splinter_votes = 0
 try:
     for r in csv.DictReader(open(DATA / "results_2021.csv", newline="", encoding="utf-8")):
-        pid = ABBR.get(r["party"], "P009")
+        pid = ABBR.get(r["party"])
+        if pid is None:
+            splinter_votes += int(r["votes"])
+            continue
         u = r["map_unit"]
         results_js.setdefault(u, {})
         results_js[u][pid] = results_js[u].get(pid, 0) + int(r["votes"])
@@ -130,8 +138,8 @@ TEMPLATE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Morocco 2026 — Constituency Seat Simulator & CEAGI</title>
 <style>
-:root { --red:#c1272d; --red-deep:#8e1b20; --green:#006233; --gold:#c8a24a;
-        --sand:#f6efe0; --ink:#1c1a17; --muted:#6d6459; --line:#e4dbc9; --bg:#fbf8f1; }
+:root { --red:__RED__; --red-deep:__RED_DEEP__; --green:__GREEN__; --gold:__GOLD__;
+        --sand:__SAND__; --ink:__INK__; --muted:__MUTED__; --line:__LINE__; --bg:__BG__; }
 * { box-sizing:border-box; }
 body { margin:0; font-family:Georgia,serif; color:var(--ink); background:var(--bg); line-height:1.5; }
 body::before { content:""; display:block; height:5px;
@@ -179,7 +187,7 @@ th { background:var(--sand); text-align:left; padding:7px 8px; border-bottom:2px
 td { padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
 tr:hover td { background:#fdf9f0; }
 .over { color:var(--red); font-weight:700; }
-.under { color:#1a6a8a; }
+.under { color:__GREEN__; }
 .chip { display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; vertical-align:middle; }
 .interpret p { margin:8px 0; font-size:.92rem; }
 .interpret .big { font-size:1.05rem; }
@@ -204,10 +212,10 @@ tr:hover td { background:#fdf9f0; }
 .mapcard { background:transparent; border:none; padding:0; }
 #mapsvg { width:100%; height:auto; display:block; background:transparent; }
 #mapsvg path.unit { stroke:#fffdf8; stroke-width:.5; cursor:pointer; transition:fill .15s; }
-#mapsvg path.unit:hover { stroke:#1c1a17; stroke-width:1.3; }
+#mapsvg path.unit:hover { stroke:__RED__; stroke-width:1.4; }
 #mapsvg path.unit.sel { stroke:var(--red); stroke-width:2.1; }
 #mapsvg path.unit.manual { stroke:var(--gold); stroke-width:1.5; stroke-dasharray:2.4 1.6; }
-#mapsvg path.regionline { fill:none; stroke:#1c1a17; stroke-opacity:.35; stroke-width:1;
+#mapsvg path.regionline { fill:none; stroke:__GREEN__; stroke-opacity:.45; stroke-width:1;
   pointer-events:none; }
 .maptools { display:flex; gap:8px; margin-top:8px; }
 .tooltip { position:fixed; pointer-events:none; background:rgba(28,26,23,.95); color:#fff;
@@ -280,8 +288,9 @@ footer { margin-top:46px; padding-top:14px; border-top:4px solid var(--green);
 <section>
   <h2>1. Parties — add, rename, recolour, remove</h2>
   <p class="note">The registry ships __NPARTIES__ parties (the <b>Others</b> row is the
-  catch-all: in 2021 it gathers the small lists &mdash; MDS, FFD, CNI, PSU and others &mdash;
-  that are not separate rows in <code>data/parties.csv</code>). Add any other party, remove the
+  catch-all: in 2021 it gathers the micro-lists (AFG, NEO, PEDD, PML, PVM, PUD and
+  others) that are not separate rows in <code>data/parties.csv</code>; MDS, FFD, CNI
+  and PSU now have their own rows). Add any other party, remove the
   ones you do not want to field (a removed party simply does not take seats), and set each
   party's national vote share. Everything below recomputes as you type.</p>
   <div class="party-head"><span>Colour</span><span>Party</span><span>Share %</span>
@@ -377,6 +386,7 @@ const CEAGI = __CEAGI__;
 const RESULTS = __RESULTS__;        // map_unit -> {party_id: 2021 votes}
 const SEATS2021 = __SEATS2021__;    // party_id -> official 2021 seats
 const TURNOUT_2021 = __TURNOUT__;   // % participation, 8 Sept 2021
+const SPLINTER_2021 = __SPLINTER__;  // thousands of votes for micro-lists, won no seat
 const DIMS = ["D","C","E","G","L","M"];
 const DIM_LABEL = {D:"Delivery", C:"Claims", E:"Electoral", G:"Governance", L:"Leadership", M:"Mandate"};
 
@@ -555,7 +565,7 @@ function seatColours(seats) {
   const order = parties.slice().sort((a,b) => (seats[b.id]||0) - (seats[a.id]||0));
   const cols = [];
   order.forEach(p => { for (let i = 0; i < (seats[p.id]||0); i++) cols.push(p.color); });
-  while (cols.length < TOTAL_SEATS) cols.push("#e6e1d6");
+  while (cols.length < TOTAL_SEATS) cols.push("__SAND__");
   return cols;
 }
 function renderHemicycle(seats) {
@@ -567,10 +577,10 @@ function renderHemicycle(seats) {
     dots += `<circle cx="${(cx+p.x).toFixed(1)}" cy="${(cy+p.y).toFixed(1)}" r="4" fill="${cols[i]}" stroke="white" stroke-width="0.6"/>`;
   });
   const p = pts[MAJORITY-1];
-  if (p) line = `<line x1="${(cx+p.x).toFixed(1)}" y1="0" x2="${(cx+p.x).toFixed(1)}" y2="${(cy+p.y).toFixed(1)}" stroke="#111" stroke-width="1.4" stroke-dasharray="3 3"/>`;
+  if (p) line = `<line x1="${(cx+p.x).toFixed(1)}" y1="0" x2="${(cx+p.x).toFixed(1)}" y2="${(cy+p.y).toFixed(1)}" stroke="__RED__" stroke-width="1.5" stroke-dasharray="3 3"/>`;
   document.getElementById("hemicycle").innerHTML =
     `<svg viewBox="0 0 640 340" width="100%" role="img" aria-label="Parliament hemicycle">` +
-    `<rect width="640" height="340" fill="#fffdf8"/>${line}${dots}</svg>`;
+    `<rect width="640" height="340" fill="__CREAM__"/>${line}${dots}</svg>`;
 }
 
 /* ------------------------- map ------------------------- */
@@ -642,7 +652,7 @@ function renderMap(res) {
     const manual = overrides[u] ? " manual" : "";
     const sel = (selected === u) ? " sel" : "";
     path.setAttribute("class", "unit" + manual + sel);
-    if (!lead) { path.setAttribute("fill", "#e9e4d8"); path.setAttribute("fill-opacity", "1"); return; }
+    if (!lead) { path.setAttribute("fill", "__SAND__"); path.setAttribute("fill-opacity", "1"); return; }
     if (colourBy === "turnout") {
       const reg = registeredVoters(u), cast = unitVotesCast(u);
       const t = reg > 0 ? Math.min(1, (cast / reg) / 0.8) : 0;
@@ -688,7 +698,7 @@ function renderLegend(res) {
       + `<span class="sw" style="background:${marginColour(1)}"></span>safe</span>`
     : "";
   document.getElementById("map-legend").innerHTML = items + scale
-    + `<span><span class="sw" style="background:#e9e4d8"></span>no votes / no seats</span>`;
+    + `<span><span class="sw" style="background:__SAND__"></span>no votes / no seats</span>`;
 }
 
 /* ------------------------- unit panel ------------------------- */
@@ -816,7 +826,8 @@ function renderTable(res) {
      Seeding the map with the real 2021 votes (<button onclick="loadResults2021()" style="padding:2px 7px">Load 2021</button>)
      reconstructs a result from those votes — close to, but not identical with, the official count,
      because the regional seats are allocated here from the local votes and four of the 305 local
-     seats could not be traced in the source PDF.</p>`;
+     seats could not be traced in the source PDF. The micro-lists (about
+     <b>${SPLINTER_2021}k votes, 3.4%</b>) won no seat in 2021 and are excluded from the model.</p>`;
 }
 function renderSeatBar(res) {
   const total = TOTAL_SEATS;
@@ -827,7 +838,7 @@ function renderSeatBar(res) {
     bars += `<div style="width:${w}%;background:${p.color}" title="${p.name}: ${s}"></div>`;
     left += w;
   });
-  if (left < 100) bars += `<div style="width:${100-left}%;background:#e6e1d6" title="unfilled"></div>`;
+  if (left < 100) bars += `<div style="width:${100-left}%;background:__SAND__" title="unfilled"></div>`;
   document.getElementById("seatbar").innerHTML =
     `<div style="display:flex;height:20px;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-top:6px">${bars}</div>`;
 }
@@ -936,6 +947,7 @@ html = (TEMPLATE
         .replace("__RESULTS__", js(results_js))
         .replace("__SEATS2021__", js(seats2021_js))
         .replace("__TURNOUT__", str(TURNOUT_2021))
+        .replace("__SPLINTER__", f"{splinter_votes/1000:.0f}")
         .replace("__VIEWBOX__", map_data["viewBox"])
         .replace("__NLOCAL__", str(LOCAL_SEATS))
         .replace("__NREGIONAL__", str(REGIONAL_SEATS))
@@ -945,6 +957,8 @@ html = (TEMPLATE
         .replace("__STAR__", STAR_URI)
         .replace("__ZELLIGE__", ZELLIGE_URI)
         .replace("__LAW__", LAW_HTML))
+
+html = apply_tokens(html)
 
 OUT.mkdir(parents=True, exist_ok=True)
 (OUT / "seat_simulator.html").write_text(html, encoding="utf-8")
