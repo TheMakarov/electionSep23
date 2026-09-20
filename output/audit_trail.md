@@ -1,7 +1,7 @@
 # Audit trail - Morocco electoral data project
 
-Generated 2026-09-20T00:33:46 by `scripts/build.py`.
-Campaign year **2026**, baseline year **2021**, publication gate: **FAIL**.
+Generated 2026-09-20T01:02:21 by `scripts/build.py`.
+Campaign year **2026**, baseline year **2021**, publication gate: **PASS**.
 
 Every number below is traced to a source ID and a confidence level.
 A value of `n/a` means the evidence does not exist yet - it is not a zero.
@@ -320,14 +320,19 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 
 ## 6. Leaders
 
-- Aziz Akhannouch [RNI] role Head of Government - skin-in-game 0.35 - sources: FILL
-- Abdellatif Ouahbi [PAM] role Secretary General / Minister of Justice - skin-in-game 0.60 - sources: FILL
-- Nizar Baraka [Istiqlal] role Secretary General - skin-in-game 0.70 - sources: FILL
-- Saad Eddine El Othmani [PJD] role Head of Government - skin-in-game 0.55 - sources: FILL
-- Abdelilah Benkirane [PJD] role Head of Government / Secretary General - skin-in-game 0.50 - sources: FILL
-- Driss Lachguar [USFP] role First Secretary - skin-in-game 0.60 - sources: FILL
-- Mohamed Ouzzine [MP] role Secretary General - skin-in-game 0.65 - sources: FILL
-- Nabil Benabdallah [PPS] role Secretary General - skin-in-game 0.60 - sources: FILL
+- Aziz Akhannouch [RNI] role Head of Government - skin-in-game 0.35 - sources: S093 S094 S095 S096
+- Abdellatif Ouahbi [PAM] role Minister of Justice - skin-in-game 0.6 - sources: S097 S098 S099
+- Nizar Baraka [Istiqlal] role Secretary General / Minister of Equipment and Water - skin-in-game 0.7 - sources: S100 S101 S102
+- Saad Eddine El Othmani [PJD] role Head of Government - skin-in-game 0.55 - sources: S103 S104 S105
+- Abdelilah Benkirane [PJD] role Head of Government / Secretary General - skin-in-game 0.5 - sources: S106 S107 S108
+- Driss Lachguar [USFP] role First Secretary - skin-in-game 0.6 - sources: S109 S110 S111
+- Mohamed Ouzzine [MP] role Secretary General - skin-in-game 0.65 - sources: S112 S011 S113
+- Nabil Benabdallah [PPS] role Secretary General - skin-in-game 0.6 - sources: S114 S115 S116
+- Mohamed Joudar [UC] role Secretary General - skin-in-game 0.4 - sources: S117 S118 S119 S120
+- Abdessamad Archane [MDS] role Secretary General - skin-in-game 0.4 - sources: S121 S122 S123
+- Mustapha Benali [FFD] role Secretary General - skin-in-game 0.3 - sources: S124 S125 S126
+- Abdeslam Laaziz [CNI] role Secretary General - skin-in-game 0.5 - sources: S127 S128 S129
+- Jamal El Asri [PSU] role Secretary-General - skin-in-game 0.3 - sources: S130 S131 S132
 
 ## 7. Sources
 
@@ -425,10 +430,50 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 | S086 | Synthèse - Développement de la recherche et de l'innovation | CESE | 2025-10 | Report | secondary | 4 | Independent advisory council | read |
 | S091 | AMO-Tadamon couvre désormais plus de 11,4 millions de bénéficiaires (Akhannouch) | Le Matin | 2025 | News | secondary | 3 | Center | read |
 | S092 | Le programme Awrach démarre à partir de 10 régions (communiqué de presse) | Chef du Gouvernement - Royaume du Maroc | 2022-01-12 | Official communiqué | primary | 5 | Primary - government communiqué | read |
+| S093 | Biography - Head of Government of the Kingdom of Morocco | Head of Government of Morocco | 2026 | official | primary | 5 | State/official | read |
+| S094 | Benjelloun, Akhannouch and Sefrioui lead Morocco's billionaire rankings in 2026 | Hespress EN | 10/03/2026 | news | secondary | 3 | Pro-establishment leaning | read |
+| S095 | The Head of Government Chairs the Board of Directors of the National Agency for Social Support | Head of Government of Morocco | 18/02/2026 | official | primary | 5 | State/official | read |
+| S096 | Morocco boycott revives debate over business, politics links | AFP | 27/05/2018 | news | secondary | 4 | Wire service (neutral) | read |
+| S097 | Abdellatif Ouahbi | Wikipedia | 2026 | encyclopedia | secondary | 4 | Neutral | read |
+| S098 | Mr. Abdellatif Ouahbi, Minister of Justice | MAP | 02/05/2024 | official | primary | 4 | State news agency | read |
+| S099 | Daily Fines Account for 43% of Court Rulings Under Morocco's Alternative Sentencing Law | MAP | 20/04/2026 | official | primary | 4 | State news agency | read |
+| S100 | Nizar Baraka | Wikipedia | 2026 | encyclopedia | secondary | 4 | Neutral | read |
+| S101 | Morocco plans 60% of drinking water from renewable desalination by 2030 | Hespress (citing Reuters) | 05/12/2025 | news | secondary | 4 | Independent Moroccan news | read |
+| S102 | 'Souissi plot' drags Nizar Baraka into controversy; associates deny cash purchase | Attasiaa | 22/05/2026 | news | secondary | 3 | Moroccan news site | read |
+| S103 | Saadeddine Othmani | Wikipedia | 2025 | encyclopedia | secondary | 4 | Neutral | read |
+| S104 | La reussite de la campagne de vaccination temoigne de la capacite du Maroc a relever les defis | MAP | 04/03/2021 | official | primary | 4 | State agency (factual) | read |
+| S105 | El Othmani: 'Je ne possede qu'une seule villa' | Le360 | 26/01/2019 | news | secondary | 3 | Neutral | read |
+| S106 | Abdelilah Benkirane | Wikipedia | 2026 | encyclopedia | secondary | 4 | Neutral reference | read |
+| S107 | Que dit Benkirane sur sa retraite ? | Hespress FR | 02/02/2019 | news | secondary | 4 | Mainstream Moroccan outlet | read |
+| S108 | Abdelilah Benkirane : Ma voiture, ma pension, mes emmerdes | La Quotidienne | 22/01/2019 | news | secondary | 3 | Slightly critical | read |
+| S109 | Driss Lachgar | Wikipedia (fr) | 2026 | encyclopedia | secondary | 3 | Crowd-edited, neutral | read |
+| S110 | Bouznika : Driss Lachgar reelu Premier secretaire de l'USFP pour un quatrieme mandat | MAP | 18/10/2025 | official | primary | 5 | State news agency | read |
+| S111 | Attribution « douteuse » de marche au sein de l'USFP : Lachgar tacle la Cour des comptes | Hespress FR | 29/03/2024 | news | secondary | 4 | Independent online daily | read |
+| S112 | Mohamed Ouzzine | Wikipedia | 2025 | encyclopedia | secondary | 4 | Neutral | read |
+| S113 | Ouzzine : « je ne possede qu'un seul appartement a credit » | TelQuel | 09/06/2023 | news | secondary | 4 | Independent/critical | read |
+| S114 | Mohamed Nabil Benabdallah | Wikipedia (fr) | 2026 | encyclopedia | secondary | 3 | Neutral/community-edited | read |
+| S115 | Le Secretaire General - PPS | PPS (official site) | 2026 | official | primary | 4 | Party official bio | read |
+| S116 | Benabdellah : « 54 villes se sont debarrassees de leurs baraques » | TelQuel | 18/11/2015 | news | secondary | 4 | Independent newsweekly | read |
+| S117 | HM the King Congratulates Mohamed Joudar on Election as Secretary General of Constitutional Union Party | MAP | 03/10/2022 | official | primary | 5 | State news agency | read |
+| S118 | Mr Deputy: Mohamed Joudar | House of Representatives (Morocco) | 2026 | official | primary | 5 | Official parliament record | read |
+| S119 | Entretien avec Mohamed Joudar | Le360 | 04/10/2022 | news | secondary | 4 | Mainstream news | read |
+| S120 | Mohamed Joudar leads UC back to the Constitutional Court | Safircom | 03/02/2026 | news | secondary | 3 | Independent news site | read |
+| S121 | Abdessamad Archane | Wikipedia | 2026 | encyclopedia | secondary | 3 | Neutral | read |
+| S122 | Legislatives: le MDS couvrira 60% des circonscriptions avec trois femmes tetes de liste | Le360 | 11/08/2026 | news | secondary | 4 | Neutral | read |
+| S123 | Abdessamad Archane reelegido como secretario general del MDS | MAP | 08/10/2022 | official | primary | 5 | State agency | read |
+| S124 | Front des forces democratiques | Wikipedia (fr) | 2026 | encyclopedia | secondary | 4 | Neutral | read |
+| S125 | Dr. Mustapha Benali - Secretaire General du PFFD | PFFD (official) | 2026 | official | primary | 3 | Pro-party / self-published | read |
+| S126 | Legislatives 2026 : Les confidences de Mustapha Benali, SG du FFD | Le360 | 15/08/2026 | news | secondary | 4 | Neutral | read |
+| S127 | Congres national Ittihadi | Wikipedia (fr) | 2026 | encyclopedia | secondary | 3 | Neutral | read |
+| S128 | Elections: Ittihadi National Congress Seeks to Strengthen its Presence | MAP | 30/08/2021 | official | primary | 5 | State news agency | read |
+| S129 | Abdessamad Laaziz elu Secretaire general du Parti de la federation de la gauche democratique | Article19.ma | 08/01/2023 | news | secondary | 3 | Independent news | read |
+| S130 | Jamal El Asri | Wikipedia | 17/09/2026 | encyclopedia | secondary | 4 | Neutral (user-edited) | read |
+| S131 | PSU: Jamal El Asri succede a Nabila Mounib | Le360 | 06/11/2023 | news | secondary | 4 | Neutral | read |
+| S132 | 2026 Elections: Social Justice at Heart of Left Alliance's Program | MAP | 19/09/2026 | official | primary | 5 | State-affiliated | read |
 
 ## 8. Validation findings
 
-errors=0, warnings=68, info=3
+errors=0, warnings=55, info=3
 
 ### WARN SINGLE_SOURCE (29)
 
@@ -446,22 +491,6 @@ errors=0, warnings=68, info=3
 - claims.csv:22: C021 rests on a single source (S002); the project's rule requires 2+ independent sources to call a claim corroborated
 - ... and 17 more
 
-### WARN FILL_CELLS (15)
-
-- parties.csv: leader_current: 5/12 rows are still FILL
-- parties.csv: leader_2021: 4/12 rows are still FILL
-- sources.csv: party_actor: 5/92 rows are still FILL
-- sources.csv: bias_lean: 1/92 rows are still FILL
-- claims.csv: baseline: 96/96 rows are still FILL
-- claims.csv: deadline: 87/96 rows are still FILL
-- claims.csv: unit: 40/96 rows are still FILL
-- claims.csv: confidence: 40/96 rows are still FILL
-- claims.csv: target: 39/96 rows are still FILL
-- promises.csv: outcome_metric: 19/35 rows are still FILL
-- leaders.csv: source_ids: 8/8 rows are still FILL
-- leaders.csv: achievements: 7/8 rows are still FILL
-- ... and 3 more
-
 ### WARN MERGED_CLAIM (15)
 
 - claims.csv:7: 3 numeric targets in one row; methodology requires one claim per row (split into Cxxxa/b/c)
@@ -478,16 +507,18 @@ errors=0, warnings=68, info=3
 - claims.csv:33: 3 numeric targets in one row; methodology requires one claim per row (split into Cxxxa/b/c)
 - ... and 3 more
 
-### WARN PLACEHOLDER_SOURCE (8)
+### WARN FILL_CELLS (10)
 
-- leaders.csv:2: source_ids=FILL -- no source assigned yet
-- leaders.csv:3: source_ids=FILL -- no source assigned yet
-- leaders.csv:4: source_ids=FILL -- no source assigned yet
-- leaders.csv:5: source_ids=FILL -- no source assigned yet
-- leaders.csv:6: source_ids=FILL -- no source assigned yet
-- leaders.csv:7: source_ids=FILL -- no source assigned yet
-- leaders.csv:8: source_ids=FILL -- no source assigned yet
-- leaders.csv:9: source_ids=FILL -- no source assigned yet
+- parties.csv: leader_current: 5/12 rows are still FILL
+- parties.csv: leader_2021: 4/12 rows are still FILL
+- sources.csv: party_actor: 5/132 rows are still FILL
+- sources.csv: bias_lean: 1/132 rows are still FILL
+- claims.csv: baseline: 96/96 rows are still FILL
+- claims.csv: deadline: 87/96 rows are still FILL
+- claims.csv: unit: 40/96 rows are still FILL
+- claims.csv: confidence: 40/96 rows are still FILL
+- claims.csv: target: 39/96 rows are still FILL
+- promises.csv: outcome_metric: 19/35 rows are still FILL
 
 ### WARN NON_SNAKE_CASE (1)
 
