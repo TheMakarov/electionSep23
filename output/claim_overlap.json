@@ -1,17 +1,17 @@
 {
-  "generated": "2026-09-20T01:02:21",
+  "generated": "2026-09-20T10:53:59",
   "campaign_year": 2026,
   "method": "claim -> theme mapping in data/claim_themes.csv (one row per claim/theme pair, each with a literal anchor from the claim); a theme is 'shared' when two or more parties claim it",
   "totals": {
     "themes_in_play": 21,
     "themes_total": 21,
-    "shared_themes": 19,
-    "exclusive_themes": 2,
+    "shared_themes": 20,
+    "exclusive_themes": 1,
     "unused_themes": 0,
-    "duplication_index": 0.905,
-    "theme_tagged_claims": 102,
-    "theme_tagged_claims_on_shared_themes": 99,
-    "parties": 8
+    "duplication_index": 0.952,
+    "theme_tagged_claims": 117,
+    "theme_tagged_claims_on_shared_themes": 116,
+    "parties": 9
   },
   "themes": [
     {
@@ -19,8 +19,8 @@
       "label": "Social protection & pensions",
       "group": "Social",
       "shared": true,
-      "n_parties": 7,
-      "n_claims": 9,
+      "n_parties": 8,
+      "n_claims": 10,
       "parties": {
         "P001": [
           "C043"
@@ -44,6 +44,9 @@
         ],
         "P008": [
           "C058"
+        ],
+        "P014": [
+          "C101"
         ]
       }
     },
@@ -52,8 +55,8 @@
       "label": "Wages & purchasing power",
       "group": "Economy",
       "shared": true,
-      "n_parties": 6,
-      "n_claims": 9,
+      "n_parties": 7,
+      "n_claims": 10,
       "parties": {
         "P001": [
           "C041"
@@ -75,6 +78,9 @@
         ],
         "P008": [
           "C058"
+        ],
+        "P014": [
+          "C097"
         ]
       }
     },
@@ -83,8 +89,8 @@
       "label": "Jobs & employment",
       "group": "Economy",
       "shared": true,
-      "n_parties": 5,
-      "n_claims": 14,
+      "n_parties": 6,
+      "n_claims": 15,
       "parties": {
         "P001": [
           "C042",
@@ -109,6 +115,93 @@
         "P007": [
           "C005",
           "C015"
+        ],
+        "P014": [
+          "C102"
+        ]
+      }
+    },
+    {
+      "theme_id": "family",
+      "label": "Children, family & youth",
+      "group": "Social",
+      "shared": true,
+      "n_parties": 6,
+      "n_claims": 7,
+      "parties": {
+        "P003": [
+          "C037"
+        ],
+        "P004": [
+          "C002"
+        ],
+        "P005": [
+          "C036"
+        ],
+        "P006": [
+          "C049"
+        ],
+        "P007": [
+          "C006",
+          "C019"
+        ],
+        "P014": [
+          "C100"
+        ]
+      }
+    },
+    {
+      "theme_id": "education",
+      "label": "School education",
+      "group": "Social",
+      "shared": true,
+      "n_parties": 5,
+      "n_claims": 8,
+      "parties": {
+        "P001": [
+          "C043"
+        ],
+        "P005": [
+          "C024",
+          "C028"
+        ],
+        "P006": [
+          "C050",
+          "C051",
+          "C052"
+        ],
+        "P007": [
+          "C004"
+        ],
+        "P014": [
+          "C105"
+        ]
+      }
+    },
+    {
+      "theme_id": "health",
+      "label": "Health & medical coverage",
+      "group": "Social",
+      "shared": true,
+      "n_parties": 5,
+      "n_claims": 7,
+      "parties": {
+        "P001": [
+          "C043"
+        ],
+        "P004": [
+          "C002"
+        ],
+        "P005": [
+          "C024"
+        ],
+        "P007": [
+          "C003",
+          "C005"
+        ],
+        "P014": [
+          "C098",
+          "C103"
         ]
       }
     },
@@ -140,63 +233,12 @@
       }
     },
     {
-      "theme_id": "family",
-      "label": "Children, family & youth",
-      "group": "Social",
-      "shared": true,
-      "n_parties": 5,
-      "n_claims": 6,
-      "parties": {
-        "P003": [
-          "C037"
-        ],
-        "P004": [
-          "C002"
-        ],
-        "P005": [
-          "C036"
-        ],
-        "P006": [
-          "C049"
-        ],
-        "P007": [
-          "C006",
-          "C019"
-        ]
-      }
-    },
-    {
-      "theme_id": "education",
-      "label": "School education",
-      "group": "Social",
-      "shared": true,
-      "n_parties": 4,
-      "n_claims": 7,
-      "parties": {
-        "P001": [
-          "C043"
-        ],
-        "P005": [
-          "C024",
-          "C028"
-        ],
-        "P006": [
-          "C050",
-          "C051",
-          "C052"
-        ],
-        "P007": [
-          "C004"
-        ]
-      }
-    },
-    {
       "theme_id": "governance",
       "label": "Governance & anti-corruption",
       "group": "Governance",
       "shared": true,
-      "n_parties": 4,
-      "n_claims": 5,
+      "n_parties": 5,
+      "n_claims": 6,
       "parties": {
         "P003": [
           "C040"
@@ -210,29 +252,9 @@
         ],
         "P008": [
           "C059"
-        ]
-      }
-    },
-    {
-      "theme_id": "health",
-      "label": "Health & medical coverage",
-      "group": "Social",
-      "shared": true,
-      "n_parties": 4,
-      "n_claims": 5,
-      "parties": {
-        "P001": [
-          "C043"
         ],
-        "P004": [
-          "C002"
-        ],
-        "P005": [
-          "C024"
-        ],
-        "P007": [
-          "C003",
-          "C005"
+        "P014": [
+          "C107"
         ]
       }
     },
@@ -241,8 +263,8 @@
       "label": "Taxation & fiscal justice",
       "group": "Economy",
       "shared": true,
-      "n_parties": 4,
-      "n_claims": 5,
+      "n_parties": 5,
+      "n_claims": 6,
       "parties": {
         "P002": [
           "C048"
@@ -256,6 +278,54 @@
         "P007": [
           "C010",
           "C011"
+        ],
+        "P014": [
+          "C098"
+        ]
+      }
+    },
+    {
+      "theme_id": "prices",
+      "label": "Cost of living, food & markets",
+      "group": "Economy",
+      "shared": true,
+      "n_parties": 4,
+      "n_claims": 5,
+      "parties": {
+        "P002": [
+          "C046"
+        ],
+        "P006": [
+          "C057"
+        ],
+        "P007": [
+          "C013"
+        ],
+        "P014": [
+          "C098",
+          "C099"
+        ]
+      }
+    },
+    {
+      "theme_id": "housing",
+      "label": "Housing, transport & local services",
+      "group": "Social",
+      "shared": true,
+      "n_parties": 4,
+      "n_claims": 4,
+      "parties": {
+        "P005": [
+          "C024"
+        ],
+        "P007": [
+          "C014"
+        ],
+        "P008": [
+          "C060"
+        ],
+        "P014": [
+          "C104"
         ]
       }
     },
@@ -300,40 +370,21 @@
       }
     },
     {
-      "theme_id": "prices",
-      "label": "Cost of living, food & markets",
-      "group": "Economy",
-      "shared": true,
-      "n_parties": 3,
-      "n_claims": 3,
-      "parties": {
-        "P002": [
-          "C046"
-        ],
-        "P006": [
-          "C057"
-        ],
-        "P007": [
-          "C013"
-        ]
-      }
-    },
-    {
-      "theme_id": "housing",
-      "label": "Housing, transport & local services",
+      "theme_id": "research",
+      "label": "Higher education & research",
       "group": "Social",
       "shared": true,
       "n_parties": 3,
       "n_claims": 3,
       "parties": {
         "P005": [
-          "C024"
+          "C028"
         ],
-        "P007": [
-          "C014"
+        "P006": [
+          "C051"
         ],
-        "P008": [
-          "C060"
+        "P014": [
+          "C102"
         ]
       }
     },
@@ -375,6 +426,24 @@
       }
     },
     {
+      "theme_id": "energy",
+      "label": "Energy & renewables",
+      "group": "Environment",
+      "shared": true,
+      "n_parties": 2,
+      "n_claims": 4,
+      "parties": {
+        "P005": [
+          "C022",
+          "C035"
+        ],
+        "P014": [
+          "C099",
+          "C106"
+        ]
+      }
+    },
+    {
       "theme_id": "water",
       "label": "Water & food security",
       "group": "Environment",
@@ -410,22 +479,6 @@
       }
     },
     {
-      "theme_id": "research",
-      "label": "Higher education & research",
-      "group": "Social",
-      "shared": true,
-      "n_parties": 2,
-      "n_claims": 2,
-      "parties": {
-        "P005": [
-          "C028"
-        ],
-        "P006": [
-          "C051"
-        ]
-      }
-    },
-    {
       "theme_id": "industry",
       "label": "Industry & productive sovereignty",
       "group": "Economy",
@@ -438,20 +491,6 @@
         ],
         "P007": [
           "C009"
-        ]
-      }
-    },
-    {
-      "theme_id": "energy",
-      "label": "Energy & renewables",
-      "group": "Environment",
-      "shared": false,
-      "n_parties": 1,
-      "n_claims": 2,
-      "parties": {
-        "P005": [
-          "C022",
-          "C035"
         ]
       }
     },
@@ -471,22 +510,77 @@
   ],
   "parties": [
     {
+      "party_id": "P005",
+      "name": "USFP",
+      "themes": [
+        "social",
+        "wages",
+        "employment",
+        "family",
+        "education",
+        "health",
+        "rural",
+        "governance",
+        "tax",
+        "housing",
+        "digital",
+        "sme",
+        "research",
+        "identity",
+        "culture",
+        "energy",
+        "water",
+        "women",
+        "industry"
+      ],
+      "shared_themes": [
+        "social",
+        "wages",
+        "employment",
+        "family",
+        "education",
+        "health",
+        "rural",
+        "governance",
+        "tax",
+        "housing",
+        "digital",
+        "sme",
+        "research",
+        "identity",
+        "culture",
+        "energy",
+        "water",
+        "women",
+        "industry"
+      ],
+      "exclusive_themes": [],
+      "carried_over_from_baseline": [
+        "governance",
+        "sme",
+        "social",
+        "tax",
+        "wages"
+      ],
+      "convergence": 1.0
+    },
+    {
       "party_id": "P007",
       "name": "PPS",
       "themes": [
         "social",
         "wages",
         "employment",
-        "rural",
         "family",
         "education",
-        "governance",
         "health",
+        "rural",
+        "governance",
         "tax",
-        "digital",
-        "sme",
         "prices",
         "housing",
+        "digital",
+        "sme",
         "identity",
         "culture",
         "water",
@@ -498,16 +592,16 @@
         "social",
         "wages",
         "employment",
-        "rural",
         "family",
         "education",
-        "governance",
         "health",
+        "rural",
+        "governance",
         "tax",
-        "digital",
-        "sme",
         "prices",
         "housing",
+        "digital",
+        "sme",
         "identity",
         "culture",
         "water",
@@ -527,60 +621,39 @@
       "convergence": 0.947
     },
     {
-      "party_id": "P005",
-      "name": "USFP",
+      "party_id": "P014",
+      "name": "Alliance de la gauche",
       "themes": [
         "social",
         "wages",
         "employment",
-        "rural",
         "family",
         "education",
-        "governance",
         "health",
+        "governance",
         "tax",
-        "digital",
-        "sme",
+        "prices",
         "housing",
-        "identity",
-        "culture",
-        "water",
-        "women",
         "research",
-        "industry",
         "energy"
       ],
       "shared_themes": [
         "social",
         "wages",
         "employment",
-        "rural",
         "family",
         "education",
-        "governance",
         "health",
+        "governance",
         "tax",
-        "digital",
-        "sme",
+        "prices",
         "housing",
-        "identity",
-        "culture",
-        "water",
-        "women",
         "research",
-        "industry"
-      ],
-      "exclusive_themes": [
         "energy"
       ],
-      "carried_over_from_baseline": [
-        "governance",
-        "sme",
-        "social",
-        "tax",
-        "wages"
-      ],
-      "convergence": 0.947
+      "exclusive_themes": [],
+      "carried_over_from_baseline": [],
+      "convergence": 1.0
     },
     {
       "party_id": "P006",
@@ -588,25 +661,25 @@
       "themes": [
         "social",
         "employment",
-        "rural",
         "family",
         "education",
+        "rural",
         "tax",
+        "prices",
         "digital",
         "sme",
-        "prices",
         "research"
       ],
       "shared_themes": [
         "social",
         "employment",
-        "rural",
         "family",
         "education",
+        "rural",
         "tax",
+        "prices",
         "digital",
         "sme",
-        "prices",
         "research"
       ],
       "exclusive_themes": [],
@@ -623,15 +696,15 @@
       "themes": [
         "social",
         "wages",
-        "rural",
         "family",
+        "rural",
         "governance"
       ],
       "shared_themes": [
         "social",
         "wages",
-        "rural",
         "family",
+        "rural",
         "governance"
       ],
       "exclusive_themes": [],
@@ -744,20 +817,57 @@
         "social",
         "wages",
         "employment",
-        "rural",
         "family",
         "education",
-        "governance",
         "health",
+        "rural",
+        "governance",
         "tax",
+        "housing",
         "digital",
         "sme",
-        "housing",
         "identity",
         "culture",
         "water",
         "women",
         "industry"
+      ]
+    },
+    {
+      "party_a": "P005",
+      "party_b": "P014",
+      "shared_themes": 11,
+      "jaccard": 0.55,
+      "themes": [
+        "social",
+        "wages",
+        "employment",
+        "family",
+        "education",
+        "health",
+        "governance",
+        "tax",
+        "housing",
+        "research",
+        "energy"
+      ]
+    },
+    {
+      "party_a": "P007",
+      "party_b": "P014",
+      "shared_themes": 10,
+      "jaccard": 0.476,
+      "themes": [
+        "social",
+        "wages",
+        "employment",
+        "family",
+        "education",
+        "health",
+        "governance",
+        "tax",
+        "prices",
+        "housing"
       ]
     },
     {
@@ -768,9 +878,9 @@
       "themes": [
         "social",
         "employment",
-        "rural",
         "family",
         "education",
+        "rural",
         "tax",
         "digital",
         "sme",
@@ -785,13 +895,28 @@
       "themes": [
         "social",
         "employment",
+        "family",
+        "education",
         "rural",
+        "tax",
+        "prices",
+        "digital",
+        "sme"
+      ]
+    },
+    {
+      "party_a": "P006",
+      "party_b": "P014",
+      "shared_themes": 7,
+      "jaccard": 0.467,
+      "themes": [
+        "social",
+        "employment",
         "family",
         "education",
         "tax",
-        "digital",
-        "sme",
-        "prices"
+        "prices",
+        "research"
       ]
     },
     {
@@ -812,6 +937,19 @@
       "party_b": "P007",
       "shared_themes": 5,
       "jaccard": 0.263,
+      "themes": [
+        "social",
+        "wages",
+        "employment",
+        "education",
+        "health"
+      ]
+    },
+    {
+      "party_a": "P001",
+      "party_b": "P014",
+      "shared_themes": 5,
+      "jaccard": 0.417,
       "themes": [
         "social",
         "wages",
@@ -834,6 +972,19 @@
       ]
     },
     {
+      "party_a": "P002",
+      "party_b": "P014",
+      "shared_themes": 5,
+      "jaccard": 0.417,
+      "themes": [
+        "social",
+        "wages",
+        "employment",
+        "tax",
+        "prices"
+      ]
+    },
+    {
       "party_a": "P003",
       "party_b": "P005",
       "shared_themes": 5,
@@ -841,8 +992,8 @@
       "themes": [
         "social",
         "wages",
-        "rural",
         "family",
+        "rural",
         "governance"
       ]
     },
@@ -854,8 +1005,8 @@
       "themes": [
         "social",
         "wages",
-        "rural",
         "family",
+        "rural",
         "governance"
       ]
     },
@@ -922,6 +1073,30 @@
       ]
     },
     {
+      "party_a": "P003",
+      "party_b": "P014",
+      "shared_themes": 4,
+      "jaccard": 0.308,
+      "themes": [
+        "social",
+        "wages",
+        "family",
+        "governance"
+      ]
+    },
+    {
+      "party_a": "P008",
+      "party_b": "P014",
+      "shared_themes": 4,
+      "jaccard": 0.308,
+      "themes": [
+        "social",
+        "wages",
+        "governance",
+        "housing"
+      ]
+    },
+    {
       "party_a": "P001",
       "party_b": "P002",
       "shared_themes": 3,
@@ -950,8 +1125,8 @@
       "jaccard": 0.25,
       "themes": [
         "social",
-        "rural",
-        "family"
+        "family",
+        "rural"
       ]
     },
     {
@@ -1014,6 +1189,16 @@
       "themes": [
         "social",
         "wages"
+      ]
+    },
+    {
+      "party_a": "P004",
+      "party_b": "P014",
+      "shared_themes": 2,
+      "jaccard": 0.154,
+      "themes": [
+        "family",
+        "health"
       ]
     },
     {

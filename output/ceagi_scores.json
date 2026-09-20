@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-20T01:02:21",
+  "generated": "2026-09-20T10:53:59",
   "config": {
     "campaign_year": 2026,
     "baseline_year": 2021,
@@ -18,7 +18,7 @@
       "sigma": 0.05
     }
   },
-  "publishable": true,
+  "publishable": false,
   "gates": [
     {
       "gate": "No structural errors in data/",
@@ -27,35 +27,35 @@
     },
     {
       "gate": "FILL cells below 10%",
-      "pass": true,
-      "measured": "7.7% of cells (336/4346)"
+      "pass": false,
+      "measured": "10.5% of cells (549/5223)"
     },
     {
       "gate": "At least 50% of claims scored",
       "pass": true,
-      "measured": "100.0% (61/61)"
+      "measured": "100.0% (72/72)"
     },
     {
       "gate": "At least 50% of claims corroborated",
       "pass": true,
-      "measured": "68.9% (42/61)"
+      "measured": "73.6% (53/72)"
     },
     {
       "gate": "At least one party fully scored on all six dimensions",
       "pass": true,
-      "measured": "2 of 12 parties"
+      "measured": "2 of 59 parties"
     }
   ],
   "readiness": {
-    "fill_fraction": 0.0773,
-    "cells_filled": 336,
-    "cells_total": 4346,
-    "claims_total": 61,
-    "claims_scored": 61,
-    "claims_corroborated": 42,
+    "fill_fraction": 0.1051,
+    "cells_filled": 549,
+    "cells_total": 5223,
+    "claims_total": 72,
+    "claims_scored": 72,
+    "claims_corroborated": 53,
     "claims_historical": 35,
     "parties_fully_scored": 2,
-    "parties_total": 12
+    "parties_total": 59
   },
   "parties": [
     {
@@ -584,6 +584,100 @@
       "advantage_ratio": 0.301
     },
     {
+      "party_id": "P014",
+      "name": "Alliance de la gauche",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P033",
+      "name": "Alliance des Libertés (ADL)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
       "party_id": "P012",
       "name": "CNI",
       "score": null,
@@ -608,6 +702,2121 @@
           "n": 0,
           "year": 2021,
           "detail": "no local-list vote share on record (regional-list seat only)"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P056",
+      "name": "Front de Défense des Institutions Constitutionnelles (FDIC)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P037",
+      "name": "Gauche Socialiste Unifiée (GSU)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P035",
+      "name": "Initiative Citoyenne pour le Développement (ICD)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P054",
+      "name": "Mouvement Populaire Démocratique et Constitutionnel (MPDC)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P048",
+      "name": "Organisation de l'Action Démocratique Populaire (OADP)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P020",
+      "name": "PARTI AL AHD ADDIMOQRATI",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P043",
+      "name": "PARTI AL AMAL",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P026",
+      "name": "PARTI ANNAHDA",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P052",
+      "name": "PARTI DE L'ACTION (P.A)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P047",
+      "name": "PARTI DE L'AVANT GARDE DEMOCRATIQUE ET SOCIALISTE (P.A.D.S)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P022",
+      "name": "PARTI DE L'ENVIRONNEMENT ET DU DEVELOPPEMENT DURABLE",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P023",
+      "name": "PARTI DE L'UNITE ET DE LA DEMOCRATIE",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P059",
+      "name": "PARTI DE LA CHOURA ET DE L'ISTIQLAL (P.C.I)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P030",
+      "name": "PARTI DE LA LIBERTE ET DE LA JUSTICE SOCIALE",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P041",
+      "name": "PARTI DE LA REFORME DU DEVELOPPEMENT (P.R.D)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P027",
+      "name": "PARTI DE LA RENAISSANCE ET DE LA VERTU",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P024",
+      "name": "PARTI DE LA SOCIETE DEMOCRATIQUE(PSD)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P021",
+      "name": "PARTI DEMOCRATE NATIONAL",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P040",
+      "name": "PARTI DES FORCES CITOYENNES (P.F.C)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P018",
+      "name": "PARTI DES NEO-DEMOCRATES",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P050",
+      "name": "PARTI DU CENTRE SOCIAL (P.C.S)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P031",
+      "name": "PARTI MAROCAIN LIBERAL",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P019",
+      "name": "PGV. Parti de la Gauche Verte",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P032",
+      "name": "PRE. Parti du Renouveau et de l'Equité",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P060",
+      "name": "Parti Communiste Marocain (PCM)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P057",
+      "name": "Parti Constitutionnel Démocratique (PCD)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P038",
+      "name": "Parti Libéral Réformateur (PLR)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P016",
+      "name": "Parti Marocain Libéral (PML)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P051",
+      "name": "Parti National Démocrate (PND)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P046",
+      "name": "Parti National des Verts pour le Développement (PVD)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P028",
+      "name": "Parti Socialiste (PS)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P055",
+      "name": "Parti Socialiste Démocrate (PSD)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P044",
+      "name": "Parti Socialiste Démocratique (PSD)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P029",
+      "name": "Parti Travailliste (PT)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P039",
+      "name": "Parti de l'Alternative Civilisationnelle (PBH)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P036",
+      "name": "Parti de l'Environnement et du Développement (PED)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P015",
+      "name": "Parti de l'Equité (PE)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P049",
+      "name": "Parti de l'Union et de la Solidarité Nationale (PUSN)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P045",
+      "name": "Parti de l'Unité et du Développement (PUD)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P053",
+      "name": "Parti de la Libération et du Socialisme (PLS)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P017",
+      "name": "Parti des Verts Marocains (PVM)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P034",
+      "name": "Parti du Pacte (ALAHD)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P025",
+      "name": "UNION MAROCAINE POUR LA DEMOCRATIE (UMD)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P042",
+      "name": "Union Démocratique (UD)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
+        },
+        "G": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "L": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        },
+        "M": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 indicator row for this party"
+        }
+      },
+      "advantage_ratio": 0.0
+    },
+    {
+      "party_id": "P058",
+      "name": "Union Nationale des Forces Populaires (UNFP)",
+      "score": null,
+      "ci": null,
+      "coverage": 0,
+      "provisional_score_unranked": null,
+      "subindices": {
+        "D": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record"
+        },
+        "C": {
+          "value": null,
+          "n": 0,
+          "year": 2026,
+          "detail": "0/0 2021 promises have a verification score; C cannot be computed"
+        },
+        "E": {
+          "value": null,
+          "n": 0,
+          "year": 2021,
+          "detail": "no 2021 election row for this party"
         },
         "G": {
           "value": null,

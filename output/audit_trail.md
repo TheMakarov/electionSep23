@@ -1,7 +1,7 @@
 # Audit trail - Morocco electoral data project
 
-Generated 2026-09-20T01:02:21 by `scripts/build.py`.
-Campaign year **2026**, baseline year **2021**, publication gate: **PASS**.
+Generated 2026-09-20T10:53:59 by `scripts/build.py`.
+Campaign year **2026**, baseline year **2021**, publication gate: **FAIL**.
 
 Every number below is traced to a source ID and a confidence level.
 A value of `n/a` means the evidence does not exist yet - it is not a zero.
@@ -84,6 +84,288 @@ A value of `n/a` means the evidence does not exist yet - it is not a zero.
 | PSU | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
 | PSU | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
 | PSU | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Alliance de la gauche | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Alliance de la gauche | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Alliance de la gauche | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Alliance de la gauche | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Alliance de la gauche | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Alliance de la gauche | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Equité (PE) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti de l'Equité (PE) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti de l'Equité (PE) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti de l'Equité (PE) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Equité (PE) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Equité (PE) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Marocain Libéral (PML) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti Marocain Libéral (PML) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti Marocain Libéral (PML) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti Marocain Libéral (PML) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Marocain Libéral (PML) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Marocain Libéral (PML) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti des Verts Marocains (PVM) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti des Verts Marocains (PVM) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti des Verts Marocains (PVM) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti des Verts Marocains (PVM) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti des Verts Marocains (PVM) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti des Verts Marocains (PVM) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DES NEO-DEMOCRATES | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DES NEO-DEMOCRATES | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DES NEO-DEMOCRATES | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DES NEO-DEMOCRATES | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DES NEO-DEMOCRATES | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DES NEO-DEMOCRATES | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PGV. Parti de la Gauche Verte | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PGV. Parti de la Gauche Verte | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PGV. Parti de la Gauche Verte | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PGV. Parti de la Gauche Verte | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PGV. Parti de la Gauche Verte | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PGV. Parti de la Gauche Verte | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI AL AHD ADDIMOQRATI | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI AL AHD ADDIMOQRATI | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI AL AHD ADDIMOQRATI | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI AL AHD ADDIMOQRATI | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI AL AHD ADDIMOQRATI | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI AL AHD ADDIMOQRATI | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DEMOCRATE NATIONAL | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DEMOCRATE NATIONAL | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DEMOCRATE NATIONAL | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DEMOCRATE NATIONAL | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DEMOCRATE NATIONAL | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DEMOCRATE NATIONAL | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'ENVIRONNEMENT ET DU DEVELOPPEMENT DURABLE | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DE L'ENVIRONNEMENT ET DU DEVELOPPEMENT DURABLE | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DE L'ENVIRONNEMENT ET DU DEVELOPPEMENT DURABLE | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DE L'ENVIRONNEMENT ET DU DEVELOPPEMENT DURABLE | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'ENVIRONNEMENT ET DU DEVELOPPEMENT DURABLE | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'ENVIRONNEMENT ET DU DEVELOPPEMENT DURABLE | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'UNITE ET DE LA DEMOCRATIE | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DE L'UNITE ET DE LA DEMOCRATIE | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DE L'UNITE ET DE LA DEMOCRATIE | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DE L'UNITE ET DE LA DEMOCRATIE | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'UNITE ET DE LA DEMOCRATIE | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'UNITE ET DE LA DEMOCRATIE | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA SOCIETE DEMOCRATIQUE(PSD) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DE LA SOCIETE DEMOCRATIQUE(PSD) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DE LA SOCIETE DEMOCRATIQUE(PSD) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DE LA SOCIETE DEMOCRATIQUE(PSD) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA SOCIETE DEMOCRATIQUE(PSD) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA SOCIETE DEMOCRATIQUE(PSD) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| UNION MAROCAINE POUR LA DEMOCRATIE (UMD) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| UNION MAROCAINE POUR LA DEMOCRATIE (UMD) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| UNION MAROCAINE POUR LA DEMOCRATIE (UMD) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| UNION MAROCAINE POUR LA DEMOCRATIE (UMD) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| UNION MAROCAINE POUR LA DEMOCRATIE (UMD) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| UNION MAROCAINE POUR LA DEMOCRATIE (UMD) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI ANNAHDA | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI ANNAHDA | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI ANNAHDA | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI ANNAHDA | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI ANNAHDA | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI ANNAHDA | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA RENAISSANCE ET DE LA VERTU | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DE LA RENAISSANCE ET DE LA VERTU | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DE LA RENAISSANCE ET DE LA VERTU | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DE LA RENAISSANCE ET DE LA VERTU | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA RENAISSANCE ET DE LA VERTU | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA RENAISSANCE ET DE LA VERTU | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Socialiste (PS) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti Socialiste (PS) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti Socialiste (PS) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti Socialiste (PS) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Socialiste (PS) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Socialiste (PS) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Travailliste (PT) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti Travailliste (PT) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti Travailliste (PT) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti Travailliste (PT) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Travailliste (PT) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Travailliste (PT) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA LIBERTE ET DE LA JUSTICE SOCIALE | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DE LA LIBERTE ET DE LA JUSTICE SOCIALE | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DE LA LIBERTE ET DE LA JUSTICE SOCIALE | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DE LA LIBERTE ET DE LA JUSTICE SOCIALE | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA LIBERTE ET DE LA JUSTICE SOCIALE | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA LIBERTE ET DE LA JUSTICE SOCIALE | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI MAROCAIN LIBERAL | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI MAROCAIN LIBERAL | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI MAROCAIN LIBERAL | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI MAROCAIN LIBERAL | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI MAROCAIN LIBERAL | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI MAROCAIN LIBERAL | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PRE. Parti du Renouveau et de l'Equité | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PRE. Parti du Renouveau et de l'Equité | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PRE. Parti du Renouveau et de l'Equité | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PRE. Parti du Renouveau et de l'Equité | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PRE. Parti du Renouveau et de l'Equité | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PRE. Parti du Renouveau et de l'Equité | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Alliance des Libertés (ADL) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Alliance des Libertés (ADL) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Alliance des Libertés (ADL) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Alliance des Libertés (ADL) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Alliance des Libertés (ADL) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Alliance des Libertés (ADL) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti du Pacte (ALAHD) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti du Pacte (ALAHD) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti du Pacte (ALAHD) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti du Pacte (ALAHD) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti du Pacte (ALAHD) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti du Pacte (ALAHD) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Initiative Citoyenne pour le Développement (ICD) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Initiative Citoyenne pour le Développement (ICD) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Initiative Citoyenne pour le Développement (ICD) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Initiative Citoyenne pour le Développement (ICD) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Initiative Citoyenne pour le Développement (ICD) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Initiative Citoyenne pour le Développement (ICD) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Environnement et du Développement (PED) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti de l'Environnement et du Développement (PED) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti de l'Environnement et du Développement (PED) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti de l'Environnement et du Développement (PED) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Environnement et du Développement (PED) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Environnement et du Développement (PED) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Gauche Socialiste Unifiée (GSU) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Gauche Socialiste Unifiée (GSU) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Gauche Socialiste Unifiée (GSU) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Gauche Socialiste Unifiée (GSU) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Gauche Socialiste Unifiée (GSU) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Gauche Socialiste Unifiée (GSU) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Libéral Réformateur (PLR) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti Libéral Réformateur (PLR) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti Libéral Réformateur (PLR) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti Libéral Réformateur (PLR) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Libéral Réformateur (PLR) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Libéral Réformateur (PLR) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Alternative Civilisationnelle (PBH) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti de l'Alternative Civilisationnelle (PBH) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti de l'Alternative Civilisationnelle (PBH) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti de l'Alternative Civilisationnelle (PBH) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Alternative Civilisationnelle (PBH) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Alternative Civilisationnelle (PBH) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DES FORCES CITOYENNES (P.F.C) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DES FORCES CITOYENNES (P.F.C) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DES FORCES CITOYENNES (P.F.C) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DES FORCES CITOYENNES (P.F.C) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DES FORCES CITOYENNES (P.F.C) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DES FORCES CITOYENNES (P.F.C) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA REFORME DU DEVELOPPEMENT (P.R.D) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DE LA REFORME DU DEVELOPPEMENT (P.R.D) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DE LA REFORME DU DEVELOPPEMENT (P.R.D) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DE LA REFORME DU DEVELOPPEMENT (P.R.D) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA REFORME DU DEVELOPPEMENT (P.R.D) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA REFORME DU DEVELOPPEMENT (P.R.D) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Union Démocratique (UD) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Union Démocratique (UD) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Union Démocratique (UD) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Union Démocratique (UD) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Union Démocratique (UD) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Union Démocratique (UD) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI AL AMAL | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI AL AMAL | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI AL AMAL | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI AL AMAL | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI AL AMAL | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI AL AMAL | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Socialiste Démocratique (PSD) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti Socialiste Démocratique (PSD) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti Socialiste Démocratique (PSD) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti Socialiste Démocratique (PSD) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Socialiste Démocratique (PSD) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Socialiste Démocratique (PSD) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Unité et du Développement (PUD) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti de l'Unité et du Développement (PUD) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti de l'Unité et du Développement (PUD) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti de l'Unité et du Développement (PUD) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Unité et du Développement (PUD) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Unité et du Développement (PUD) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti National des Verts pour le Développement (PVD) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti National des Verts pour le Développement (PVD) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti National des Verts pour le Développement (PVD) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti National des Verts pour le Développement (PVD) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti National des Verts pour le Développement (PVD) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti National des Verts pour le Développement (PVD) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'AVANT GARDE DEMOCRATIQUE ET SOCIALISTE (P.A.D.S) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DE L'AVANT GARDE DEMOCRATIQUE ET SOCIALISTE (P.A.D.S) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DE L'AVANT GARDE DEMOCRATIQUE ET SOCIALISTE (P.A.D.S) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DE L'AVANT GARDE DEMOCRATIQUE ET SOCIALISTE (P.A.D.S) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'AVANT GARDE DEMOCRATIQUE ET SOCIALISTE (P.A.D.S) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'AVANT GARDE DEMOCRATIQUE ET SOCIALISTE (P.A.D.S) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Organisation de l'Action Démocratique Populaire (OADP) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Organisation de l'Action Démocratique Populaire (OADP) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Organisation de l'Action Démocratique Populaire (OADP) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Organisation de l'Action Démocratique Populaire (OADP) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Organisation de l'Action Démocratique Populaire (OADP) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Organisation de l'Action Démocratique Populaire (OADP) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Union et de la Solidarité Nationale (PUSN) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti de l'Union et de la Solidarité Nationale (PUSN) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti de l'Union et de la Solidarité Nationale (PUSN) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti de l'Union et de la Solidarité Nationale (PUSN) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Union et de la Solidarité Nationale (PUSN) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de l'Union et de la Solidarité Nationale (PUSN) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DU CENTRE SOCIAL (P.C.S) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DU CENTRE SOCIAL (P.C.S) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DU CENTRE SOCIAL (P.C.S) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DU CENTRE SOCIAL (P.C.S) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DU CENTRE SOCIAL (P.C.S) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DU CENTRE SOCIAL (P.C.S) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti National Démocrate (PND) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti National Démocrate (PND) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti National Démocrate (PND) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti National Démocrate (PND) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti National Démocrate (PND) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti National Démocrate (PND) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'ACTION (P.A) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DE L'ACTION (P.A) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DE L'ACTION (P.A) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DE L'ACTION (P.A) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'ACTION (P.A) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE L'ACTION (P.A) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de la Libération et du Socialisme (PLS) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti de la Libération et du Socialisme (PLS) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti de la Libération et du Socialisme (PLS) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti de la Libération et du Socialisme (PLS) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de la Libération et du Socialisme (PLS) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti de la Libération et du Socialisme (PLS) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Mouvement Populaire Démocratique et Constitutionnel (MPDC) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Mouvement Populaire Démocratique et Constitutionnel (MPDC) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Mouvement Populaire Démocratique et Constitutionnel (MPDC) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Mouvement Populaire Démocratique et Constitutionnel (MPDC) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Mouvement Populaire Démocratique et Constitutionnel (MPDC) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Mouvement Populaire Démocratique et Constitutionnel (MPDC) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Socialiste Démocrate (PSD) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti Socialiste Démocrate (PSD) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti Socialiste Démocrate (PSD) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti Socialiste Démocrate (PSD) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Socialiste Démocrate (PSD) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Socialiste Démocrate (PSD) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Front de Défense des Institutions Constitutionnelles (FDIC) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Front de Défense des Institutions Constitutionnelles (FDIC) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Front de Défense des Institutions Constitutionnelles (FDIC) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Front de Défense des Institutions Constitutionnelles (FDIC) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Front de Défense des Institutions Constitutionnelles (FDIC) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Front de Défense des Institutions Constitutionnelles (FDIC) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Constitutionnel Démocratique (PCD) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti Constitutionnel Démocratique (PCD) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti Constitutionnel Démocratique (PCD) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti Constitutionnel Démocratique (PCD) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Constitutionnel Démocratique (PCD) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Constitutionnel Démocratique (PCD) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Union Nationale des Forces Populaires (UNFP) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Union Nationale des Forces Populaires (UNFP) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Union Nationale des Forces Populaires (UNFP) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Union Nationale des Forces Populaires (UNFP) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Union Nationale des Forces Populaires (UNFP) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Union Nationale des Forces Populaires (UNFP) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA CHOURA ET DE L'ISTIQLAL (P.C.I) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| PARTI DE LA CHOURA ET DE L'ISTIQLAL (P.C.I) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| PARTI DE LA CHOURA ET DE L'ISTIQLAL (P.C.I) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| PARTI DE LA CHOURA ET DE L'ISTIQLAL (P.C.I) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA CHOURA ET DE L'ISTIQLAL (P.C.I) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| PARTI DE LA CHOURA ET DE L'ISTIQLAL (P.C.I) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Communiste Marocain (PCM) | D | n/a | 0 | 2021 | 0 concluded 2021 promise(s) tracked, 3 required to score; no 2021 promise on record |
+| Parti Communiste Marocain (PCM) | C | n/a | 0 | 2026 | 0/0 2021 promises have a verification score; C cannot be computed |
+| Parti Communiste Marocain (PCM) | E | n/a | 0 | 2021 | no 2021 election row for this party |
+| Parti Communiste Marocain (PCM) | G | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Communiste Marocain (PCM) | L | n/a | 0 | 2021 | no 2021 indicator row for this party |
+| Parti Communiste Marocain (PCM) | M | n/a | 0 | 2021 | no 2021 indicator row for this party |
 
 ## 2. Composite scores
 
@@ -100,7 +382,54 @@ A value of `n/a` means the evidence does not exist yet - it is not a zero.
 | FFD | 1/6 | n/a | n/a | n/a |
 | MDS | 1/6 | n/a | n/a | n/a |
 | PSU | 1/6 | n/a | n/a | n/a |
+| Alliance de la gauche | 0/6 | n/a | n/a | n/a |
+| Alliance des Libertés (ADL) | 0/6 | n/a | n/a | n/a |
 | CNI | 0/6 | n/a | n/a | n/a |
+| Front de Défense des Institutions Constitutionnelles (FDIC) | 0/6 | n/a | n/a | n/a |
+| Gauche Socialiste Unifiée (GSU) | 0/6 | n/a | n/a | n/a |
+| Initiative Citoyenne pour le Développement (ICD) | 0/6 | n/a | n/a | n/a |
+| Mouvement Populaire Démocratique et Constitutionnel (MPDC) | 0/6 | n/a | n/a | n/a |
+| Organisation de l'Action Démocratique Populaire (OADP) | 0/6 | n/a | n/a | n/a |
+| PARTI AL AHD ADDIMOQRATI | 0/6 | n/a | n/a | n/a |
+| PARTI AL AMAL | 0/6 | n/a | n/a | n/a |
+| PARTI ANNAHDA | 0/6 | n/a | n/a | n/a |
+| PARTI DE L'ACTION (P.A) | 0/6 | n/a | n/a | n/a |
+| PARTI DE L'AVANT GARDE DEMOCRATIQUE ET SOCIALISTE (P.A.D.S) | 0/6 | n/a | n/a | n/a |
+| PARTI DE L'ENVIRONNEMENT ET DU DEVELOPPEMENT DURABLE | 0/6 | n/a | n/a | n/a |
+| PARTI DE L'UNITE ET DE LA DEMOCRATIE | 0/6 | n/a | n/a | n/a |
+| PARTI DE LA CHOURA ET DE L'ISTIQLAL (P.C.I) | 0/6 | n/a | n/a | n/a |
+| PARTI DE LA LIBERTE ET DE LA JUSTICE SOCIALE | 0/6 | n/a | n/a | n/a |
+| PARTI DE LA REFORME DU DEVELOPPEMENT (P.R.D) | 0/6 | n/a | n/a | n/a |
+| PARTI DE LA RENAISSANCE ET DE LA VERTU | 0/6 | n/a | n/a | n/a |
+| PARTI DE LA SOCIETE DEMOCRATIQUE(PSD) | 0/6 | n/a | n/a | n/a |
+| PARTI DEMOCRATE NATIONAL | 0/6 | n/a | n/a | n/a |
+| PARTI DES FORCES CITOYENNES (P.F.C) | 0/6 | n/a | n/a | n/a |
+| PARTI DES NEO-DEMOCRATES | 0/6 | n/a | n/a | n/a |
+| PARTI DU CENTRE SOCIAL (P.C.S) | 0/6 | n/a | n/a | n/a |
+| PARTI MAROCAIN LIBERAL | 0/6 | n/a | n/a | n/a |
+| PGV. Parti de la Gauche Verte | 0/6 | n/a | n/a | n/a |
+| PRE. Parti du Renouveau et de l'Equité | 0/6 | n/a | n/a | n/a |
+| Parti Communiste Marocain (PCM) | 0/6 | n/a | n/a | n/a |
+| Parti Constitutionnel Démocratique (PCD) | 0/6 | n/a | n/a | n/a |
+| Parti Libéral Réformateur (PLR) | 0/6 | n/a | n/a | n/a |
+| Parti Marocain Libéral (PML) | 0/6 | n/a | n/a | n/a |
+| Parti National Démocrate (PND) | 0/6 | n/a | n/a | n/a |
+| Parti National des Verts pour le Développement (PVD) | 0/6 | n/a | n/a | n/a |
+| Parti Socialiste (PS) | 0/6 | n/a | n/a | n/a |
+| Parti Socialiste Démocrate (PSD) | 0/6 | n/a | n/a | n/a |
+| Parti Socialiste Démocratique (PSD) | 0/6 | n/a | n/a | n/a |
+| Parti Travailliste (PT) | 0/6 | n/a | n/a | n/a |
+| Parti de l'Alternative Civilisationnelle (PBH) | 0/6 | n/a | n/a | n/a |
+| Parti de l'Environnement et du Développement (PED) | 0/6 | n/a | n/a | n/a |
+| Parti de l'Equité (PE) | 0/6 | n/a | n/a | n/a |
+| Parti de l'Union et de la Solidarité Nationale (PUSN) | 0/6 | n/a | n/a | n/a |
+| Parti de l'Unité et du Développement (PUD) | 0/6 | n/a | n/a | n/a |
+| Parti de la Libération et du Socialisme (PLS) | 0/6 | n/a | n/a | n/a |
+| Parti des Verts Marocains (PVM) | 0/6 | n/a | n/a | n/a |
+| Parti du Pacte (ALAHD) | 0/6 | n/a | n/a | n/a |
+| UNION MAROCAINE POUR LA DEMOCRATIE (UMD) | 0/6 | n/a | n/a | n/a |
+| Union Démocratique (UD) | 0/6 | n/a | n/a | n/a |
+| Union Nationale des Forces Populaires (UNFP) | 0/6 | n/a | n/a | n/a |
 
 ## 3. Election results (seats and vote shares)
 
@@ -200,6 +529,17 @@ A value of `n/a` means the evidence does not exist yet - it is not a zero.
 - `C059` [UC] class=V, verification=1 (scored) - sources: S012, S045 - confidence: MEDIUM
 - `C060` [UC] class=V, verification=1 (scored) - sources: S012 - confidence: MEDIUM
 - `C096` [Istiqlal] class=V, verification=1 (scored) - sources: S029 - confidence: MEDIUM
+- `C097` [Alliance de la gauche] class=Q, verification=3 (scored) - sources: S157, S158, S160, S161 - confidence: HIGH
+- `C098` [Alliance de la gauche] class=V, verification=1 (scored) - sources: S157, S160 - confidence: HIGH
+- `C099` [Alliance de la gauche] class=V, verification=1 (scored) - sources: S157, S161 - confidence: HIGH
+- `C100` [Alliance de la gauche] class=Q, verification=2 (scored) - sources: S157, S160 - confidence: HIGH
+- `C101` [Alliance de la gauche] class=V, verification=1 (scored) - sources: S157, S160 - confidence: HIGH
+- `C102` [Alliance de la gauche] class=Q, verification=2 (scored) - sources: S157, S160 - confidence: HIGH
+- `C103` [Alliance de la gauche] class=V, verification=1 (scored) - sources: S157, S160 - confidence: HIGH
+- `C104` [Alliance de la gauche] class=Q, verification=2 (scored) - sources: S157, S160 - confidence: HIGH
+- `C105` [Alliance de la gauche] class=V, verification=1 (scored) - sources: S157, S160 - confidence: HIGH
+- `C106` [Alliance de la gauche] class=V, verification=1 (scored) - sources: S157, S160 - confidence: HIGH
+- `C107` [Alliance de la gauche] class=Q, verification=2 (scored) - sources: S157, S163 - confidence: HIGH
 
 ## 4b. Historical claims (earlier campaigns)
 
@@ -241,30 +581,30 @@ A value of `n/a` means the evidence does not exist yet - it is not a zero.
 
 ## 4c. Claim-theme mapping and convergence
 
-Method: `data/claim_themes.csv` maps each claim to one or more themes from the controlled vocabulary in `data/themes.csv`; every mapping row quotes a literal anchor from the claim text. `19` of `21` themes in play for 2026 are claimed by two or more parties (duplication index 90%).
+Method: `data/claim_themes.csv` maps each claim to one or more themes from the controlled vocabulary in `data/themes.csv`; every mapping row quotes a literal anchor from the claim text. `20` of `21` themes in play for 2026 are claimed by two or more parties (duplication index 95%).
 
 | Theme | Group | Parties | Claim IDs |
 |---|---|---|---|
-| Social protection & pensions | Social | RNI (1), PAM (1), Istiqlal (1), USFP (1), MP (1), PPS (3), UC (1) | RNI: C043; PAM: C047; Istiqlal: C037; USFP: C027; MP: C054; PPS: C003, C005, C006; UC: C058 |
-| Wages & purchasing power | Economy | RNI (1), PAM (2), Istiqlal (2), USFP (1), PPS (2), UC (1) | RNI: C041; PAM: C044, C047; Istiqlal: C038, C039; USFP: C024; PPS: C006, C007; UC: C058 |
-| Jobs & employment | Economy | RNI (2), PAM (1), USFP (6), MP (3), PPS (2) | RNI: C042, C043; PAM: C045; USFP: C022, C023, C027, C029, C034, C036; MP: C049, C052, C056; PPS: C005, C015 |
+| Social protection & pensions | Social | RNI (1), PAM (1), Istiqlal (1), USFP (1), MP (1), PPS (3), UC (1), Alliance de la gauche (1) | RNI: C043; PAM: C047; Istiqlal: C037; USFP: C027; MP: C054; PPS: C003, C005, C006; UC: C058; Alliance de la gauche: C101 |
+| Wages & purchasing power | Economy | RNI (1), PAM (2), Istiqlal (2), USFP (1), PPS (2), UC (1), Alliance de la gauche (1) | RNI: C041; PAM: C044, C047; Istiqlal: C038, C039; USFP: C024; PPS: C006, C007; UC: C058; Alliance de la gauche: C097 |
+| Jobs & employment | Economy | RNI (2), PAM (1), USFP (6), MP (3), PPS (2), Alliance de la gauche (1) | RNI: C042, C043; PAM: C045; USFP: C022, C023, C027, C029, C034, C036; MP: C049, C052, C056; PPS: C005, C015; Alliance de la gauche: C102 |
+| Children, family & youth | Social | Istiqlal (1), PJD (1), USFP (1), MP (1), PPS (2), Alliance de la gauche (1) | Istiqlal: C037; PJD: C002; USFP: C036; MP: C049; PPS: C006, C019; Alliance de la gauche: C100 |
+| School education | Social | RNI (1), USFP (2), MP (3), PPS (1), Alliance de la gauche (1) | RNI: C043; USFP: C024, C028; MP: C050, C051, C052; PPS: C004; Alliance de la gauche: C105 |
+| Health & medical coverage | Social | RNI (1), PJD (1), USFP (1), PPS (2), Alliance de la gauche (2) | RNI: C043; PJD: C002; USFP: C024; PPS: C003, C005; Alliance de la gauche: C098, C103 |
 | Rural development & territorial equity | Territory | Istiqlal (1), USFP (2), MP (1), PPS (1), UC (2) | Istiqlal: C096; USFP: C025, C029; MP: C053; PPS: C004; UC: C058, C059 |
-| Children, family & youth | Social | Istiqlal (1), PJD (1), USFP (1), MP (1), PPS (2) | Istiqlal: C037; PJD: C002; USFP: C036; MP: C049; PPS: C006, C019 |
-| School education | Social | RNI (1), USFP (2), MP (3), PPS (1) | RNI: C043; USFP: C024, C028; MP: C050, C051, C052; PPS: C004 |
-| Governance & anti-corruption | Governance | Istiqlal (1), USFP (1), PPS (2), UC (1) | Istiqlal: C040; USFP: C031; PPS: C016, C021; UC: C059 |
-| Health & medical coverage | Social | RNI (1), PJD (1), USFP (1), PPS (2) | RNI: C043; PJD: C002; USFP: C024; PPS: C003, C005 |
-| Taxation & fiscal justice | Economy | PAM (1), USFP (1), MP (1), PPS (2) | PAM: C048; USFP: C023; MP: C055; PPS: C010, C011 |
+| Governance & anti-corruption | Governance | Istiqlal (1), USFP (1), PPS (2), UC (1), Alliance de la gauche (1) | Istiqlal: C040; USFP: C031; PPS: C016, C021; UC: C059; Alliance de la gauche: C107 |
+| Taxation & fiscal justice | Economy | PAM (1), USFP (1), MP (1), PPS (2), Alliance de la gauche (1) | PAM: C048; USFP: C023; MP: C055; PPS: C010, C011; Alliance de la gauche: C098 |
+| Cost of living, food & markets | Economy | PAM (1), MP (1), PPS (1), Alliance de la gauche (2) | PAM: C046; MP: C057; PPS: C013; Alliance de la gauche: C098, C099 |
+| Housing, transport & local services | Social | USFP (1), PPS (1), UC (1), Alliance de la gauche (1) | USFP: C024; PPS: C014; UC: C060; Alliance de la gauche: C104 |
 | Digital administration | Governance | USFP (2), MP (1), PPS (1) | USFP: C028, C030; MP: C054; PPS: C015 |
 | SMEs, entrepreneurship & investment | Economy | USFP (2), MP (1), PPS (1) | USFP: C026, C036; MP: C055; PPS: C010 |
-| Cost of living, food & markets | Economy | PAM (1), MP (1), PPS (1) | PAM: C046; MP: C057; PPS: C013 |
-| Housing, transport & local services | Social | USFP (1), PPS (1), UC (1) | USFP: C024; PPS: C014; UC: C060 |
+| Higher education & research | Social | USFP (1), MP (1), Alliance de la gauche (1) | USFP: C028; MP: C051; Alliance de la gauche: C102 |
 | Identity, Amazigh & languages | Identity | PJD (1), USFP (1), PPS (1) | PJD: C001; USFP: C033; PPS: C017 |
 | Culture, sport & leisure | Identity | USFP (1), PPS (3) | USFP: C032; PPS: C007, C008, C019 |
+| Energy & renewables | Environment | USFP (2), Alliance de la gauche (2) | USFP: C022, C035; Alliance de la gauche: C099, C106 |
 | Water & food security | Environment | USFP (2), PPS (2) | USFP: C029, C035; PPS: C012, C013 |
 | Women's rights & equality | Social | USFP (2), PPS (1) | USFP: C023, C034; PPS: C018 |
-| Higher education & research | Social | USFP (1), MP (1) | USFP: C028; MP: C051 |
 | Industry & productive sovereignty | Economy | USFP (1), PPS (1) | USFP: C022; PPS: C009 |
-| Energy & renewables | Environment | USFP (2) | USFP: C022, C035 |
 | Moroccan diaspora (MRE) | Identity | PPS (1) | PPS: C020 |
 
 ### Carried-over themes (same party, previous campaign)
@@ -279,6 +619,7 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 | MP | School education, Rural development & territorial equity, SMEs, entrepreneurship & investment |
 | PPS | School education, Jobs & employment, Health & medical coverage, Social protection & pensions, Women's rights & equality |
 | UC | Social protection & pensions |
+| Alliance de la gauche | none |
 
 ## 5. Promises
 
@@ -321,18 +662,18 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 ## 6. Leaders
 
 - Aziz Akhannouch [RNI] role Head of Government - skin-in-game 0.35 - sources: S093 S094 S095 S096
-- Abdellatif Ouahbi [PAM] role Minister of Justice - skin-in-game 0.6 - sources: S097 S098 S099
-- Nizar Baraka [Istiqlal] role Secretary General / Minister of Equipment and Water - skin-in-game 0.7 - sources: S100 S101 S102
-- Saad Eddine El Othmani [PJD] role Head of Government - skin-in-game 0.55 - sources: S103 S104 S105
-- Abdelilah Benkirane [PJD] role Head of Government / Secretary General - skin-in-game 0.5 - sources: S106 S107 S108
-- Driss Lachguar [USFP] role First Secretary - skin-in-game 0.6 - sources: S109 S110 S111
-- Mohamed Ouzzine [MP] role Secretary General - skin-in-game 0.65 - sources: S112 S011 S113
-- Nabil Benabdallah [PPS] role Secretary General - skin-in-game 0.6 - sources: S114 S115 S116
+- Abdellatif Ouahbi [PAM] role Minister of Justice - skin-in-game 0.6 - sources: S135 S136 S098 S099
+- Nizar Baraka [Istiqlal] role Secretary General / Minister of Equipment and Water - skin-in-game 0.7 - sources: S137 S138 S101 S102
+- Saad Eddine El Othmani [PJD] role Head of Government - skin-in-game 0.55 - sources: S139 S140 S104 S105
+- Abdelilah Benkirane [PJD] role Head of Government / Secretary General - skin-in-game 0.5 - sources: S141 S142 S107 S108
+- Driss Lachguar [USFP] role First Secretary - skin-in-game 0.6 - sources: S143 S144 S110 S111
+- Mohamed Ouzzine [MP] role Secretary General - skin-in-game 0.65 - sources: S145 S146 S011 S113
+- Nabil Benabdallah [PPS] role Secretary General - skin-in-game 0.6 - sources: S147 S148 S115 S116
 - Mohamed Joudar [UC] role Secretary General - skin-in-game 0.4 - sources: S117 S118 S119 S120
-- Abdessamad Archane [MDS] role Secretary General - skin-in-game 0.4 - sources: S121 S122 S123
-- Mustapha Benali [FFD] role Secretary General - skin-in-game 0.3 - sources: S124 S125 S126
-- Abdeslam Laaziz [CNI] role Secretary General - skin-in-game 0.5 - sources: S127 S128 S129
-- Jamal El Asri [PSU] role Secretary-General - skin-in-game 0.3 - sources: S130 S131 S132
+- Abdessamad Archane [MDS] role Secretary General - skin-in-game 0.4 - sources: S149 S150 S122 S123
+- Mustapha Benali [FFD] role Secretary General - skin-in-game 0.3 - sources: S151 S152 S125 S126
+- Abdeslam Laaziz [CNI] role Secretary General - skin-in-game 0.5 - sources: S153 S154 S128 S129
+- Jamal El Asri [PSU] role Secretary-General - skin-in-game 0.3 - sources: S155 S156 S131 S132
 
 ## 7. Sources
 
@@ -409,7 +750,6 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 | S069 | IFES Election Guide - Morocco (election dates, registered voters, turnout) | International Foundation for Electoral Systems | 2026 | Data portal | secondary | 4 | International election database | read |
 | S070 | Élections législatives marocaines 2026 (calendrier officiel) | Portail national du Maroc | 2026 | Official portal | primary | 5 | Primary - government portal | read |
 | S071 | Scrutin du 4 septembre : des néophytes aux commandes | MAP Express | 2015 | News | secondary | 3 | State news agency | read |
-| S072 | Élections communales marocaines de 2009 | Wikipédia (fr) | 2009 | Encyclopaedia | secondary | 3 | Community-edited encyclopaedia | read |
 | S073 | Morocco's king appoints new government to end political deadlock | Xinhua | 2017-04-06 | News | secondary | 3 | State news agency | read |
 | S074 | Maroc : nomination d'un nouveau gouvernement | Xinhua | 2019-10-10 | News | secondary | 3 | State news agency | read |
 | S075 | Dahir n° 1-24-56 portant nomination du gouvernement (28 octobre 2024) | Royaume du Maroc | 2024-10-28 | Law | primary | 5 | Primary - official dahir | read |
@@ -434,46 +774,67 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 | S094 | Benjelloun, Akhannouch and Sefrioui lead Morocco's billionaire rankings in 2026 | Hespress EN | 10/03/2026 | news | secondary | 3 | Pro-establishment leaning | read |
 | S095 | The Head of Government Chairs the Board of Directors of the National Agency for Social Support | Head of Government of Morocco | 18/02/2026 | official | primary | 5 | State/official | read |
 | S096 | Morocco boycott revives debate over business, politics links | AFP | 27/05/2018 | news | secondary | 4 | Wire service (neutral) | read |
-| S097 | Abdellatif Ouahbi | Wikipedia | 2026 | encyclopedia | secondary | 4 | Neutral | read |
 | S098 | Mr. Abdellatif Ouahbi, Minister of Justice | MAP | 02/05/2024 | official | primary | 4 | State news agency | read |
 | S099 | Daily Fines Account for 43% of Court Rulings Under Morocco's Alternative Sentencing Law | MAP | 20/04/2026 | official | primary | 4 | State news agency | read |
-| S100 | Nizar Baraka | Wikipedia | 2026 | encyclopedia | secondary | 4 | Neutral | read |
 | S101 | Morocco plans 60% of drinking water from renewable desalination by 2030 | Hespress (citing Reuters) | 05/12/2025 | news | secondary | 4 | Independent Moroccan news | read |
 | S102 | 'Souissi plot' drags Nizar Baraka into controversy; associates deny cash purchase | Attasiaa | 22/05/2026 | news | secondary | 3 | Moroccan news site | read |
-| S103 | Saadeddine Othmani | Wikipedia | 2025 | encyclopedia | secondary | 4 | Neutral | read |
 | S104 | La reussite de la campagne de vaccination temoigne de la capacite du Maroc a relever les defis | MAP | 04/03/2021 | official | primary | 4 | State agency (factual) | read |
 | S105 | El Othmani: 'Je ne possede qu'une seule villa' | Le360 | 26/01/2019 | news | secondary | 3 | Neutral | read |
-| S106 | Abdelilah Benkirane | Wikipedia | 2026 | encyclopedia | secondary | 4 | Neutral reference | read |
 | S107 | Que dit Benkirane sur sa retraite ? | Hespress FR | 02/02/2019 | news | secondary | 4 | Mainstream Moroccan outlet | read |
 | S108 | Abdelilah Benkirane : Ma voiture, ma pension, mes emmerdes | La Quotidienne | 22/01/2019 | news | secondary | 3 | Slightly critical | read |
-| S109 | Driss Lachgar | Wikipedia (fr) | 2026 | encyclopedia | secondary | 3 | Crowd-edited, neutral | read |
 | S110 | Bouznika : Driss Lachgar reelu Premier secretaire de l'USFP pour un quatrieme mandat | MAP | 18/10/2025 | official | primary | 5 | State news agency | read |
 | S111 | Attribution « douteuse » de marche au sein de l'USFP : Lachgar tacle la Cour des comptes | Hespress FR | 29/03/2024 | news | secondary | 4 | Independent online daily | read |
-| S112 | Mohamed Ouzzine | Wikipedia | 2025 | encyclopedia | secondary | 4 | Neutral | read |
 | S113 | Ouzzine : « je ne possede qu'un seul appartement a credit » | TelQuel | 09/06/2023 | news | secondary | 4 | Independent/critical | read |
-| S114 | Mohamed Nabil Benabdallah | Wikipedia (fr) | 2026 | encyclopedia | secondary | 3 | Neutral/community-edited | read |
 | S115 | Le Secretaire General - PPS | PPS (official site) | 2026 | official | primary | 4 | Party official bio | read |
 | S116 | Benabdellah : « 54 villes se sont debarrassees de leurs baraques » | TelQuel | 18/11/2015 | news | secondary | 4 | Independent newsweekly | read |
 | S117 | HM the King Congratulates Mohamed Joudar on Election as Secretary General of Constitutional Union Party | MAP | 03/10/2022 | official | primary | 5 | State news agency | read |
 | S118 | Mr Deputy: Mohamed Joudar | House of Representatives (Morocco) | 2026 | official | primary | 5 | Official parliament record | read |
 | S119 | Entretien avec Mohamed Joudar | Le360 | 04/10/2022 | news | secondary | 4 | Mainstream news | read |
 | S120 | Mohamed Joudar leads UC back to the Constitutional Court | Safircom | 03/02/2026 | news | secondary | 3 | Independent news site | read |
-| S121 | Abdessamad Archane | Wikipedia | 2026 | encyclopedia | secondary | 3 | Neutral | read |
 | S122 | Legislatives: le MDS couvrira 60% des circonscriptions avec trois femmes tetes de liste | Le360 | 11/08/2026 | news | secondary | 4 | Neutral | read |
 | S123 | Abdessamad Archane reelegido como secretario general del MDS | MAP | 08/10/2022 | official | primary | 5 | State agency | read |
-| S124 | Front des forces democratiques | Wikipedia (fr) | 2026 | encyclopedia | secondary | 4 | Neutral | read |
 | S125 | Dr. Mustapha Benali - Secretaire General du PFFD | PFFD (official) | 2026 | official | primary | 3 | Pro-party / self-published | read |
 | S126 | Legislatives 2026 : Les confidences de Mustapha Benali, SG du FFD | Le360 | 15/08/2026 | news | secondary | 4 | Neutral | read |
-| S127 | Congres national Ittihadi | Wikipedia (fr) | 2026 | encyclopedia | secondary | 3 | Neutral | read |
 | S128 | Elections: Ittihadi National Congress Seeks to Strengthen its Presence | MAP | 30/08/2021 | official | primary | 5 | State news agency | read |
 | S129 | Abdessamad Laaziz elu Secretaire general du Parti de la federation de la gauche democratique | Article19.ma | 08/01/2023 | news | secondary | 3 | Independent news | read |
-| S130 | Jamal El Asri | Wikipedia | 17/09/2026 | encyclopedia | secondary | 4 | Neutral (user-edited) | read |
 | S131 | PSU: Jamal El Asri succede a Nabila Mounib | Le360 | 06/11/2023 | news | secondary | 4 | Neutral | read |
 | S132 | 2026 Elections: Social Justice at Heart of Left Alliance's Program | MAP | 19/09/2026 | official | primary | 5 | State-affiliated | read |
+| S133 | PAM sweeps the 2009 communal elections (official results) | Hespress | 13/06/2009 | news | secondary | 4 | Mainstream Moroccan outlet | read |
+| S134 | PAM wins Morocco's 2009 municipal elections | EFE (via RTVE) | 13/06/2009 | news | secondary | 4 | Wire service (neutral) | read |
+| S135 | السيرة الذاتية — عبد اللطيف وهبي وزير العدل | Moroccan Ministry of Justice | 2024 | official | primary | 5 | Official government source | read |
+| S136 | Mr. Abdellatif Ouahbi, Minister of Justice | MAP | 02/05/2024 | bio | secondary | 5 | State news agency | read |
+| S137 | Mr. Nizar Baraka, Minister of Equipment and Water | MAP | 02/05/2024 | official | primary | 5 | State news agency | read |
+| S138 | Qui est Nizar Baraka, nouveau ministre de l'Equipement et de l'Eau ? | Le Matin.ma | 08/10/2021 | news | secondary | 4 | Pro-establishment daily | read |
+| S139 | Former Heads of Government | Head of Government of Morocco (cg.gov.ma) | 2026 | official | primary | 5 | Official government source | read |
+| S140 | Biographie de M. Saad-Eddine El Othmani, chef du gouvernement | MAP Express | 17/03/2017 | news | primary | 5 | State news agency | read |
+| S141 | نبذة عن السيد عبد الإله ابن كيران | MAP (Arabic) | 10/10/2016 | news | primary | 5 | State news agency | read |
+| S142 | بنكيران.. ربان يقود الإسلاميين بالمغرب | Anadolu Agency | 27/04/2025 | news | secondary | 4 | International news agency | read |
+| S143 | Lachgar re-elected as Socialist Union Chief for fourth term | Hespress EN | 18/10/2025 | news | secondary | 4 | Independent outlet | read |
+| S144 | Driss Lachgar reelu a la tete de l'USFP pour un quatrieme mandat | Le Matin | 18/10/2025 | news | secondary | 4 | Pro-establishment daily | read |
+| S145 | Le Secretaire General — Mohammed Ouzzine | Parti du Mouvement Populaire (official) | 2026 | official | primary | 5 | Party official bio | read |
+| S146 | Noqta ila satr: l'essentiel de l'intervention de Mohammed Ouzzine | SNRT News | 18/01/2023 | news | secondary | 4 | State broadcaster | read |
+| S147 | Mohamed Nabil Benabdallah reelegido secretario general del PPS | MAP | 12/11/2022 | news | primary | 5 | State news agency | read |
+| S148 | Maroc : comment Nabil Benabdallah est devenu ministre | Jeune Afrique | 08/08/2019 | news | secondary | 4 | Independent magazine | read |
+| S149 | Le MDS aspire a jouer un role preponderant sur la scene politique (SG) | MAP | 24/03/2018 | official | primary | 5 | State news agency | read |
+| S150 | Abdessamad Archane reelu au poste de secretaire general du MDS | Le Matin | 08/10/2022 | news | secondary | 4 | Pro-establishment daily | read |
+| S151 | A propos du Front des Forces Democratiques (SG: Dr. Mustapha Benali) | FFD (official site) | 2026 | official | primary | 4 | Left-wing party official site | read |
+| S152 | Democratic Forces Front Unveils Five Major Projects in Program | MAP | 17/09/2026 | news | primary | 5 | State news agency | read |
+| S153 | HM the King congratulates Abdeslam Laaziz on re-election as CNI secretary general | MAP | 17/12/2012 | official | primary | 5 | State news agency | read |
+| S154 | العزيز يقود حزب المؤتمر الوطني لولاية ثالثة | Hespress | 13/11/2017 | news | secondary | 4 | Independent outlet | read |
+| S155 | Jamal El Asri elu a la tete du PSU, succedant a Nabila Mounib | TelQuel | 06/11/2023 | news | secondary | 4 | Independent weekly | read |
+| S156 | Jamal El Asri, de l'etudiant baasiste au secretaire general du PSU | Medias24 | 08/11/2023 | bio | secondary | 4 | Independent outlet | read |
+| S157 | Élections 2026: l'Alliance de la gauche propose 431 mesures et 500 milliards de dirhams | SNRT News | 08/09/2026 | news | secondary | 4 | State broadcaster | read |
+| S158 | Législatives 2026 : D'un parti à l'autre, des promesses qui se ressemblent | Maroc Hebdo | 18/09/2026 | news | secondary | 4 | Independent weekly | read |
+| S159 | Législatives 2026 : l'Alliance de la gauche détaille son programme électoral | Medias24 | 12/09/2026 | news | secondary | 4 | Independent outlet | read |
+| S160 | Élections législatives : la justice sociale au cœur des priorités du programme de l'Alliance de la gauche | MAP Express | 08/09/2026 | official | primary | 5 | State news agency | read |
+| S161 | تحالف اليسار يقدم برنامجه لـ2026: خفض أسعار المحروقات ورفع الحد الأدنى للأجر | 2M.ma | 08/09/2026 | news | secondary | 4 | State broadcaster | read |
+| S162 | Législatives 2026 : naissance de l'«Alliance de la gauche» | H24info | 2026 | news | secondary | 3 | Independent outlet | read |
+| S163 | Morocco's Left Alliance Launches Election Program of 431 Measures Worth MAD 500 Billion | Morocco World News | 2026 | news | secondary | 3 | Independent outlet | read |
+| S164 | Les partis politiques et syndicats (liste officielle) | Portail national du Maroc (maroc.ma) | 2026 | official | primary | 5 | Official government portal | read |
 
 ## 8. Validation findings
 
-errors=0, warnings=55, info=3
+errors=0, warnings=57, info=3
 
 ### WARN SINGLE_SOURCE (29)
 
@@ -507,17 +868,19 @@ errors=0, warnings=55, info=3
 - claims.csv:33: 3 numeric targets in one row; methodology requires one claim per row (split into Cxxxa/b/c)
 - ... and 3 more
 
-### WARN FILL_CELLS (10)
+### WARN FILL_CELLS (12)
 
-- parties.csv: leader_current: 5/12 rows are still FILL
-- parties.csv: leader_2021: 4/12 rows are still FILL
-- sources.csv: party_actor: 5/132 rows are still FILL
-- sources.csv: bias_lean: 1/132 rows are still FILL
-- claims.csv: baseline: 96/96 rows are still FILL
-- claims.csv: deadline: 87/96 rows are still FILL
-- claims.csv: unit: 40/96 rows are still FILL
-- claims.csv: confidence: 40/96 rows are still FILL
-- claims.csv: target: 39/96 rows are still FILL
+- parties.csv: leader_current: 51/59 rows are still FILL
+- parties.csv: leader_2021: 51/59 rows are still FILL
+- parties.csv: name_ar: 46/59 rows are still FILL
+- parties.csv: ideology: 38/59 rows are still FILL
+- sources.csv: party_actor: 8/152 rows are still FILL
+- sources.csv: bias_lean: 1/152 rows are still FILL
+- claims.csv: baseline: 106/107 rows are still FILL
+- claims.csv: deadline: 98/107 rows are still FILL
+- claims.csv: unit: 46/107 rows are still FILL
+- claims.csv: target: 45/107 rows are still FILL
+- claims.csv: confidence: 40/107 rows are still FILL
 - promises.csv: outcome_metric: 19/35 rows are still FILL
 
 ### WARN NON_SNAKE_CASE (1)
@@ -534,4 +897,4 @@ errors=0, warnings=55, info=3
 
 ### INFO PARTIES_WITHOUT_CLAIMS (1)
 
-- claims.csv: no claims recorded for ['P010', 'P011', 'P012', 'P013'] -- these parties cannot be compared on claim credibility
+- claims.csv: no claims recorded for ['P010', 'P011', 'P012', 'P013', 'P015', 'P016', 'P017', 'P018', 'P019', 'P020', 'P021', 'P022', 'P023', 'P024', 'P025', 'P026', 'P027', 'P028', 'P029', 'P030', 'P031', 'P032', 'P033', 'P034', 'P035', 'P036', 'P037', 'P038', 'P039', 'P040', 'P041', 'P042', 'P043', 'P044', 'P045', 'P046', 'P047', 'P048', 'P049', 'P050', 'P051', 'P052', 'P053', 'P054', 'P055', 'P056', 'P057', 'P058', 'P059', 'P060'] -- these parties cannot be compared on claim credibility

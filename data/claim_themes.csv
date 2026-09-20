@@ -158,3 +158,18 @@ C094,employment,emploi,HIGH
 C095,employment,capital humain,HIGH
 C095,education,capital humain,HIGH
 C096,rural,developpement territorial,HIGH
+C097,wages,salaire minimum 5 000 dirhams,HIGH
+C098,tax,exonération de TVA,HIGH
+C098,prices,produits de première nécessité,HIGH
+C098,health,médicaments,HIGH
+C099,energy,prix des carburants,HIGH
+C099,prices,carburants,HIGH
+C100,family,prime de naissance,HIGH
+C101,social,personnes âgées et veuves,HIGH
+C102,research,diplômés à la recherche d'un emploi,HIGH
+C102,employment,allocation diplômés,HIGH
+C103,health,maladies chroniques,HIGH
+C104,housing,logements publics,HIGH
+C105,education,gratuité enseignement public,HIGH
+C106,energy,souveraineté énergétique,HIGH
+C107,governance,programme 431 mesures,HIGH

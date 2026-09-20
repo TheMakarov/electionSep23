@@ -685,38 +685,9 @@ def chart(title, fn):
     return {"name": title, "path": result, "note": None}
 
 
-def chart_ceagi():
-    if not ranked:
-        return None
-    lo = [ci[p]["lo"] for p in ranked]
-    hi = [ci[p]["hi"] for p in ranked]
-    vals = [score[p] for p in ranked]
-    fig, ax = plt.subplots(figsize=(9, 5.6))
-    add_star_watermark(ax, cy=0.58, r=0.46, alpha=0.06)
-    ax.bar([pname[p] for p in ranked], vals,
-           yerr=[[max(0.0, vals[i] - lo[i]) for i in range(len(vals))],
-                 [max(0.0, hi[i] - vals[i]) for i in range(len(vals))]],
-           capsize=5, color=[pcolor[p] for p in ranked], alpha=0.95,
-           edgecolor=MOROC_GOLD, linewidth=1.3, zorder=3,
-           error_kw=dict(ecolor=MOROC_GREEN, lw=1.4, capthick=1.4))
-    for i, v in enumerate(vals):
-        ax.text(i, hi[i] + 0.012, f"{v:.3f}", ha="center", va="bottom",
-                fontsize=10.5, fontweight="bold", color="#241f18", zorder=4)
-    if len(vals) >= 2:
-        med = float(np.median(vals))
-        ax.axhline(med, color=MOROC_RED, ls="--", lw=1.3, zorder=2,
-                   label=f"median of the ranked parties   {med:.3f}")
-        ax.legend(loc="upper right", frameon=False, fontsize=8.5)
-    ax.set_ylabel("CEAGI score (0-1)")
-    moroccan_frame(fig, ax,
-                   "Party accountability score (CEAGI) with 95% credible interval")
-    ax.set_ylim(0, max(hi) * 1.20)
-    return save(fig, "ceagi_ranking")
-
-
 # ---------------------------------------------------------------------------
-# Convergence charts. Only the pairwise echo matrix joins the chart wall; the
-# theme-by-party matrix itself lives once, interactively, in section 8.
+# Convergence chart: the pairwise echo matrix. It is rendered inside the
+# convergence section (section 8), not in a separate chart wall.
 # ---------------------------------------------------------------------------
 def chart_party_echo():
     """Party x party matrix: how many themes any two parties both claim.
@@ -776,7 +747,6 @@ def chart_party_echo():
 
 
 CHART_SPECS = [
-    ("CEAGI ranking", chart_ceagi),
     ("Party echo matrix", chart_party_echo),
 ]
 
@@ -1037,9 +1007,8 @@ for c in campaign_claims:
         esc(c.get("claim_id")), esc(pname.get(c.get("party_id"), c.get("party_id"))),
         cell(c.get("class")), cell(c.get("verification_score")),
         f'<span class="claimtext">{cell(c.get("claim"))}</span>',
-        grade_cell(c), source_links(c.get("source_ids")), cell(c.get("confidence")),
-        esc(c.get("domain")), cell(c.get("baseline")), cell(c.get("target")),
-        cell(c.get("deadline")), cell(c.get("unit")),
+        grade_cell(c), source_links(c.get("source_ids")),
+        esc(c.get("domain")),
     ])
 
 historical_rows_html = []
@@ -1049,9 +1018,8 @@ for c in historical_claims:
         esc(pname.get(c.get("party_id"), c.get("party_id"))),
         cell(c.get("class")), cell(c.get("verification_score")),
         f'<span class="claimtext">{cell(c.get("claim"))}</span>',
-        grade_cell(c), source_links(c.get("source_ids")), cell(c.get("confidence")),
-        esc(c.get("domain")), cell(c.get("baseline")), cell(c.get("target")),
-        cell(c.get("deadline")), cell(c.get("unit")),
+        grade_cell(c), source_links(c.get("source_ids")),
+        esc(c.get("domain")),
     ])
 
 promise_rows = []
@@ -1111,16 +1079,49 @@ for r in timeline_rows:
         f'<span class="tlsrc">{source_links(r.get("source_ids"))}</span></div>')
 timeline_html = "".join(_tl_parts)
 
-chart_blocks = ""
-for c in drawn:
-    chart_blocks += (
-        f'<figure class="chart">{inline_svg(c["path"])}'
-        f'<figcaption>{esc(c["name"])}</figcaption></figure>')
-if skipped:
-    chart_blocks += '<p class="small">Charts not produced:</p><ul class="small">'
-    chart_blocks += "".join(
-        f'<li><b>{esc(c["name"])}</b> - {esc(c["note"])}</li>' for c in skipped)
-    chart_blocks += "</ul>"
+# The pairwise echo matrix is the only chart left; it is shown at the end of
+# the convergence section (section 8).
+_echo = next((c for c in drawn if c["name"] == "Party echo matrix"), None)
+echo_chart_html = (
+    f'<figure class="chart">{inline_svg(_echo["path"])}'
+    f'<figcaption>Party echo matrix - shared themes between each pair of parties '
+    f'(count / Jaccard overlap)</figcaption></figure>'
+    if _echo else '<p class="small">Echo matrix not produced.</p>')
+
+SORT_JS = """<script>
+// Click-to-sort for every data table (no buttons). The convergence matrix
+// (table.conv) is skipped because its rows are banded by shared theme.
+(function () {
+  function val(td) {
+    var s = td.textContent.replace(/\\u00a0/g, " ").trim();
+    var n = Number(s.replace(/[%,\\s]/g, ""));
+    if (s !== "" && isFinite(n) && !/[A-Za-z]/.test(s)) return n;
+    return s.toLowerCase();
+  }
+  document.querySelectorAll("table:not(.conv)").forEach(function (tbl) {
+    var head = tbl.querySelector("thead tr");
+    if (!head) return;
+    Array.prototype.forEach.call(head.children, function (th, i) {
+      th.style.cursor = "pointer";
+      th.title = "Click to sort";
+      th.addEventListener("click", function () {
+        var body = tbl.querySelector("tbody");
+        if (!body) return;
+        var rows = Array.prototype.slice.call(body.rows);
+        var asc = th.getAttribute("data-sort") !== "asc";
+        rows.sort(function (a, b) {
+          var va = a.cells[i] ? val(a.cells[i]) : "";
+          var vb = b.cells[i] ? val(b.cells[i]) : "";
+          return (va < vb ? -1 : va > vb ? 1 : 0) * (asc ? 1 : -1);
+        });
+        rows.forEach(function (r) { body.appendChild(r); });
+        Array.prototype.forEach.call(head.children, function (t) { t.removeAttribute("data-sort"); });
+        th.setAttribute("data-sort", asc ? "asc" : "desc");
+      });
+    });
+  });
+})();
+</script>"""
 
 banner_class = "banner ok-banner" if publishable else "banner bad-banner"
 banner_text = ("PUBLISHABLE - the data passes every gate below."
@@ -1505,6 +1506,12 @@ convergence_html = f"""
   counts themes the same party already ran on in the previous campaign - a
   promise repeated is not a promise added.</p>
   <div class="scroll">{conv_party_table}</div>
+
+  <h3>Echo matrix</h3>
+  <p class="small">Each cell is the number of policy themes two parties share, with the
+  Jaccard overlap (shared &divide; union) as a percentage. Red outlines mark the highest
+  overlap pair.</p>
+  {echo_chart_html}
 </section>
 """
 
@@ -1634,7 +1641,12 @@ tr:hover td { background:#fdf9f0; }
 .sev-error { color:var(--red); font-weight:700; }
 .sev-warn { color:#a8741a; font-weight:700; }
 .sev-info { color:var(--green); }
-.claimtext { display:block; max-width:520px; }
+.claimtext { display:inline-block; max-width:640px; overflow:hidden;
+            text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; }
+.claimtext:hover { max-width:none; white-space:normal; overflow:visible; }
+th[data-sort]::after { font-size:.62rem; margin-left:4px; }
+th[data-sort="asc"]::after { content:"\u25b4"; }
+th[data-sort="desc"]::after { content:"\u25be"; }
 figure.chart { margin:28px 0; text-align:center; }
 figure.chart svg { max-width:100%; height:auto; }
 figcaption { font-family:Helvetica,Arial,sans-serif; font-size:.78rem;
@@ -1718,7 +1730,7 @@ a.src { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.72rem;
 a.src:hover { color:var(--red); border-bottom-color:var(--red); }
 .unresolved { color:#a8741a; font-weight:700; }
 .why { color:#5b5346; font-size:.72rem; white-space:nowrap; }
-table.claims { min-width:1440px; }
+table.claims { min-width:940px; }
 .lawquote { margin:26px 0; }
 .lawquote blockquote { margin:0; background:#fff; border:1px solid var(--line);
   border-top:5px solid var(--gold); padding:20px 24px;
@@ -1773,6 +1785,23 @@ OG_META = f"""
 <meta name="twitter:title" content="{REPORT_TITLE}">
 <meta name="twitter:description" content="{REPORT_DESC}">
 <meta name="twitter:image" content="{SITE_BASE}/og-report.png">"""
+
+# Registered-party registry (official maroc.ma list, with emblems).
+_party_registry_rows = []
+for _p in parties:
+    if _p["party_id"] == "P009":
+        continue
+    _badge = (f'<img class="plogo" src="{plogo[_p["party_id"]]}" alt="">'
+              if _p["party_id"] in plogo else '<span class="swatch"></span>')
+    _party_registry_rows.append([
+        f'{_badge}{esc(pname[_p["party_id"]])}',
+        esc(_p.get("name_ar") or ""),
+        esc(_p.get("founded") or ""),
+        esc(_p.get("ideology") or ""),
+        esc(_p.get("leader_current") or ""),
+    ])
+party_registry_rows = _party_registry_rows
+n_registered = len(_party_registry_rows)
 
 html_doc = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1852,8 +1881,7 @@ html_doc = f"""<!DOCTYPE html>
   yet - it is shown rather than hidden so the hole is visible.</p>
   <div class="scroll">
   {table(["ID", "Party", "Class", "Verif.", "Claim", "Why this grade",
-          "Sources", "Conf.", "Domain", "Baseline", "Target", "Deadline",
-          "Unit"], claim_rows_html, "claims")}
+          "Sources", "Domain"], claim_rows_html, "claims")}
   </div>
 </section>
 
@@ -1881,8 +1909,7 @@ html_doc = f"""<!DOCTYPE html>
   current CEAGI run.</p>
   <div class="scroll">
   {table(["Year", "ID", "Party", "Class", "Verif.", "Claim", "Why this grade",
-          "Sources", "Conf.", "Domain", "Baseline", "Target", "Deadline",
-          "Unit"], historical_rows_html, "claims")}
+          "Sources", "Domain"], historical_rows_html, "claims")}
   </div>
 </section>
 
@@ -1891,12 +1918,7 @@ html_doc = f"""<!DOCTYPE html>
 {ceagi_explained_html}
 
 <section>
-  <h2>10. Charts</h2>
-  {chart_blocks}
-</section>
-
-<section>
-  <h2>11. Sources registry</h2>
+  <h2>10. Sources registry</h2>
   <div class="scroll">
   {table(["ID", "Title", "Author/Org", "Date", "Type", "Primary?", "Rel.",
           "Lean", "Status", "Link"], source_rows)}
@@ -1909,17 +1931,17 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>12. Timeline</h2>
+  <h2>11. Timeline</h2>
   <p class="small">The legislative record since 2002: elections, referendums, the
   organic laws that set the rules, and the governments they produced. Source IDs
-  link to the registry in section 11; <span class="miss">FILL</span> means a date
+  link to the registry in section 10; <span class="miss">FILL</span> means a date
   or source is still missing, and <code>UNSOURCED</code> rows are knowingly
   unattributed and must not be published as they stand.</p>
   {timeline_html}
 </section>
 
 <section>
-  <h2>13. What the data supports, and what it does not</h2>
+  <h2>12. What the data supports, and what it does not</h2>
   <h3>Supportable today</h3>
   <ul class="findings">{findings_html or '<li class="small">Nothing yet.</li>'}</ul>
   <h3>Not supportable yet</h3>
@@ -1927,13 +1949,13 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>14. To do before publishing</h2>
+  <h2>13. To do before publishing</h2>
   <p class="small">Generated automatically, ordered by how many rows each gap blocks.</p>
   <ol class="findings">{actions_html or '<li class="small">Nothing outstanding.</li>'}</ol>
 </section>
 
 <section>
-  <h2>15. Validation findings</h2>
+  <h2>14. Validation findings</h2>
   <p class="small">Produced by <code>scripts/validate.py</code>. ERROR breaks an
   invariant, WARN is incomplete but sound, INFO is coverage.</p>
   <div class="scroll">
@@ -1942,7 +1964,7 @@ html_doc = f"""<!DOCTYPE html>
 </section>
 
 <section>
-  <h2>16. Methodology (short)</h2>
+  <h2>15. Methodology (short)</h2>
   <p class="small">Sources to facts/claims to synthesis. A claim is
   "corroborated" only with 2+ independent reliable sources. Delivery
   D = (fulfilled + 0.5&middot;partial) / (fulfilled + partial + failed +
@@ -1957,17 +1979,31 @@ html_doc = f"""<!DOCTYPE html>
   per-number provenance in <code>output/audit_trail.md</code>.</p>
 </section>
 
+<section>
+  <h2>Appendix - Registered parties ({n_registered})</h2>
+  <p class="small">Every party in the official national registry
+  (<code>maroc.ma</code>), with its emblem. Parties that exist on paper only -
+  no 2026 programme, no seats, no scored record - are listed for completeness
+  and are <b>not</b> scored. &ldquo;Historical (defunct)&rdquo; marks pre-1999
+  formations that no longer contest elections.</p>
+  <div class="scroll">
+  {table(["Party", "Arabic", "Founded", "Ideology", "Current leader"],
+         party_registry_rows)}
+  </div>
+</section>
+
 <footer>
   <p>Reproducible data project. Regenerate with
   <code>make check &amp;&amp; make build</code>. Settings in
   <code>config.json</code>. Published scores require passing the gate in
   section 1; until then treat every value as provisional.</p>
   <p class="small">Party logos are the trademarks of the respective parties, used
-  editorially for identification only; sourced from each party's Wikipedia article
-  (Wikimedia Commons / Wikipedia uploads).</p>
+  editorially for identification only; image files sourced from the official
+  national portal (maroc.ma).</p>
 </footer>
 
 </div>
+{SORT_JS}
 </body>
 </html>
 """

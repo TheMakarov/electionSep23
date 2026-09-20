@@ -421,8 +421,8 @@ footer { margin-top:46px; padding-top:14px; border-top:4px solid var(--green);
   Method: proportional representation, largest remainder, quotient on registered
   voters (loi organique n&deg; 27.11, arts. 1 &amp; 84), <b>no electoral threshold</b>.</p>
   <p class="small">Party logos are the trademarks of the respective parties, used
-  editorially for identification only; sourced from each party's Wikipedia article
-  (Wikimedia Commons / Wikipedia uploads).</p>
+  editorially for identification only; image files sourced from the official
+  national portal (maroc.ma).</p>
 </footer>
 
 </div>
