@@ -1,6 +1,6 @@
 # Audit trail - Morocco electoral data project
 
-Generated 2026-09-20T10:53:59 by `scripts/build.py`.
+Generated 2026-09-21T20:02:13 by `scripts/build.py`.
 Campaign year **2026**, baseline year **2021**, publication gate: **FAIL**.
 
 Every number below is traced to a source ID and a confidence level.
@@ -834,7 +834,7 @@ Method: `data/claim_themes.csv` maps each claim to one or more themes from the c
 
 ## 8. Validation findings
 
-errors=0, warnings=57, info=3
+errors=0, warnings=58, info=3
 
 ### WARN SINGLE_SOURCE (29)
 
@@ -882,6 +882,10 @@ errors=0, warnings=57, info=3
 - claims.csv: target: 45/107 rows are still FILL
 - claims.csv: confidence: 40/107 rows are still FILL
 - promises.csv: outcome_metric: 19/35 rows are still FILL
+
+### WARN OPEN_IN_CALC (1)
+
+- sources.csv: a LibreOffice lock file exists -- close the CSV in Calc before editing it from a script, or the edit is lost on save
 
 ### WARN NON_SNAKE_CASE (1)
 
